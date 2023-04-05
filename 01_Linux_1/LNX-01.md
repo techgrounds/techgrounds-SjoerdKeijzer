@@ -27,10 +27,10 @@ Vervolgens PowerShell opstarten en invoeren van:
 -i om key te inserten, en we moesten in dit geval ook de poort specificeren en dat doe je met -p poortnummer
 
 ### Gebruikte bronnen
-Het server IP, username en key stonden allemaal op de Techgrounds Drive.
-https://learn.microsoft.com/en-us/windows-server/administration/openssh/openssh_install_firstuse?tabs=gui
-https://help.skytap.com/connect-to-a-linux-vm-with-ssh.html
-https://www.preveil.com/blog/public-and-private-key/
+- Het server IP, username en key stonden allemaal op de Techgrounds Drive.
+- https://learn.microsoft.com/en-us/windows-server/administration/openssh/openssh_install_firstuse?tabs=gui
+- https://help.skytap.com/connect-to-a-linux-vm-with-ssh.html
+- https://www.preveil.com/blog/public-and-private-key/
 
 ### Ervaren problemen
 Geen problemen, ik had eigenlijk verwacht dat dit lastiger zou zijn. Op de kwalificatie opdracht met Putty en VM in Azure heb ik een stuk meer lopen zweten. 
