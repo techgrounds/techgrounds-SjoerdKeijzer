@@ -37,4 +37,4 @@ Geen problemen, ik had eigenlijk verwacht dat dit lastiger zou zijn. Op de kwali
 ### Resultaat
 
 Screenshot van whoami
-![whoami](https://github.com/techgrounds/techgrounds-SjoerdKeijzer/blob/main/00_includes/screen%20LNX-01_whoami.png)
+![](https://github.com/techgrounds/techgrounds-SjoerdKeijzer/blob/main/00_includes/screen%20LNX-01_whoami.png)
