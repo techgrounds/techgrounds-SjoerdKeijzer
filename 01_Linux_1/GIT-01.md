@@ -25,8 +25,8 @@ Het samenvoegen van wijzigingen. Als er merge conflicten zijn moet je die eerst 
 Stel je wilt iemand helpen met zijn/haar project. Dan is een fork handig. Je kan een copy van een repository maken en daar zelf aan werken en expirimenteren zonder dat je schade toe brengt aan de originele repo. Als je changes wilt commiten/pushen dan zal de originele eigenaar wel toestemming moeten geven of eventuele wijzigingen te laten mergen.   
 
 ## Gebruikte bronnen
-https://github.com/techgrounds/git-github-fundamentals-SjoerdKeijzer
-https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-branches
+- https://github.com/techgrounds/git-github-fundamentals-SjoerdKeijzer
+- https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-branches
 
 
 ## Ervaren problemen
