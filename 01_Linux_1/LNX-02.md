@@ -26,11 +26,15 @@ Hoe werken directories en files en hoe krijg daar overzicht in?
 - https://opensource.com/article/19/8/navigating-filesystem-relative-paths
 
 ### Ervaren problemen
-Waarom er geen permissions waren voor Cat command terwijl overal op het internet dat wel als eerste functie wordt aangegeven. Bleek iets met permissies te zijn. Omzeilt voor nu door als Root in te loggen omdat ik niet te veel wil achter lopen bij meteen de 1e opdracht 
+Waarom er geen permissions waren voor Cat command terwijl overal op het internet dat wel als eerste functie wordt aangegeven. Kreeg steeds permission denied. Omzeilt voor nu door als Root in te loggen omdat ik niet te veel wil achter lopen bij meteen de 1e opdracht, maar ik ga daar later naar kijken of dat niet gewoon anders kan met permissions. 
 
 Mijn focus begint echt op te raken dus ik weet niet meer zo goed of ik nu dingen begin te zien die er niet zijn. Probleem bij pathing stukje: ik heb op een of andere manier per ongeluk een map '/' aangemaakt waardoor ik bij cd / steeds in die map terecht kwam. Ik heb dit uiteindelijk opgelost door als 'reset' cd ~sjoerd te gebruiken en van daar uit de cd /absolute en cd ../relative gedaan. 
 
 ### Resultaat
-![Screenshot 1](https://github.com/techgrounds/techgrounds-SjoerdKeijzer/blob/main/00_includes/LNX-02_current_dir_pwd.png)
+![pwd](https://github.com/techgrounds/techgrounds-SjoerdKeijzer/blob/6762dd42a72a69b44e650f2cc631138f2b812790/00_includes/LNX-02_current%20dir_pwd.png)
 
-![Screenshot 1](https://github.com/techgrounds/techgrounds-SjoerdKeijzer/blob/main/00_includes/LNX-02-List_and_make_TG_dir.png)
+![list and make TG dir](https://github.com/techgrounds/techgrounds-SjoerdKeijzer/blob/6762dd42a72a69b44e650f2cc631138f2b812790/00_includes/LNX-02-List%20and%20make%20TG%20dir.png)
+
+![createfileaddtext](https://github.com/techgrounds/techgrounds-SjoerdKeijzer/blob/6762dd42a72a69b44e650f2cc631138f2b812790/00_includes/LNX-02-create%20file%20and%20add%20text.png)
+
+![paths](https://github.com/techgrounds/techgrounds-SjoerdKeijzer/blob/6762dd42a72a69b44e650f2cc631138f2b812790/00_includes/LNX-02-absolute_relative_paths.png)
