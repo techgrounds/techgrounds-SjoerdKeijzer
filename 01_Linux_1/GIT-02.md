@@ -20,9 +20,9 @@ Een bold tekst
 Een link naar een website
 
 ### Gebruikte bronnen
-https://www.markdownguide.org/cheat-sheet/
-https://www.techtarget.com/whatis/definition/WYSIWYG-what-you-see-is-what-you-get
-https://en.wikipedia.org/wiki/WYSIWYM
+- https://www.markdownguide.org/cheat-sheet/
+- https://www.techtarget.com/whatis/definition/WYSIWYG-what-you-see-is-what-you-get
+- https://en.wikipedia.org/wiki/WYSIWYM
 
 
 ### Ervaren problemen
