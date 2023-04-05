@@ -2,7 +2,8 @@
 Inloggen op VM via SSH
 
 ## Key-terms
-### SSH = een secure shell of Secure Socket Shell en is een cryptografisch netwerk protocol om veilig te kunnen verbinden met een (onbeveiligd) ander netwerk.
+### SSH
+SSH is een secure shell of Secure Socket Shell en is een cryptografisch netwerk protocol om veilig te kunnen verbinden met een (onbeveiligd) ander netwerk.
 
 ### Powershell
 De console applicatie en scripting taal van Microsoft waarmee je veel dingen kan doen. Het wordt voornamelijk gebruikt als automatisatie tool. 
@@ -37,4 +38,4 @@ Geen problemen, ik had eigenlijk verwacht dat dit lastiger zou zijn. Op de kwali
 ### Resultaat
 
 Screenshot van whoami
-![](https://github.com/techgrounds/techgrounds-SjoerdKeijzer/blob/main/00_includes/screen%20LNX-01_whoami.png)
+![Screenshot 1](https://github.com/techgrounds/techgrounds-SjoerdKeijzer/blob/main/00_includes/LNX-01_whoami.png)
