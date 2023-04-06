@@ -20,7 +20,7 @@ Redirect - Je kan de stdin en stdout veranderen met zgm input en output redirect
 - https://www.guru99.com/linux-redirection.html
 - https://www.digitalocean.com/community/tutorials/an-introduction-to-linux-i-o-redirection
 - https://pubs.opengroup.org/onlinepubs/009696899/utilities/grep.html
-man grep
+- man grep
 
 ### Ervaren problemen
 Omdat ik af wilde dat ik voor iedere command sudo of als root moest zijn inlogd, heb ik met permissions rond zitten te kloten. Dit heeft me ongeveer de gehele woensdag gekost. Ik heb met chmod proberen mezelf meer user rechten te geven en uiteindelijk de folder van techgrounds en ook de file kitty.txt die daar in stond. Ik heb daar een foutje in gemaakt en toen kon ik als user niet meer /home/techgrounds zien.  
