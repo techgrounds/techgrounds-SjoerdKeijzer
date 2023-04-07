@@ -27,7 +27,7 @@ Ik heb vorige keer zo erg met permissions lopen rotzooien dat ik kennelijk mezel
 
 Volgende is om de scripts map aan PATH variable toe te voegen. 
 
-![PATH](../00_includes/LNX-07-scripts%20dir.png)
+![ehco ehco](../00_includes/LNX-07_PATH+scripts.png)
 Het is duidelijk dat de vermoeidheid toe begint te slaan, maar het is gelukt. 
 
 Met `export PATH=/home/scripts:$PATH` zorg ik dat mijn /home/scripts folder nu vooraan komt te staan als ik dit met `echo $PATH` check. 
