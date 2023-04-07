@@ -28,13 +28,14 @@ Ik heb vorige keer zo erg met permissions lopen rotzooien dat ik kennelijk mezel
 Volgende is om de scripts map aan PATH variable toe te voegen. 
 
 ![ehco ehco](../00_includes/LNX-07_PATH+scripts.png)
+
 Het is duidelijk dat de vermoeidheid toe begint te slaan, maar het is gelukt. 
 
 Met `export PATH=/home/scripts:$PATH` zorg ik dat mijn /home/scripts folder nu vooraan komt te staan als ik dit met `echo $PATH` check. 
 
 Verder had ik nog nooit een script gemaakt dus nu werd het echt interessant. 
 
-
+Het is ook handig om het PATH permanent op te slaan. Daar begon ik tegen wat dingen aan te lopen zie hieronder bij 'Ervaren Problemen' voor uitgebreide omschrijving. 
 
 
 ## Opdracht 2
@@ -64,7 +65,7 @@ A check for a condition can be done using ‘if’, ‘elif’, and/or ‘else�
 ### Ervaren problemen
 Toen ik probeerde mijn $PATH fixed te maken, heb ik iets gedaan wat onhandig was. Ik heb een instructie verkeerd gelezen en toen  
 
-`source ~/.bash_profile` doet in jouw huidige .bash_profile. Nu ik het zo terug lees met een nacht slaap, weet ik niet waarom dit toen zo'n goed idee leek. 
+`source ~/.bash_profile` gedaan in .bash_profile. Nu ik het zo terug lees met een nacht slaap, weet ik niet waarom dit toen zo'n goed idee leek. 
 
 Anyway ik dacht, het is gelukt laten we testen of PATH nu ook /home/scripts/ heeft opgeslagen. Powershell gesloten en opnieuw opgestart. 
 
@@ -77,6 +78,13 @@ Door mijn bash_profile te slopen op bovenstaande manier, wist de container ook n
 Exit status -1 is niet zo goed. Container kaduuk. Casper om hulp gevraagd en die heeft mijn bash_profile gereset. Nu kan ik er weer in. 
 
 Als je dit ooit terug leest Casper, nogmaals mucho gracias want ik kon mezelf wel voor mijn kop slaan. 
+
+Omdat mijn bash profile leeg was, zijn ook user colours gereset. Dat is wat uitdagend met lezen van bijvoorbeeld rights. Ik heb heel lang gezocht hoe ik dit kon oplossen. Casper had heel behulpzaam geopeerd om nieuwe user aan te maken en de bash_profile daar van te kopieren. Echter bleken die bash_profile ook leeg. 
+
+Ik heb uiteindelijk in ~/.profile gevonden dat ik force_colour_prompt=YES kon doen. Daarna source command om te updaten en voila:
+
+![Er is weer kleur](../00_includes/LNX-07_source.png)
+
 
 ### Resultaat
 [Omschrijf hoe je weet dat je opdracht gelukt is (gebruik screenshots waar nodig).]
