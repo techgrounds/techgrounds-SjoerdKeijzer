@@ -21,23 +21,6 @@ Letterlijk een schil, vaak een soort user interface. Kan een text based interfac
 - Create a script that appends a line of text to a text file whenever it is executed.
 - Create a script that installs the httpd package, activates httpd, and enables httpd. Finally, your script should print the status of httpd in the terminal.
 
-Ik heb vorige keer zo erg met permissions lopen rotzooien dat ik kennelijk mezelf uit /home had gelocked. Ik kon namelijk eerst geen mkdir scripts doen, wat toch wat onhandig is. 
-
-![scripts dir](../00_includes/LNX-07-scripts%20dir.png)
-
-Volgende is om de scripts map aan PATH variable toe te voegen. 
-
-![ehco ehco](../00_includes/LNX-07_PATH+scripts.png)
-
-Het is duidelijk dat de vermoeidheid toe begint te slaan, maar het is gelukt. 
-
-Met `export PATH=/home/scripts:$PATH` zorg ik dat mijn /home/scripts folder nu vooraan komt te staan als ik dit met `echo $PATH` check. 
-
-Verder had ik nog nooit een script gemaakt dus nu werd het echt interessant. 
-
-Het is ook handig om het PATH permanent op te slaan. Daar begon ik tegen wat dingen aan te lopen zie hieronder bij 'Ervaren Problemen' voor uitgebreide omschrijving. 
-
-
 ## Opdracht 2
 - Create a script that generates a random number between 1 and 10, stores it in a variable, and then appends the number to a text file.
 
@@ -87,4 +70,31 @@ Ik heb uiteindelijk in ~/.profile gevonden dat ik force_colour_prompt=YES kon do
 
 
 ### Resultaat
-[Omschrijf hoe je weet dat je opdracht gelukt is (gebruik screenshots waar nodig).]
+
+## Opdracht 1
+Ik heb vorige keer zo erg met permissions lopen rotzooien dat ik kennelijk mezelf uit /home had gelocked. Ik kon namelijk eerst geen mkdir scripts doen, wat toch wat onhandig is. 
+
+![scripts dir](../00_includes/LNX-07-scripts%20dir.png)
+
+Volgende is om de scripts map aan PATH variable toe te voegen. 
+
+![ehco ehco](../00_includes/LNX-07_PATH+scripts.png)
+
+Het is duidelijk dat de vermoeidheid toe begint te slaan, maar het is gelukt. 
+
+Met `export PATH=/home/scripts:$PATH` zorg ik dat mijn /home/scripts folder nu vooraan komt te staan als ik dit met `echo $PATH` check. 
+
+Verder had ik nog nooit een script gemaakt dus nu werd het echt interessant. 
+
+Het is ook handig om het PATH permanent op te slaan. Daar begon ik tegen wat dingen aan te lopen zie hieronder bij 'Ervaren Problemen' voor uitgebreide omschrijving. 
+
+Nu het script om text te appenden. Om Bash te laten weten dat je van deze script taal gebruik wilt maken, begin je met `#!/bin/bash`
+
+![blauw](../00_includes/LNX-07_append_script.png)
+Dit is het idee
+
+![append test](../00_includes/LNX-07-append%20script%20works.png)
+Typfouten worden ooit mijn ondergang, maar ja het werkt uiteindelijk wel. 
+
+
+
