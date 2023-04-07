@@ -4,7 +4,7 @@
 ## Key-terms
 
 ### PATH
-
+Lijst van paths zodat linux kan zoeken en daarvoor hoeven we niet hele lange absolute paths steeds in te kloppen om scripts of exe's te laten werken. 
 
 ### Scripts
 Exec explainer.cfg. Ja ja, hadden we dat bijna geautomatiseerd. Scripts zijn stukjes code die van buitenaf een *start* sein krijgen om hun code te runnen. Ook dat startsein kan worden geautomatiseerd.  
@@ -14,6 +14,11 @@ Jason had ook nog een broertje die computer nerd was. Bash staat voor *B*ourne-*
 
 ### shell
 Letterlijk een schil, vaak een soort user interface. Kan een text based interface zijn, maar ook een command-line interface (CLI). Het heet vooral een shell omdat het als een schil over de kernel ligt. Dat betekent dat het niet alleen van toepassing is op de CLI maar ook op een (eventuele) graphical user interface (GUI). 
+
+apt - Advanced packaging tool. Wordt vaak gebruikt bij command om installeren en updaten (en verwijderen) van services. 
+
+### Statements
+Behalve dat je waanzinnig kan filosoferen met statements zijn ze handig in computing. If, then, else kan eigenlijk iedereen wel raden en je hebt ook nog elif (else if) en fi. Dit zodat je bepaalde condities op je code/script kan toepassen. 
 
 ## Opdracht 1
 - Create a directory called ‘scripts’. Place all the scripts you make in this directory.
@@ -43,6 +48,9 @@ A check for a condition can be done using ‘if’, ‘elif’, and/or ‘else�
 - https://opensource.com/article/17/6/set-path-linux
 - https://linuxhint.com/30_bash_script_examples/
 - https://askubuntu.com/questions/715219/ssh-connection-closed-right-after-login-exit-status-1
+- https://www.cyberciti.biz/faq/linux-install-and-start-apache-httpd/
+- https://www.layerstack.com/resources/tutorials/Installing-Apache-server-on-Linux-Cloud-Servers
+
 
 
 ### Ervaren problemen
@@ -60,9 +68,9 @@ Door mijn bash_profile te slopen op bovenstaande manier, wist de container ook n
 
 Exit status -1 is niet zo goed. Container kaduuk. Casper om hulp gevraagd en die heeft mijn bash_profile gereset. Nu kan ik er weer in. 
 
-Als je dit ooit terug leest Casper, nogmaals mucho gracias want ik kon mezelf wel voor mijn kop slaan. 
+Als je dit ooit terug leest Casper, nogmaals muchos gracias want ik kon mezelf wel voor mijn kop slaan. 
 
-Omdat mijn bash profile leeg was, zijn ook user colours gereset. Dat is wat uitdagend met lezen van bijvoorbeeld rights. Ik heb heel lang gezocht hoe ik dit kon oplossen. Casper had heel behulpzaam geopeerd om nieuwe user aan te maken en de bash_profile daar van te kopieren. Echter bleken die bash_profile ook leeg. 
+Omdat mijn bash profile leeg was, zijn ook user colours gereset. Dat is wat uitdagend met lezen van bijvoorbeeld rights. Ik heb heel lang gezocht hoe ik dit kon oplossen. Casper had heel behulpzaam geopeerd om nieuwe user aan te maken en de bash_profile daar van te kopieren. Echter bleek die bash_profile ook leeg. Nog geprobeerd uit /etc/skel maar daar stond ook geen bash_profile.
 
 Ik heb uiteindelijk in ~/.profile gevonden dat ik force_colour_prompt=YES kon doen. Daarna source command om te updaten en voila:
 
@@ -94,7 +102,18 @@ Nu het script om text te appenden. Om Bash te laten weten dat je van deze script
 Dit is het idee
 
 ![append test](../00_includes/LNX-07-append%20script%20works.png)
+
 Typfouten worden ooit mijn ondergang, maar ja het werkt uiteindelijk wel. 
 
+Next up: httpd oftewel apache ophalen
 
+httpd.sh gemaakt:
+
+![httpd script](../00_includes/LNX-07-apache_script.png)
+
+![apache deployed](../00_includes/LNX-07-apache_deployed.png)
+
+Apache gedeployed dus geinstalleerd, geenabled en status op gevraagd. Bij een van de bronnen stond ook nog een commando wat de werkende port voor apache2 op vraagt, maar ik zag later pas dat je daar voor `sudo apt install net-tools` moest doen om de `netstat -tulpn | grep :80` commando werkend te krijgen.
+
+## Opdracht 2
 
