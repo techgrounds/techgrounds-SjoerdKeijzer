@@ -128,10 +128,13 @@ Apache gedeployed dus geinstalleerd, geenabled en status op gevraagd. Bij een va
 
 ## Opdracht 2
 ![script num gen](../00_includes/LNX-07_tadaa_script.png)
+
 Scriptje gemaakt om nummer te genereren met `shuf` wat shuffle command is. Had ook voor `RANDOM` kunnen kiezen. Ik vond `shuf -i [range] -n[hoeveel]` voor een leek wel zo eenvoudig.
 
 Script gerunned.
+
 ![result num gen](../00_includes/LNX-07_number_generator.png)
+
 Magik done succesfully. 
 
 edit: ik lees de opdracht net opnieuw, er staat wel bij dat het eigenlijk tussen 1-10 moet zijn en ik heb 0-10 wat dus betekent dat er kans is dat de shuf ook 0 uit kiest. Ik snap het idee, dus ik ga geen nieuwe screenshot maken, maar heb het in de code aangepast voor het laatste gedeelte van opdracht 3. 
