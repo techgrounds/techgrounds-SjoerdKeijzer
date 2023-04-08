@@ -145,7 +145,9 @@ Daar moeten we namelijk ook conditions aan gaan stellen. Komt ie:
 Maak een leuk script wat op basis van de resultaten verschillende dingen kan doen mbv condition parameters.
 
 Het script:
+
 ![conditions](../00_includes/LNX-07-conditions_script.png)
 
 Het resultaat:
+
 ![conditions result](../00_includes/LNX-07_conditions_result.png)
