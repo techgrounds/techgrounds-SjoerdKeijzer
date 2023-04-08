@@ -1,5 +1,5 @@
 # LNX-07 Bash scripting
-[Geef een korte beschrijving van het onderwerp]
+Automatiseren kun je leren (ook aan een computer)
 
 ## Key-terms
 
@@ -15,7 +15,8 @@ Jason had ook nog een broertje die computer nerd was. Bash staat voor *B*ourne-*
 ### shell
 Letterlijk een schil, vaak een soort user interface. Kan een text based interface zijn, maar ook een command-line interface (CLI). Het heet vooral een shell omdat het als een schil over de kernel ligt. Dat betekent dat het niet alleen van toepassing is op de CLI maar ook op een (eventuele) graphical user interface (GUI). 
 
-apt - Advanced packaging tool. Wordt vaak gebruikt bij command om installeren en updaten (en verwijderen) van services. 
+### apt
+Advanced packaging tool. Wordt vaak gebruikt bij command om installeren en updaten (en verwijderen) van services. 
 
 ### Statements
 Behalve dat je waanzinnig kan filosoferen met statements zijn ze handig in computing. If, then, else kan eigenlijk iedereen wel raden en je hebt ook nog elif (else if) en fi. Dit zodat je bepaalde condities op je code/script kan toepassen. 
@@ -58,7 +59,8 @@ A check for a condition can be done using ‘if’, ‘elif’, and/or ‘else�
 
 
 
-### Ervaren problemen
+
+# Ervaren problemen
 Toen ik probeerde mijn $PATH fixed te maken, heb ik iets gedaan wat onhandig was. Ik heb een instructie verkeerd gelezen en toen  
 
 `source ~/.bash_profile` gedaan in .bash_profile. Nu ik het zo terug lees met een nacht slaap, weet ik niet waarom dit toen zo'n goed idee leek. 
@@ -75,14 +77,18 @@ Exit status -1 is niet zo goed. Container kaduuk. Casper om hulp gevraagd en die
 
 Als je dit ooit terug leest Casper, nogmaals muchos gracias want ik kon mezelf wel voor mijn kop slaan. 
 
-Omdat mijn bash profile leeg was, zijn ook user colours gereset. Dat is wat uitdagend met lezen van bijvoorbeeld rights. Ik heb heel lang gezocht hoe ik dit kon oplossen. Casper had heel behulpzaam geopeerd om nieuwe user aan te maken en de bash_profile daar van te kopieren. Echter bleek die bash_profile ook leeg. Nog geprobeerd uit /etc/skel maar daar stond ook geen bash_profile.
+Omdat mijn bash profile leeg was, zijn ook user colours gereset. Dat is wat uitdagend met lezen van bijvoorbeeld rights. Ik heb heel lang gezocht hoe ik dit kon oplossen. Casper had heel behulpzaam geopperd om nieuwe user aan te maken en de bash_profile daar van te kopieren. Echter bleek die bash_profile ook leeg. Nog geprobeerd uit /etc/skel maar daar stond ook geen bash_profile.
 
 Ik heb uiteindelijk in ~/.profile gevonden dat ik force_colour_prompt=YES kon doen. Daarna source command om te updaten en voila:
 
 ![Er is weer kleur](../00_includes/LNX-07_source.png)
 
+Bij opdracht 2 zat ik vooral te zoeken wat een handig manier is om een random nummer te genereren. `random` komt veel voor, maar ik vond persoonlijk `shuf` command makkelijker te gebruiken in dit geval. 
 
-### Resultaat
+Bij opdracht 3 had ik de condition statements wel aardig door, script wilde eerst niet runnen terwijl de syntax wel goed was. Vervolgens wat lopen rommelen met brackets, spaties en enters en ergens daarin lag het want daarna deed het script het wel gewoon.
+
+
+# Resultaat
 
 ## Opdracht 1
 Ik heb vorige keer zo erg met permissions lopen rotzooien dat ik kennelijk mezelf uit /home had gelocked. Ik kon namelijk eerst geen mkdir scripts doen, wat toch wat onhandig is. 
@@ -128,4 +134,15 @@ Script gerunned.
 ![result num gen](../00_includes/LNX-07_number_generator.png)
 Magik done succesfully. 
 
+edit: ik lees de opdracht net opnieuw, er staat wel bij dat het eigenlijk tussen 1-10 moet zijn en ik heb 0-10 wat dus betekent dat er kans is dat de shuf ook 0 uit kiest. Ik snap het idee, dus ik ga geen nieuwe screenshot maken, maar heb het in de code aangepast voor het laatste gedeelte van opdracht 3. 
 
+Daar moeten we namelijk ook conditions aan gaan stellen. Komt ie:
+
+### Opdracht 3
+Maak een leuk script wat op basis van de resultaten verschillende dingen kan doen mbv condition parameters.
+
+Het script:
+![conditions](../00_includes/LNX-07-conditions_script.png)
+
+Het resultaat:
+![conditions result](../00_includes/LNX-07_conditions_result.png)
