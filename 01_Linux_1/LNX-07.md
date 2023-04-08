@@ -38,7 +38,8 @@ A check for a condition can be done using ‘if’, ‘elif’, and/or ‘else�
 - Create a script that generates a random number between 1 and 10, stores it in a variable, and then appends the number to a text file only if the number is bigger than 5. If the number is 5 or smaller, it should append a line of text to that same text file instead.
 
 
-### Gebruikte bronnen
+## Gebruikte bronnen
+### opdracht 1
 - https://opensource.com/resources/what-bash
 - https://subscription.packtpub.com/book/cloud-and-networking/9781788995597/1/ch01lvl1sec12/what-is-bash
 - https://devhints.io/bash
@@ -50,6 +51,10 @@ A check for a condition can be done using ‘if’, ‘elif’, and/or ‘else�
 - https://askubuntu.com/questions/715219/ssh-connection-closed-right-after-login-exit-status-1
 - https://www.cyberciti.biz/faq/linux-install-and-start-apache-httpd/
 - https://www.layerstack.com/resources/tutorials/Installing-Apache-server-on-Linux-Cloud-Servers
+
+### opdracht 2
+- https://stackoverflow.com/questions/8988824/generating-random-number-between-1-and-10-in-bash-shell-script
+- https://linuxize.com/post/bash-if-else-statement/
 
 
 
@@ -116,4 +121,11 @@ httpd.sh gemaakt:
 Apache gedeployed dus geinstalleerd, geenabled en status op gevraagd. Bij een van de bronnen stond ook nog een commando wat de werkende port voor apache2 op vraagt, maar ik zag later pas dat je daar voor `sudo apt install net-tools` moest doen om de `netstat -tulpn | grep :80` commando werkend te krijgen.
 
 ## Opdracht 2
+![script num gen](../00_includes/LNX-07_tadaa_script.png)
+Scriptje gemaakt om nummer te genereren met `shuf` wat shuffle command is. Had ook voor `RANDOM` kunnen kiezen. Ik vond `shuf -i [range] -n[hoeveel]` voor een leek wel zo eenvoudig.
+
+Script gerunned.
+![result num gen](../00_includes/LNX-07_number_generator.png)
+Magik done succesfully. 
+
 
