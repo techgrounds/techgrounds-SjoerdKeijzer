@@ -35,7 +35,7 @@ Study:
 Ik wist al van het bestaan van OSI/TCP, maar ik moest me nog wel inlezen wat de protocollen nou precies doen. Dat roept dan natuurlijk ook meer vragen op, bijvoorbeeld wat de functie nou precies is van sockets.
 
 ## Resultaat
-TCP/IP gebruikt 5 layers en staat bekend als bijzonder betrouwbaar.
+TCP/IP gebruikt 4 layers en staat bekend als bijzonder betrouwbaar.
 
 OSI bestaat uit 7 lagen waarvan er de nodige over een komen met de TCP stack. OSI wordt vooral gebruikt om problemen te troubleshooten want er blijft ook nog wel eens een programma hangen in layer 5 (Session layer). 
 
@@ -43,3 +43,7 @@ OSI bestaat uit 7 lagen waarvan er de nodige over een komen met de TCP stack. OS
 
 Ik vond deze video van NetworkChuck het heel goed illustreren. 
 Grappig dingetje dat kennelijk Network Engineers de application layer altijd layer 7 noemen, maakt niet uit welke stack je gebruikt. 
+
+De Phyical en Data link layer worden bij TCP ook als 1 beschouwd, dus dan krijg je uiteindelijk: 
+
+![Alt text](../00_includes/NTW-01_TCPvsOSI.png)
