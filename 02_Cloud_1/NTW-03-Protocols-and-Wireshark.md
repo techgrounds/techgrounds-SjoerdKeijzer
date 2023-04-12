@@ -1,22 +1,24 @@
 # Protocollen en wireshark
-Wie beslist nou eigenlijk welke protocollen we gebruiken op het internet?
+Wat is een protocol en wie beslist nou eigenlijk welke protocollen we gebruiken op het internet?
 
 ## Key-terms
 - **Protocol**:
-Afgesproken 
+Afgesproken wijze op welke manier er een handeling wordt verricht. Lekker vaag he? Daarom hier onder nog wat specifiekere internet protocollen. 
 
 - **HTTP(s)**:
+Hypertext Transfer Protocol. Een protocol op de Application layer (7). Als je Reddit, Facebook of Twitter over scrollt dan maak je gebruik van HTTP. Het protocol zorgt dat gedistribueerde, cooperatieve, hypermedia (links, afbeeldingen) informatie systemen met gebruikers kunnen communiceren op het World Wide Web. Klik jij op een afbeelding in een browser, zorgt HTTP voor de uitvoering/vertaalslag voor wat de vervolg actie is. 
 
 - **TCP**
+Transmission Control Protocol. Maakt gebruik van three-way handshake. TCP weet dat alle data in volgorde, ontvangen en verzend zijn en dat niks op de weg naar de destination is verloren. Dat betekent dat TCP er wel langer over doet, maar dus wel veel betrouwbaarder is dan UDP. Omdat het een transport protocol is, zit deze op layer 4. 
 
 - **ARP**
 Address Resolution Protocol. Probeert MAC adressen te ontdekken in een netwerk via een IP adres. Opereert op layer 2. 
 
 - **UDP**:
-Snel.
+User Datagram Protocol. Het is niet zo secure als TCP, maar gaat wel loeisnel. Dus als snelheid belangrijker is dan dat je packets helemaal in orde aankomen, dan is dit protocol superieur. Wordt dan ook voornamelijk gebruikt voor games, het afspelen van video's , VoIP en DNS lookups. Net als TCP zit UDP op layer 4. 
 
 - **SSH** 
-
+Secure Shell protocol. Zorgt er onder andere voor dat je een veilige verbinding kan leggen met een andere computer en dat je dit ook kan automatiseren. De key is dat SSH keys gebruikt om de authorisaties te verlenen (waaronder toegang). SSH zit op layer 7. 
 
 
 ## Opdracht
@@ -34,6 +36,8 @@ Snel.
 - https://en.wikipedia.org/wiki/Internet_Standard
 - https://osqa-ask.wireshark.org/questions/11863/why-do-tcp-clients-send-packets-with-no-data/
 - https://www.whois.com/whois/
+- https://www.fortinet.com/resources/cyberglossary/user-datagram-protocol-udp#:~:text=User%20Datagram%20Protocol%20(UDP)%20refers,Name%20System%20(DNS)%20lookups.
+
 
 
 
@@ -50,8 +54,8 @@ Er zijn zo ontzettend veel protocollen dat je moet oppassen dat je ze niet per 1
 | Layer 6 |	Presentation |	To translate, encrypt and compress data. |	MPEG, ASCH, SSL, TLS |
 | Layer 5	| Session |	To establish, manage, and terminate the session |	NetBIOS, SAP
 | Layer 4 |	Transport |	The transport layer builds on the network layer to provide data transport from a process on a source machine to a process on a destination machine. |	TCP, UDP |
-| Layer 3 |	Network |	To provide internetworking. To move packets from source to destination |	IPV5, IPV6, ICMP, IPSEC, ARP, MPLS. |
-| Layer 2 |	Data Link |	To organize bits into frames. To provide hop-to-hop delivery |	RAPA, PPP, Frame Relay, ARP, ATM, Fiber Cable, etc. |
+| Layer 3 |	Network |	To provide internetworking. To move packets from source to destination |	IPV5, IPV6, ICMP, IPSEC, MPLS. |
+| Layer 2 |	Data Link |	To organize bits into frames. To provide hop-to-hop delivery |	RAPA, PPP, Frame Relay, ATM, ARP etc. |
 | Layer 1 |	Physical |	To transmit bits over a medium. To provide mechanical and electrical specifications |	RS232, 100BaseTX, ISDN, 11.
 
 ****
