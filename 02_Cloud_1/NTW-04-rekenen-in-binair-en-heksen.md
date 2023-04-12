@@ -10,11 +10,15 @@ Er zijn 4 manieren om dingen te nummeren/tellen. Dat is binair (base 2), decimal
 Aan of uit. 0 of 1. Groot is de keuze niet, maar dat maakt het wel overzichtelijk tot op zekere hoogte. Erg intiutief voor mens is het niet. Voor een computer wel. 
 
 ### Hexadecimaal
+We hebben 6 characters die een cijfer en of nummer kunnen zijn. Hiermee kan je vrij veel combinaties maken. 
 
+Ik ken Hex vooral toen ik in Photoshop of Premiere kleuren ging gebruiken, dan krijg je de precieze kleur met een Hexadecimaal. Ik moest bij een opdracht bijvoorbeeld een specifieke kleur blauw gebruiken. Als je dat zelf zou moeten uitzoeken op jouw monitor, kan die kleur nog wel eens verschillen met iemand ander's display. Vandaar dat als we afspreken om #2a9df4 blauw te gebruiken er geen gekke dingen kunnen gebeuren. 
 
 ## Opdracht
 - Study counting in base 2 and base 16
 - Vertaal een heel zooitje nummers naar binair en hexadecimaal (zie tabel bij Resultaat)
+- https://www.cuemath.com/numbers/decimal-to-binary/
+
 
 
 
@@ -23,7 +27,7 @@ Aan of uit. 0 of 1. Groot is de keuze niet, maar dat maakt het wel overzichtelij
 
 
 ### Ervaren problemen
-
+Ik ben al geen rekenwonder. Ik vind dit dus echt klote om uit mijn hoofd/met kladpapier te moeten doen. 
 
 ### Resultaat
 
