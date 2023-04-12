@@ -16,14 +16,16 @@ Ik ken Hex vooral toen ik in Photoshop of Premiere kleuren ging gebruiken, dan k
 
 ## Opdracht
 - Study counting in base 2 and base 16
-- Vertaal een heel zooitje nummers naar binair en hexadecimaal (zie tabel bij Resultaat)
-- https://www.cuemath.com/numbers/decimal-to-binary/
+- Vertaal een heel zooitje nummers naar binair en hexadecimaal uit je hoofd/met kladpapier (zie tabel bij Resultaat)
+
 
 
 
 
 ### Gebruikte bronnen
 - https://en.wikipedia.org/wiki/Hexadecimal
+- https://www.cuemath.com/numbers/decimal-to-binary/
+- [Rekenen Binair naar decimaal op Youtube](https://www.youtube.com/watch?v=rsxT4FfRBaM)
 
 
 ### Ervaren problemen
@@ -35,11 +37,11 @@ Decimaal naar binair
 
 | Decimal | Binary  |
 | --------| ------------- |
-| 16 | |
-| 128 | |
-| 228 | |
-| 112 | 
-| 73 | |
+| 16 | 0001 |
+| 128 |  1000 0000  |
+| 228 |  1110 0100 |
+| 112 | 1110 0000 |
+| 73 |  0000 1001 |
 
 Binair naar decimaal
 | Binair | decimaal | 

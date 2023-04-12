@@ -75,5 +75,5 @@ Wat ook nog een optie is als je op de device zelf klikt, om deze een andere naam
 
 Ik kan 'em aan/uit zetten en zien dat ik zo'n 199 devices nog kan plaatsen voordat dit een probleem wordt. (de IPv4 Pool start/end geeft de range aan IP's die nog mogelijk zijn).
 
-Daaronder is nog een optie om (static) IP address te reserveren. 
+Daaronder is nog een optie om IP address te reserveren. Elke keer dat je met bepaald device connect kan je regelen dat die hetzelfde IP adres krijgt toe gewezen. Een soort hybrid static IP dus, om het makkelijk te houden. 
 
