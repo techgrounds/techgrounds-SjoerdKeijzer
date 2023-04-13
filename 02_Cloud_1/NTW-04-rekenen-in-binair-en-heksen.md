@@ -4,7 +4,7 @@
 ## Key-terms
 
 ### Counting bases 
-Er zijn 4 manieren om dingen te nummeren/tellen. Dat is binair (base 2), decimal (base 10), octal (base 10) en Hex (base 16)
+Er zijn 4 manieren om dingen te nummeren/tellen. Dat is binairy (base 2), decimal (base 10), octal (base 10) en Hex (base 16)
 
 ### Binair
 Aan of uit. 0 of 1. Groot is de keuze niet, maar dat maakt het wel overzichtelijk tot op zekere hoogte. Erg intiutief voor mens is het niet. Voor een computer wel. 
@@ -23,13 +23,14 @@ Ik ken Hex vooral toen ik in Photoshop of Premiere kleuren ging gebruiken, dan k
 
 
 ### Gebruikte bronnen
+- https://www.rapidtables.com/convert/number/binary-to-ascii.html
 - https://en.wikipedia.org/wiki/Hexadecimal
 - https://www.cuemath.com/numbers/decimal-to-binary/
 - [Rekenen Binair naar decimaal op Youtube](https://www.youtube.com/watch?v=rsxT4FfRBaM)
 
 
 ### Ervaren problemen
-Ik ben al geen rekenwonder. Ik vind dit dus echt klote om uit mijn hoofd/met kladpapier te moeten doen. 
+Ik ben al geen rekenwonder. Ik vind dit dus echt klote om uit mijn hoofd/met kladpapier te moeten doen. Ik heb deze opdracht ook pas afgemaakt toen ik met Subnetting moest beginnen. 
 
 ### Resultaat
 
