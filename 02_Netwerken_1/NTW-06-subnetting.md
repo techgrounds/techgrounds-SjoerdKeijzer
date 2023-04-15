@@ -7,7 +7,7 @@ Een subnetwork, kortweg subnet, is in essentie een netwerk binnen een netwerk.
 
 - **Octet**: De cijfers die tussen de puntjes van `xxx.xxx.x.x` staan. Ander voorbeeld is: `192.168.1.2` De verschillende octeten hier zijn `192`, `168`, `1` en `2`. Een IPv4 adres bestaat dus uit 4 octeten. 
 
-- **Subnet Mask (ook prefix genoemd)**:
+- **Subnet Mask**:
 De subnet mask van bijvoorbeeld jezelf kan je ontdekken door `ipconfig` in cmd prompy te typen voor Windows, of `ifconfig` voor MasOS/LNX. 
 
 In de meeste gevallen is het voor jou en mij iets wat lijkt op `255.255.255.0`. Sommige bedrijven hebben een subnet mask van `255.255.0.0` of zelf `255.0.0.0`. 
@@ -22,6 +22,8 @@ Een groep van devices op een fysieke locatie, vaak iets als een kantoor, thuis s
 
 - **CIDR notatie**:
 Staat voor Classless Inter-Domain Routing en is een schema om IP addressen toe te wijzen. Het oude systeem had nog speciale Classes, maar toen CIDR om het hoekje kwam kijken is het een stuk efficienter geworden. 
+
+- **subnet prefix**:
 
 
 ## Opdracht
@@ -45,7 +47,11 @@ Staat voor Classless Inter-Domain Routing en is een schema om IP addressen toe t
 ### Ervaren problemen
 Nog nooit iets met subnets te maken gehad dus dit was wel weer een aardige sprong in het diepe. Ik heb meerdere video's moeten kijken wat bijvoorbeeld bedoelt wordt met het network/host stukje, daar waren sommige video's ook niet altijd even duidelijk over. 
 
+Waar ik vooral mee aan het stoeien was, het gedeelte hoe het subnet berekend wordt met het stelen van het netwerk stuk van het binair uitgeschreven IP.
+
+En verder omdat de opdracht verder vrij vaag is behalve over de subnetten, roept dat allemaal vragen op. Moet ik ook switches erbij tekenen in de diagram? Als ik al een NAT gateway heb, moet er dan eigenlijk nog een router tussen naar de hosts/devices? Staat niet in de opdracht, dus ik kan er ook aan voldoen zonder hier heel diep op in te gaan. Toch vind ik dit wel ontzettend interessant en heb me deze keer moedwillig in de ene na de andere rabbit hole gestord. Heel leerzaam, maar zo weer paar uur aan kwijt. 
+
 
 
 ### Resultaat
-[Omschrijf hoe je weet dat je opdracht gelukt is (gebruik screenshots waar nodig).]
+w.i.p
