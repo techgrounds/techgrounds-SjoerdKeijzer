@@ -42,6 +42,7 @@ Staat voor Classless Inter-Domain Routing en is een schema om IP addressen toe t
 - https://www.cisco.com/c/en/us/products/switches/what-is-a-lan-local-area-network.html
 - https://serverfault.com/questions/556363/what-is-the-difference-between-a-public-and-private-subnet-in-a-amazon-vpc
 - https://www.keycdn.com/support/what-is-cidr
+- https://www.fieldengineer.com/blogs/switches-firewalls-routers-differences#:~:text=How%20are%20they%20Connected,The%20switch%20is%20typically%20last.
 
 
 ### Ervaren problemen
@@ -54,4 +55,10 @@ En verder omdat de opdracht verder vrij vaag is behalve over de subnetten, roept
 
 
 ### Resultaat
-w.i.p
+Moet toch ergens beginnen in plaats van eindelijk staren hoe ik de infrastructuur precies moet toepassen.
+
+Laten we dan eerst beginnen met hoeveel hosts we nodig hebben.
+
+1. Private subnet met 15 hosts. Er is sowieso een IP nodig voor het netwerkadres en ook een voor het broadcast adres. In totaal 17.
+2. Private subnet met 30 hosts. Wederom +2 vanwege netwerk en broadcast adres. Er is ook een NAT-gateway en het is ook netjes die ook een IP toe te wijzen. Dat betekent 33 hosts.
+3. Public subnet met het bescheiden aantal van 5 hosts. Net als bij twee hebben we hier te maken met netwerk+broadcast adres en een (internet) gateway. 5+3 maakt tenminste 8 hosts. 
