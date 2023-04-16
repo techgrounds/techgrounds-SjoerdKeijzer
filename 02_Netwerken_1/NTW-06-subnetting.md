@@ -10,21 +10,19 @@ Een subnetwork, kortweg subnet, is in essentie een netwerk binnen een netwerk.
 - **Subnet Mask**:
 De subnet mask van bijvoorbeeld jezelf kan je ontdekken door `ipconfig` in cmd prompy te typen voor Windows, of `ifconfig` voor MasOS/LNX. 
 
-In de meeste gevallen is het voor jou en mij iets wat lijkt op `255.255.255.0`. Sommige bedrijven hebben een subnet mask van `255.255.0.0` of zelf `255.0.0.0`. 
+In de meeste gevallen is het voor jou en mij iets wat lijkt op `255.255.255.0`. Sommige bedrijven hebben een subnet mask van `255.255.0.0` of zelfs `255.0.0.0`. 
 
 Wat zegt dat precies? Dat zegt eigenlijk hoeveel IP addressen (en dus devices) je je binnen jet netwerk kan gebruiken. Kleine hack: als we `192.168.2.0` als netwerk adres nemen met een subnetmask van `255.255.255.0` dan vertellen die eerste drie octeten van 255 eigenlijk dat de eerste drie octets van mijn netwerk IP nooit mogen veranderen. 
 
-Dus: wat ik zelf beschikbaar heb zit alleen in het laatste stukje, in dit geval de `.0`. Het eerste stuk noemen ze dan het netwerk byt en het tweede stuk de host bit. En omdat `192.168.2.0` mijn netwerk adres en `192.168.2.1` is eigenlijk gereserveerd voor jouw router die met het de buitenwereld (WAN) moet spreken. `.192.168.2.255` is weer gereserveerd als broadcast address. Als je dat weet houden we dus 253 IP addressen over om te gebruiken. 
+Dus: wat ik zelf beschikbaar heb zit alleen in het laatste stukje, in dit geval de `.0`. Het eerste stuk noemen ze dan het netwerk portie en het tweede stuk de host bit. En omdat `192.168.2.0` mijn netwerk adres en `192.168.2.1` is eigenlijk gereserveerd voor jouw router die met het de buitenwereld (WAN) moet spreken. `192.168.2.255` is weer gereserveerd als broadcast address. Als je dat weet houden we dus 253 IP addressen over om te gebruiken. 
 
 - **LAN**:
 Local Area Network.
 Een groep van devices op een fysieke locatie, vaak iets als een kantoor, thuis situatie etc. Ze staan aan elkaar geschakeld zodat ze ook gedeelde mappen/schijven kunnen hebben zodat niet op elke lokale machine een aparte kopie van dezelfde file (ppt, doc, etc) staat.  
 
 - **CIDR notatie**:
-Staat voor Classless Inter-Domain Routing en is een schema om IP addressen toe te wijzen. Het oude systeem had nog speciale Classes, maar toen CIDR om het hoekje kwam kijken is het een stuk efficienter geworden. 
-
-- **subnet prefix**:
-
+Staat voor Classless Inter-Domain Routing en is een schema om IP addressen toe te wijzen. Het oude systeem had nog speciale Classes, maar toen CIDR om het hoekje kwam kijken is het een stuk efficienter geworden.
+Een voorbeeld is `10.0.0.0/24` wat wil zeggen dat van de 32 bits die een IP adres heeft, er 24 voor het netwerk gedeelte gebruikt worden. 32-24= 8 bits vrij voor host gedeelte. Wat automatisch betekent dat het subnet mask 255.255.255.0 is. CIDR is dus een notatie om dit makkelijker aan te duiden.  
 
 ## Opdracht
 - Maak een netwerkarchitectuur die voldoet aan de volgende eisen:
