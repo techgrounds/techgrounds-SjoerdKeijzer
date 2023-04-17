@@ -60,3 +60,16 @@ Laten we dan eerst beginnen met hoeveel hosts we nodig hebben.
 1. Private subnet met 15 hosts. Er is sowieso een IP nodig voor het netwerkadres en ook een voor het broadcast adres. In totaal 17.
 2. Private subnet met 30 hosts. Wederom +2 vanwege netwerk en broadcast adres. Er is ook een NAT-gateway en het is ook netjes die ook een IP toe te wijzen. Dat betekent 33 hosts.
 3. Public subnet met het bescheiden aantal van 5 hosts. Net als bij twee hebben we hier te maken met netwerk+broadcast adres en een (internet) gateway. 5+3 maakt tenminste 8 hosts. 
+
+Nu de IP's toewijzen. Stel dat we met 10.0.0.0 werken. Het moet groot genoeg zijn om dus tenminste 3 subnets te kunnen dragen en minimaal 58 devices aan kunnen hangen. 
+
+In theorie zou je dus bijvoorbeeld een 10.0.0.0/26 kunnen doen, maar dan komen we in de knoop als er uitbreiding nodig zou zijn. Ik denk dat het meest makkelijke is als we simpel weg 10.0.0.0/24 doen, hoeven we ook niet al te ingewikkeld te doen met het stelen van bits bij het netwerk gedeelte. 
+
+Krijgen we dus netwerk IP van `10.0.0.0/24`.
+
+- Voor de subnets gaan we weer met de machten goochelen. Voor het grootste subnet van 33 hosts komen we met 5 bits net te kort (dat is 32), dus we gaan voor de 6, wat ons ook meteen ruimte geeft voor toekomstige uitbreiding. 32-6= /26 netwerk met ruimte voor 64 hosts. 
+Grootste subnet wordt dus `10.0.0.0/26`. Begint met 10.0.0.0
+
+- Subnet met 17 hosts. 
+
+- Subnet met 8 hosts.
