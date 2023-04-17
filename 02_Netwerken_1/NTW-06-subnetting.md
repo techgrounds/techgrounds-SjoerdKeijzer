@@ -8,7 +8,7 @@ Een subnetwork, kortweg subnet, is in essentie een netwerk binnen een netwerk.
 - **Octet**: De cijfers die tussen de puntjes van `xxx.xxx.x.x` staan. Ander voorbeeld is: `192.168.1.2` De verschillende octeten hier zijn `192`, `168`, `1` en `2`. Een IPv4 adres bestaat dus uit 4 octeten. 
 
 - **Subnet Mask**:
-De subnet mask van bijvoorbeeld jezelf kan je ontdekken door `ipconfig` in cmd prompy te typen voor Windows, of `ifconfig` voor MasOS/LNX. 
+De subnet mask van bijvoorbeeld jezelf kan je ontdekken door `ipconfig` in cmd prompy te typen voor Windows. 
 
 In de meeste gevallen is het voor jou en mij iets wat lijkt op `255.255.255.0`. Sommige bedrijven hebben een subnet mask van `255.255.0.0` of zelfs `255.0.0.0`. 
 
