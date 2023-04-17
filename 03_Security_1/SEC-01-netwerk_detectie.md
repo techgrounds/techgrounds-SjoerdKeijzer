@@ -1,0 +1,28 @@
+# SEC-01 Netwerk detectie
+Attentie attentie, netwerk detectie preventie!
+
+## Key-terms
+- Nmap
+
+## Opdracht
+Scan the network of your Linux machine using nmap. What do you find?
+Open Wireshark in Windows/MacOS Machine. Analyse what happens when you open an internet browser. (Tip: you will find that Zoom is constantly sending packets over the network. You can either turn off Zoom for a minute, or look for the packets sent by the browser between the packets sent by Zoom.)
+
+
+### Gebruikte bronnen
+- https://www.geeksforgeeks.org/nmap-command-in-linux-with-examples/
+
+### Ervaren problemen
+Geen. Ik had al eerder in NTW module Zoom packets gepakt via Wireshark. 
+
+### Resultaat
+Eerst moeten we weten wat het IP is van de VM. Daarna kunnen we die nmappen.
+![Alt text](../00_includes/SEC-01_ifconfig.png)
+We zien dat port 22 open staat voor SSH en we zien dat port 80 open staat voor http protocol. 
+
+
+Via Wireshark zie ik super veel verkeer voorbij vliegen van `159.124.13.100`. Vorige keer bij NTW met wireshark had ik al gevonden dat `159.124.x.x` Zoom is. Laten we deze keer met de VM kijken of dat weer zo is. 
+
+![Alt text](../00_includes/SEC-01_whoisdis.png)
+Het is inderdaad Zoom. 
+
