@@ -17,12 +17,18 @@ Geen. Ik had al eerder in NTW module Zoom packets gepakt via Wireshark.
 
 ### Resultaat
 Eerst moeten we weten wat het IP is van de VM. Daarna kunnen we die nmappen.
+
 ![Alt text](../00_includes/SEC-01_ifconfig.png)
+
 We zien dat port 22 open staat voor SSH en we zien dat port 80 open staat voor http protocol. 
 
 
-Via Wireshark zie ik super veel verkeer voorbij vliegen van `159.124.13.100`. Vorige keer bij NTW met wireshark had ik al gevonden dat `159.124.x.x` Zoom is. Laten we deze keer met de VM kijken of dat weer zo is. 
+Via Wireshark zie ik super veel UDP maar ook TCP verkeer voorbij vliegen van `159.124.13.100`. Vorige keer bij NTW met wireshark had ik al gevonden dat `159.124.x.x` Zoom is. Laten we deze keer met de VM kijken of dat weer zo is. 
 
 ![Alt text](../00_includes/SEC-01_whoisdis.png)
+
 Het is inderdaad Zoom. 
 
+Maar dat was niet perse de opdracht, dat was kijk of je tussen door de pakkets van Zoom kan vinden wat er gebeurd als je een browser opstart.
+
+In mijn geval zie ik dat `34.107.221.82` TCP packets stuurt en na een nieuwe whois check, blijkt dat een IP van Google te zijn.  
