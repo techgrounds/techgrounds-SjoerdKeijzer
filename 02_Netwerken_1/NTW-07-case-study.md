@@ -2,7 +2,7 @@
 Bouw je eigen webshop toko. Doen we. 
 
 ## Key-terms
-- DMZ (demilitarized zone). Ik wist oprecht niet dat dit ook in de IT werd gebruikt. Een DMZ in militaire zin is een soort niemandsland, een bufferzone. Grens tussen de twee Korea's in een voorbeeld. In de IT moet je het ook zien als een bufferzone. 
+- DMZ (demilitarized zone). Ik wist oprecht niet dat dit ook in de IT werd gebruikt. Een DMZ in militaire zin is een soort niemandsland, een bufferzone. Grens tussen de twee Korea's in een voorbeeld. In de IT moet je het ook zien als een bufferzone, dit om een veiligheidszone te creeren. 
 
 
 ## Opdracht
@@ -26,17 +26,23 @@ As a network administrator you get to choose which networking devices get used.
 
 
 ### Ervaren problemen
-[Geef een korte beschrijving van de problemen waar je tegenaan bent gelopen met je gevonden oplossing.]
+Het bedenken van een echt kloppende architectuur blijft wel een ding. Ben nu natuurlijk nog low skilled, dus ik merk dat ik heel erg blijf schuiven met routers/firewalls voor een logische en veilige routing van data. Denk wel dat het gewoon een kwestie is van meer doen, en dan kom ik er vanzelf achter na diagram 8 dat het veel makkelijker kan en dat ik nu vet ingewikkeld zit te doen. 
 
 ### Resultaat
 Ik had meteen al zoiets dat het handig zou zijn om bepaalde zaken te clusteren. Front-end vs back-end en de werkplekken voor medewerkers.
 
-Laten we daarmee beginnen:
+Laten we daarmee beginnen. In ieder geval:
 
-- Frontend: Webserver
+- Frontend: In ieder geval webserver
 
-- Back-end: DB with login credentials + AD server + file server for internal documents
+- Back-end: DB with login credentials (SQL) + Active Directory server + file server for internal documents
 
 - Office LAN: 5 workstations + printer
 
-Nou zou ik in schatten dat met 5 workstations dit geen hele grote webshop is met gigantisch veel traffic. Mocht dat wel zijn, kan je ook nog overwegen om meer dan 1 hostingmachine voor de webshop te maken met een load balancer ervoor in de DMZ. Laat ik voor nu uitgaan dat het een wat kleinere webshop is. 
+Nou zou ik in schatten dat met 5 workstations dit geen hele grote webshop is met gigantisch veel traffic. Mocht dat wel zijn, kan je ook nog overwegen om meer dan 1 hostingmachine voor de webshop te maken met een load balancer ervoor in de DMZ. Zou ook nog een middel kunnen zijn tegen Ddos aanvallen, maar dat hopen we te voorkomen door de nodige veiligheidsmaatregelen en firewalls. 
+
+Wat ik wel verwarrend vind, als ik het internet afstruin voor wat inspiratie van netwerk diagrammen, soms de volgorde van router en firewall wordt omgedraait. Bij de ene staat eerst internet > router > firewall en bij anderen internet > firewall > router. Puur op basis van het layer model en waar een firewall voornamelijk op layer 4 werkt, lijkt me het meest logisch dat die laatste de voor de hand liggende volgorde is. 
+
+![Alt text](../00_includes/NTW-07-casestudy.png)
+
+Toen ik eigenlijk bijna klaar was, bedacht ik me het volgende: bij het Corporate gedeelte heb ik de back-end en office gedeelte ieder een eigen switch gegeven met een corporate router erboven. Dit had ook allemaal in 1 router of L3 switch gekunt. Ik laat de diagram zoals die nu is, dan kan ik verder met de SEC modules. 
