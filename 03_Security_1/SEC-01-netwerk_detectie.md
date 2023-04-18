@@ -2,7 +2,7 @@
 Attentie attentie, netwerk detectie preventie!
 
 ## Key-terms
-- Nmap
+- Nmap: tool om netwerken te scannen.
 
 ## Opdracht
 Scan the network of your Linux machine using nmap. What do you find?
@@ -13,7 +13,7 @@ Open Wireshark in Windows/MacOS Machine. Analyse what happens when you open an i
 - https://www.geeksforgeeks.org/nmap-command-in-linux-with-examples/
 
 ### Ervaren problemen
-Geen. Ik had al eerder in NTW module Zoom packets gepakt via Wireshark. 
+Geen. Ik had al eerder in NTW module Zoom packets gepakt via Wireshark en ik wist uit eerdere opdracht dat je whois command kan doen op Linux. (Als je die wel eerst installeerd :) )
 
 ### Resultaat
 Eerst moeten we weten wat het IP is van de VM. Daarna kunnen we die nmappen.
