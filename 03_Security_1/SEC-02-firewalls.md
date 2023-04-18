@@ -28,7 +28,24 @@ Next Gen Firewall Wall. De Chinese Muur is hier niks bij.
 
 
 ### Ervaren problemen
-[Geef een korte beschrijving van de problemen waar je tegenaan bent gelopen met je gevonden oplossing.]
+Het duurder vrij lang voordat het kwartje viel en ik niet het IP adres van mijn VM moest gebruiken maar IP van de server + poort nummer om daar de standaardbrowser van apache te kunnen zien. 
+
+Eerst ook nog verkeerde poort nummber gebruikt (van SSH key) dus toen kreeg ik ook eerst nog een andere error, namelijk `400 Bad request`. Toen gaan googlen en toen bedacht ik met dat er ook nog een andere port was in het excel document. Voila de webport en die deed het dan ook. 
 
 ### Resultaat
-[Omschrijf hoe je weet dat je opdracht gelukt is (gebruik screenshots waar nodig).]
+Apache al bij Bash Scripting geinstalleerd. 
+
+Toen ik er uiteindelijk op kwam hoe dit te openen was dit deel eenvoudig: `serverIP+webport = apache homepage`
+
+
+![Apache draait](../00_includes/SEC-02_apache_draait.png)
+
+Laten we vervolgens de firewall enablen. Om te zorgen dat ik metzelf niet uit SSH connectie lock, eerst nog `sudo ufw allow 22` en `sudo ufw allow 'OpenSSH'` gedaan zodat ik daar geen problemen mee zou hebben. 
+
+![Alt text](../00_includes/SEC-02_spannend.png)
+
+For good measure nog gekeken of daarna de ports open stonden, en dat 22 nog steeds ok was (ja, want skipping existing rule). 
+
+Vervolgens gereboot zodat het ook effect zou hebben. Ik kon gelukkig nog in mijn VM.
+
+Ik zat nog wel even te puzzelen hoe ik alles kon uitzetten zodat ik de default page niet meer kon zien. Alle relevante ports dichtzetten was zo gebeurd, maar bleef connectie houden. Pas toen ik ook `sudo ufw deny 'Apache'` en `sudo ufw deny 'Apache Full` deed, was de Apache2 Ubuntu default page niet meer bereikbaar. 
