@@ -31,4 +31,9 @@ Het is inderdaad Zoom.
 
 Maar dat was niet perse de opdracht, dat was kijk of je tussen door de pakkets van Zoom kan vinden wat er gebeurd als je een browser opstart.
 
-In mijn geval zie ik dat `34.107.221.82` TCP packets stuurt en na een nieuwe whois check, blijkt dat een IP van Google te zijn.  
+![Alt text](../00_includes/SEC-01_wireshark.png)
+
+
+In mijn geval zie ik dat `34.107.221.82` TCP packets stuurt en na een nieuwe whois check, blijkt dat een IP van Google te zijn. Zelfde geldt voor `172.217.23.195`.   
+
+Dat kan kloppen, want Google is mijn standaard homepage. Je ziet dus dat de browser meteen allerlei dingen opvraagt waaronder de homepage/zaken die nodig zijn voor de URL balk en dat die vanuit verschillende destinations ook razendsnel weer worden beantwoord. 
