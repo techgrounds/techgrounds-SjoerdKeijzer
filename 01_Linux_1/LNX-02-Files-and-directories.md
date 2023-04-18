@@ -31,10 +31,10 @@ Waarom er geen permissions waren voor Cat command terwijl overal op het internet
 Mijn focus begint echt op te raken dus ik weet niet meer zo goed of ik nu dingen begin te zien die er niet zijn. Probleem bij pathing stukje: ik heb op een of andere manier per ongeluk een map '/' aangemaakt waardoor ik bij cd / steeds in die map terecht kwam. Ik heb dit uiteindelijk opgelost door als 'reset' cd ~sjoerd te gebruiken en van daar uit de cd /absolute en cd ../relative gedaan. 
 
 ### Resultaat
-![pwd](https://github.com/techgrounds/techgrounds-SjoerdKeijzer/blob/6762dd42a72a69b44e650f2cc631138f2b812790/00_includes/LNX-02_current%20dir_pwd.png)
+![pwd](../00_includes/LNX-02_current%20dir_pwd.png)
 
-![list and make TG dir](https://github.com/techgrounds/techgrounds-SjoerdKeijzer/blob/6762dd42a72a69b44e650f2cc631138f2b812790/00_includes/LNX-02-List%20and%20make%20TG%20dir.png)
+![list and make TG dir](../00_includes/LNX-02-List%20and%20make%20TG%20dir.png)
 
-![createfileaddtext](https://github.com/techgrounds/techgrounds-SjoerdKeijzer/blob/6762dd42a72a69b44e650f2cc631138f2b812790/00_includes/LNX-02-create%20file%20and%20add%20text.png)
+![createfileaddtext](../00_includes/LNX-02-create%20file%20and%20add%20text.png)
 
-![paths](https://github.com/techgrounds/techgrounds-SjoerdKeijzer/blob/6762dd42a72a69b44e650f2cc631138f2b812790/00_includes/LNX-02-absolute_relative_paths.png)
+![paths](../00_includes/LNX-02-absolute_relative_paths.png)
