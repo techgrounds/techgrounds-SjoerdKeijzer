@@ -3,9 +3,13 @@ Jij krijgt een key, ik krijg een key. Ze zijn allebei anders maar toch kunnen we
 
 ## Key-terms
 
-- Public Key:
+- Public Key: Sleutel die je kan delen in openbaar.
 
-- Private Key:
+- Private Key: Sleutel die voor jezelf is. 
+
+Waarom zijn deze twee belangrijk?
+
+Met Asymmetric encryption stuur je jouw public key naar diegene waar mee je communicatie wilt. Deze kan de public key gebruiken om berichten mee te encrypten. Vervolgens wordt het bericht naar jou gestuurd. Jij gebruikt jouw private key (die aan de public key is gekoppeld) om de assymetrische encryptie op deze manier te decrypten. Je ontvangt nu het bericht na een 2 keer gelaagde encryptie en eigenlijk ook een tweestaps authenticatie. 
 
 ## Opdracht
 - Generate a key pair.
@@ -13,10 +17,13 @@ Jij krijgt een key, ik krijg een key. Ze zijn allebei anders maar toch kunnen we
 
 
 ### Gebruikte bronnen
-[Plaats hier de bronnen die je hebt gebruikt.]
+- https://travistidwell.com/jsencrypt/demo/
+- https://www.devglan.com/online-tools/rsa-encryption-decryption
+- https://www.javainuse.com/rsagenerator
+
 
 ### Ervaren problemen
-[Geef een korte beschrijving van de problemen waar je tegenaan bent gelopen met je gevonden oplossing.]
+Ik begreep eerst niet helemaal goed welke key je waarvoor gebruikt. Bij wijze als test heb ik toen met mijn public key iets geencrypt en de wijde wereld ingestuurd. Ik dacht dat dan alsnog de private key kon gebruiken om zelf de message te lezen, maar dat hoeft niet perse. Wijze les: je moet dus public key delen, en berichten maken met de public key die je kan uitlezen met de gepairde private key die alleen jij moet hebben. 
 
 ### Resultaat
-[Omschrijf hoe je weet dat je opdracht gelukt is (gebruik screenshots waar nodig).]
+Na het eerst verkeerd te hebben gedaan, heb ik nu door hoe je de keys moet gebruiken, waarom je de key pairs moet hebben (public voor encrypting, private voor decrypting) en dus dat dit al duizend keer beter is dan symmmetrische encrypting. Met name de private key die alleen jijzelf in bezit zou moeten hebben, zorgt voor een tweede beveiligingslaag die zeer secuur is. 
