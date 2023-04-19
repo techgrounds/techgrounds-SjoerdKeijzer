@@ -51,7 +51,7 @@ Steganography en de Pigpen Cypher vond ik de leukste. Vooral Steganography omdat
 
 ![Caspersky](../00_includes/SEC-04_caspersky.png) 
 
-We nemen een Caspersky, met een AES encrypted bericht. Ik heb Stenography gebruikt om in de alternative description van het plaatje `128b CasperSkyKeyCry6` te zetten, wat het aantal bits is en de key waarmee je het bericht zou moeten kunnen ontcijferen. 
+We nemen een Caspersky, met een AES encrypted bericht. Ik heb Stenography gebruikt om in de alternative description van het plaatje `128b vector: Hiermotietsstaan CasperSkyKeyCry6` te zetten, wat het aantal bits is en de key en vector waarmee je het bericht zou moeten kunnen ontcijferen. 
 
 Waarom is dit nou niet zo veilig? Omdat je de key waarmee je het ook kan ontcijferen, in je bericht zet. Kortom, iedereen die de juiste techniek kent, kan dit zo meelezen. Casper dus ook. 
 
