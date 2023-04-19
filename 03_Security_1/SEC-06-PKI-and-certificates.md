@@ -1,4 +1,4 @@
-# SEc-07 Public Key Instrastructure and Certificates
+# SEC-06 Public Key Instrastructure and Certificates
 [Geef een korte beschrijving van het onderwerp]
 
 ## Key-terms
