@@ -47,4 +47,10 @@ Steganography en de Pigpen Cypher vond ik de leukste. Vooral Steganography omdat
     - Blowfish cipher - gebruikt 64 block bits. In essentie hakt deze methode de plaintedt in de helft, begint encryptie en hakt daarna alles tot blocks en husselt die vervolgens door elkaar. (1 round). Hoe vaker je schud (x round zoveel), hoe veiliger het wordt. Blowfish is tegenwoordig depriciated, maar het algoritme word nog wel op voortgebouwd in nieuwe itineraties symmetric encryption. Je zou kunnen zeggen dat daarmee de Blowfish cipher nu ook nog gebruikt wordt. 
 
 
+- Send a symmetrically encrypted message to one of your peers via the public Slack channel. They should be able to decrypt the message using a key you share with them. Try to think of a way to share this encryption key without revealing it to everyone. You are not allowed to use any private messages or other communication channels besides the public Slack channel. Analyse the shortcomings of symmetric encryption for sending messages.
 
+![Caspersky](../00_includes/SEC-04_caspersky.png) 
+
+We nemen een Caspersky, met een AES encrypted bericht. Ik heb Stenography gebruikt om in de alternative description van het plaatje `128b CasperSkyKeyCry6` te zetten, wat het aantal bits is en de key waarmee je het bericht zou moeten kunnen ontcijferen. 
+
+Waarom is dit nou niet zo veilig? Omdat je de key waarmee je het ook kan ontcijferen, in je bericht zet. Kortom, iedereen die de juiste techniek kent, kan dit zo meelezen. Casper dus ook. 
