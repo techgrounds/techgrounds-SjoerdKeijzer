@@ -19,8 +19,10 @@ Nu we het toch over gezouten wachtwoorden hebben, wat is salting precies? Het is
 Wat salting specifiek met hashing goed maakt, is dat de grote valkuil van hash (zelfde input = zelfde output) teniet doet. Als voorbeeld:
 
 `hash ("hello)                   = a9021932994939e83b2ac5b9e29e1b1c193841`
+
 `hash ("hello + Qxe39dfkdX")     = 8dfac912a93f8as98d8sd09sd9ss3644939e83b`
-`hash ("hello + S399d3x94d")     = c9d9d9s7dd38f3364494=3938f33644939d3fg4f`
+
+`hash ("hello + S399d3x94d")     = c9d9d9s7dd38f3364494=3938f33644939d3fg4`
 
 Misschien mis ik een nummer bij het overtypen, maar het is duidelijk dat salting helpt om dezelfde input, te veranderen naar een andere output. Rainbow Table is dan vrijwel nutteloos, of in ieder geval een stuk lastiger toe te passen. 
 
