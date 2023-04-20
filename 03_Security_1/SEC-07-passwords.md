@@ -45,4 +45,21 @@ Message Digest Algoritmh 5, is een vorm van een hashing techniek en output is al
 [Geef een korte beschrijving van de problemen waar je tegenaan bent gelopen met je gevonden oplossing.]
 
 ### Resultaat
-[Omschrijf hoe je weet dat je opdracht gelukt is (gebruik screenshots waar nodig).]
+
+- Find out what hashing is and why it is preferred over symmetric encryption for storing passwords.
+
+Hash is niet terug te draaien met een sleutel. Precies wat symmetric encryption dus wel is. 
+
+- Find out how a Rainbow Table can be used to crack hashed passwords.
+
+Een manier om hash wel te kraken, is als je de standaard input/output weet. Om dat bij te houden kan je een grote tabel maken aka een Rainbow Table. Ook op basis van pure rekenkracht; als een wachtwoord kleiner is, dan is deze sowieso al makkelijker te kraken want er zijn simpelweg minder mogelijke combinaties. 
+
+- Below are two MD5 password hashes. One is a weak password, the other is a string of 16 randomly generated characters. Try to look up both hashes in a Rainbow Table.
+03F6D7D1D9AAE7160C05F71CE485AD31
+03D086C9B98F90D628F2D1BD84CFA6CA
+
+![greenredhash](../00_includes/SEC-07-hashcracking.png)
+
+De groene werd dus gekraakt en de ander niet. 
+
+- Create a new user in Linux with the password 12345. Look up the hash in a Rainbow Table
