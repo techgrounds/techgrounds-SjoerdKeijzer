@@ -58,6 +58,7 @@ Certificate Signing Request. Een van de eerste dingen die je doet om jouw eigen 
 - https://devopscube.com/create-self-signed-certificates-openssl/
 - https://www.globalsign.com/en/blog/what-is-a-certificate-signing-request-csr
 - https://stackoverflow.com/questions/63195304/difference-between-pem-crt-key-files#:~:text=be%20kept%20secret.-,.,decrypt%20data%20sent%20by%20servers.
+- https://support.moonpoint.com/os/windows/certificates/trusted_root.php
 
 
 
@@ -103,6 +104,30 @@ Ik ben geen expert, maar dit lijkt mij in orde.
 
 ![Google](../00_includes/SEC06_cert_google.png)
 
+Wat valt op aan deze drie? Dat Google zelf haar certificaat heeft uitgegeven dmv dochteronderneming Google Trust Services. 
 
+ING heeft het ondergebracht bij Entrust, wat gezien de naam alleen al, waarschijnlijk een goede keuze is voor een bank. Je wilt tenslotte wel veilig bankzaken kunnen garanderen voor jouw klanten. Het zou zomaar kunnen dat Entrust dit voor meer financiele instellingen doet en niet alleen aan ING. 
+
+Wat bij Techgrounds 'opvalt' is dat Let's Encrypt een open source en non-profit organisatie is die de cert heeft geissued. 
 
 - Find the list of trusted certificate roots on your system (bonus points if you also find it in your VM).
+
+Ik dacht dat dit heel moeilijk zou worden, maar na 1 keer zoeken had ik al een goede website gevonden die dit perfect uitlegde. 
+
+Je maakt gebruikt van MMC oftewel Microsoft Management Console. 
+
+![MMC](../00_includes/SEC-06_MMC_power.png)
+
+Bij de panel voegen we certificates toe op user account niveau
+
+![found it](../00_includes/SEC-06_MMC_roots_found.png)
+
+En dan kunnen we zo ook bij de Trusted Root certs komen
+
+Bonus als we dit lijstje ook in de VM kunnen vinden.
+
+Ik wist van een vorige opdracht in week 1 dat bij /etc/ alle systeemdingetjes stonden, was in de mappen structuur kort zoeken maar het is gewoon te vinden met `/etc/ssl/certs`
+
+![Alt text](../00_includes/SEC-06_LNX_etc_certs.png)
+
+Ik had ook nog alle hidden kunnen opvragen met -a, maar dat stond er niet specifiek bij. De locatie is in elk geval gevonden. 
