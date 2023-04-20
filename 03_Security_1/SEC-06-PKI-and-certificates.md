@@ -3,7 +3,7 @@
 
 ## Key-terms
 ### **PKI**: 
-Public Key Infrastructure. PKI gebruikt cryptografische public keys, die gepaired zijn aan een digitaal certificaat, welke het apparaat of gebruiker authenticeert. 
+Public Key Infrastructure. PKI gebruikt cryptografische public keys, die gepaired zijn aan een digitaal certificaat, welke het apparaat of gebruiker authenticeert. PKI is de basis waar SSL en TLS gebruik van maken. Over die begrippen hieronder meer. 
 
 ### **Digital Certificate**:
 Digital certificates zijn uitgegeven door een trusted source, een **certificate authority (CA)** en op die manier zijn ze een soort digitaal paspoort; de zender kan geverifieerd worden. 
@@ -29,9 +29,17 @@ Secure Sockets Layer. Er wordt een beveiligde laag geplaatst tussen een server e
 
 SSL certificaten maken gebruik van het https-protocol van de browser (via poort 443) wat de beveiligde verbinding tot stand brengt. Daardoor is (een gedeelte van) de website ook alleen via https:// te bereiken op het internet.
 
-
 ### **TLS**:
+Transport Layer Security. Eigenlijk de opvolger en dus de meest recente versie van SSL. 
 
+Wanneer een bezoeker je site bezoekt, zoekt zijn webbrowser naar het SSL/TLS-certificaat van je site. Vervolgens voert de browser een *“handshake”* uit om de geldigheid van je certificaat te controleren en je server te verifiëren. Als het SSL certificaat niet geldig is, bestaat de kans dat je gebruikers de foutmelding *“your connection is not private”* krijgen, waardoor ze je site mogelijk verlaten.
+
+Nadat de browser van een bezoeker de geldigheid van je certificaat heeft vastgesteld en je server heeft geverifieerd, creëert het in wezen een gecodeerde koppeling tussen de browser en de server om gegevens veilig te transporteren.
+
+En dit is ook waar HTTPS ten tonele verschijnt (HTTPS staat voor “HTTP via SSL/TLS”).
+
+### **CSR**:
+Certificate Signing Request. Een van de eerste dingen die je doet om jouw eigen SSL/TLS certificate te maken. Gegenereerd op dezelfde server waar je van plan bent om de cert te installeren, bevat de CSR de nodige informatie die de Certificate Authority (CA) zal gebruiken om het certificate te maken. De public key zit in het certificaat inbegrepen en is getekened met de gepaired private key. 
 
 ## Opdracht
 - Create a self-signed certificate on your VM.
@@ -45,13 +53,45 @@ SSL certificaten maken gebruik van het https-protocol van de browser (via poort 
 - https://www.freecodecamp.org/news/openssl-command-cheatsheet-b441be1e8c4a/#b723
 - https://www.ssl.com/nl/veelgestelde-vragen/wat-is-een-x-509-certificaat/
 - https://www.domeinwinkel.nl/blog/2016/03/30/wat-is-een-ssl-certificaat/
+- https://kinsta.com/nl/kennisbank/tls-vs-ssl/
+- https://www.digitalocean.com/community/tutorials/how-to-create-a-self-signed-ssl-certificate-for-apache-in-ubuntu-22-04
+- https://devopscube.com/create-self-signed-certificates-openssl/
+- https://www.globalsign.com/en/blog/what-is-a-certificate-signing-request-csr
+- https://stackoverflow.com/questions/63195304/difference-between-pem-crt-key-files#:~:text=be%20kept%20secret.-,.,decrypt%20data%20sent%20by%20servers.
+
+
+
 
 
 ### Ervaren problemen
-[Geef een korte beschrijving van de problemen waar je tegenaan bent gelopen met je gevonden oplossing.]
+Er zijn natuurlijk meerdere wegen naar Rome om een eigen certificaat te maken, ik vond het wel lastig om tussen alle opties iets te kiezen omdat de meeste net weer een beetje anders zijn dan de andere. Ook verschil in wanneer .key of .pem te gebruiken verwarde me wat. 
 
 ### Resultaat
 - Create a self-signed certificate on your VM.
+
+Om een certificate te maken hebben we iets nodig om ons daarbij te helpen, in dit geval is dat OpenSSL.
+
+`sudo apt install openssl`
+
+Wat nu? 
+
+1. Maak Private Key dmv RSA.
+
+2. Gebruik private key om CSR te maken
+
+3. Onderteken certificaat (self-signed)
+
+4. Check of de inhoud klopt
+
+We kunnen stap 1-3 ook in 1x doen. 
+
+![voila](../00_includes/SEC-06_pkey_and_cert.png)
+
+En kijken of de inhoud klopt als we het nakijken:
+
+![Alt text](../00_includes/SEC-06-results.png)
+
+Ik ben geen expert, maar dit lijkt mij in orde. 
 
 
 - Analyze some certification paths of known websites (ex. techgrounds.nl / google.com / ing.nl).
