@@ -1,5 +1,5 @@
 # SEC-08 Detectie, response en analyse
-[Geef een korte beschrijving van het onderwerp]
+Veiligheid first. Hoe doen we dat eigenlijk?
 
 ## Key-terms
 ### **IDS**: 
@@ -56,9 +56,19 @@ verwijder/disable onnodige software/ongebruikte ports om te voorkomen dat dit ee
 
 ### **Types of disaster recovery options**:
 
+- Back-up en restore: 
+- Cold Site:
+- Hot Site:
+- Hybride: 
+
+
 ### **RPO**:
+Recovery Point Objective beschrijft het tijdsinterval dat mag voorbijgaan zonder dat de hoeveelheid verloren data de maximum toelaatbare drempel overschrijdt.
+
+De RPO wordt bepaald op basis van de tijd tussen 2 back-ups en de hoeveelheid gegevens die tussen die 2 back-ups verloren zouden kunnen gaan.
 
 ### **RTO**:
+Recovery Time Objective is de streeftijd waarbinnen een bepaalde functie, proces of dienst opnieuw operationeel moet zijn na een storing, om onaanvaardbare gevolgen voor de bedrijfsactiviteiten te vermijden. Soms wordt het ook gebruikt om de tijd aan te geven hoelang het duurt voordat het systeem weer operationeel is.
 
 ## Opdracht
 - A Company makes daily backups of their database. The database is automatically recovered when a failure happens using the most recent available backup. The recovery happens on a different physical machine than the original database, and the entire process takes about 15 minutes. What is the RPO of the database?
@@ -71,6 +81,7 @@ verwijder/disable onnodige software/ongebruikte ports om te voorkomen dat dit ee
 - https://www.techtarget.com/searchsecurity/definition/incident-response
 - https://www.msp360.com/resources/blog/how-to-respond-to-cyberattacks/#:~:text=Containment%2C%20eradication%2C%20and%20recovery%20%E2%80%93,having%20a%20plan%20for%20recovery
 - https://www.beyondtrust.com/resources/glossary/systems-hardening
+- https://www.aurelium.be/nl/blog/wat-is-disaster-recovery-plan-welke-stappen
 
 
 
@@ -80,4 +91,19 @@ verwijder/disable onnodige software/ongebruikte ports om te voorkomen dat dit ee
 Was veel theorie, dus daar wel even doorheen moeten fietsen. Opdracht zelf was niet al te ingewikkeld. 
 
 ### Resultaat
-[Omschrijf hoe je weet dat je opdracht gelukt is (gebruik screenshots waar nodig).]
+- A Company makes daily backups of their database. The database is automatically recovered when a failure happens using the most recent available backup. The recovery happens on a different physical machine than the original database, and the entire process takes about 15 minutes. What is the RPO of the database?
+
+RPO is de tijd tussen 2 back-ups en de hoeveelheid gegevens die tussen die 2 back-ups verloren zouden kunnen gaan. 
+
+Hoewel de RTO (recovery time) 15 minuten is, hangt het preciese verlies aan data af van wanneer de DB precies wordt gebackuped en wanneer er een incident plaatstvind. In het ergste geval is het data verlies 1 dag omdat er dagelijks een back-up wordt gemaakt. 
+
+De RPO is 1 dag. 
+
+
+
+- An automatic failover to a backup web server has been configured for a website. Because the backup has to be powered on first and has to pull the newest version of the website from GitHub, the process takes about 8 minutes. What is the RTO of the website?
+
+Voor de volledigheid quoten we nog even wat een RTO is. RTO is de streeftijd waarbinnen een bepaalde functie, proces of dienst opnieuw operationeel moet zijn na een storing, om onaanvaardbare gevolgen voor de bedrijfsactiviteiten te vermijden. Soms wordt het ook gebruikt om de tijd aan te geven hoelang het duurt voordat het systeem weer operationeel is. 
+
+Die laatste zin is nu het geval en staat gelijk aan 8 minuten. 
+
