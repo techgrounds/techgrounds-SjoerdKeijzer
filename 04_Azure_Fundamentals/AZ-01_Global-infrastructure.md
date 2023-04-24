@@ -11,7 +11,7 @@ We hebben het hier boven al een beetje verklapt maar een Availability Zone ligt 
 ### **Region Pairs**: 
 Het zou kunnen dat door een orkaan, aardbeving of oorlog meerdere Availability Zones getroffen worden, mogelijk zelfs een hele Region. Omdat je Single Point of Failure ten allen tijden wil voorkomen, zijn er Region Pairs. Stel jij zit in West Europe . Er is iets gebeurd in een bepaalde AZ wat een overload van traffic veroorzaakt op de rest van de AZ binnen die Region (of de Region plat ligt) dan is dat wat onhandig. 
 
-Stel dat North-Europe de region pair is, dan wordt traffic omgeleid naar waarschijnlijk een Availability Zone in de NA region. Ook worden daar back-ups gemaakt (want region pair) dus is jouw data in geval van calamiteit ook nog steeds oproepbaar. De Primairy region is West-Europe, hier draaien ook jouw services op. De secondary region (en region pair) in dit voorbeeld is North-Europe en zal alleen worden gebruikt als fail-over (aka de pleuris breekt uit). 
+Stel dat North-Europe de region pair is, dan wordt traffic omgeleid naar waarschijnlijk een Availability Zone in de EU-West region. Ook worden daar back-ups gemaakt (want region pair) dus is jouw data in geval van calamiteit ook nog steeds oproepbaar. De Primairy region is West-Europe, hier draaien ook jouw services op. De secondary region (en region pair) in dit voorbeeld is North-Europe en zal alleen worden gebruikt als fail-over (aka de pleuris breekt uit). 
 
 ## Opdracht
 - Wat is een Azure Region?
