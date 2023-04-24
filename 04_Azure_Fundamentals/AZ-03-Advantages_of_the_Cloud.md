@@ -23,9 +23,12 @@ Via de Cloud is schaalbaarheid geen probleem.
     - Letterlijk lenigheid. Wil je over 10 minuten iets draaien? Go. Ik had een DB in een VM, nu wil ik een managed DB. Klik klik. Done. Bij een 'on-premise' situatie kan je niet zomaar in drie kliks veranderen, want dat betekent dat je hardware/software en soms zelf architectuur moet omgooien. Kortom: Cloud is heel erg agile. 
 
 - ### **5. Geo-distribution**:
-    - placeholder
+    - Nog zo'n voordeel van de Cloud. Opeens razend populair in Japan? Openen we een server of website in Region Japan, dat komt de latency van jouw lokale fans alleen maar ten goede. 
+
 - ### **6. Disaster recovery**:
-    - boom placeholder
+    - Hotel? Trivago! Calamiteit? Cloud! Beetje flauw natuurlijk, maar je zit niet meteen met de gebakken peren als er een calamiteit is. Bij een 'on-prem' situatie ben je de Sjaak als jouw servers in de fik vliegen. 
+    
+    Cloud providers hebben zelf ook complexe Disaster Recovery plans om te zorgen dat jouw service/dienst blijft draaien volgens SLA. Dankzij de Availability Zones en Region Pairs moet de wereld wel echt vergaan om te zorgen dat de back-ups van de back-ups niet werken. 
 
 ## Consumption model
 - ### **CapEx**:
