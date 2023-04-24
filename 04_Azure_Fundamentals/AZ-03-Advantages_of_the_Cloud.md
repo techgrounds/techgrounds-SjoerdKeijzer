@@ -7,14 +7,12 @@ De 6 voordelen van Cloud computing:
 - ### **1. High Availability**: 
 In principe draait het altijd. Jouw applicatie/database/etc. blijft draaien zonder interruptie.  Zelfs als er een onderliggend probleem is bij een Azure datacenter dan zal er een weg worden gevonden dat de applicatie naadloos kan blijven draaien. Daar hoef jij je als gebruiker geen zorgen over te maken. Er is wel een sidenote: de precieze verwachtingen worden meestal vastgesteld in een **SLA** (service level agreement). 
 
-    - In de SLA worden afgesproken gedaan over Recovery Time Objective (RTO - hoe snel moet het weer runnen als het uitvalt) en Recovery Point Objectives (RPO - als er een recovery plaats moet vinden hou oud mag de data dan zijn). Er kunnen ook afspraken worden gemaakt over bijvoorbeeld uptime garantie van 99.99%, maar daar betaal je dan ook voor. 
-
+- In de SLA worden afgesproken gedaan over Recovery Time Objective (RTO - hoe snel moet het weer runnen als het uitvalt) en Recovery Point Objectives (RPO - als er een recovery plaats moet vinden hou oud mag de data dan zijn). Er kunnen ook afspraken worden gemaakt over bijvoorbeeld uptime garantie van 99.99%, maar daar betaal je dan ook voor. 
 
 - ### **2. Scalability**:
 Je hoeft er niet veel over na te denken dan bij 'on-prem' waar bijvoorbeeld stroomkosten, fysieke ruimte voor jouw serverkast en logistiek een rol zouden kunnen spelen.  Je hebt twee soorten scalability:
-
-    - **Vertical**: meer of minder CPU, memory, storage. Aka Sterkere units om de oude mee te vervangen. In plaats van een klein bescheiden rack, vervang je die met een full-stack rack zo groot als de grootste koelkast die je kan vinden. 
-    - **Horizontal**: Je zet meer machines mij de huidige pool die je hebt. Ik zet naast mijn huidige koelkast, nog een (gelijkwaardige) koelkast. 
+- **Vertical**: meer of minder CPU, memory, storage. Aka Sterkere units om de oude mee te vervangen. In plaats van een klein bescheiden rack, vervang je die met een full-stack rack zo groot als de grootste koelkast die je kan vinden. 
+- **Horizontal**: Je zet meer machines mij de huidige pool die je hebt. Ik zet naast mijn huidige koelkast, nog een (gelijkwaardige) koelkast. 
 
 Via de Cloud is schaalbaarheid geen probleem. 
 

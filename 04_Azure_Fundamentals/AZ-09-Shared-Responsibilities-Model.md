@@ -15,6 +15,8 @@ Geen keyterms wel leuk om te weten voor het idee wat er nog meer aaS wordt aange
 - DBaaS: Database as a Service. 
 - SECaaS: Je raadt het nooit, maar het is inderdaad Security as a Service. Meestal in de vorm van een abbonement.
 - XaaS: Everything as a Service. Kort gezegd alles aaS tools in een (1) pakket. 
+- FinOps aaS: Samenvoegsel van Finance en DevOps. In het heel kort: hoe krijg je het soms complexe proces van billing in de Cloud op een rijtje en vergeet vooral geen dingen uit te zetten als je het niet nodig hebt, want kost geld. 
+- BaaS - Bike as a Service. Dat is vanMoof. 
 
 
 ## Opdracht
