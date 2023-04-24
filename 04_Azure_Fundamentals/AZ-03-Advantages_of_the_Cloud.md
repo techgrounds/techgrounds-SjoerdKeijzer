@@ -26,7 +26,7 @@ Via de Cloud is schaalbaarheid geen probleem.
     - Nog zo'n voordeel van de Cloud. Opeens razend populair in Japan? Openen we een server of website in Region Japan, dat komt de latency van jouw lokale fans alleen maar ten goede. 
 
 - ### **6. Disaster recovery**:
-    - Hotel? Trivago! Calamiteit? Cloud! Beetje flauw natuurlijk, maar je zit niet meteen met de gebakken peren als er een calamiteit is. Bij een 'on-prem' situatie ben je de Sjaak als jouw servers in de fik vliegen. 
+    - Hotel? Trivago! Calamiteit? Cloud! Beetje flauw natuurlijk, maar je zit niet meteen met de gebakken peren als er een calamiteit is. Bij een 'on-prem' situatie ben je wel de sjaak als jouw servers in de fik vliegen. Mocht je nog wel een back-up hebben dan nog is de RPO niet die van de Cloud. 
     
     Cloud providers hebben zelf ook complexe Disaster Recovery plans om te zorgen dat jouw service/dienst blijft draaien volgens SLA. Dankzij de Availability Zones en Region Pairs moet de wereld wel echt vergaan om te zorgen dat de back-ups van de back-ups niet werken. 
 
@@ -35,6 +35,7 @@ Via de Cloud is schaalbaarheid geen probleem.
 - ### **OpEx**: 
 
 ## Opdracht
+Bestudeer:
 - De 6 advantages of the cloud
 - Het consumption-based model
 
@@ -49,4 +50,4 @@ Via de Cloud is schaalbaarheid geen probleem.
 Niet echt, de meeste van deze termen kom je wel eerder tegen als je iets over Cloud hebt opgezocht. Zowel Microsoft als Amazon promoten natuurlijk verder de grote voordelen van Cloud gebruik. Enige nieuwe termen voor mij was het CapEx/OpEx gedeelte. 
 
 ### Resultaat
-[Omschrijf hoe je weet dat je opdracht gelukt is (gebruik screenshots waar nodig).]
+Zie keyterms. 
