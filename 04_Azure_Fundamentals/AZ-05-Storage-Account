@@ -1,11 +1,12 @@
 # AZ-05 Storage Account
-[Geef een korte beschrijving van het onderwerp]
+Blobber blobber de blob. 
 
 ## Key-terms
 - ### **Storage Account**:
+Azure specifiek; je kan hier dus een account maken waar je containers en andere storage methodes onder hangt. Je kan meerdere accounts maken voor verschillende doeleinden en verschillende configs meegeven.
 
 - ### **Blob**: 
-Staat voor **B**inairy **L**arge **Ob**ject. Blob Storage is geoptimaliseerd voor het opslaan van grote hoeveelheden ongestructureerde gegevens. Ongestructureerde gegevens zijn gegevens die niet voldoen aan een bepaald gegevensmodel of bepaalde definitie, zoals tekst of binaire gegevens.
+Staat voor **B**inairy **L**arge **Ob**ject. Blob Storage is geoptimaliseerd voor het opslaan van grote hoeveelheden ongestructureerde gegevens. Ongestructureerde gegevens zijn gegevens die niet voldoen aan een bepaald gegevensmodel of bepaalde definitie, zoals tekst of binaire gegevens. Alles wordt als een object behandeld. 
 
 
 ## Opdracht
@@ -23,6 +24,8 @@ Staat voor **B**inairy **L**arge **Ob**ject. Blob Storage is geoptimaliseerd voo
 
 ### Gebruikte bronnen
 - https://learn.microsoft.com/nl-nl/azure/storage/blobs/storage-blobs-introduction
+- https://learn.microsoft.com/en-us/azure/storage/blobs/storage-blob-static-website
+
 
 
 ### Ervaren problemen
@@ -60,5 +63,10 @@ Maak een nieuwe container aan.
 - Zorg dat Static Website Hosting aan staat.
 - Deel de URL met een teamgenoot. Zorg ervoor dat zij de website kunnen zien.
 
+Dit was leuk. Ik was Static Hosting al eerder tegen gekomen bij het onderzoeken van het Azure control panel. Static hosting aangezet. Ik had een nieuwe container aangemaakt, bestanden erin gezet en toen URL voor mezelf geopened om te kijken of dat lukte. Nope. 
 
+Dan maar eerst snel bij de learn microsoft omgeving spieken wat ik verkeerd deed. De container moet wel $web heten anders snapt Azure het niet. Die bleek nu al automatisch aangemaakt te zijn. Ik mijn oude container deleten en de 4 bestanden nu oploaden in $web. Refresh de website in de browser en voila. 
 
+![Alt text](../00_includes/AZ-05-website.png)
+
+Voor mezelf werkte die toen. Moet natuurlijk bij Acces Level weer aanpassen of die volledige private is of niet. Daarna konden mijn peers ook de website zien. 
