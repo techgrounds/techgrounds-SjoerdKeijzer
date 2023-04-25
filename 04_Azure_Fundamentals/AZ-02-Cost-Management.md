@@ -13,7 +13,9 @@ Hiermee bedoelt Microsoft vooral volledig inzicht in de kosten(structuur) en geb
 
 
 ### **TCO (Total cost of Ownership)**:
-Wordt gebruikt om te berekenen hoeveel een infrastructuur kost als het op de traditionele manier gehost wordt. Met de TCO-calculator kan je de kosten van een traditionele infrastructuur vergelijken met de kosten voor dezelfde infrastructuur op Azure
+Wordt gebruikt om te berekenen hoeveel een infrastructuur kost als het op de traditionele manier gehost wordt. Met de TCO-calculator kan je de kosten van een traditionele infrastructuur vergelijken met de kosten voor dezelfde infrastructuur op Azure.
+
+Ik vind de TCO een machtig mooi ding. De TCO houdt ook rekening met hardware, software en zelfs onderhoud en personeelskosten van traditionele infra. Zo kan een organisatie heel mooi inzien waar de waarde van een Cloud in zit in vergelijking met een traditionele 'on-prem' situatie. En in het geval van Cost Management waar we het hier over hebben, ook over geld besparing en kostenbeheer.
 
 ## Opdracht
 Bestudeer:
