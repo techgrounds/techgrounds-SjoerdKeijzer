@@ -2,7 +2,12 @@
 Je kan computers dus wijsmaken dat ze uit meerdere (verzonnen) computers bestaan. Heel handig! 
 
 ## Key-terms
-[Schrijf hier een lijst met belangrijke termen met eventueel een korte uitleg.]
+Virtual Machine (VM):
+
+Vnet: 
+
+RDP:
+Remote Desktop Protocol.
 
 ## Opdracht
 Maak een VM met de volgende vereisten:
