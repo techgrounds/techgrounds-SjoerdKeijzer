@@ -31,6 +31,7 @@ Doen:
 
 ### Gebruikte bronnen
 - https://learn.microsoft.com/en-us/azure/cost-management-billing/
+- https://azure.microsoft.com/en-in/pricing/tco/calculator/
 
 ### Ervaren problemen
 Zelfde als eerst, dankzij John Savill wist ik al de basics van AZ Cost Management. Geen echte ervaren problemen hier. 
