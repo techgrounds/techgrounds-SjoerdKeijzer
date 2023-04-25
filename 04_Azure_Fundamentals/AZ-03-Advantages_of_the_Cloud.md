@@ -31,8 +31,36 @@ Via de Cloud is schaalbaarheid geen probleem.
     Cloud providers hebben zelf ook complexe Disaster Recovery plans om te zorgen dat jouw service/dienst blijft draaien volgens SLA. Dankzij de Availability Zones en Region Pairs moet de wereld wel echt vergaan om te zorgen dat de back-ups van de back-ups niet werken. 
 
 ## Consumption model
-- ### **CapEx**:
-- ### **OpEx**: 
+
+Hier gaan we weer terug naar wat basis Economie les. Ik zie mijn leerkracht van de middelbare school weer een balans tekenen op het krijtbord. Here we go. 
+
+- ### **CapEx**: Capital Expenditure
+    - Fysieke gebouwen
+    - Apparatuur en randapparatuur (desktops, laptops, servers, monitoren, keyboards etc.)
+    - Kantoormeubilair
+    - Patenten en licenties
+    - Grond (als in land, niet de stormram in Lord of the Rings)
+    - Software
+    - Voertuigen (auto's)
+
+Ook wel bekend als vaste activa. Dit zijn dingen die (als het goed is) een levenduur van minimaal een jaar hebben en vaak long-term investments zijn. Ook upgrades van bijvoorbeeld Software worden onder dit model als CapEx weggeschreven. 
+Deze zaken worden in de accounting voor meerdere jaren op de balans gezet en afgeschreven (na berekening van eventuele waardedaling). 
+
+- ### **OpEx**: Operational Expenditure
+    - Verzekering(en)
+    - Advertentie en marketing uitgaven
+    - Overhead kosten
+    - Kantoor benodigheden (papier, pen, paperclips etc.)
+    - Voertuig kosten (onderhoud, brandstof)
+    - Salarissen
+    - Reiskosten
+    - Eigendombelasting
+    - Onderhoud en reperatiekosten
+    - Wettelijke toeslagen
+    - Licentie toeslagen
+    - Nutsvoorzieningen (Energie, Gas, water etc).
+
+You get the drill. Eenmalige uitgaven of lopende kosten die een bedrijf te maken heeft die voortvloeien uit de dagelijkse bedrijfsvoering (aka operatie). 
 
 ## Opdracht
 Bestudeer:
@@ -44,6 +72,8 @@ Bestudeer:
 - [John Savill over benefits of the Cloud](https://www.youtube.com/watch?v=VaMdHKJQ15c)
 - https://networklessons.com/cisco/evolving-technologies/cloud-performance-scalability-and-high-availability
 - https://us.sios.com/blog/availability-slas-ft-ha-and-dr-where-to-start/
+- https://www.integrify.com/capex-vs-opex/
+- https://learn.microsoft.com/en-us/azure/well-architected/cost/design-price
 
 
 ### Ervaren problemen
@@ -51,3 +81,20 @@ Niet echt, de meeste van deze termen kom je wel eerder tegen als je iets over Cl
 
 ### Resultaat
 Zie keyterms. 
+
+Nog uitbreiding op hoe het dan zit met het consumption model in de Cloud:
+
+Daar kan je nu natuurlijk van voorstellen dat afhankelijk van hoe je de service(s) afneemt (zie opdracht, 9 het responsibility model), bepaalde kosten vooral voor Microsoft zijn en niet voor jou. 
+
+Wat in essentie betekent dat zowel CapEx (geen eigen datacenter of serverhok meer nodig) als OpEx (minder personeel, meer VM's/containers en goed toepasbare scalability en auto-scaling) kosten voor jou als bedrijf drastisch worden verlaagd omdat dit voor de rekening van Azure komt. 
+
+En dan hebben we het nog niet eens gehad over het belangrijkste deel:
+
+### **Consumption-based price: You are charged for only what you use aka pay-as-you-go rate.**
+
+en 
+
+### **Fixed price - You provision resources and are charged for those instances whether you use them or not.**
+
+
+Kortom: als je nog on-prem zit kap daar zo snel mogelijk mee en ga tenminste een hybrid cloud oplossing zoeken voor jouw bedrijfsvoering. Scheelt de nodige centjes op zowel operationeel als kapitaal gebied. 
