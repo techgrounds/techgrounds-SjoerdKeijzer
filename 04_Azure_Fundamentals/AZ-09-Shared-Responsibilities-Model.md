@@ -43,3 +43,21 @@ PaaS: Wil je nog minder zorgen? Daar hebben we Platform as a Service voor. Dan r
 SaaS: Software as a service. Waar de vendor dus alles voor je regelt, inclusief de applicatie zodat de gebruiker zich alleen zorgen hoeft te maken over het daadwerkelijk gebruiken van de applicatie.
 
  Salesforce is denk ik een hele grote bekende hier.
+
+ Wel nog belangrijke side note voor SaaS is het volgende: 
+
+*For all cloud deployment types, you own your data and identities. You are responsible for protecting the security of your data and identities, on-premises resources, and the cloud components you control (which varies by service type).*
+
+Regardless of the type of deployment, the following responsibilities are always retained by you:
+
+- Data
+- Endpoints
+- Account
+- Access management
+
+___
+Kortom: Als we Salesforce als voorbeeld gebruiken: Je bent zelf nog steeds verantwoordelijk voor de data; zowel hoe je het beheert en structrueert. Daar kan Microsoft je niet bij helpen. 
+
+Je bent zelf verantwoordelijk voor de Endpoints (dus mobile devices, laptops, desktops, VM's, servers en ook IoT dingen als koelkasten, speakers en thermostaten). 
+
+Zelf verantwoordelijk voor accounts, account en acces management. Kom niet bij Microsoft aankloppen als jij Admin rights hebt toegewezen aan iemand die dat niet nodig had en die nu de configs heeft veranderd. 
