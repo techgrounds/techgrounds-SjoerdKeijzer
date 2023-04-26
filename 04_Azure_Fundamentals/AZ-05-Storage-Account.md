@@ -29,7 +29,7 @@ Staat voor **B**inairy **L**arge **Ob**ject. Blob Storage is geoptimaliseerd voo
 
 
 ### Ervaren problemen
-Storage account aanmaken was zo gedaan. Blob maken ook. Op een of andere meneer wilde Azure Store Explorer niet standaard openen via de Portal en ik elke keer als ik het wilde downloaden werd ik naar een nieuwe tab gestuurd. Ik dacht dat ik eerst weer moest inloggen zodat Azure weet dat ik een sub heb, maar dat bracht me elke keer weer simpelweg op de landingspage van de portal. Uiteindelijk bij poging 8 simpelweg op OS: windows geklikt en dat was de truc..toen kreeg ik een startende download voor StorageExlporer.exe. hehe. 
+Storage account aanmaken was zo gedaan. Blob maken ook. Op een of andere manier wilde Azure Store Explorer niet standaard openen via de Portal en ik elke keer als ik het wilde downloaden werd ik naar een nieuwe tab gestuurd. Ik dacht dat ik eerst weer moest inloggen zodat Azure weet dat ik een sub heb, maar dat bracht me elke keer weer simpelweg op de landingspage van de portal. Uiteindelijk bij poging 8 simpelweg op OS: windows geklikt en dat was de truc..toen kreeg ik een startende download voor StorageExlporer.exe. hehe. 
 
 
 ### Resultaat
