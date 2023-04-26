@@ -49,4 +49,6 @@ Gedeployed en inlogd met private IP van de VM + SSH + key.
 Ik vind de opdracht wat vaag in de zin van, 'kijk of de server het doet'. We installeren apache niks voor niks lijkt mij, dus ik heb ook gekeken of ik mijn webserver op de VM kon bereiken. Dat lukte niet met het public IP van de VM en ook niet als ik bepaalde porten in de firewall aanpaste of x.x.x.x:port deed. 
 Heb op het internet nog wel gezocht naar mogelijkheden en de meeste begonnen allemaal over portforwarding. Wat hartstikke leuk is, maar daar dacht ik wel dat ik er te veel over na dacht en besloot het hier bij te laten. Laat ik de opdracht dan lezen als: zie dat de Ubuntu server draait. Dat doet ie. 
 
-p.s. VM gedeletet. Dag VM! Was leuk je te leren kennen. 
+p.s. VM gedeletet door de resource group weg te halen. Dag VM! Was leuk je te leren kennen. 
+
+![Alt text](../00_includes/AZ-06-VM-group_dag.png)
