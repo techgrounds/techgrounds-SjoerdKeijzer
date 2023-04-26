@@ -31,6 +31,8 @@ Voordelen om dus zowel OS-disk als data disk te hebben dat je systeem bestanden 
 - https://docs.microsoft.com/en-us/azure/virtual-machines/disks-types
 - https://www.alibabacloud.com/tech-news/data-disk/cd-what-is-the-difference-between-a-system-disk-and-a-data-disk#:~:text=System%20disks%20and%20data%20disks%20are%20two%20types%20of%20disks,on%20the%20main%20hard%20drive.
 - https://learn.microsoft.com/en-us/answers/questions/3619/what-is-the-difference-between-managed-disk-and-un
+- https://learn.microsoft.com/en-us/azure/virtual-machines/linux/attach-disk-portal?tabs=ubuntu
+- https://learn.microsoft.com/en-us/azure/virtual-machines/disks-shared
 
 
 

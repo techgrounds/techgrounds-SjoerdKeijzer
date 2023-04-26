@@ -51,3 +51,9 @@ Heb op het internet nog wel gezocht naar mogelijkheden en de meeste begonnen all
 p.s. VM gedeletet door de resource group weg te halen. Dag VM! Was leuk je te leren kennen. 
 
 ![Alt text](../00_includes/AZ-06-VM-group_dag.png)
+
+Edit: Ik ben inmiddels bij AZ-07 waar we natuurlijk ook weer 2 VM's hebben draaien en ik heb bij allebei voor de grap toch ook Apache erop gezet. Als ik nu alleen het pub IP adres van de VM intik in mijn browser, dan krijg ik **wel** de Apache default start pagina. Ik ben bij deze opdracht dan toch iets vergeten te configureren denk ik.
+
+Bewijs: (op public IP van VM VirtualJaap die ik heb gemaakt voor AZ-07)
+ ![Alt text](../00_includes/AZ-06-ubuntu-works.png)
+
