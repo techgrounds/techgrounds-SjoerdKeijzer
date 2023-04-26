@@ -2,8 +2,7 @@
 Je kan computers dus wijsmaken dat ze uit meerdere (verzonnen) computers bestaan. Heel handig! 
 
 ## Key-terms
-Virtual Machine (VM): Een computer die denkt dat die een computer is op een (digitale) harde schijf ergens in een datacenter van Microsoft. 
- 
+Virtual Machine (VM): Een computer die denkt dat die een computer is op een (digitale) harde schijf ergens in een datacenter.
 
 ## Opdracht
 Maak een VM met de volgende vereisten:
