@@ -10,11 +10,15 @@ Voordelen om dus zowel OS-disk als data disk te hebben dat je systeem bestanden 
 
 **Managed vs Unmanaged disks**:
 
+Managed Disks = are managed by Microsoft Azure and you don't need any storage account while created new disk. Since the storage account is managed by Azure you do not have full control of the disks that are being created.
+
+Un-managed Disks = is something which requires you to create a storage account before you create any new disk. Since, the storage account is created and owned by you, you have full control over all the data that is present on your storage account. Additionally, you also need to take care of encryption, data recovery plans etc.
 
 
 **(Incremental) Snapshot**:
 
-**Type disks**:
+
+**Type disks**: SSD vs 
 
 
 ## Opdracht
@@ -37,7 +41,11 @@ Voordelen om dus zowel OS-disk als data disk te hebben dat je systeem bestanden 
 
 
 ### Ervaren problemen
-[Geef een korte beschrijving van de problemen waar je tegenaan bent gelopen met je gevonden oplossing.]
+Wat ik vooral heel lastig vond om te onderzoeken of mijn disk nu daadwerkelijk shared was en hoe ik dat voor elkaar moest krijgen. 
+
+Uiteindelijk gevonden dat je het moest 'mounten'. Dat leek makkelijk, maar voordat je dat moest doen, moet je het kennelijk formatteren. Hier raakte ik een beetje de draad kwijt. Ik heb de stappen volgens mij correct doorlopen op de learn.microsoft page, maar als ik em wil mounten dan kreeg ik allemaal errors zoals `wrong fs type, bad option, bad superblock on /dev/sdc Error`. Nu heb ik het wel werkend gekregen op 1 VM, maar niet op de andere. 
+
+Ik heb echt hoofdpijn gekregen en na de dag afsluiting heb ik eigenlijk besloten dat ik morgen kijk of het me wel lukt. Anders alles deleten en fris weer beginnen hier aan. 
 
 ### Resultaat
 2 Linux VM's gemaakt. VirtualMaarten en VirtualJaap. 
@@ -45,4 +53,6 @@ Voordelen om dus zowel OS-disk als data disk te hebben dat je systeem bestanden 
 ![Alt text](../00_includes/AZ-07_virtualMaarten.png)
 
 ![Alt text](../00_includes/AZ-07_virtual_jaap.png)
+
+Apache was niet nodig voor deze opdracht, maar ik wilde weten of ik op een van deze twee opdracht 6 nog goed kon voltooien. En dat lukte. 
 
