@@ -114,7 +114,7 @@ Ik heb geen idee wat ik precies aan het doen ben, behalve de commands in tikken 
 
 Ik denk dat ik het principe snap en waarom er OS/system disks zijn en (externe) data disks en welke waarvoor handig is. En dat je dus een snapshot of back-up in kan laden indien wenselijk. 
 
-Hoe precies, dat moet ik dan wel echt aan een professional overlaten, maar ik laat het voor nu hierbij. Genoeg tijd aan deze opdracht verspilt, op naar de volgende. 
+Hoe precies, dat moet ik dan wel echt aan een professional overlaten, maar ik laat het voor nu hierbij. Genoeg tijd aan deze opdracht verspild, op naar de volgende. 
 
 
 
