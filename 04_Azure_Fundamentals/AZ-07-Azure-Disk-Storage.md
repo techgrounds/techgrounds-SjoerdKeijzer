@@ -37,6 +37,10 @@ Un-managed Disks = is something which requires you to create a storage account b
 - https://learn.microsoft.com/en-us/answers/questions/3619/what-is-the-difference-between-managed-disk-and-un
 - https://learn.microsoft.com/en-us/azure/virtual-machines/linux/attach-disk-portal?tabs=ubuntu
 - https://learn.microsoft.com/en-us/azure/virtual-machines/disks-shared
+- https://stackoverflow.com/questions/76069102/shared-disk-data-not-updating-between-linux-vms
+- https://learn.microsoft.com/en-us/answers/questions/874923/why-shared-drive-is-not-showing-content-from-one-a
+- https://learn.microsoft.com/en-us/answers/questions/1029604/my-data-disk-is-not-showing-in-my-vm
+- https://stackoverflow.com/questions/34151446/azure-why-cant-i-find-attached-drive-on-my-vm
 
 
 
@@ -47,6 +51,22 @@ Uiteindelijk gevonden dat je het moest 'mounten'. Dat leek makkelijk, maar voord
 
 Ik heb echt hoofdpijn gekregen en na de dag afsluiting heb ik eigenlijk besloten dat ik morgen kijk of het me wel lukt. Anders alles deleten en fris weer beginnen hier aan. 
 
+___
+Dag 2. Op de ene VM was de schijf wel gepartioned, op de andere niet. Na de nodige reboots op beide VM's de schijf zichtbaar als sdc1 32g partitie en kon ik op VirtualJaap de disk mounten. Op VirtualMaarten bleef ik echter de `wrong fs type, bad option, bad superblock on /dev/sdc Error` houden wat ik bijzonder frustrerend vond. 
+
+Door opnieuw de schijf te formatten met xfs volgens het stappen plan van microsoft en allebei de VM's de rebooten, lukte het nu wel om de disks te mounten, maar het is wel echt een zootje geworden en ik denk ook niet dat het klopt omdat de partities anders worden weer gegeven per VM. 
+
+![Alt text](../00_includes/AZ-07_mount_jaap.png)
+
+![Alt text](../00_includes/AZ-07_mount_maarten.png)
+
+Ennnn ik zie het al.. nu de verkeerde disk gemount bij Jaap. Echt niet te geloven gewoon. 
+
+Ga er niet weer een screenshot voor aanmaken, gefixed met 
+`sudo mount /dev/sdb1 /datadrive` bij VirtualJaap. 
+
+___
+
 ### Resultaat
 2 Linux VM's gemaakt. VirtualMaarten en VirtualJaap. 
 
@@ -56,3 +76,40 @@ Ik heb echt hoofdpijn gekregen en na de dag afsluiting heb ik eigenlijk besloten
 
 Apache was niet nodig voor deze opdracht, maar ik wilde weten of ik op een van deze twee opdracht 6 nog goed kon voltooien. En dat lukte. 
 
+ 
+ Dan de managed shared disk. 
+![Alt text](../00_includes/AZ-07_shared-disk-I-think.png)
+![Alt text](../00_includes/AZ-07-size-matters.png)
+Dit is goed om te weten want dan weten we straks waar we op moeten letten (namelijk dat de shared disk 32G is)
+![Alt text](../00_includes/AZ-07-vind-shared-disk.png)
+Shared disk is 32g en dat is dus in dit geval `sdc`. 
+
+
+Vervolgens 2 dagen lopen kloten, zie 'Ervaren Problemen'.
+
+- Creëer op je eerste machine een bestand en plaats deze op de Shared Disk.
+- Kijk op de tweede machine of je het bestand kan lezen.
+
+![Alt text](../00_includes/AZ-07_wel_bestand_geen_zicht.png)
+
+Kan het tekst bestand niet lezen. Nog opgezocht en omdat te moeten kunnen, heb je eigenlijk een clustermanager nodig. Bekende daarvan is bijvoorbeeld Kubernetes. 
+
+- Maak een snapshot van de schijf en probeer hier een nieuwe Disk mee te maken
+
+Snapshot maken is redelijk eenvoudig, kan simpel via de Azure Portal als je de disk (in dit geval de VMsharedisk) selecteerd via *'Create Snapshot'*. 
+
+![Alt text](../00_includes/AZ-07_snapsjoerd.png)
+
+So far so good. Nu de disk aan Maarten koppelen. Dit duurde even omdat de disk in eerste instantie niet bij 'add existing disk' wilde verschijnen. Na meerdere malen gerefreshed te hebben verscheen die gelukkig als optie.. ik begon alweer hoofdpijn te krijgen. 
+
+![Alt text](../00_includes/AZ-07_gaat_niet_zomaar.png)
+
+Maar het gaat niet vanzelf. Kennelijk toch iets niet goed in de file structure van de snap. 
+
+![Alt text](../00_includes/AZ-07-noformat.png)
+
+Ik heb geen idee wat ik precies aan het doen ben, behalve de commands in tikken die verschillende pagina's aanbevelen bij het troubleshooten van de error. Ik kan nu wel de Snapdisk mounten gelukkig, maar ik denk omdat ik het opnieuw moest cleanen dat je het tekst bestand wat er anders op had gestaan, nu weg is gecleaned. 
+
+Ik denk dat ik het principe snap en waarom er OS/system disks zijn en (externe) data disks en welke waarvoor handig is. En dat je dus een snapshot of back-up in kan laden indien wenselijk. 
+
+Hoe precies, dat moet ik dan wel echt aan een professional overlaten, maar ik laat het voor nu hierbij. Genoeg tijd aan deze opdracht verspilt, op naar de volgende. 
