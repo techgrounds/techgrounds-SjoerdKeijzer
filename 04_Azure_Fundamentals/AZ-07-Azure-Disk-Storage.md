@@ -16,9 +16,9 @@ Un-managed Disks = is something which requires you to create a storage account b
 
 
 **(Incremental) Snapshot**:
+Is een kopie van de gegevens op een opslagaccount op een bepaald moment. Het is een statisch beeld van de gegevens op dit bepaalde moment en kan worden gebruikt om back-ups/herstelpunt te maken voor VM's of schijven.
 
-
-**Type disks**: SSD vs 
+Een incremental snapshot daarentegen maakt alleen een kopie van de gegevens die zijn gewijzigd sinds het vorige snapshot. Dit betekent dat als je bijvoorbeeld dagelijks een incremental snapshot maakt, alleen de wijzigingen van de afgelopen dag worden opgeslagen. Voordel is wel, dat de hoeveelheid opslagruimte die nodig is voor het maken van snapshots, wordt verminderd.
 
 
 ## Opdracht
@@ -41,6 +41,8 @@ Un-managed Disks = is something which requires you to create a storage account b
 - https://learn.microsoft.com/en-us/answers/questions/874923/why-shared-drive-is-not-showing-content-from-one-a
 - https://learn.microsoft.com/en-us/answers/questions/1029604/my-data-disk-is-not-showing-in-my-vm
 - https://stackoverflow.com/questions/34151446/azure-why-cant-i-find-attached-drive-on-my-vm
+- https://askubuntu.com/questions/910078/structure-needs-cleaning-error-cannot-mount-partition
+- https://linuxhint.com/fix-mount-point-does-not-exist-error-linux/
 
 
 
@@ -113,3 +115,33 @@ Ik heb geen idee wat ik precies aan het doen ben, behalve de commands in tikken 
 Ik denk dat ik het principe snap en waarom er OS/system disks zijn en (externe) data disks en welke waarvoor handig is. En dat je dus een snapshot of back-up in kan laden indien wenselijk. 
 
 Hoe precies, dat moet ik dan wel echt aan een professional overlaten, maar ik laat het voor nu hierbij. Genoeg tijd aan deze opdracht verspilt, op naar de volgende. 
+
+
+
+
+
+___
+
+### Notes to self:
+
+`lsblk -o NAME,HCTL,SIZE,MOUNTPOINT | grep -i "sd"` = list disks op 'sd' naam
+
+### Manieren om disk te formatten:
+`sudo fdisk /dev/sdc`
+
+of
+
+1. `sudo parted /dev/sdc --script mklabel gpt mkpart xfspart xfs 0% 100%`
+
+2. `sudo mkfs.xfs /dev/sdc1`
+
+3. `sudo partprobe /dev/sdc1`
+
+### Check integriteit
+`sudo e2fsck /dev/sdd1 -y`
+
+### Maak dir en mount disk
+`sudo mkdir /datadrive`
+
+`sudo mount /dev/sdc1 /datadrive`
+
