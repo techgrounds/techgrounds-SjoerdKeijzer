@@ -16,7 +16,7 @@ Un-managed Disks = is something which requires you to create a storage account b
 
 
 **(Incremental) Snapshot**:
-Is een kopie van de gegevens op een opslagaccount op een bepaald moment. Het is een statisch beeld van de gegevens op dit bepaalde moment en kan worden gebruikt om back-ups/herstelpunt te maken voor VM's of schijven.
+Is een exacte kopie van de gegevens op een opslagaccount op een bepaald moment. Deze image van de gegevens op dit bepaalde moment en kan worden gebruikt om back-ups/herstelpunt te maken voor VM's of schijven.
 
 Een incremental snapshot daarentegen maakt alleen een kopie van de gegevens die zijn gewijzigd sinds het vorige snapshot. Dit betekent dat als je bijvoorbeeld dagelijks een incremental snapshot maakt, alleen de wijzigingen van de afgelopen dag worden opgeslagen. Voordeel is wel, dat de hoeveelheid opslagruimte die nodig is voor het maken van snapshots, wordt verminderd.
 
