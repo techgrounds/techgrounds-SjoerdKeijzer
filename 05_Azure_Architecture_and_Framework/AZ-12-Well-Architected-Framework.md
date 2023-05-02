@@ -2,10 +2,14 @@
 Alles begint bij het begin. Vooral een goed uitgedacht begin. 
 
 ## Key-terms
+De hele opdracht draait hierom en het is een aardige berg theorie. 
 
-Bruggetje CROPS
+Gelukkig hebben we voor de theorie een bruggetje: **CROPS**. De rest volgt in het Engels want dat is wat makkelijker examen stof oefenen en begrijpen. 
 
 - ### **Cost optimization**:
+
+
+
 
 - ### **Reliability**:
 In order to make sure that you yourself can maintain a high SLA performance, you need to think about the resiliency of the architecture framework. 
@@ -39,6 +43,7 @@ Bestudeer:
 ### Gebruikte bronnen
 - [John Savill over Well Architected Framework basics](https://www.youtube.com/watch?v=lQlHWacM1N0)
 - https://learn.microsoft.com/en-us/azure/well-architected/
+- https://learn.microsoft.com/en-us/azure/well-architected/#cost-optimization
 
 
 ### Ervaren problemen
