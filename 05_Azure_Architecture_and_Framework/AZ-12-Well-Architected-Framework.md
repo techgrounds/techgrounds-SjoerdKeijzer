@@ -139,7 +139,7 @@ ___
 
 ## **Performance efficiency**:
 
-- Autoscaling (how to in Azure) 
+- **Autoscaling (how to in Azure)** 
     - **Azure Virtual Machines** autoscale via virtual machine **scale sets**, which manage a set of Azure virtual machines as a group.
     - **Service Fabric** also supports autoscaling through virtual machine scale sets. Every node type in a Service Fabric cluster is set up as a separate virtual machine scale set. That way, each node type can be scaled in or out independently.
     - **Azure App Service** has built-in autoscaling. Autoscale settings apply to all of the apps within an App Service.
@@ -168,7 +168,7 @@ Background jobs can be triggered by either an **event-driven trigger** or **sche
 
 - **Caching**
 
-Caching is a common technique that aims to improve the performance and scalability of a system. It caches data by temporarily copying frequently accessed data to fast storage that's located close to the application. If this fast data storage is located closer to the application than the original source, then caching can significantly improve response times for client applications by serving data more quickly.
+Caching is a common technique that aims to improve the performance and scalability of a system. **It caches data by temporarily copying frequently accessed data to fast storage that's located close to the application.** If this fast data storage is located closer to the application than the original source, then caching can significantly improve response times for client applications by serving data more quickly.
 
 **Caching in distributed applications**
 
@@ -177,12 +177,25 @@ Distributed applications typically implement either or both of the following str
 - They use a **private cache**, where data is held locally on the computer that's running an instance of an application or service.
 - They use a **shared cache**, serving as a common source that can be accessed by multiple processes and machines.
 
-- CDN
+**Content delivery network (CDN)** is a distributed network of servers that can efficiently deliver web content to users. CDNs store cached content on edge servers that are close to end users to minimize latency.
+- **CDNs are typically used to deliver static content** such as images, style sheets, documents, client-side scripts, and HTML pages. The major advantages of using a CDN are lower latency and faster delivery of content to users, regardless of their geographical location in relation to the datacenter where the application is hosted. CDNs can also help to reduce load on a web application, because the application does not have to service requests for the content that is hosted in the CDN.
+- **Streaming video files to the client on demand**. Video benefits from the low latency and reliable connectivity available from the globally located datacenters that offer CDN connections. **Microsoft Azure Media Services (AMS)** integrates with Azure CDN to deliver content directly to the CDN for further distribution.
+- **Coping with peaks and surges in demand without requiring the application to scale**, avoiding the consequent increase in running costs. For example, when an update to an operating system is released for a hardware device such as a specific model of router, or for a consumer device such as a smart TV, there will be a huge peak in demand as it is downloaded by millions of users and devices over a short period.
+- Delivering **public static and shared content to devices such as mobile phones and tablet computers**. The application itself is a web service that offers an API to clients running on the various devices. The CDN can also deliver static datasets (via the web service) for the clients to use, perhaps to generate the client UI. For example, the CDN could be used to distribute JSON or XML documents.
 
+**Data partitioning**
 
-- Data partitioning
+`The term partitioning in this case means the process of physically dividing data into separate data stores.`
 
+There are three typical strategies for partitioning data:
 
+1. **Horizontal partitioning (often called sharding)**. In this strategy, each partition is a separate data store, but all partitions have the same schema. Each partition is known as a shard and holds a specific subset of the data, such as all the orders for a specific set of customers.
+
+2. **Vertical partitioning**. In this strategy, each partition holds a subset of the fields for items in the data store. The fields are divided according to their pattern of use. For example, frequently accessed fields might be placed in one vertical partition and less frequently accessed fields in another.
+
+3. **Functional partitioning**. In this strategy, data is aggregated according to how it is used by each bounded context in the system. For example, an e-commerce system might store invoice data in one partition and product inventory data in another.
+
+___
 - ## **Security**:
 As a Cloud Engineer you will need to take several security principles into account. This means make use of;
 
