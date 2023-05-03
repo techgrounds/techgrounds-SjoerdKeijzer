@@ -56,13 +56,95 @@ Scale units further reduce the effects of a single resource failure.
 ___
 
 ## **Operational excellence**:
+How to keep the operation running, and better, how to make it run smoothly. 
+
+- **Application Design**. Provides guidance on how to design, build, and orchestrate workloads with DevOps principles in mind.
+This seems a no-brainer but make sure you **have different development environments**. You should at the least have 2 (1 dev and 1 live/prod environment) and preferably more. In addition ask yourself:
+    - How do I ensure that all dependencies are in place?
+    - How can I best configure my development environment to emulate a production environment?
+    - How do I develop code where service dependencies may exist with code already in production?
+
+    **Source control management (SCM)** systems provide a way to control, collaborate, and peer review software changes. As software is merged into source control, the system helps manage code conflicts. Ultimately, source control provides a running history of the software, modification, and contributors. Whether a piece of software is open-sourced or private, using source control software has become a standardized method of managing software development.
+
+    As cloud practices are adopted and because so much of the cloud infrastructure is managed through code, version control systems are an integral part of infrastructure management.
+
+    Many source control systems are powered by Git and therefore use GitHub.
+
+- **Monitoring**. Monitoring and diagnostics are essential to any workload. Specifically for cloud applications that run in a remote datacenter often this discipline becomes even more crucial.
+Why is monitoring important:
+    - Ensure the system remains healthy
+    - Track the availability of the system and its components
+    - Guarantuee the system meets any SLA established with customers
+    - Protect the privacy and the security of the system, users and their respective data. 
+    - Monitor the day-today- usage of the system and spot trends that might lead to problems if not addressed. 
+    - Trace operations and debug software releases.
+
+- **App performance management**. The monitoring and management of performance, and availability of software applications through DevOps.
+    This mostly applies to builds. 
+    Build status shows if your product is in a deployable state, so builds are the heartbeat of your continuous delivery system.ince builds provide such crucial information about the status of your product, you should always strive for fast builds.
+
+    What types of builds your organization needs depends on many factors including your team's and organizational maturity, the kind of product you are working on, and your deployment strategy.
 
 
+- **Code deployment:** How you deploy your application code is one of the key factors that determines your application stability.
+   - To automate provisioning of Azure resources, you can use Terraform, Ansible, Chef, Puppet, Azure PowerShell, Azure CLI, Azure Resource Manager templates, or Azure Deployment Environments.
+    - To configure VMs, you can use cloud-init (for Linux VMs) or Azure Automation State Configuration (DSC).
+    - To automate application deployment, you can use Azure DevOps Services, Jenkins, or other CI/CD solutions.
 
+    As you provision and update Azure resources, application code, and configuration settings, a repeatable and predictable process will help you avoid errors and downtime. We recommend automated processes for deployment that you can run on demand and rerun if something fails. 
 
+    The most reliable deployment processes are automated and *idempotent* — that is, repeatable to produce the same results.
+ 
+    **As a best practice, create a repository of categorized automation scripts for quick access, documented with explanations of parameters and examples of script use.** Keep this documentation in sync with your Azure deployments, and designate a primary person to manage the repository.
 
+    Automation scripts can also activate resources on demand for disaster recovery.
+    
+    **Stage your workloads**
 
-- ## **Performance efficiency**:
+    Deployment to various stages and running tests/validations at each stage before moving on to the next ensures friction free production deployment.
+
+    With good use of staging and production environments, you can push updates to the production environment in a highly controlled way and minimize disruption from unanticipated deployment issues.
+
+- **Infrastructure provisioning**. Frequently known as  **Deployment Automation** or **Infrastructure as code  (IaS)**, this discipline refers to best practices for deploying the platform where your application will run.
+
+    **IaC is the management of infrastructure**- such as virtual machines, load balancers, and connection topology - in a descriptive model, using a versioning system that is similar to what is used for source code. When you're creating an application, the same source code will generate the same binary every time it is compiled. In a similar manner, an IaC model generates the same environment every time it is applied. IaC is a key DevOps practice, and it is often used with continuous delivery.
+
+    Ultimately, IaC allows you and your team to develop and release changes faster, but with much higher confidence in your deployments.
+
+- **Testing**: Testing is fundamental to prepare for the unexpected and to catch mistakes before they impact users.
+There are many, many forms of testing. 
+    - **Automated Testing**
+        - **Unit Testing** *(Unit tests are tests typically run as part of the continuous integration routine. Unit Tests should be extensive (ideally cover 100% of the code) and quick (run in under 30 seconds, although this number is a guideline)). Unit testing can verify that the syntax and functionality of individual modules of code are working the way they should.*
+        - **Smoke Testing** *(Smoke tests verify that a workload can be stood up in a test environment and performs as expected. They don't go to the extent of integration tests as they don't verify the interoperability of different components.Instead they verify that the deployment methodology for both infrastructure and the application works and that the system responds as intended once the process is complete.)*
+        - **Integration Testing** (Itegration testing has as goal to determine whether components can interact with each other as they should.
+        Running a large integration test suite can take a considerable amount of time, which is why tests should be shifted left as much as possible, with integration tests being reserved to scenarios that cannot be tested with a smoke or unit test.
+        Long running test processes can be run on a regular interval if needed. This offers a good compromise, detecting interoperability issues between application components no later than one day after they were introduced.)
+    - **Manual Testing** *(is fundamental for the correct functioning of the DevOps feedback loop, to correct errors before they become too expensive to repair, or cause customer dissatisfaction.)*
+    - **Acceptance Testing** *(Depending on the context acceptance testing is sometimes performed manually. In some cases it's partially or fully automated. The main purpose of this test is to evaluate the system's compliance with the business requirements and verify if it has met the required criteria for delivery to end users.)*
+    - **Stress Testing** *(Can vary if this is done manually or automated. In essence; you want to know bottlenecks in the system/application and how the environment reacts to changing load conditions. Autoscale anybody?)*
+
+**Testing and Experimentation in Production**.
+
+I know, I know. What could possibly go wrong, right?
+
+There are multiple popular approaches to experimentation in production:
+
+**Blue/Green deployments**: When deploying a new application version, you can deploy it in parallel to the existing one. This allows you to start redirecting clients to the new version, and if everything goes well you can then decommission the old version. If there is any problem with the new deployment, you can always redirect the users back to the deployment with the previous version.
+
+**Canary releases**: You can expose new functionality of your application in a staggered way to select groups of users. If users are satisfied with the new functionality, or if the new feature performs as expected with the control group, you can extend the feature to a larger group of users until it's fully rolled out.
+
+**A/B testing**: A/B testing is similar to canary release-testing, but while canary releases focus on mitigate risk, A/B testing focus on evaluating two versions of an application or feature side by side. For example, if you have two versions of the layout of a certain area of your application, you could send half of your users to one, the other half to the other, and use some metrics to see which layout is more successful in the context of your business goals.
+
+___
+
+## **Performance efficiency**:
+
+- Autoscaling
+- Background jobs
+- Caching
+- CDN
+- Data partitioning
+
 
 - ## **Security**:
 As a Cloud Engineer you will need to take several security principles into account. This means make use of;
@@ -83,13 +165,13 @@ Bestudeer:
 
 
 ### Gebruikte bronnen
-- [John Savill over Well Architected Framework basics](https://www.youtube.com/watch?v=lQlHWacM1N0)
-- https://learn.microsoft.com/en-us/azure/well-architected/
-- https://learn.microsoft.com/en-us/azure/well-architected/#cost-optimization
+- [John Savill over Well Architected Framework basics met meer focus op SLA targets.](https://www.youtube.com/watch?v=lQlHWacM1N0)
+- https://learn.microsoft.com/en-us/azure/well-architected/ en alle daar uit voortvloeiende subpagina's. 
+
 
 
 ### Ervaren problemen
-[Geef een korte beschrijving van de problemen waar je tegenaan bent gelopen met je gevonden oplossing.]
+Geen echte problemen, behalve dat je ook hier weer zo diep kan duiken als je zelf wilt. Ik heb persoonlijk wel echt de tijd ervoor genomen want ik denk als ik hier een mooi stukje van maak, dat ik hier profijt van ga hebben de rest van mijn opleiding. Terwijl ik de documentatie lees worden er steeds meer stukjes van de puzzel ontrafelt. 
 
 ### Resultaat
-Ik denk dat de termen al redelijk voor zich spreken, maar het is fijn om wat video's er over te kijken om het beter te snappen in het grotere geheel. Ik blijf het zeggen maar John Savill is echt een topgozer voor het uitleggen van Azure dingen. 
+Ik denk dat de termen al redelijk voor zich spreken, maar het is fijn om wat video's er over te kijken om het beter te snappen in het grotere geheel. Ik blijf het zeggen maar John Savill is echt een topgozer voor het uitleggen van Azure dingen. En ik merk dat ik nu ook echt steeds **meer** snap van wat John uitlegt. 
