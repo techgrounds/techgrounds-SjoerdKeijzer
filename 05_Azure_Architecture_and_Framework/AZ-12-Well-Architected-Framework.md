@@ -139,10 +139,47 @@ ___
 
 ## **Performance efficiency**:
 
-- Autoscaling
+- Autoscaling (how to in Azure) 
+    - **Azure Virtual Machines** autoscale via virtual machine **scale sets**, which manage a set of Azure virtual machines as a group.
+    - **Service Fabric** also supports autoscaling through virtual machine scale sets. Every node type in a Service Fabric cluster is set up as a separate virtual machine scale set. That way, each node type can be scaled in or out independently.
+    - **Azure App Service** has built-in autoscaling. Autoscale settings apply to all of the apps within an App Service.
+    - **Azure Cloud Services** has built-in autoscaling at the role level.
+
+**Use Azure Monitor autoscale**
+Azure Monitor autoscale provide a common set of autoscaling functionality for virtual machine scale sets, Azure App Service, and Azure Cloud Service. Scaling can be performed on a schedule, or based on a runtime metric, such as CPU or memory usage.
+
+Keep in mind that **autoscaling might not be the most appropriate mechanism to handle a sudden burst in workload**. It takes time to provision and start new instances of a service or add resources to a system, and the peak demand may have passed by the time these additional resources have been made available. In this scenario, it may be better to **throttle** the service.
+
+**Throttling**: 
+![Alt text](../00_includes/AZ-12-throttling-resource-utilization.png)
+
+If the critical function of feature C reaches the soft limit for resource capacity, the non-critical feature B is suspended temporarily. This makes sure that critical features A and C can continue without risk of running out of resources. When feature C has finished it's short peak and there is enough resource capacity as per the set parameters, the throttle ends and feature B can resume running. 
+
 - Background jobs
-- Caching
+Background jobs typically include one or more of the following types of jobs:
+
+    - **CPU-intensive jobs**, such as mathematical calculations or structural model analysis.
+    - **I/O-intensive jobs**, such as executing a series of storage transactions or indexing files.
+    - **Batch jobs**, such as nightly data updates or scheduled processing.
+    - **Long-running workflows**, such as order fulfillment, or provisioning services and systems.
+    - **Sensitive-data processing** where the task is handed off to a more secure location for processing. For example, you might not want to process sensitive data within a web app. 
+
+Background jobs can be triggered by either an **event-driven trigger** or **schedule-driven trigger**.
+
+- **Caching**
+
+Caching is a common technique that aims to improve the performance and scalability of a system. It caches data by temporarily copying frequently accessed data to fast storage that's located close to the application. If this fast data storage is located closer to the application than the original source, then caching can significantly improve response times for client applications by serving data more quickly.
+
+**Caching in distributed applications**
+
+Distributed applications typically implement either or both of the following strategies when caching data:
+
+- They use a **private cache**, where data is held locally on the computer that's running an instance of an application or service.
+- They use a **shared cache**, serving as a common source that can be accessed by multiple processes and machines.
+
 - CDN
+
+
 - Data partitioning
 
 
@@ -167,8 +204,8 @@ Bestudeer:
 ### Gebruikte bronnen
 - [John Savill over Well Architected Framework basics met meer focus op SLA targets.](https://www.youtube.com/watch?v=lQlHWacM1N0)
 - https://learn.microsoft.com/en-us/azure/well-architected/ en alle daar uit voortvloeiende subpagina's. 
-
-
+- https://learn.microsoft.com/en-us/azure/architecture/best-practices/auto-scaling
+- https://learn.microsoft.com/en-us/azure/architecture/patterns/throttling
 
 ### Ervaren problemen
 Geen echte problemen, behalve dat je ook hier weer zo diep kan duiken als je zelf wilt. Ik heb persoonlijk wel echt de tijd ervoor genomen want ik denk als ik hier een mooi stukje van maak, dat ik hier profijt van ga hebben de rest van mijn opleiding. Terwijl ik de documentatie lees worden er steeds meer stukjes van de puzzel ontrafelt. 
