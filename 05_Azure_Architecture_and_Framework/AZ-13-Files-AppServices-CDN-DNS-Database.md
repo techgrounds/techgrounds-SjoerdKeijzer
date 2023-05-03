@@ -2,11 +2,20 @@
 Bij netwerk problemen ligt het altijd aan DNS. Ik zweer het je.  
 
 ## Key-terms
-- App Service
+- ### **App Service**: 
 
-- Content Delivery Network (CDN)
 
-- Azure DNS 
+- ### **Content Delivery Network (CDN)**:
+Is a distributed network of servers that can efficiently deliver web content to users. CDNs store cached content on edge servers that are close to end users to minimize latency.
+
+
+- ### **Azure DNS** 
+Azure DNS is a hosting service for DNS domains that provides name resolution by using Microsoft Azure infrastructure. By hosting your domains in Azure, you can manage your DNS records by using the same credentials, APIs, tools, and billing as your other Azure services.
+
+You **can't use Azure DNS to buy a domain name**. For an annual fee, you **can buy a domain name by using App Service** domains or a third-party domain name registrar. Your domains then can be hosted in Azure DNS for record management.
+
+DNS vertaalt een domain (google.com) naar iets wat een computer snapt; een IP adres als 8.8.8.8. 
+
 
 
 ## Opdracht
@@ -20,7 +29,7 @@ Doe iets leuks met:
 - Azure Database (+ managed instance) 	/ RDS, Aurora
 
 ### Gebruikte bronnen
-[Plaats hier de bronnen die je hebt gebruikt.]
+- https://learn.microsoft.com/en-us/azure/dns/dns-overview
 
 ### Ervaren problemen
 [Geef een korte beschrijving van de problemen waar je tegenaan bent gelopen met je gevonden oplossing.]
