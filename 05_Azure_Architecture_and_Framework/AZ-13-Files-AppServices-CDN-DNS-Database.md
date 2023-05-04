@@ -96,9 +96,35 @@ Doe iets leuks met:
 - https://learn.microsoft.com/en-us/azure/cdn/cdn-pop-locations
 - https://cloudacademy.com/course/intro-to-azure-storage/introduction-azure-files-1/#:~:text=Azure%20Files%20is%20an%20offering,message%20block%20protocol%2C%20or%20SMB.
 - https://learn.microsoft.com/en-us/azure/storage/files/storage-files-introduction
+- https://learn.microsoft.com/en-us/azure/azure-sql/database/sql-database-paas-overview?view=azuresql
 
 ### Ervaren problemen
 [Geef een korte beschrijving van de problemen waar je tegenaan bent gelopen met je gevonden oplossing.]
+___
 
-### Resultaat
-[Omschrijf hoe je weet dat je opdracht gelukt is (gebruik screenshots waar nodig).]
+# Praktische opdracht
+
+- Waar kan ik deze dienst vinden in de console?
+- Hoe zet ik deze dienst aan?
+- Hoe kan ik deze dienst koppelen aan andere resources?
+
+
+## Azure files
+
+Azure Files is an offering that makes file shares available in the cloud. It’s a fully managed solution that supports access to these cloud-based file shares via the industry-standard server message block protocol, or SMB.
+
+You **can mount Azure file shares from cloud deployments and on-prem deployments** of not only Windows machines, but also Linux, and Mac OS machines. You can also **use the Azure file sync service with Azure Files to cache your Azure file shares on Windows servers that are located close to your users.** By leveraging Azure file shares with Azure file sync, you can speed data access for your end users. 
+
+**Organizations will often use Azure Files to replace on-prem file servers/NAS devices (Network attached storage) or to supplement them.**
+
+**"Lift and shift" applications**:\
+Azure Files makes it easy to "lift and shift" applications to the cloud that expect a file share to store file application or user data. Azure Files enables both the "classic" lift and shift scenario, where both the application and its data are moved to Azure, and the "hybrid" lift and shift scenario, where the application data is moved to Azure Files, and the application continues to run on-premises.
+
+____
+
+## Azure Database
+
+- What is relational DB?
+
+- How about a non rela DB?
+
