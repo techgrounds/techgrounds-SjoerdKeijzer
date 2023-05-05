@@ -99,6 +99,9 @@ Doe iets leuks met:
 - https://learn.microsoft.com/en-us/azure/azure-sql/database/sql-database-paas-overview?view=azuresql
 - [Microsoft promo over Azure Files en serverless benefits](https://www.youtube.com/watch?v=H04e9AgbcSc)
 - https://learn.microsoft.com/en-us/azure/storage/files/storage-how-to-use-files-portal?tabs=azure-portal
+- https://www.oracle.com/database/what-is-a-relational-database/
+- https://www.openlogic.com/blog/what-sql-database
+
 
 ### Ervaren problemen
 [Geef een korte beschrijving van de problemen waar je tegenaan bent gelopen met je gevonden oplossing.]
@@ -163,10 +166,45 @@ ____
 
 ## Azure Database
 
-- What is relational DB?
+- What is a relational DB? (RDBMS)
+Deze type databases kunnen relaties aangaan tussen bepaalde type opgeslagen data. 
+
+The RDBMS that we used today **rely on SQL as the engine** that allows us to perform all the operations required to create, retrieve, update, and delete data as needed. From an open source perspective these RDBMSs include MySQL, MariaDB, and PostgreSQL as the most commonly used open source RDBMS in production today.Many Fortune 100 companies across several different business sectors including financial, retail, healthcare, and others **have turned to these open source alternatives to drastically lower their total cost of ownership when compared to pay-for-play offerings, such as Oracle Database server and Microsoft SQL Server**.
 
 - How about a non rela DB?
 
-Waar kan ik deze dienst vinden in de console?
-- Hoe zet ik deze dienst aan?
-- Hoe kan ik deze dienst koppelen aan andere resources?
+In recent years, new technologies have emerged to meet the needs of database servers that can handle extremely large sets of data with extremely high throughout velocities without sacrificing stability or availability.
+
+**NoSQL** (Not Only SQL, or Non-SQL) databases have become increasing popular to meet these demands. NoSQL databases house their data differently that relational databases, **utilizing JSON based or key-value databases to name a couple of the common storage types.** PostgreSQL with JSON and its OORDMS based methodology is testament to the staying power of these NoSQL databases.
+
+That said however, it will be a long time before the sun sets on the traditional SQL database. The degree that SQL databases are entrenched into our daily lives means these highly functional and robust RDBMS will be a mainstay of the enterprise for decades to come.
+
+Also; nonrela DB are slower; as when they are queried, it scans the whole DB. Usually there are tons of data in there so it might take a while. 
+
+It is easier to scale because it does not have the (complex) relations system the RDBMS has.
+
+
+### **A SQL Managed Instance**
+ is created in its own VNet with no public endpoint. For client application access, you can either create a VM in the same VNet (different subnet) or create a point-to-site VPN connection to the VNet from your client computer 
+
+![Alt text](../00_includes/AZ-13-SQLDB.png)
+
+If we search for SQL we can find several ways of creating an (Azure) SQL database. We can also create an Azure SQL managed instance. 
+
+![Alt text](../00_includes/AZ-13-sql-managed-instance.png)
+
+If we start with the managed instance. You have several options to configure. We are not gonna actually run it as I think my budget will go through the roof. 
+
+![Alt text](../00_includes/AZ-13-sqldb_create.png)
+
+How about a regular SQL DB? Little bit simpler. Again we can approach authentication via different ways. Either SQl, AAD, or the hybrid version (both). 
+
+With SQL auth only you will need to make a server admin account/login. 
+
+
+![Alt text](../00_includes/AZ-13-sqldb_endpoints_connectivity.png)
+
+And if we click a bit through the options we have more interesting stuff. We can configure the connectivity method. For example, set it up as a private endpoint in a certain virtual network with stated subnet. In this case, the private endpoint requires a DNS zone to be made. 
+
+
+So Sjoerd, why could we use a SQL managed instance? So we can migrate SQL server databases. That is pretty handy should be want to go from a on-prem setting to a full cloud PaaS or hybrid solution. 
