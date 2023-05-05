@@ -97,6 +97,8 @@ Doe iets leuks met:
 - https://cloudacademy.com/course/intro-to-azure-storage/introduction-azure-files-1/#:~:text=Azure%20Files%20is%20an%20offering,message%20block%20protocol%2C%20or%20SMB.
 - https://learn.microsoft.com/en-us/azure/storage/files/storage-files-introduction
 - https://learn.microsoft.com/en-us/azure/azure-sql/database/sql-database-paas-overview?view=azuresql
+- [Microsoft promo over Azure Files en serverless benefits](https://www.youtube.com/watch?v=H04e9AgbcSc)
+- https://learn.microsoft.com/en-us/azure/storage/files/storage-how-to-use-files-portal?tabs=azure-portal
 
 ### Ervaren problemen
 [Geef een korte beschrijving van de problemen waar je tegenaan bent gelopen met je gevonden oplossing.]
@@ -115,11 +117,48 @@ Azure Files is an offering that makes file shares available in the cloud. It’s
 
 You **can mount Azure file shares from cloud deployments and on-prem deployments** of not only Windows machines, but also Linux, and Mac OS machines. You can also **use the Azure file sync service with Azure Files to cache your Azure file shares on Windows servers that are located close to your users.** By leveraging Azure file shares with Azure file sync, you can speed data access for your end users. 
 
-**Organizations will often use Azure Files to replace on-prem file servers/NAS devices (Network attached storage) or to supplement them.**
+**Organizations will often use (serverless) Azure Files to replace on-prem file servers/NAS devices (Network attached storage) or to supplement them.**
+
+Good to know:
 
 **"Lift and shift" applications**:\
 Azure Files makes it easy to "lift and shift" applications to the cloud that expect a file share to store file application or user data. Azure Files enables both the "classic" lift and shift scenario, where both the application and its data are moved to Azure, and the "hybrid" lift and shift scenario, where the application data is moved to Azure Files, and the application continues to run on-premises.
 
+Ok let's get this show on the road. How to we find Azure files in the Azure portal? How to turn it on? How to attach it to other resources? 
+
+
+**Where to find it:**
+
+In order to setup a Azure Files, we need a storage account first.
+
+1. Storage account. 
+
+![Alt text](../00_includes/AZ-13_storage_account_new.png)
+
+Dat is inmiddels gesneden koek dus makkie. 
+
+2. vanuit storage account maken we bij menu/file share een nieuwe file share aan. 
+
+![Alt text](../00_includes/AZ-13-file-share.png)
+
+3. Om mappen te maken en files te uploaden hebben we prachtige knoppen voor dus ook dit deel is niet heel ingewikkeld. 
+
+![Alt text](../00_includes/AZ-13-upload_file.png)
+
+4. Hamvraag is natuurlijk nog wel, nu hebben we een file share, maar hoe kunnen we die dan koppelen? Je raadt het nooit, maar via 'Connect' heb je verschillende opties. 
+
+![Alt text](../00_includes/AZ-13-connect_files.png)
+
+Zowel voor Windhoos, Linux en MacOS. 
+
+
+![Alt text](../00_includes/AZ-13-example_linux_connect.png)
+
+Voor Linux kan je bijvoorbeeld het mee geleverde script runnen zodat de file share wordt gemount. (gemounted?)
+
+![Alt text](../00_includes/AZ-13-instead_key_with_AD.png)
+
+In plaats van met de storage key acces geven kan je ook de acces van andere instances/computers naar de file share regelen via het AD (active directory)
 ____
 
 ## Azure Database
@@ -128,3 +167,6 @@ ____
 
 - How about a non rela DB?
 
+Waar kan ik deze dienst vinden in de console?
+- Hoe zet ik deze dienst aan?
+- Hoe kan ik deze dienst koppelen aan andere resources?
