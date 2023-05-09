@@ -1,5 +1,5 @@
 # AZ-14 Week 6 Theorie | Containers, AZ support plans, AZ advisor, AZ App config, AZ Activity Log
-[Geef een korte beschrijving van het onderwerp]
+Laatste beetjes voor examen prepping
 
 ## Key-terms
 
@@ -19,9 +19,11 @@ Is portable (can be run on any OS).
 
 ### **Azure Support Plans**
 
-<insert plaatje hier>
+![Alt text](../00_includes/AZ-14_support_plan.png)
 
+![Alt text](../00_includes/AZ-14-more-support-plan.png)
 
+Lijkt me vrij duidelijk. Bepaald in welke mate je support kan krijgen op basis van bepaalde payment plan en services. 
 
 ### **Azure Advisor**
 Advisor is een handige tool om op een low-key manier dingen te verbeteren. Advisor scanned op mogelijk verbeteringen, mocht dat efficiency of cost management zijn. Met een eenvoudig dashboard kan je in een paar kliks de recommendations toepassen, uitstellen of negeren. Je hoeft ook niet door te klikken op de individuele componenten. 
