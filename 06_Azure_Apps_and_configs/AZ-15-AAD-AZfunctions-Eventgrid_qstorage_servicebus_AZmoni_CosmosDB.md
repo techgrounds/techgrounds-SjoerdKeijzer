@@ -24,4 +24,33 @@ Vragen voor praktisch onderzoek:
 [Geef een korte beschrijving van de problemen waar je tegenaan bent gelopen met je gevonden oplossing.]
 
 ### Resultaat
-[Omschrijf hoe je weet dat je opdracht gelukt is (gebruik screenshots waar nodig).]
+
+- ### **Azure Active Directory**
+	
+
+
+- ### **Azure Monitor**		
+Waar kunnen we AZ monitor vinden? Vrij simpel, via zowel het standaard menu aan de linkerkant van de portal als via de zoekfuncties. 
+
+![Alt text](../00_includes/AZ-15-azure-monitor.png)
+
+Overzicht van AZ monitor ziet er als boven uit en is een handige tool om insights op te doen en trends te spotten. 
+
+![Alt text](../00_includes/AZ-15_AZ-advisor.png)
+
+AZ Advisor die we bij de theorie tegen kwamen, is ook als onderdeel van AZ monitor te gebruiken. Advisor blijft zijn ding doen en in 
+
+
+![Alt text](../00_includes/AZ-15_monitor-health-planned-maintenance.png)
+
+We gaan geen super deep dive doen wat AZ monitor allemaal kan, maar wat ik persoonlijk wel interessant vond dat die ook alerts kan creeren voor service health en ook planned maintenance. Je maakt eigenlijk event triggers aan. 
+
+Dit speelt natuurlijk ook weer een rol voor waar we het zo over gaan hebben met de Event Grid. 
+
+- CosmosDB 	
+
+
+- Azure Functions 		
+
+
+- Event Grid, Queue Storage, Service Bus
