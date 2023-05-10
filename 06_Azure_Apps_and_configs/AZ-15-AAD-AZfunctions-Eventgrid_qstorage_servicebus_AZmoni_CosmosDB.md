@@ -21,10 +21,16 @@ Vragen voor praktisch onderzoek:
 - AAD van de werkomgeving van mijn vriendin. 
 - https://www.msp360.com/resources/blog/iam-vs-pam-vs-pim/#:~:text=So%2C%20to%20put%20it%20in,PIM%20cover%20privileged%20access%20patterns.
 - https://learn.microsoft.com/en-us/azure/cosmos-db/introduction
-- 
+- https://learn.microsoft.com/en-us/azure/azure-functions/functions-compare-logic-apps-ms-flow-webjobs
+
+___
 
 ### Ervaren problemen
 Sommige termen worden nog wel eens door elkaar heen gebruikt bij verschillende sources (IAM, PIM, PAM) en dat schept soms wel wat verwarring. 
+
+Ook dat sommige services zo'n overlap hebben op het eerste gezicht is verwarrend. Wat is nou precies het verschil tussen de automated services van Azure Functions, Azure App services en Azure Logic apps? Verschil zit 'em soms maar in hele kleine dingen. Het leukste? Ze kunnen allemaal met elkaar integreren om het overzichtelijk te houden. 
+
+___
 
 ### Resultaat
 
@@ -68,7 +74,7 @@ Overzicht van AZ monitor ziet er als boven uit en is een handige tool om insight
 
 ![Alt text](../00_includes/AZ-15_AZ-advisor.png)
 
-AZ Advisor die we bij de theorie tegen kwamen, is ook als onderdeel van AZ monitor te gebruiken. Advisor blijft zijn ding doen en in 
+AZ Advisor die we bij de theorie tegen kwamen, is ook als onderdeel van AZ monitor te gebruiken. Advisor blijft zijn ding doen. 
 
 
 ![Alt text](../00_includes/AZ-15_monitor-health-planned-maintenance.png)
@@ -83,8 +89,21 @@ noSQL db, dus handig voor gigantische bakken data die snel moeten worden geschre
 
 Deeply integrated with key Azure services used in modern (cloud-native) app development including Azure Functions, IoT Hub, AKS (Azure Kubernetes Service), App Service and more. 
 
-- Azure Functions
- 		
+As a fully managed service, Azure Cosmos DB takes database administration off your hands with automatic management, updates and patching. It also handles capacity management with cost-effective serverless and automatic scaling options that respond to application needs to match capacity with demand.
+
+Change feed makes it easy to track and manage changes to database containers and **create triggered events with Azure Functions**.
+
+Azure Cosmos DB's **schema-less** service automatically indexes all your data, regardless of the data model, to deliver blazing fast queries.
+
+- ### **Azure Functions**:
+Azure Functions is a serverless solution that allows you to write less code, maintain less infrastructure, and save on costs. Instead of worrying about deploying and maintaining servers, the cloud infrastructure provides all the up-to-date resources needed to keep your applications running.
 
 
-- Event Grid, Queue Storage, Service Bus
+I was confused in part with all the different automation computing services. Biggest differentation between Azure Functions and for example Azure Logic apps I could find are:
+
+- Functions is: **Code-first (imperative)**. Logic apps is **Designer-first (declarative)**.
+- Functions: **Each activity is an Azure function; write code for activity functions**. Logic app: **Large collection of ready-made actions**. 
+
+
+### **Event Grid, Queue Storage, Service Bus**
+Oh boy oh boy. 
