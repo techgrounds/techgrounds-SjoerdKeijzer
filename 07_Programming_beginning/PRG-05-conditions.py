@@ -3,7 +3,12 @@
 # If the name they input is your name, print a personalized welcome message. 
 # If not, print a different personalized message.
 
+name = input("Please state your name.")
 
+if name == "Sjoerd":
+    then: print(f"Dobar Python ratnik {name}")
+else:
+    print(f"Greetings {name}!")
 
 #----------------- Exercise 2 
 # Ask the user of your script for a number. Give them a response based on whether the number is higher than, lower than, or equal to 100.
@@ -17,13 +22,13 @@
 while True: 
 
     # ask for input
-    number = input("Please select a number: ") 
+    number = int(input("Please select a number: "))
 
 # Conditions for the numbers game. 
     if number > 100:
-        print(f"Thanks for submitting your number. Your chosen number is: {number}. 'Tis a little high though.")
+        print("Thanks for submitting your number.'Tis a little high though.")
     elif number < 100:
-        print(f"{number} is a great choice. Though bit on the low side.")
+        print("Great choice. Though bit on the low side.")
     else:
         print(f"Your input directly matches 100. Congratulations!")
-    break # if 100 has been guessed, stop the loop
+        break # if 100 has been guessed, stop the loop
