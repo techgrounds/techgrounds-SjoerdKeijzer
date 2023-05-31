@@ -22,8 +22,39 @@ print(x)
 
 #------------- exercise 2
 # Use the input() function to get input from the user. Store that input in a variable.
-# Find out what data type the output of input() is. See if it is different for different kinds of input (numbers, words, etc.).
-# 
+# Find out what data type the output of input() is. See if it is different for different kinds of input (numbers, words, etc.)."""
 
+# At first I had:
 
+inputvar = input("\nEnter a value: ")
+typevar = type(inputvar)
+ 
+print(f'\nYou chosen value is {inputvar}.\nThis is a {typevar} data type.')
 
+# The problem with this, that Python always returns a string as datatype, regardless of input.
+# I know this is probably beyond the scope of what is required, but what if we can try add certain conditions to make sure we can actually
+# use 1 print line and yet determine datatypes. 
+
+# Get input
+inputvar = input("Enter a value: ")
+
+# If you enter a float you will probably use a '.'. So if there is a . try to see if it is indeed a float by converting it to float. 
+if "." in inputvar:
+    try:
+        # Try converting to float
+        number = float(inputvar)
+        data_type = type(number)
+    except ValueError:
+        # If not a valid float, consider it a string
+        data_type = str
+else:
+    try:
+        # Try converting to integer
+        number = int(inputvar)
+        data_type = type(number)
+    except ValueError:
+        # If not a valid integer, consider it a string
+        data_type = str
+
+# Print the data type
+print(f'\nYou chosen value is {inputvar}.\nThis is a {data_type} data type.')

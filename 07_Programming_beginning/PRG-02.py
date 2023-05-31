@@ -2,6 +2,7 @@
 value1=1
 value2=24
 value3=(value1+value2)
+
 # value3=sum(value1+value2) but Python is smart enough to recognise this without syntax sum
 
 print()
@@ -19,11 +20,12 @@ print(f"Hello, {name}!")
 
 
 #---------- exercise 3
-changevar="Bonjour"
 
+# create a var that changes with output, but the print value var name (changevar) itself should remain the same. 
+changevar="Bonjour"
 print()
 print(f"Value 1: {changevar}")
 changevar='Dobre dan'
 print(f"Value 2: {changevar}")
-changevar = 'Buens noches'
+changevar = 'Buenos noches'
 print(f"Value 3: {changevar}")
