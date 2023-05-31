@@ -21,8 +21,8 @@ print("type d is: ",  type(d))
 print(x)
 
 #------------- exercise 2
-# Use the input() function to get input from the user. Store that input in a variable.
-# Find out what data type the output of input() is. See if it is different for different kinds of input (numbers, words, etc.)."""
+# -- Use the input() function to get input from the user. Store that input in a variable.
+# -- Find out what data type the output of input() is. See if it is different for different kinds of input (numbers, words, etc.)."""
 
 # At first I had:
 
