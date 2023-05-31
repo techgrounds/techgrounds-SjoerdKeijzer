@@ -9,11 +9,21 @@
 # Ask the user of your script for a number. Give them a response based on whether the number is higher than, lower than, or equal to 100.
 # Make the game repeat until the user inputs 100
 
-number = input("Please select a number ")
 
-if number > 100:
-    print(f"Thanks for submitting your number. Your chosen number is: {number}. 'Tis a little high though. ")
-elif number < 100:
-    print(f"{number} is a great choice. Though bit on the low side.")
-else:
-    print(f"Your input directly matches 100. Congratulations!")
+# User input hebben we al paar keer gehad en if/elif ook. Truc is nu om iets te hebben om de number gaande te houden
+# tot 100 is geraden. 
+
+# start loop
+while True: 
+
+    # ask for input
+    number = input("Please select a number: ") 
+
+# Conditions for the numbers game. 
+    if number > 100:
+        print(f"Thanks for submitting your number. Your chosen number is: {number}. 'Tis a little high though.")
+    elif number < 100:
+        print(f"{number} is a great choice. Though bit on the low side.")
+    else:
+        print(f"Your input directly matches 100. Congratulations!")
+    break # if 100 has been guessed, stop the loop
