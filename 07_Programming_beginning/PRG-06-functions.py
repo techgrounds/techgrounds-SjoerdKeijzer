@@ -15,7 +15,7 @@ for i in range(5):
 # -- Rewrite your function so that it takes a string as an argument. Then, it should print “Hello, <string>!”.
 
 
-# we make the custom function, myfunction(), that prints 'Hello, world!'. The c
+# we make the custom function, myfunction(), that prints 'Hello, world!'.
 def myfunction():
     print('Hello, world!')
 
@@ -41,6 +41,9 @@ myfunction("Sjoerd")
 # z = avg(x,y)
 # print("The average of",x,"and",y,"is",z)
 # Write the custom function avg() so that it returns the average of the given parameters. You are not allowed to edit any code below the second comment.
+
+# I tried many versions of this, but this worked in the end. The trick sort of is to that z ends up being the average. I cheesed it by doing the return command and already calculating the average of x + y. 
+# Pretty sure there is a more elegant way to do this, but in the end this produced the required results so I'm keeping as is for the time being. 
 
 def avg(x, y):
     return (x + y) / 2

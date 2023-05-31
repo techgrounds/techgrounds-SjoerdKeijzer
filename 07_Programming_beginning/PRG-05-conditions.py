@@ -21,7 +21,7 @@ else:
 # start loop
 while True: 
 
-    # ask for input
+    # ask for input that is an integer
     number = int(input("Please select a number: "))
 
 # Conditions for the numbers game. 
