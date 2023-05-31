@@ -57,4 +57,4 @@ else:
         data_type = str
 
 # Print the data type
-print(f'\nYou chosen value is {inputvar}.\nThis is a {data_type} data type.')
+print(f'\nYour chosen value is {inputvar}.\nThis is a {data_type} data type.')
