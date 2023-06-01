@@ -9,7 +9,6 @@
 #
 #Loop over the dictionary and print every key-value pair in the terminal.
 
-
 techgrounds_dict = {
 "First name": "Casper",
 "Last name": "Velzen",
@@ -17,8 +16,10 @@ techgrounds_dict = {
 "Company": "Techgrounds",
 }
 
+# Looping over dict while printing every key-value pair
 for key, value in techgrounds_dict.items():
     print(f"{key} : {value}")
+
 
 #----------------- Exercise 2
 # Create a new script.
