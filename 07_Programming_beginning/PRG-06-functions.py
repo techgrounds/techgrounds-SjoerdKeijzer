@@ -25,6 +25,7 @@ myfunction()
 # Rewrite the function with a string argument
 def myfunction(name):
     print("Hello, " + name + "!")
+    print(f"Hello, {name}!")
 
 # Call myfunction with a string argument
 myfunction("Sjoerd")
@@ -42,7 +43,7 @@ myfunction("Sjoerd")
 # print("The average of",x,"and",y,"is",z)
 # Write the custom function avg() so that it returns the average of the given parameters. You are not allowed to edit any code below the second comment.
 
-# I tried many versions of this, but this worked in the end. The trick sort of is to that z ends up being the average. I cheesed it by doing the return command and already calculating the average of x + y. 
+# I tried many versions of this, but this worked in the end. My 'trick' sort of is to that z ends up being the average. I cheesed it by doing the return command and already calculating the average of x + y. 
 # Pretty sure there is a more elegant way to do this, but in the end this produced the required results so I'm keeping as is for the time being. 
 
 def avg(x, y):

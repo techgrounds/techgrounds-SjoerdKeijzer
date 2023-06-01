@@ -35,10 +35,12 @@ print(f'\nYou chosen value is {inputvar}.\nThis is a {typevar} data type.')
 # I know this is probably beyond the scope of what is required, but what if we can try add certain conditions to make sure we can actually
 # use 1 print line and yet determine datatypes. 
 
-# Get input
 inputvar = input("Enter a value: ")
 
-# If you enter a float you will probably use a '.'. So if there is a . try to see if it is indeed a float by converting it to float. 
+# First I tried this with If/else statements but that was very difficult. After some research found that you can use try to make Python attempt
+# things and if failed, take another action. That works actually just fine in this scenario. 
+
+# So if you enter a float you will probably use a '.'. So if there is a . try to see if it is indeed a float by converting it to float. 
 if "." in inputvar:
     try:
         # Try converting to float

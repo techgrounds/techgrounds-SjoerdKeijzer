@@ -26,9 +26,9 @@ while True:
 
 # Conditions for the numbers game. 
     if number > 100:
-        print("Thanks for submitting your number.'Tis a little high though.")
+        print(f"Thanks for submitting your number, {number}.'Tis a little high though.")
     elif number < 100:
-        print("Great choice. Though bit on the low side.")
+        print(f"Great choice. Though {number} is a bit on the low side.")
     else:
         print(f"Your input directly matches 100. Congratulations!")
         break # if 100 has been guessed, stop the loop
