@@ -19,15 +19,14 @@ for i in range(5):
 def myfunction():
     print('Hello, world!')
 
-# Call the function without argument
+# Call the function (without argument). Will print 'Hello, world!'.
 myfunction()
 
-# Rewrite the function with a string argument
+# Rewrite the function
 def myfunction(name):
-    print("Hello, " + name + "!")
     print(f"Hello, {name}!")
 
-# Call myfunction with a string argument
+# Call myfunction with an argument. Will print 'Hello, Sjoerd!'.
 myfunction("Sjoerd")
 
 # ------------- Exercise 3
@@ -43,8 +42,9 @@ myfunction("Sjoerd")
 # print("The average of",x,"and",y,"is",z)
 # Write the custom function avg() so that it returns the average of the given parameters. You are not allowed to edit any code below the second comment.
 
-# I tried many versions of this, but this worked in the end. My 'trick' sort of is to that z ends up being the average. I cheesed it by doing the return command and already calculating the average of x + y. 
-# Pretty sure there is a more elegant way to do this, but in the end this produced the required results so I'm keeping as is for the time being. 
+# Took a while to get my head around this as I am not super proficient in maths. So when changing from letters to numbers this is somewhat confusing for me.
+# However after reading several times how function calling works, I just had to figure out a way in the function code to make sure that z returned the average of x and y
+# I think below works, so there we go. 
 
 def avg(x, y):
     return (x + y) / 2
