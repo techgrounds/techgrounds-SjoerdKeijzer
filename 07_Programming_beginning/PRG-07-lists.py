@@ -3,9 +3,9 @@
 # Create a variable that contains a list of five names.
 # Loop over the list using a for loop. Print every individual name in the list on a new line.
 
-
-
-
+name_list = ["Casper", "John", "Curt", "Sebastiaan", "Eline"]
+for name in name_list:
+    print(name)
 
 
 # -------------------- Exercise 2
@@ -16,4 +16,4 @@
 # The first result above is created by adding 9 and 80. The second result is created by adding 80 and 16, etc. The last result is created by adding 35 and 9.
 
 
-
+int_list = [25, 88, 7, 12, 256]
