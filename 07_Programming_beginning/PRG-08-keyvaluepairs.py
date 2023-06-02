@@ -9,16 +9,7 @@
 #
 #Loop over the dictionary and print every key-value pair in the terminal.
 
-techgrounds_dict = {
-"First name": "Casper",
-"Last name": "Velzen",
-"Job title": "Learning Coach",
-"Company": "Techgrounds",
-}
 
-# Looping over dict while printing every key-value pair
-for key, value in techgrounds_dict.items():
-    print(f"{key} : {value}")
 
 
 #----------------- Exercise 2
@@ -27,4 +18,29 @@ for key, value in techgrounds_dict.items():
 # Write the information to a csv file (comma-separated values). The data should not be overwritten when you run the script multiple times.
 # 
 
+# first we do the code to get input from user
+input_first_name = input("Please state your first name: ")
+input_last_name = input("Please state your last name: ")
+input_job_title = input("What is your job title? ")
+input_company = input("What company is your employer? ")
 
+# save input from user in a custom dictionairy
+custom_dict = {
+
+"firstname" : {input_first_name},  
+"lastname" : {input_last_name},
+"job_title" : {input_job_title},
+"company" : {input_company},
+}
+
+# for test purposes check values in dict
+print(custom_dict)
+
+# get the input from user into a csv file
+import csv
+
+with open('exercise.csv', 'w', newline='') as csv_file:
+    writer = csv.writer(csv_file)
+
+content = csv_file.read()
+print(content)
