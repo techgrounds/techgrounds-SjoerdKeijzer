@@ -44,7 +44,7 @@ custom_dict = {
 
 import csv
 
-# write the content from the dictionary to a CSV file
+# write the content from the dict to a CSV file - we need 'a' append mode and not 'w' write mode to ensure the data is not overwritten on reruns of the script
 with open('exercise.csv', 'a', newline='') as csv_file:
     writer = csv.DictWriter(csv_file, fieldnames=custom_dict.keys())
 
