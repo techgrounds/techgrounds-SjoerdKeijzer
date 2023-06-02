@@ -20,7 +20,7 @@ for name in name_list:
 # 
 # Most written way out, but lots of typing is: 
 # value 0+1= answer a | value 1+2 = answer B | value 2+3 = answer C | value 3+4 = answer D | value 4+5 = answer E | value 5 + 0 = answer F |
-# The tough part is to make sure value 5 (or -1 as the end of the loop) adds up with value 0. How can we write this in proper code though? 
+# The rough part is to make sure value 5 (or -1 as the end of the loop) adds up with value 0. How can we write this in proper code though? 
 # list[i]+1 something something, but then we get in trouble at the end of the sequence going back to value 0. 
 # so I guess we have 2 conditions: 
 # 1. cycle next number and add next value 

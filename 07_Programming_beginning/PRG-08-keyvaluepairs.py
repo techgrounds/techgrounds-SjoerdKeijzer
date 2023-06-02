@@ -42,6 +42,9 @@ custom_dict = {
     "Company": input_company
 }
 
+# for test purposes check values in dict
+print(custom_dict)
+
 import csv
 
 # write the content from the dict to a CSV file - we need 'a' append mode and not 'w' write mode to ensure the data is not overwritten on reruns of the script
@@ -50,7 +53,7 @@ with open('exercise.csv', 'a', newline='') as csv_file:
 
     # In the ideal world I would like to have the header also but it keeps printing each time for each rerun of the script. I could probably fix it with enough time, but for now
     # I decide to move on with PRG-09
-    # writer.writeheader() 
+    # writer.writeheader() something something
     writer.writerow(custom_dict)
 
 # Check if content is there
