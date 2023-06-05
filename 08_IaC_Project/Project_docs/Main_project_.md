@@ -1,5 +1,5 @@
 
-# IaS Project met Python en Azure Biceps
+# IaC Project met Python en Azure Biceps
 
 ## Case samenvatting: 
 ### *Bedrijf will van on-prem naar cloud omgeving. Help ze hierbij door de deployment te automatiseren via templates. Voor specificaties zie requirements en user stories.* 
