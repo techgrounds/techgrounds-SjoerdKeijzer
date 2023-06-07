@@ -36,15 +36,16 @@ _____________
 
 
 ### Dagverslag (1 zin)
-
+Wat zijn nou eigenlijk de requirements?
 
 ### Obstakels
-
+Op het eerste oog lijken de requirements helder. Totdat je er wat dieper op in gaat. Ik probeer ook meteen na te denken over welke diensten hierbij horen want ook dat hoort in een (aparte) UserStory. 
 
 ### Oplossingen
-
+Vooral veel informatie opzoeken hoe bepaalde eisen uitmonden in bepaalde functionaliteiten en daaraan gekoppelde diensten. Dat zijn een heleboel moeilijke woorden om te verhullen: hoe werkt dit nou?
 
 ### Learnings
+Zoals met alles heb je ook keuzes te maken. Bijvoorbeeld VMSS vs AZ App services en of je heel moeilijk gaat doet met AZ Bastion of dat je simpelweg Network Security Groups gebruikt voor bepaald verkeer. 
 ___
 
 ## [08/06]
