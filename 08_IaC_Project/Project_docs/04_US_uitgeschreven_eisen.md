@@ -20,7 +20,7 @@ De lijst:
     - De volgende IP ranges worden gebruikt: 10.10.10.0/24 & 10.20.20.0/24 (is dit handig?)
     - /!\ Alle subnets moeten beschermd worden door een firewall op subnet niveau (is dit handig?)
 - Network security groups (NSG)
-- vnet peering
+- vnet peering (wat impliceert dat er tenminste 2 vnets moeten zijn)
 - AZ key vault
 - AZ AAD en IAM (nog te implementeren)
 - webserver (linux?)
@@ -38,3 +38,5 @@ Wat te doen met:
 - AZ Recovery Service Vault
 - /!\ (?) uberhaupt firewall voor inbound verkeer 
 - /!\ iets voor post deployment script (kan dit gewoon in een blob container bijvoorbeeld?)
+- staat nergens maar in professionele setting is geld vaak belangrijk. Inschatting van kosten van deployment/infra plannen?
+- In huidige netwerk diagram meerdere availability zones nodig? waarom?

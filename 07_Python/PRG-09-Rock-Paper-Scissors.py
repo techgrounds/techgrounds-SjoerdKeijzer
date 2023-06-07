@@ -27,8 +27,8 @@ while True:
         return computer_choice
     
     # print chosen values of both user and computer
-    computer_action = computer_move
-    player_action = valid_move
+    computer_action = computer_move # does not work
+    player_action = valid_move # does not work
     print(f'\nYou have chosen {player_input} - Computer has chosen {computer_action}.')
 
 # Create another function to check who wins the round - this works but could probably in a function 
@@ -51,13 +51,14 @@ while True:
             print("Rock smashes scissors! You lose.")
 
 # function that keeps track of the score
+# not done yet
     def update_score(winner, scores):
         if winner == "player":
             scores["player"] += 1
         elif winner == "computer":
             scores["computer"] += 1
         else:
-             print()
+             print() # there is already a 'it's a draw' statement above
 
 
                             
