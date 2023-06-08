@@ -22,14 +22,14 @@ De lijst:
 - Network security groups (NSG)
 - vnet peering (wat impliceert dat er tenminste 2 vnets moeten zijn)
 - AZ key vault
-- AZ AAD en IAM (nog te implementeren)
-- webserver (linux?)
+- AZ AAD (nog te implementeren - AZ AAD alleen gratis plan vanuit PO beschikbaar)
+- webserver (PO: confirmed linux ok)
     - SSH of RDP verbindingen met de webserver mogen alleen tot stand komen vanuit de admin server
     - De webserver moet op een geautomatiseerde manier geïnstalleerd worden (post deployment script)
     - De webserver moet dagelijks gebackupt worden. De backups moeten 7 dagen behouden worden. (hoe wordt back-up geschreven, waar moet die opgeslagen worden en op welke manier -> LRS, ZRS etc)
-- management server (OS? niet bekend nog)
+- management server (for now lunix; depending on further pending feedback stakeholders)
     - De admin/management server moet bereikbaar zijn met een publiek IP.
-    - De admin/management server moet alleen bereikbaar zijn van vertrouwde locaties (office/admin’s thuis) (AZ AAD / conditional access)
+    - De admin/management server moet alleen bereikbaar zijn van vertrouwde locaties (office/admin’s thuis) (AZ AAD / conditional access? Kan alleen niet op AZ AAD free plan. NSG dan met bepaalde rules om bekende IP's uit te exempten? )
 
 - autoscale config als via vmss of anders AZ app service
 - DB type voor opslag van ((End User) en/of klant)gegevens - SQL?
