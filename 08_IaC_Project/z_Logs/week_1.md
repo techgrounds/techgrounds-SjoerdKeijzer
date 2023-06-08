@@ -45,23 +45,23 @@ Op het eerste oog lijken de requirements helder. Totdat je er wat dieper op in g
 Vooral veel informatie opzoeken hoe bepaalde eisen uitmonden in bepaalde functionaliteiten en daaraan gekoppelde diensten. Dat zijn een heleboel moeilijke woorden om te verhullen: hoe werkt dit nou?
 
 ### Learnings
-Zoals met alles heb je ook keuzes te maken. Bijvoorbeeld VMSS vs AZ App services en of je heel moeilijk gaat doet met AZ Bastion of dat je simpelweg Network Security Groups gebruikt voor bepaald verkeer. 
+Zoals met alles heb je ook keuzes te maken. Bijvoorbeeld VMSS vs AZ App services en of je heel moeilijk gaat doet met AZ Bastion of dat je simpelweg Network Security Groups gebruikt voor bepaald verkeer filteren. 
 ___
 
 ## [08/06]
 
 
 ### Dagverslag (1 zin)
-
+Eerste stapjes nemen met Biceps.
 
 ### Obstakels
-
+Niet echt, enige vervelende was nog al wat theorie doorspitten op de learn.microsoft modules voordat je echt met Bicep zelf begon. 
 
 ### Oplossingen
-
+Blijven doorklikken op next en de knowledge check halen. (insert strong emoji.jpeg)
 
 ### Learnings
-
+/
 ____
 
 ## [09/06]

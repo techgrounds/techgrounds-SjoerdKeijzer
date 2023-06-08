@@ -1,4 +1,4 @@
-### Standup 08/06
+## Standup 08/06
 
 - Akram: voornamelijk gefocused op Bicep - wat ik wil gaan doen planning maken en userstories verwerken - en ook logs gaan implementren
 - Jennifer: weer verder met Bicep proberen met scripts te schrijven - 
