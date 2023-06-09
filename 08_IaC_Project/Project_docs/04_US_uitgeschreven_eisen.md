@@ -13,8 +13,8 @@ Er staan al wat eisen in dit document genoemd, maar deze lijst is mogelijk incom
 
 De lijst: 
 
-- AZ subscription (welke? is default ok?)
-- AZ storage account (type? )
+- AZ subscription ()
+- AZ storage account (type? basic)
 - AZ resource group
 - AZ vnet + subnets
     - De volgende IP ranges worden gebruikt: 10.10.10.0/24 & 10.20.20.0/24 (is dit handig?)
