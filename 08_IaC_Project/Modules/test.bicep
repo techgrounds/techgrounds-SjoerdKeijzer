@@ -1,5 +1,5 @@
 resource storageAccount 'Microsoft.Storage/storageAccounts@2022-09-01' = {
-name: 'testname'
+name: 'test_tosti_name_for_deployment'
 location:'uksouth'
 sku: {
   name: 'Standard_LRS'

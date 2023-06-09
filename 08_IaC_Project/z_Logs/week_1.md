@@ -68,14 +68,14 @@ ____
 
 
 ### Dagverslag (1 zin)
-
+Proberen iets te deployen met Bicep.
 
 ### Obstakels
-
+Deployen lukt in eerste instantie niet; AZ powershell will niet installeren vanwege bepaalde rechten die ik zou moeten aanpassen om scripts te runnen. Ook na de rechten aan te passen wil de instal niet verder. AZ cli doet het wel gewoon, dus laten we daar dan verder mee gaan. Ideaal gesproken wil ik bij het deployen ook meteen een resource group aanmaken, maar dat lijkt in de beginneling fase nog niet mogelijk te zijn. Je moet volgens de tutorial eerst default resource group maken en daarna met een commando iets deployen wat in die resource group kan. 
 
 ### Oplossingen
-
+In Azure cli gewerkt om eerste (via sandbox mode en az concierge sub) een storage account te deployen. Was even puzzelen want ik wilde heel eigenwijs ook meteen een resource group aanmaken in 1 command. Als je gewoon braaf de stappen volgt dan gaat het deployen uiteindelijk goed. Dat was wel heel satisfying om terug te zien in je (sandbox) portal. 
 
 ### Learnings
-
+Neem niet te grote stappen in 1x maar blijf kleine stapjes nemen. Neem voldoende pauze zodat je scherp blijft. 
 ____
