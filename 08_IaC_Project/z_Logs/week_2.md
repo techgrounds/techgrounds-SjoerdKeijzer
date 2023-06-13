@@ -19,16 +19,16 @@ ____________
 
 
 ### Dagverslag (1 zin)
-
+Prutsen met Bicep continues
 
 ### Obstakels
-
+Ik had mezelf uit mijn Az portal gesloten door eerst mijn wachtwoord te vergeten en daarna op 'forget password' te klikken ipv 'reset password'. Met tussenkomst van Casper uiteindelijk temp ww gekregen om zo weer nieuwe aan te maken. Heb het deployen maar even gelaten voor wat het is. 
 
 ### Oplossingen
-
+In plaats van me weer op de troubleshoot muur te storten ben ik wat dieper Bicep in gedoken en alvast geprobeerd om alvast wat netwerk parameters in mijn test.bicep te schrijven. 
 
 ### Learnings
- 
+Op andere dingen voortgang gemaakt ipv vast te loop op het ene issue.  
 _____________
 
 ## 14/06
