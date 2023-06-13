@@ -36,10 +36,9 @@ resource vnet1 'Microsoft.Network/virtualNetworks@2022-11-01' = {
     project: 'vnet1'}
   properties: {
     addressSpace: 
-      {addressPrefixes: ['10.0.0.0/24']
+      {addressPrefixes: ['10.10.10.0/24']
     } 
   }
 }
-resource subnet 'Microsoft.Network/virtualNetworks/subnets@2022-11-01' = {
 
-}
+// resource subnet 'Microsoft.Network/virtualNetworks/subnets@2022-11-01'
