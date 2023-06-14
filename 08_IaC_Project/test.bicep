@@ -30,10 +30,10 @@ properties: {
 // netwerk gedeelte maken
 // vnet 1 setup
 resource vnet1 'Microsoft.Network/virtualNetworks@2022-11-01' = {
-  name: condition ? TrueValue : FalseValue
+  name: vnet_webserver
   location: location
   tags: {
-    project: 'vnet1'}
+    TagName1: 'vnet1'}
   properties: {
     addressSpace: 
       {addressPrefixes: ['10.10.10.0/24']
@@ -42,3 +42,6 @@ resource vnet1 'Microsoft.Network/virtualNetworks@2022-11-01' = {
 }
 
 // resource subnet 'Microsoft.Network/virtualNetworks/subnets@2022-11-01'
+
+// Module om storage account aan te maken
+module stg 'Modules/storage.bicep'
