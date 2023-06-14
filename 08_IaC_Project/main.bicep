@@ -14,6 +14,6 @@ resource azrg01 'Microsoft.Resources/resourceGroups@2021-04-01'= {
 
 // Deploy storage account module
 // module stg 'Modules/storage.bicep' = {
-//  scope: 
+//  scope: // ? staat al in stg module though
 //  name: stgname
 // }

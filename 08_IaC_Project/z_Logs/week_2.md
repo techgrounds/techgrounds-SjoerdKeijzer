@@ -35,16 +35,18 @@ _____________
 
 
 ### Dagverslag (1 zin)
-
+Eindelijk gelukt.
 
 ### Obstakels
-
+Na het legen van mijn cache in mijn browser heb ik toch de deployment kunnen zien, dus alles was gewoon goed voorheen. 
+Ander obstakel was dat bij het proberen te deployen van een storage account ik steeds een targetScope error kreeg. 
 
 ### Oplossingen
-
+Oplossing van die targetScope error was door de storage account te deployen in een andere module die wordt aangeroepen vanaf de main.bicep en in de storage.bicep targetScope='resourceGroup' van te maken.
+Het kan soms zo simpel zijn.
 
 ### Learnings
-
+Zie bovenstaand. 
 ___
 
 ## 15/06

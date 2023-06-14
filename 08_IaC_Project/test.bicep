@@ -1,7 +1,6 @@
 
 
 param location string = resourceGroup().location
-param testtostistorage string = 'deploy_storage_account${uniqueString(resourceGroup().id)}'
 param environment string = 'testomgeving'
 
 // param vnet1 string = 'vnet_webserver'
@@ -14,18 +13,6 @@ param environment string = 'testomgeving'
 // nic voor adminserver
 // vnet peering
 
-
-resource storageAccount 'Microsoft.Storage/storageAccounts@2022-09-01' = {
-name: testtostistorage
-location:location
-sku: {
-  name: 'Standard_LRS'
-}
-kind: 'StorageV2'
-properties: {
-  accessTier: 'Hot'
-}
-}
 
 // netwerk gedeelte maken
 // vnet 1 setup
@@ -43,5 +30,3 @@ resource vnet1 'Microsoft.Network/virtualNetworks@2022-11-01' = {
 
 // resource subnet 'Microsoft.Network/virtualNetworks/subnets@2022-11-01'
 
-// Module om storage account aan te maken
-module stg 'Modules/storage.bicep'
