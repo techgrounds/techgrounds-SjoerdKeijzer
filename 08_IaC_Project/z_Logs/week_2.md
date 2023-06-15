@@ -53,16 +53,18 @@ ___
 
 
 ### Dagverslag (1 zin)
-
+Verdere deployments gedaan
 
 ### Obstakels
+vnets gemaakt, main.bicep test gedeployed. Storage account en vnets prima gemaakt, alleen subnet waren onderdeel van de vnets en zag geen nsg's staan. 
 
+Vervolgens geprobeerd om nsg's toe te voegen, maar daar kreeg ik dan weer allerlei errors van. Vervolgens eigenlijk heel de dag getroubleshoot hoe dit goed te passen
 
 ### Oplossingen
-
+Krijg wel steeds andere deployment errors, dus wat dat betreft zit er schot in
 
 ### Learnings
-
+Blijven troubleshooten maar het wel timeboxen. 
 ____
 
 ## 16/06

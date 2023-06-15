@@ -36,12 +36,16 @@ resource nsg_webserver 'Microsoft.Network/networkSecurityGroups@2022-11-01' = {
   location: location
   properties: {
     securityRules: [
-      { name: 'nsg_rules_webserver'
+      { name: 'https'
         properties: {
           access: 'Allow' 
           direction: 'Inbound' 
           priority: 100
           protocol: 'Tcp'
+          sourcePortRange: '*'
+          sourceAddressPrefix: '*'
+          destinationPortRange: '443'
+          destinationAddressPrefix: '*'
         }}
     ]
   }
@@ -73,12 +77,16 @@ resource nsg_adminserver 'Microsoft.Network/networkSecurityGroups@2022-11-01' = 
   properties: {
     securityRules: [
       {
-        name: 'nsg_rules_adminserver'
+        name: 'ssh'
         properties: {
           access: 'Allow'
           direction: 'Inbound'
           priority: 100
           protocol: 'Tcp'
+          sourcePortRange: '*'
+          sourceAddressPrefix: '*'
+          destinationPortRange: '22'
+          destinationAddressPrefix: '*'
         }
       }
     ]
