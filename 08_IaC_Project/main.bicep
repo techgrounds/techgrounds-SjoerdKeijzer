@@ -2,7 +2,7 @@ targetScope = 'subscription'
 
 @description('Make general resource group for deployment in UKsouth region')
 // Make a general resource group for deployment in Uksouth region
-param resourceGroupName string = 'root_resource_group'
+param resourceGroupName string = 'rootrg'
 param location string = 'uksouth'
 resource rootgroup 'Microsoft.Resources/resourceGroups@2021-04-01'= {
   name: resourceGroupName

@@ -24,14 +24,13 @@ resource vnet_webserver 'Microsoft.Network/virtualNetworks@2022-11-01' = {
         { name: name_subnet_webserver
         properties: {
           addressPrefix: '10.10.10.0/24' // moeten subnets niet /32 zijn? andere keer nakijken
-        }}
+          networkSecurityGroup: {
+            id: resourceId('Microsoft.Network/networkSecurityGroups', name_nsg_webserver)
+          }
+        }
+      }
       ]
   }
-}
-
-
-resource nsg_webserver 'Microsoft.Network/networkSecurityGroups@2022-11-01' = {
-  name: name_nsg_webserver
 }
 
 @description('adminserver vnet, subnet and nsg details here')
@@ -48,11 +47,10 @@ resource vnet_adminserver 'Microsoft.Network/virtualNetworks@2022-11-01' = {
         { name: name_subnet_adminserver
         properties: {
           addressPrefix: '10.20.20.0/24' // moeten subnets niet /32 zijn? andere keer nakijken
+          networkSecurityGroup: {
+            id: resourceId('Microsoft.Network/networkSecurityGroups@2022-11-01', name_nsg_adminserver)
+          }
         }}
       ]
   }
-}
-
-resource nsg_adminserver 'Microsoft.Network/networkSecurityGroups@2022-11-01' = {
-  name: name_nsg_adminserver
 }

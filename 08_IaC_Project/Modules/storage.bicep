@@ -3,7 +3,8 @@ targetScope = 'resourceGroup'
 @description('Name the storage acount with a unique name.')
 @minLength(3)
 @maxLength(24)
-param storageName string = 'storage_${uniqueString(resourceGroup().id)}'
+param storageName string = 'stg${uniqueString(resourceGroup().id)}'
+
 
 // place storage account in same region as resource group
 param location string = resourceGroup().location
@@ -21,3 +22,4 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2022-09-01' = {
     accessTier: 'Hot'
   }
   }
+
