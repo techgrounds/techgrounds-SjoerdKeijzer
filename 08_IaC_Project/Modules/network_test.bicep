@@ -39,13 +39,15 @@ resource vnet_webserver 'Microsoft.Network/virtualNetworks@2022-11-01' = {
           name: name_subnet_webserver
         properties: {
           addressPrefix: '10.10.10.0/24' // subnet(s) address here
-          networkSecurityGroup: nsg_webserver
+          networkSecurityGroup: {
+            id: nsg_webserver.id}
           }
         }
       
       ]
   }
 }
+output subnet_id_webserver string = vnet_webserver.properties.subnets[0].id
 
 resource pub_ip_webserver 'Microsoft.Network/publicIPAddresses@2021-02-01' = {
   name: name_pubip_webserver
@@ -119,7 +121,8 @@ resource vnet_adminserver 'Microsoft.Network/virtualNetworks@2022-11-01' = {
           name: name_subnet_adminserver
         properties: {
           addressPrefix: '10.20.20.0/25' // subnet(s) address here
-          networkSecurityGroup: nsg_adminserver
+          networkSecurityGroup: {
+            id: nsg_adminserver.id}
           }
         }
       ]

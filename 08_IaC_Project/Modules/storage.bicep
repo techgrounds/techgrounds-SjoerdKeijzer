@@ -3,7 +3,7 @@ targetScope = 'resourceGroup'
 @description('Name the storage acount with a unique name.')
 @minLength(3)
 @maxLength(24)
-param storageName string = 'stg${uniqueString(resourceGroup().id)}'
+param storageName string = 'Storage${uniqueString(resourceGroup().id)}'
 
 
 // place storage account in same region as resource group
