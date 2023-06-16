@@ -17,12 +17,12 @@ scope: rootgroup
 params: {
   location: location
 }
- }
+}
 
  @description('Deploy network module')
 // Deploy network module
-// Ideally I want different resource groups for each vnet, but for testing purposes let's deploy everything in the main root resource group
-module network 'Modules/network_test.bicep' = {
+// Ideally I want different resource groups for each vnet, but for easy testing purposes let's deploy everything in the main root resource group
+module network 'Modules/network._test.bicep' = {
   name: 'networkdeployment'
   scope: rootgroup
   params: {

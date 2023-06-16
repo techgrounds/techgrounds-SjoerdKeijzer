@@ -13,6 +13,7 @@ param name_subnet_adminserver string= 'subnet_adminserver'
 param name_nsg_adminserver string = 'nsg_adminserver'
 
 @description('Naming of network components; nics and public IP')
+// Naming of network components; nics and public IPs
 param name_nic_vnet_webserver string = 'nic_${name_vnet_webserver}'
 param name_nic_vnet_adminserver string = 'nic_${name_vnet_adminserver}'
 param name_pubip_webserver string = '${name_vnet_webserver}-publicIP'
