@@ -52,6 +52,10 @@ output subnet_id_webserver string = vnet_webserver.properties.subnets[0].id
 resource pub_ip_webserver 'Microsoft.Network/publicIPAddresses@2021-02-01' = {
   name: name_pubip_webserver
   location: location
+  tags: {
+    vnet: name_vnet_webserver
+    location: location
+  }
   properties: {
     publicIPAllocationMethod: 'Dynamic'
   }
@@ -60,6 +64,10 @@ resource pub_ip_webserver 'Microsoft.Network/publicIPAddresses@2021-02-01' = {
 resource nic_webserver 'Microsoft.Network/networkInterfaces@2022-11-01' = {
   name: name_nic_vnet_webserver
   location: location
+  tags: {
+    vnet: name_vnet_webserver
+    location:location
+  }
   properties: {
     ipConfigurations: [
       {
@@ -78,10 +86,13 @@ resource nic_webserver 'Microsoft.Network/networkInterfaces@2022-11-01' = {
   }
 }
 
-
 resource nsg_webserver 'Microsoft.Network/networkSecurityGroups@2022-11-01' = {
   name: name_nsg_webserver
   location: location
+  tags: {
+    vnet: name_nic_vnet_webserver
+    location: location
+  }
   properties: {
     securityRules: [
       { name: 'https'
@@ -99,10 +110,8 @@ resource nsg_webserver 'Microsoft.Network/networkSecurityGroups@2022-11-01' = {
   }
 }
 
-
-
-@description('adminserver vnet, subnet and nsg details here')
-// webserver vnet
+@description('All adminserver infra to follow below. Order is vnet with nested subnet -> public IP -> nics -> NSG')
+// adminserver vnet
 resource vnet_adminserver 'Microsoft.Network/virtualNetworks@2022-11-01' = {
   name: name_vnet_adminserver
   location: location
@@ -128,6 +137,45 @@ resource vnet_adminserver 'Microsoft.Network/virtualNetworks@2022-11-01' = {
       ]
   }
 }
+output subnet_id_adminserver string = vnet_adminserver.properties.subnets[0].id
+
+resource pub_ip_adminserver 'Microsoft.Network/publicIPAddresses@2021-02-01' = {
+  name: name_pubip_adminserver
+  location: location
+  tags: {
+    vnet: name_vnet_adminserver
+    location: location
+  }
+  properties: {
+    publicIPAllocationMethod: 'Dynamic'
+  }
+}
+
+resource nic_adminserver 'Microsoft.Network/networkInterfaces@2022-11-01' = {
+  name: name_nic_vnet_adminserver
+  location: location
+  tags: {
+    vnet: name_vnet_adminserver
+    location:location
+  }
+  properties: {
+    ipConfigurations: [
+      {
+        name: 'ipconfig_adminserver'
+        properties: {
+          subnet: {
+            id: vnet_adminserver.properties.subnets[0].id
+          }
+          privateIPAllocationMethod: 'Dynamic'
+          publicIPAddress: {
+            id: pub_ip_adminserver.id
+          }
+        }
+      }
+    ]
+  }
+}
+
 resource nsg_adminserver 'Microsoft.Network/networkSecurityGroups@2022-11-01' = {
   name: name_nsg_adminserver
   location: location
