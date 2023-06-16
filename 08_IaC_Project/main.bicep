@@ -1,18 +1,15 @@
 targetScope = 'subscription'
 
-@description('Make general resource group for deployment in UKsouth region')
+@description('Make general resource group for deployment in certain region')
 // Make a general resource group for deployment in Uksouth region
 param resourceGroupName string = 'rootrg'
-param location string = 'uksouth'
+param location string = deployment().location // locate resources at location declared with the deployment command
 resource rootgroup 'Microsoft.Resources/resourceGroups@2021-04-01'= {
   name: resourceGroupName
   location: location
 }
 
-// place any resource in the region/location of the resourcegroup
-// param location string = resourceGroup().location
-
-@description('Deploy storage account module')
+@description('Deploy storage account module') // works just fine
 // Deploy storage account module
 module stg 'Modules/storage.bicep' = {
 name: 'storagedeployment'
