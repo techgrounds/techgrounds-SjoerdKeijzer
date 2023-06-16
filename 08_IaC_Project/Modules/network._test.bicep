@@ -48,7 +48,6 @@ resource vnet_webserver 'Microsoft.Network/virtualNetworks@2022-11-01' = {
       ]
   }
 }
-output subnet_id_webserver string = vnet_webserver.properties.subnets[0].id
 
 resource pub_ip_webserver 'Microsoft.Network/publicIPAddresses@2021-02-01' = {
   name: name_pubip_webserver
@@ -138,7 +137,7 @@ resource vnet_adminserver 'Microsoft.Network/virtualNetworks@2022-11-01' = {
       ]
   }
 }
-output subnet_id_adminserver string = vnet_adminserver.properties.subnets[0].id
+
 
 resource pub_ip_adminserver 'Microsoft.Network/publicIPAddresses@2021-02-01' = {
   name: name_pubip_adminserver
@@ -198,3 +197,16 @@ resource nsg_adminserver 'Microsoft.Network/networkSecurityGroups@2022-11-01' = 
     ]
   }
 }
+
+@description('Outputs to connect with other modules that need networking details')
+// Outputs
+output vnet_id_webserver string = vnet_webserver.id
+output vnet_id_adminserver string = vnet_adminserver.id
+output subnet_id_webserver string = vnet_webserver.properties.subnets[0].id
+output subnet_id_adminserver string = vnet_adminserver.properties.subnets[0].id
+output nsg_id_webserver string = nsg_webserver.id
+output nsg_id_adminserver string = nsg_adminserver.id
+output nic_id_webserver string = nic_webserver.id
+output nic_id_adminserver string = nic_adminserver.id
+output pub_ip_id_webserver string = pub_ip_webserver.id
+output pub_ip_id_adminserver string = pub_ip_adminserver.id

@@ -14,9 +14,12 @@ module peering 'Modules/peering.bicep' = {
   }
 
 ///////////////////////////////////////////////
+// test area
+// 
+
 @description('Naming for the vnets')
-param vnet1Name string = 'vNet1'
-param vnet2Name string = 'vNet2'
+param vnet1Name string = 'vNet1' // vnet web_server.id
+param vnet2Name string = 'vNet2' // vnet admin_server.id
 
 // need 2 resources so we can make the proper connections with vnet 1 -> vnet 2 and also vnet 2 -> vnet1 
 // example below
