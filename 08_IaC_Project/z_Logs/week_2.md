@@ -71,14 +71,16 @@ ____
 
 
 ### Dagverslag (1 zin)
-
+Het wordt zowaar leuk om te doen.
 
 ### Obstakels
-
+Nog een beetje uitvinden hoe je fatsoenlijk de outputs van verschillende modules correct in andere modules importeert/verwerkt. ChatGPT vertrouw ik niet helemaal, die raad aan om de module opnieuw te laden, maar dan krijg ik 100% 2x duplicate resources. 
 
 ### Oplossingen
+Het is gelukt met id's om subnets en nics aan elkaar te koppelen dus het probleem van gisteren heb ik niet meer. Paar test deploys gedaan en ik krijg mijn netwerk nu elke keer fatsoenlijk gedeployed. De basis staat! 
 
+Voor mijn probleem van vandaag: er zijn gelukkig voldoende andere informatie bronnen op het internet die wel hulp aanbieden en beetje verder puzzelen. Ben begonnen met opzetje voor netwerk peering, maar dat bleek nog best wat voeten in de aarde te hebben. Heb test template gemaakt en verder gegaan met opzet van adminserver, dat is belangrijkste. Peering doe ik later wel, heb ik ook allerlei outputs van nodig van network module.
 
 ### Learnings
-
+I love it when a plan comes together! Nu ik het basis netwerk eindelijk klaar heb voel ik me stuk beter om ook vm's en de servers op te zetten en de andere userstories. 
 ____
