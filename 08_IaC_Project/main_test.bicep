@@ -36,12 +36,11 @@ module adminserver 'Modules/adminserver.bicep' = {
   scope: rootgroup
   name: 'adminserver deployment'
   params: {
-    adminpassword: 'testing'
+    adminPassword: 'testing'
     location: location
     vnetplacement: network.outputs.vnet_id_adminserver
     nsgid: network.outputs.nsg_id_adminserver
     nicid: network.outputs.nic_id_adminserver
-
-
+    pubip_admin: network.outputs.pub_ip_id_adminserver
   }
 }

@@ -9,6 +9,7 @@ param location string
 param vnetplacement string
 param nsgid string
 param nicid string
+param pubip_admin string
 
 /////////////////
 // disk encryption
@@ -16,29 +17,68 @@ param nicid string
 // adminserver specifics
 @description('The name of your Virtual Machine.')
 param vm_name_adminserver string = 'windows_adminserver'
+param vm_specs string = 'Standard_D2s_v5'
+param OSVersion string = '2022-datacenter-azure-edition'
 
-@allowed()
-// param of var
-param vm_specs string =
-
-@allowed([
-  'password'
-  //'sshkey'          // need to read how to config ssh acces proper 
-])
-param authentication string = 'password'
+// @allowed([
+//   'password'
+//   //'sshkey'          // need to read how to config ssh acces proper 
+// ])
+// //param authentication string = 'password'
 
 @description('Username and pw settings for the Virtual Machine.')
 param adminUsername string = 'sjoerdvm'
 @secure()
 @minLength(6)
-param adminpassword string
+param adminPassword string
 
-resource vm_adminserver 'Microsoft.Compute/virtualMachines@2023-03-01' = {
+resource vm_adminserver 'Microsoft.Compute/virtualMachines@2022-03-01' = {
   name: vm_name_adminserver
   location: location
   properties: {
     hardwareProfile: {
       vmSize: vm_specs
+    }
+    osProfile: {
+      computerName: vm_name_adminserver
+      adminUsername: adminUsername
+      adminPassword: adminPassword
+    }
+    storageProfile: {
+      imageReference: {
+        publisher: 'MicrosoftWindowsServer'
+        offer: 'WindowsServer'
+        sku: OSVersion
+        version: 'latest'
+      }
+      osDisk: {
+        createOption: 'FromImage'
+        managedDisk: {
+          storageAccountType: 'StandardSSD_LRS'
+        }
+      }
+      dataDisks: [
+        {
+          diskSizeGB: 1023
+          lun: 0
+          createOption: 'Empty'
+        }
+      ]
+    }
+    networkProfile: {
+      networkInterfaces: [
+        {
+          id: nicid
+          properties: {
+            deleteOption: 'Detach'
+                   }
+        }
+      ]
+    }
+    diagnosticsProfile: {
+      bootDiagnostics: {
+        enabled: false
+      }
     }
   }
 }
