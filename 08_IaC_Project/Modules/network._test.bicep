@@ -129,7 +129,7 @@ resource vnet_adminserver 'Microsoft.Network/virtualNetworks@2022-11-01' = {
         { 
           name: name_subnet_adminserver
         properties: {
-          addressPrefix: '10.20.20.0/25' // subnet(s) address here
+          addressPrefix: '10.20.20.0/24' // subnet(s) address here
           networkSecurityGroup: {
             id: nsg_adminserver.id}
           }
