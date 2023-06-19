@@ -17,8 +17,8 @@ param pubip_admin string
 // adminserver specifics
 @description('The name of your Virtual Machine.')
 param vm_name_adminserver string = 'windows_adminserver'
-param vm_specs string = 'Standard_D2s_v5'
-param OSVersion string = '2022-datacenter-azure-edition'
+param vm_size string = 'Standard_D2s_v5' // 
+param vm_sku string = '2022-datacenter-azure-edition-core' // 2022-datacenter-core-smalldisk-g2
 
 // @allowed([
 //   'password'
@@ -37,18 +37,22 @@ resource vm_adminserver 'Microsoft.Compute/virtualMachines@2022-03-01' = {
   location: location
   properties: {
     hardwareProfile: {
-      vmSize: vm_specs
+      vmSize: vm_size
     }
     osProfile: {
       computerName: vm_name_adminserver
       adminUsername: adminUsername
       adminPassword: adminPassword
+      windowsConfiguration: {
+        enableAutomaticUpdates: true          // automatic updates yes, but could be unscheduled maintenance timeffffffffffffffffffffffffffffff
+        provisionVMAgent: true
+      }
     }
     storageProfile: {
       imageReference: {
         publisher: 'MicrosoftWindowsServer'
         offer: 'WindowsServer'
-        sku: OSVersion
+        sku: vm_sku
         version: 'latest'
       }
       osDisk: {

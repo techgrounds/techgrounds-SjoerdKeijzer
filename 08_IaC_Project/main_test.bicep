@@ -34,7 +34,7 @@ module network 'Modules/network._test.bicep' = {
 // Deploy admin module
 module adminserver 'Modules/adminserver.bicep' = {
   scope: rootgroup
-  name: 'adminserver deployment'
+  name: 'adminserver_deployment'
   params: {
     adminPassword: 'testing'
     location: location
