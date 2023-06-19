@@ -29,3 +29,19 @@ module network 'Modules/network._test.bicep' = {
     location: location
   }
 }
+
+@description('Deploys admin server module')
+// Deploy admin module
+module adminserver 'Modules/adminserver.bicep' = {
+  scope: rootgroup
+  name: 'adminserver deployment'
+  params: {
+    adminpassword: 'testing'
+    location: location
+    vnetplacement: network.outputs.vnet_id_adminserver
+    nsgid: network.outputs.nsg_id_adminserver
+    nicid: network.outputs.nic_id_adminserver
+
+
+  }
+}

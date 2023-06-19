@@ -1,7 +1,7 @@
 targetScope = 'resourceGroup'
 
 @description('Place all resources in the same region of target resourcegroup, declared in main.bicep')
-param location string = resourceGroup().location
+param location string
 
 @description('Naming of vnets, subnets and nsg')
 // Naming of the vnets, subnets and nsg's
@@ -90,7 +90,7 @@ resource nsg_webserver 'Microsoft.Network/networkSecurityGroups@2022-11-01' = {
   name: name_nsg_webserver
   location: location
   tags: {
-    vnet: name_nic_vnet_webserver
+    vnet: name_vnet_webserver
     location: location
   }
   properties: {
