@@ -1,25 +1,10 @@
 //////////////////////////////////////////////
 
-// Copy this later into main.bicep // 
-
-@description('Deploy network peering module')
-// Deploy network peering module
-module peering 'Modules/peering.bicep' = {
-  name: 'peering deployment'
-  scope: rootgroup
-  params: {
-    something: something                      // probably need outputs and id's here
-    somethingelse: againsomething             // probably need outputs and id's here
-  }
-  }
-
-///////////////////////////////////////////////
-// test area
-// 
+param location string
 
 @description('Naming for the vnets')
-param vnet1Name string = 'vNet1' // vnet web_server.id
-param vnet2Name string = 'vNet2' // vnet admin_server.id
+param peer_web string = 'vnet_webserver' // vnet web_server.id
+param peer_admin string = 'vnet_adminserver' // vnet admin_server.id
 
 // need 2 resources so we can make the proper connections with vnet 1 -> vnet 2 and also vnet 2 -> vnet1 
 // example below

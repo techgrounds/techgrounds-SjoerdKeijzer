@@ -28,7 +28,7 @@ param vm_sku string = '2022-datacenter-azure-edition-core' // 2022-datacenter-co
 param admin_username string = 'sjoerdvm'
 @secure()
 @minLength(6)
-param admin_password string
+param admin_password string = 'PasswordMustBeSafeOk!'
 
 resource vm_adminserver 'Microsoft.Compute/virtualMachines@2022-03-01' = {
   name: vm_name_adminserver

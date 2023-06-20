@@ -17,7 +17,7 @@ param vm_sku string = '20_04-lts'
 param webadmin_username string = 'vmsjoerd'
 @secure()
 @minLength(6)
-param webadmin_password string = 'PasswordMustBeSafeOk'
+param webadmin_password string = 'PasswordMustBeSafeOk!'
 
 
 resource webvm 'Microsoft.Compute/virtualMachines@2022-03-01' = {

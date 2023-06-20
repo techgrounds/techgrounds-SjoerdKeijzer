@@ -1,14 +1,15 @@
 
 
-param location string = resourceGroup().location
+// param location string = resourceGroup().location
 // param environment string = 'testomgeving'
 
 
-// publicip voor webserver
-// publicip voor adminserver
-// nic voor webserver
-// nic voor adminserver
+
 // vnet peering
+// keyvault
+// disk encryption
+// access management // via tenant id?
+// post deployment script
 
 
 

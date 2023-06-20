@@ -202,6 +202,8 @@ resource nsg_adminserver 'Microsoft.Network/networkSecurityGroups@2022-11-01' = 
 // Outputs
 output vnet_id_webserver string = vnet_webserver.id
 output vnet_id_adminserver string = vnet_adminserver.id
+output vnet_name_webserver string = name_vnet_webserver
+output vnet_name_adminserver string = name_vnet_adminserver
 output subnet_id_webserver string = vnet_webserver.properties.subnets[0].id
 output subnet_id_adminserver string = vnet_adminserver.properties.subnets[0].id
 output nsg_id_webserver string = nsg_webserver.id

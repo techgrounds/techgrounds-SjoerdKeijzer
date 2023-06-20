@@ -1,7 +1,7 @@
 targetScope = 'resourceGroup'
 
 @description('Place all resources in the same region of target resourcegroup, declared in main.bicep')
-param location string = resourceGroup().location
+param location string
 
 @description('Naming of vnets, subnets and nsg')
 // Naming of the vnets, subnets and nsg's
@@ -48,7 +48,6 @@ resource vnet_webserver 'Microsoft.Network/virtualNetworks@2022-11-01' = {
       ]
   }
 }
-output subnet_id_webserver string = vnet_webserver.properties.subnets[0].id
 
 resource pub_ip_webserver 'Microsoft.Network/publicIPAddresses@2021-02-01' = {
   name: name_pubip_webserver
@@ -91,7 +90,7 @@ resource nsg_webserver 'Microsoft.Network/networkSecurityGroups@2022-11-01' = {
   name: name_nsg_webserver
   location: location
   tags: {
-    vnet: name_nic_vnet_webserver
+    vnet: name_vnet_webserver
     location: location
   }
   properties: {
@@ -130,7 +129,7 @@ resource vnet_adminserver 'Microsoft.Network/virtualNetworks@2022-11-01' = {
         { 
           name: name_subnet_adminserver
         properties: {
-          addressPrefix: '10.20.20.0/25' // subnet(s) address here
+          addressPrefix: '10.20.20.0/24' // subnet(s) address here
           networkSecurityGroup: {
             id: nsg_adminserver.id}
           }
@@ -138,7 +137,7 @@ resource vnet_adminserver 'Microsoft.Network/virtualNetworks@2022-11-01' = {
       ]
   }
 }
-output subnet_id_adminserver string = vnet_adminserver.properties.subnets[0].id
+
 
 resource pub_ip_adminserver 'Microsoft.Network/publicIPAddresses@2021-02-01' = {
   name: name_pubip_adminserver
@@ -198,3 +197,16 @@ resource nsg_adminserver 'Microsoft.Network/networkSecurityGroups@2022-11-01' = 
     ]
   }
 }
+
+@description('Outputs to connect with other modules that need networking details')
+// Outputs
+output vnet_id_webserver string = vnet_webserver.id
+output vnet_id_adminserver string = vnet_adminserver.id
+output subnet_id_webserver string = vnet_webserver.properties.subnets[0].id
+output subnet_id_adminserver string = vnet_adminserver.properties.subnets[0].id
+output nsg_id_webserver string = nsg_webserver.id
+output nsg_id_adminserver string = nsg_adminserver.id
+output nic_id_webserver string = nic_webserver.id
+output nic_id_adminserver string = nic_adminserver.id
+output pub_ip_id_webserver string = pub_ip_webserver.id
+output pub_ip_id_adminserver string = pub_ip_adminserver.id
