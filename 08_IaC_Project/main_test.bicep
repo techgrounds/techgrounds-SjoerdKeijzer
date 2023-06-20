@@ -30,27 +30,27 @@ module network 'Modules/network._test.bicep' = {
   }
 }
 
-@description('Deploys admin server module')
-// Deploy admin server module
-module adminserver 'Modules/adminserver.bicep' = {
-  scope: rootgroup
-  name: 'adminserver_deployment'
-  params: {
-    location: location
-    nicid: network.outputs.nic_id_adminserver
-  }
-}
+// @description('Deploys admin server module')
+// // Deploy admin server module
+// module adminserver 'Modules/adminserver.bicep' = {
+//   scope: rootgroup
+//   name: 'adminserver_deployment'
+//   params: {
+//     location: location
+//     nicid: network.outputs.nic_id_adminserver
+//   }
+// }
 
-@description('Deploy webserver module')
-// Deploy webserver module
-module webserver 'Modules/webserver.bicep' = {
-  scope: rootgroup
-  name: 'webserver_deployment'
-  params: {
-    location: location
-    nicid: network.outputs.nic_id_webserver
-  }
-}
+// @description('Deploy webserver module')
+// // Deploy webserver module
+// module webserver 'Modules/webserver.bicep' = {
+//   scope: rootgroup
+//   name: 'webserver_deployment'
+//   params: {
+//     location: location
+//     nicid: network.outputs.nic_id_webserver
+//   }
+// }
 
 @description('Deploy network peering module')
 // Deploy network peering module
@@ -62,5 +62,7 @@ module peering 'Modules/peering.bicep' = {
     name_vnet_adminserver: network.outputs.vnet_name_adminserver
     peer_web_vnet: network.outputs.vnet_id_webserver
     peer_admin_vnet: network.outputs.vnet_id_adminserver
+    }
   }
-  }
+
+  
