@@ -1,7 +1,5 @@
 //////////////////////////////////////////////
 
-param location string
-
 @description('Naming for the vnets')
 param name_vnet_webserver string
 param name_vnet_adminserver string
@@ -11,14 +9,11 @@ param peer_web_vnet string // vnet id webserver
 param peer_admin_vnet string // vnet id adminserver
 
 
-// need 2 resources so we can make the proper connections with vnet 1 -> vnet 2 and also vnet 2 -> vnet1 
-// example below
-
 resource vnet_webserver 'Microsoft.Network/virtualNetworks@2022-11-01' existing = {
-  name: name_vnet_webserver}
+  name: name_vnet_webserver }
 
 resource web_to_admin_peer 'Microsoft.Network/virtualNetworks/virtualNetworkPeerings@2022-07-01' = {
-  name: '${name_vnet_webserver} to ${name_vnet_adminserver}'
+  name: '${name_vnet_webserver}_to_${name_vnet_adminserver}'
   parent: vnet_webserver                             // adjust to proper network name
   properties: {
     allowForwardedTraffic: true
@@ -31,9 +26,6 @@ resource web_to_admin_peer 'Microsoft.Network/virtualNetworks/virtualNetworkPeer
       addressPrefixes: [
         'string'
       ]
-    }
-    remoteBgpCommunities: {
-      virtualNetworkCommunity: 'string'
     }
     remoteVirtualNetwork: {
       id: peer_admin_vnet                        // adjust to network name you wish to pair the parent network with
@@ -48,10 +40,10 @@ resource web_to_admin_peer 'Microsoft.Network/virtualNetworks/virtualNetworkPeer
 }
 
 resource vnet_adminserver 'Microsoft.Network/virtualNetworks@2022-11-01' existing = {
-  name: name_vnet_adminserver}
+  name: name_vnet_adminserver }
 
 resource admin_to_web_peer 'Microsoft.Network/virtualNetworks/virtualNetworkPeerings@2022-07-01' = {
-  name: '${name_vnet_adminserver} to ${name_vnet_webserver}' 
+  name: '${name_vnet_adminserver}_to_${name_vnet_webserver}' 
   parent: vnet_adminserver                             // adjust to proper network name
   properties: {
     allowForwardedTraffic: true
@@ -64,9 +56,6 @@ resource admin_to_web_peer 'Microsoft.Network/virtualNetworks/virtualNetworkPeer
       addressPrefixes: [
         'string'
       ]
-    }
-    remoteBgpCommunities: {
-      virtualNetworkCommunity: 'string'
     }
     remoteVirtualNetwork: {
       id: peer_web_vnet                        // adjust to network name you wish to pair the parent network with

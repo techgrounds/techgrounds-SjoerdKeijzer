@@ -31,7 +31,7 @@ module network 'Modules/network._test.bicep' = {
 }
 
 @description('Deploys admin server module')
-// Deploy admin module
+// Deploy admin server module
 module adminserver 'Modules/adminserver.bicep' = {
   scope: rootgroup
   name: 'adminserver_deployment'
@@ -58,7 +58,6 @@ module peering 'Modules/peering.bicep' = {
   name: 'peering_deployment'
   scope: rootgroup
   params: {
-    location: location
     name_vnet_webserver: network.outputs.vnet_name_webserver
     name_vnet_adminserver: network.outputs.vnet_name_adminserver
     peer_web_vnet: network.outputs.vnet_id_webserver

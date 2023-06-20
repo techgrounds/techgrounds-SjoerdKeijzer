@@ -9,15 +9,15 @@ resource rootgroup 'Microsoft.Resources/resourceGroups@2021-04-01' = {
   location: location
 }
 
-// @description('Deploy storage account module') // works just fine
-// // Deploy storage account module
-// module stg 'Modules/storage.bicep' = {
-// name: 'storagedeployment'
-// scope: rootgroup
-// params: {
-//   location: location
-// }
-// }
+@description('Deploy storage account module') // works just fine
+// Deploy storage account module
+module stg 'Modules/storage.bicep' = {
+name: 'storagedeployment'
+scope: rootgroup
+params: {
+  location: location
+  }
+}
 
  @description('Deploy network module') // works fine
 // Deploy network module
@@ -30,16 +30,16 @@ module network 'Modules/network._test.bicep' = {
   }
 }
 
-// @description('Deploys admin server module')
-// // Deploy admin module
-// module adminserver 'Modules/adminserver.bicep' = {
-//   scope: rootgroup
-//   name: 'adminserver_deployment'
-//   params: {
-//     location: location
-//     nicid: network.outputs.nic_id_adminserver
-//   }
-// }
+@description('Deploys admin server module')
+// Deploy admin server module
+module adminserver 'Modules/adminserver.bicep' = {
+  scope: rootgroup
+  name: 'adminserver_deployment'
+  params: {
+    location: location
+    nicid: network.outputs.nic_id_adminserver
+  }
+}
 
 @description('Deploy webserver module')
 // Deploy webserver module
@@ -51,3 +51,16 @@ module webserver 'Modules/webserver.bicep' = {
     nicid: network.outputs.nic_id_webserver
   }
 }
+
+@description('Deploy network peering module')
+// Deploy network peering module
+module peering 'Modules/peering.bicep' = {
+  name: 'peering_deployment'
+  scope: rootgroup
+  params: {
+    name_vnet_webserver: network.outputs.vnet_name_webserver
+    name_vnet_adminserver: network.outputs.vnet_name_adminserver
+    peer_web_vnet: network.outputs.vnet_id_webserver
+    peer_admin_vnet: network.outputs.vnet_id_adminserver
+    }
+  }
