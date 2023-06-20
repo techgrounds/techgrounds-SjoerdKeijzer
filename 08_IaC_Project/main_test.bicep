@@ -55,7 +55,7 @@ module webserver 'Modules/webserver.bicep' = {
 @description('Deploy network peering module')
 // Deploy network peering module
 module peering 'Modules/peering.bicep' = {
-  name: 'peering deployment'
+  name: 'peering_deployment'
   scope: rootgroup
   params: {
     location: location
