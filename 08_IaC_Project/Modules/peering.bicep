@@ -3,19 +3,28 @@
 param location string
 
 @description('Naming for the vnets')
-param peer_web string = 'vnet_webserver' // vnet web_server.id
-param peer_admin string = 'vnet_adminserver' // vnet admin_server.id
+param name_vnet_webserver string
+param name_vnet_adminserver string
+
+@description('imported vnet ids and resources from network module')
+param peer_web_vnet string // vnet id webserver
+param peer_admin_vnet string // vnet id adminserver
+
 
 // need 2 resources so we can make the proper connections with vnet 1 -> vnet 2 and also vnet 2 -> vnet1 
 // example below
-resource peer2appple 'Microsoft.Network/virtualNetworks/virtualNetworkPeerings@2022-07-01' = {
-  name: '${vnet1Name}-${vnet2Name}'
-  parent: vnet1                               // adjust to proper network name
+
+resource vnet_webserver 'Microsoft.Network/virtualNetworks@2022-11-01' existing = {
+  name: name_vnet_webserver}
+
+resource web_to_admin_peer 'Microsoft.Network/virtualNetworks/virtualNetworkPeerings@2022-07-01' = {
+  name: '${name_vnet_webserver} to ${name_vnet_adminserver}'
+  parent: vnet_webserver                             // adjust to proper network name
   properties: {
     allowForwardedTraffic: true
     allowGatewayTransit: false
     allowVirtualNetworkAccess: true
-    doNotVerifyRemoteGateways: bool
+    doNotVerifyRemoteGateways: true                 // remote gateway settings
     peeringState: 'Connected'
     peeringSyncLevel: 'FullyInSync'
     remoteAddressSpace: {
@@ -27,13 +36,13 @@ resource peer2appple 'Microsoft.Network/virtualNetworks/virtualNetworkPeerings@2
       virtualNetworkCommunity: 'string'
     }
     remoteVirtualNetwork: {
-      id: vnet2.id                        // adjust to network name you wish to pair the parent network with
+      id: peer_admin_vnet                        // adjust to network name you wish to pair the parent network with
     }
     remoteVirtualNetworkAddressSpace: {
       addressPrefixes: [
         'string'
       ]
     }
-    useRemoteGateways: bool
+    useRemoteGateways: false                    // remote gateway settings 2
   }
 }

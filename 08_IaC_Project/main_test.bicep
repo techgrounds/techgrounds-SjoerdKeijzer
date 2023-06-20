@@ -51,3 +51,17 @@ module webserver 'Modules/webserver.bicep' = {
     nicid: network.outputs.nic_id_webserver
   }
 }
+
+@description('Deploy network peering module')
+// Deploy network peering module
+module peering 'Modules/peering.bicep' = {
+  name: 'peering deployment'
+  scope: rootgroup
+  params: {
+    location: location
+    name_vnet_webserver: network.outputs.vnet_name_webserver
+    name_vnet_adminserver: network.outputs.vnet_name_adminserver
+    peer_web_vnet: network.outputs.vnet_id_webserver
+    peer_admin_vnet: network.outputs.vnet_id_adminserver
+  }
+  }
