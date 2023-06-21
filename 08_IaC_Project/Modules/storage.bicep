@@ -6,6 +6,7 @@ targetScope = 'resourceGroup'
 param storageName string = 'storage${uniqueString(resourceGroup().id)}' // note that if the target resource group also has a long name, you may opt for 'stg${uniqueString(resourceGroup().id)}'
 
 
+@description('Place storage account in same region as resource group')
 // place storage account in same region as resource group
 param location string = resourceGroup().location
 
@@ -20,5 +21,8 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2022-09-01' = {
   kind: 'StorageV2'
   properties: {
     accessTier: 'Hot'
+    }
   }
-  }
+
+  output stg_id string = storageAccount.id
+  output stg_name string = storageName
