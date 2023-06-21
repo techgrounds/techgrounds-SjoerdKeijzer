@@ -19,14 +19,14 @@ param webadmin_username string = 'vmsjoerd'
 @minLength(6)
 param webadmin_password string = 'PasswordMustBeSafeOk!'
 
-// var apache_script = loadFileAsBase64 // Path iets hier zoals (./web_installscript.sh)         // apache user data to get onto webserver
+var apache_script = loadFileAsBase64('bashscript/web_installscript.sh')          // apache user data to get onto webserver
 
 
 resource webvm 'Microsoft.Compute/virtualMachines@2022-03-01' = {
   name: vm_name_webserver
   location: location
   properties: {
-    // userData: apache_script
+    userData: apache_script
     hardwareProfile: {
       vmSize: vm_size
     }

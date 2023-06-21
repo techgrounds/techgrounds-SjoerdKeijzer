@@ -8,7 +8,6 @@ param name_vnet_adminserver string
 param peer_web_vnet string // vnet id webserver
 param peer_admin_vnet string // vnet id adminserver
 
-
 resource vnet_webserver 'Microsoft.Network/virtualNetworks@2022-11-01' existing = {
   name: name_vnet_webserver }
 

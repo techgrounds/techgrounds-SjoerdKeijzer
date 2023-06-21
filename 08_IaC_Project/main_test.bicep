@@ -9,9 +9,6 @@ resource rootgroup 'Microsoft.Resources/resourceGroups@2022-09-01' = {
   location: location
 }
 
-// 'Microsoft.Resources/resourceGroups@2021-04-01'
-
-
 @description('Deploy storage account module') // works just fine
 // Deploy storage account module
 module stg 'Modules/storage.bicep' = {
@@ -19,7 +16,7 @@ name: 'storagedeployment'
 scope: rootgroup
 params: {
   location: location
-}
+  }
 }
 
  @description('Deploy network module') // works fine

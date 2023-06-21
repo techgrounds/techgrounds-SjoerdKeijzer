@@ -14,8 +14,8 @@ param nicid string
 // adminserver specifics
 @description('The name of your Virtual Machine.')
 param vm_name_adminserver string = 'winadminserver'
-param vm_size string = 'Standard_D2ds_v4' // /!\ this needs adjusting as I keep getting errors // Standard_D2ps_v5 ? // 'Standard_B1s' // 'Standard_D2ds_v4'
-param vm_sku string = '2022-datacenter-azure-edition-core' // 2022-datacenter-core-smalldisk-g2 as alternative
+param vm_size string = 'Standard_D2ds_v4' // Standard_D2ps_v5 ? // 'Standard_B1s' // 'Standard_D2ds_v4'
+param vm_sku string = '2022-datacenter-azure-edition-core' // 2022-datacenter-core-smalldisk-g2 als alternative
 
 // @allowed([
 //   'password'
