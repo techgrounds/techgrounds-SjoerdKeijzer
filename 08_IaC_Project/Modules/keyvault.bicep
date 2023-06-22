@@ -6,6 +6,12 @@ param location string
 param storageAccount string
 param storageName string
 
+
+// To do any operations with Key Vault, you first need to authenticate to it.
+// managed / assigned identity 
+
+// Azure Key Vault enforces Transport Layer Security (TLS) protocol to protect data when it’s traveling between Azure Key vault and clients
+
 // keyvault resource
 // assigned identity resource
 // keyvault key (resource?) 
