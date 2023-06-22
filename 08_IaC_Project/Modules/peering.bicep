@@ -8,6 +8,7 @@ param name_vnet_adminserver string
 param peer_web_vnet string // vnet id webserver
 param peer_admin_vnet string // vnet id adminserver
 
+@description('To make sure we can reference the parent in the peering resource, we have to write this line of code.')
 resource vnet_webserver 'Microsoft.Network/virtualNetworks@2022-11-01' existing = {
   name: name_vnet_webserver }
 
@@ -38,6 +39,7 @@ resource web_to_admin_peer 'Microsoft.Network/virtualNetworks/virtualNetworkPeer
   }
 }
 
+@description('To make sure we can reference the parent in the peering resource, we have to write this line of code.')
 resource vnet_adminserver 'Microsoft.Network/virtualNetworks@2022-11-01' existing = {
   name: name_vnet_adminserver }
 

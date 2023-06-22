@@ -41,7 +41,7 @@ resource vm_adminserver 'Microsoft.Compute/virtualMachines@2022-03-01' = {
       adminUsername: admin_username
       adminPassword: admin_password
       windowsConfiguration: {
-        enableAutomaticUpdates: true          // automatic updates yes, but could be unscheduled maintenance time
+        enableAutomaticUpdates: false          // admin will use scheduled maintance feature to apply (security) updates
         provisionVMAgent: true
       }
     }
