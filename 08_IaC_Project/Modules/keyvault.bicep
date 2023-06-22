@@ -2,13 +2,13 @@
 param location string
 
 @description('Outputs from stg module')
-// import storage module outputs that are required
+// import storage module outputs that might be required for disk encryption sets
 param storageAccount string
 param storageName string
 
 
 // To do any operations with Key Vault, you first need to authenticate to it.
-// managed / assigned identity 
+// managed / assigned identity ??
 
 // Azure Key Vault enforces Transport Layer Security (TLS) protocol to protect data when it’s traveling between Azure Key vault and clients
 
@@ -20,17 +20,15 @@ param storageName string
 // admin pw moet gestored kunnen worden (via az policy add?)
 // back-up encryptie / secret? 
 
-// Azure bicep windows example
 @description('Specifies the name of the key vault.')
 param keyVaultName string = 'keyvault' // unique id? 
-
 
 @description('Specifies the Azure Active Directory tenant ID that should be used for authenticating requests to the key vault. Get it by using Get-AzSubscription cmdlet.')
 param tenantId string = subscription().tenantId
 // param tenantId string = '7810209c-8fef-48a1-8881-d6946b6a7633'
 
 @description('Specifies the object ID of a user, service principal or security group in the Azure Active Directory tenant for the vault. The object ID must be unique for the list of access policies. Get it by using Get-AzADUser or Get-AzADServicePrincipal cmdlets.')
-param objectId string
+param objectId string = ''
 
 @description('Specifies the permissions to keys in the vault. Valid values are: all, encrypt, decrypt, wrapKey, unwrapKey, sign, verify, get, list, create, update, import, delete, backup, restore, recover, and purge.')
 param keysPermissions array = [
@@ -47,6 +45,9 @@ param keysPermissions array = [
 @description('Specifies the permissions to secrets in the vault. Valid values are: all, get, list, set, delete, backup, restore, recover, and purge.')
 param secretsPermissions array = [
   'list'
+  'get'
+  'recover'
+  'restore'
 ]
 
 @description('Specifies whether the key vault is a standard vault or a premium vault.')
@@ -55,11 +56,6 @@ param secretsPermissions array = [
   'premium'
 ])
 param skuName string = 'standard'
-
-
-@description('Specifies the value of the secret that you want to create.')
-@secure()
-param secretValue string
 
 resource keyvault_resource 'Microsoft.KeyVault/vaults@2021-11-01-preview' = {
   name: keyVaultName
@@ -92,14 +88,15 @@ resource keyvault_resource 'Microsoft.KeyVault/vaults@2021-11-01-preview' = {
   }
 }
 
-// resource kv_key_resource 'Microsoft.KeyVault/vaults/secrets@2021-11-01-preview' = {
-//   parent: keyvault_resource
-//   name: kv_key_name
-//   properties: {
-//     value: secretValue
-//   }
-// }
-
+resource kv_key_resource 'Microsoft.KeyVault/vaults/keys@2023-02-01' = {
+  name: kv_key_name
+  parent: keyvault_resource
+  properties: {
+    
+    keySize: ''         // ????
+    kty: 'RSA'
+  }
+}
 /////////
 // possible outputs
 
@@ -109,3 +106,5 @@ resource keyvault_resource 'Microsoft.KeyVault/vaults@2021-11-01-preview' = {
 // 
 
 output key_vault_resource_id string = keyvault_resource.id
+output key_vault_url string = keyvault_resource.properties.vaultUri
+output kv_key_name string = kv_key_resource.name

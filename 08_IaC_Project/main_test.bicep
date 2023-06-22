@@ -30,27 +30,27 @@ module network 'Modules/network._test.bicep' = {
   }
 }
 
-// @description('Deploys admin server module') // need to fix acces rules from nsg and login to vm
-// // Deploy admin server module
-// module adminserver 'Modules/adminserver.bicep' = {
-//   scope: rootgroup
-//   name: 'adminserver_deployment'
-//   params: {
-//     location: location
-//     nicid: network.outputs.nic_id_adminserver
-//   }
-// }
+@description('Deploys admin server module') // need to fix acces rules from nsg and login to vm
+// Deploy admin server module
+module adminserver 'Modules/adminserver.bicep' = {
+  scope: rootgroup
+  name: 'adminserver_deployment'
+  params: {
+    location: location
+    nicid: network.outputs.nic_id_adminserver
+  }
+}
 
-// @description('Deploy webserver module') // need to fix acces/routing from internet via nsg / and login to vm + apache bootstrap
-// // Deploy webserver module
-// module webserver 'Modules/webserver.bicep' = {
-//   scope: rootgroup
-//   name: 'webserver_deployment'
-//   params: {
-//     location: location
-//     nicid: network.outputs.nic_id_webserver
-//   }
-// }
+@description('Deploy webserver module') // need to fix acces/routing from internet via nsg / and login to vm + apache bootstrap
+// Deploy webserver module
+module webserver 'Modules/webserver.bicep' = {
+  scope: rootgroup
+  name: 'webserver_deployment'
+  params: {
+    location: location
+    nicid: network.outputs.nic_id_webserver
+  }
+}
 
 @description('Deploy network peering module') // works fine
 // Deploy network peering module
@@ -66,22 +66,17 @@ module peering 'Modules/peering.bicep' = {
   }
 
 
-// @description('Deploy keyvault and encryption module')   // work in progress
-// // Deploy Keyvault & encryption module
-// module keyvault 'Modules/keyvault.bicep' = {
-//   scope: rootgroup
-//   name: 'keyvault_deployment'
-//   params: {
-//     keyVaultName:  
-//     location: location
-//     objectId: 
-//     secretName: 
-//     secretValue:
-//     secretsPermissions:
-//     storageAccount: stg.outputs.stg_id
-//     storageName: stg.outputs.stg_name 
-//   }
-// }
+@description('Deploy keyvault and encryption module')   // work in progress
+// Deploy Keyvault & encryption module
+module keyvault 'Modules/keyvault.bicep' = {
+  scope: rootgroup
+  name: 'keyvault_deployment'
+  params: {
+    location: location
+    storageAccount: stg.outputs.stg_id
+    storageName: stg.outputs.stg_name 
+  }
+}
 
 //  @description('Deploy vmss module')
 //  // Deply vmss module
