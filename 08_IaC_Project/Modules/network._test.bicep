@@ -1,14 +1,16 @@
 targetScope = 'resourceGroup'
 
+param environment string
+
 @description('Place all resources in the same region of target resourcegroup, declared in main.bicep')
 param location string
 
 @description('Naming of vnets, subnets and nsg')
 // Naming of the vnets, subnets and nsg's
-param name_vnet_webserver string = 'vnet_webserver'
+param name_vnet_webserver string = '${environment}_vnet_webserver'
 param name_subnet_webserver string = 'subnet_webserver'
 param name_nsg_webserver string = 'nsg_webserver'
-param name_vnet_adminserver string = 'vnet_adminserver'
+param name_vnet_adminserver string = '${environment}_vnet_adminserver'
 param name_subnet_adminserver string= 'subnet_adminserver'
 param name_nsg_adminserver string = 'nsg_adminserver'
 

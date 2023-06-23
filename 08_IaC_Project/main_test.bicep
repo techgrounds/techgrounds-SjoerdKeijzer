@@ -1,5 +1,13 @@
 targetScope = 'subscription'
 
+@description('Param for different environments. Dev(elopment) and prod(uction) are allowed')
+@allowed([
+  'dev'
+  'prod'
+])
+param environment string = 'dev'
+
+
 @description('Make general resource group for deployment in certain region')
 // Make a general resource group for deployment in a region
 param resourceGroupName string = 'rootrg'
@@ -16,6 +24,7 @@ name: 'storagedeployment'
 scope: rootgroup
 params: {
   location: location
+  environment: environment
   }
 }
 
@@ -27,28 +36,33 @@ module network 'Modules/network._test.bicep' = {
   scope: rootgroup
   params: {
     location: location
+    environment: environment
   }
 }
 
 @description('Deploys admin server module') // need to fix acces rules from nsg and login to vm
 // Deploy admin server module
 module adminserver 'Modules/adminserver.bicep' = {
-  scope: rootgroup
   name: 'adminserver_deployment'
+  scope: rootgroup
   params: {
     location: location
+    environment: environment
     nicid: network.outputs.nic_id_adminserver
+    diskencryption: keyvault.outputs.diskencrypset
   }
 }
 
 @description('Deploy webserver module') // need to fix acces/routing from internet via nsg / and login to vm + apache bootstrap
 // Deploy webserver module
 module webserver 'Modules/webserver.bicep' = {
-  scope: rootgroup
   name: 'webserver_deployment'
+  scope: rootgroup
   params: {
     location: location
+    environment: environment
     nicid: network.outputs.nic_id_webserver
+    diskencryption: keyvault.outputs.diskencrypset
   }
 }
 
@@ -65,7 +79,6 @@ module peering 'Modules/peering.bicep' = {
     }
   }
 
-
 @description('Deploy keyvault and encryption module')   // work in progress
 // Deploy Keyvault & encryption module
 module keyvault 'Modules/keyvault.bicep' = {
@@ -74,9 +87,23 @@ module keyvault 'Modules/keyvault.bicep' = {
   params: {
     location: location
     storageAccount: stg.outputs.stg_id
-    storageName: stg.outputs.stg_name 
+    storageName: stg.outputs.stg_name
+    environment: environment 
   }
 }
+
+// @description('Deply database module')
+// // Deploy mySQL database attached to webserver as back-end db
+// module database 'Modules/database.bicep' = {
+//   name: 'database_deployment'
+//   scope: rootgroup
+//   params: {
+//     db_admin_username: keyvault.getSecret(db_adminuser.name)    // wip
+//     mysqlPassword: keyvault.getSecret(secret.name)              // wip
+//   }
+// }
+
+
 
 //  @description('Deploy vmss module')
 //  // Deply vmss module

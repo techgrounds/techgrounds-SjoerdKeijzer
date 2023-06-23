@@ -2,19 +2,20 @@
 @description('set resources in same region as the target resource group')
 param location string
 
+param environment string
 
 @description('Input linked outputs from networking module.')
 // input linked outputs from networking module. Outputs are defined in adminserver module in main.bicep
 param nicid string
 
-
-/////////////////
 // disk encryption
+@secure()
+param diskencryption string
 
 // adminserver specifics
 @description('The name of your Virtual Machine.')
-param vm_name_adminserver string = 'winadminserver'
-param vm_size string = 'Standard_D2ds_v4' // Standard_D2ps_v5 ? // 'Standard_B1s' // 'Standard_D2ds_v4'
+param vm_name_adminserver string = '${environment}winadminserver'
+param vm_size string = environment == 'dev' ? 'Standard_B1s' : 'Standard_D2ds_v4' // set b1s as dev and d2ds_V4 as prod standard || pos sizes test 'Standard_D2ps_v5' // 'Standard_B1s' // 'Standard_D2ds_v4'
 param vm_sku string = '2022-datacenter-azure-edition-core' // 2022-datacenter-core-smalldisk-g2 als alternative
 
 // @allowed([
@@ -59,11 +60,11 @@ resource vm_adminserver 'Microsoft.Compute/virtualMachines@2022-03-01' = {
         }
       }
       dataDisks: [
-        {
-          diskSizeGB: 512
-          lun: 0
-          createOption: 'Empty'
-        }
+        // {
+        //   diskSizeGB: 512
+        //   lun: 0
+        //   createOption: 'Empty'
+        // }
       ]
     }
     networkProfile: {

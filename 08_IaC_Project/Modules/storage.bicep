@@ -1,5 +1,7 @@
 targetScope = 'resourceGroup'
 
+param environment string
+
 @description('Name the storage acount with a unique name. As f.e. storage123xyz')
 @minLength(3)
 @maxLength(24)
@@ -15,6 +17,9 @@ param location string = resourceGroup().location
 resource storageAccount 'Microsoft.Storage/storageAccounts@2022-09-01' = {
   name: storageName
   location: location
+  tags: {
+    environment: environment
+  }
   sku: {
     name: 'Standard_LRS'
   }

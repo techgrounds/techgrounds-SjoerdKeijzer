@@ -1,4 +1,3 @@
-//////////////////////////////////////////////
 
 @description('Naming for the vnets')
 param name_vnet_webserver string

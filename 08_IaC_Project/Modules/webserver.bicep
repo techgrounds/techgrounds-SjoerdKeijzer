@@ -1,3 +1,5 @@
+param environment string
+
 @description('set resources in same region as the target resource group')
 param location string
 
@@ -7,9 +9,13 @@ param location string
 param nicid string
 
 
+// diskencryption
+@secure()
+param diskencryption string
+
 @description('Name and specs of webserver.')
 // Name and specs of webserver
-param vm_name_webserver string = 'linuxwebserver'
+param vm_name_webserver string = '${environment}linuxwebserver'
 param vm_size string = 'Standard_B1s'
 param vm_sku string = '20_04-lts'
 
