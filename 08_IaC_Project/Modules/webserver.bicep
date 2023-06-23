@@ -31,6 +31,12 @@ param webadmin_password string = 'PasswordMustBeSafeOk!'                        
 resource webvm 'Microsoft.Compute/virtualMachines@2022-03-01' = {
   name: vm_name_webserver
   location: location
+  tags:{
+    location: location
+    environment: environment
+    type: vm_name_webserver
+
+  }
   properties: {
     // userData: apache_script
     hardwareProfile: {

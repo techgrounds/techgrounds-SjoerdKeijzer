@@ -107,7 +107,8 @@ resource nsg_webserver 'Microsoft.Network/networkSecurityGroups@2022-11-01' = {
           sourceAddressPrefix: '*'
           destinationPortRange: '443'
           destinationAddressPrefix: '*'
-        }}
+        }
+      }
     ]
   }
 }
