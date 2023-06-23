@@ -2,6 +2,7 @@
 param location string
 
 param environment string
+param company_name string = 'Techgrounds'
 
 @description('Outputs from stg module')
 // import storage module outputs that might be required for disk encryption sets
@@ -24,7 +25,7 @@ param user_assigned_identity_name string= 'userid${uniqueString(resourceGroup().
 param kv_key_name string = 'key${uniqueString(resourceGroup().name)}' 
 
 @description('Specifies the name of the key vault.')
-param keyVaultName string = 'keyvault${environment}-${uniqueString(resourceGroup().id)}'
+param keyVaultName string = 'keyvault${environment}-${company_name}'
 
 @description('Specifies the Azure Active Directory tenant ID that should be used for authenticating requests to the key vault. Get it by using Get-AzSubscription cmdlet.')
 param tenantId string = subscription().tenantId
