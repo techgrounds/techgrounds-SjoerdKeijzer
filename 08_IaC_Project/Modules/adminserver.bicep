@@ -8,14 +8,15 @@ param environment string
 // input linked outputs from networking module. Outputs are defined in adminserver module in main.bicep
 param nicid string
 
-// disk encryption
-@secure()
-param diskencryption string
+// // disk encryption
+// @secure()
+// param diskencryption string
 
 // adminserver specifics
 @description('The name of your Virtual Machine.')
 param vm_name_adminserver string = '${environment}winadminserver'
-param vm_size string = environment == 'dev' ? 'Standard_B1s' : 'Standard_D2ds_v4' // set b1s as dev and d2ds_V4 as prod standard || pos sizes test 'Standard_D2ps_v5' // 'Standard_B1s' // 'Standard_D2ds_v4'
+param vm_size string = 'Standard_B1s'
+// param vm_size string = environment == 'dev' ? 'Standard_B1s' : 'Standard_D2ds_v4' // set b1s as dev and d2ds_V4 as prod standard || pos sizes test 'Standard_D2ps_v5' // 'Standard_B1s' // 'Standard_D2ds_v4'
 param vm_sku string = '2022-datacenter-azure-edition-core' // 2022-datacenter-core-smalldisk-g2 als alternative
 
 // @allowed([
@@ -28,7 +29,7 @@ param vm_sku string = '2022-datacenter-azure-edition-core' // 2022-datacenter-co
 param admin_username string = 'sjoerdvm'
 @secure()
 @minLength(6)
-param admin_password string = 'PasswordMustBeSafeOk!'       // later in keyvault zetten en reference maken
+param admin_password string = 'PasswordMustBeSafeOk!'       // later in keyvault als secret zetten en reference maken
 
 resource vm_adminserver 'Microsoft.Compute/virtualMachines@2022-03-01' = {
   name: vm_name_adminserver
@@ -85,8 +86,4 @@ resource vm_adminserver 'Microsoft.Compute/virtualMachines@2022-03-01' = {
   }
 }
 
-////////////////////////
-// possible outputs
-// vm_admin
-// vm_login
-// 
+

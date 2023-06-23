@@ -9,9 +9,9 @@ param location string
 param nicid string
 
 
-// diskencryption
-@secure()
-param diskencryption string
+// // diskencryption
+// @secure()
+// param diskencryption string
 
 @description('Name and specs of webserver.')
 // Name and specs of webserver
@@ -23,16 +23,16 @@ param vm_sku string = '20_04-lts'
 param webadmin_username string = 'vmsjoerd'
 @secure()
 @minLength(6)
-param webadmin_password string = 'PasswordMustBeSafeOk!'
+param webadmin_password string = 'PasswordMustBeSafeOk!'                        // later in keyvault zetten
 
-var apache_script = loadFileAsBase64('bashscript/web_installscript.sh')          // apache user data to get onto webserver
+// var apache_script = loadFileAsBase64('bashscript/web_installscript.sh')          // apache user data to get onto webserver
 
 
 resource webvm 'Microsoft.Compute/virtualMachines@2022-03-01' = {
   name: vm_name_webserver
   location: location
   properties: {
-    userData: apache_script
+    // userData: apache_script
     hardwareProfile: {
       vmSize: vm_size
     }
@@ -65,3 +65,7 @@ resource webvm 'Microsoft.Compute/virtualMachines@2022-03-01' = {
     }
   }
 }
+
+
+
+output vm_webserver_principal_id string = webvm.identity.principalId

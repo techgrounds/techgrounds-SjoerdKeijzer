@@ -59,7 +59,7 @@ resource pub_ip_webserver 'Microsoft.Network/publicIPAddresses@2021-02-01' = {
     location: location
   }
   properties: {
-    publicIPAllocationMethod: 'Static'
+    publicIPAllocationMethod: 'Dynamic'
   }
 }
 
@@ -78,7 +78,7 @@ resource nic_webserver 'Microsoft.Network/networkInterfaces@2022-11-01' = {
           subnet: {
             id: vnet_webserver.properties.subnets[0].id
           }
-          privateIPAllocationMethod: 'Static'
+          privateIPAllocationMethod: 'Dynamic'
           publicIPAddress: {
             id: pub_ip_webserver.id
           }
@@ -149,7 +149,7 @@ resource pub_ip_adminserver 'Microsoft.Network/publicIPAddresses@2021-02-01' = {
     location: location
   }
   properties: {
-    publicIPAllocationMethod: 'Static'
+    publicIPAllocationMethod: 'Dynamic'
   }
 }
 
@@ -168,7 +168,7 @@ resource nic_adminserver 'Microsoft.Network/networkInterfaces@2022-11-01' = {
           subnet: {
             id: vnet_adminserver.properties.subnets[0].id
           }
-          privateIPAllocationMethod: 'Static'
+          privateIPAllocationMethod: 'Dynamic'
           publicIPAddress: {
             id: pub_ip_adminserver.id
           }
@@ -214,3 +214,5 @@ output nic_id_webserver string = nic_webserver.id
 output nic_id_adminserver string = nic_adminserver.id
 output pub_ip_id_webserver string = pub_ip_webserver.id
 output pub_ip_id_adminserver string = pub_ip_adminserver.id
+
+
