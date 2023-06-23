@@ -17,16 +17,16 @@ resource rootgroup 'Microsoft.Resources/resourceGroups@2022-09-01' = {
   location: location
 }
 
-// @description('Deploy storage account module') // works just fine
-// // Deploy storage account module
-// module stg 'Modules/storage.bicep' = {
-// name: 'storagedeployment'
-// scope: rootgroup
-// params: {
-//   location: location
-//   environment: environment
-//   }
-// }
+@description('Deploy storage account module') // works just fine
+// Deploy storage account module
+module stg 'Modules/storage.bicep' = {
+name: 'storagedeployment'
+scope: rootgroup
+params: {
+  location: location
+  environment: environment
+  }
+}
 
  @description('Deploy network module') // works fine
 // Deploy network module
@@ -65,9 +65,9 @@ module webserver 'Modules/webserver.bicep' = {
     environment: environment
     nicid: network.outputs.nic_id_webserver
   }
-  dependsOn: [
-    network
-  ]
+  // dependsOn: [
+  //   network
+  // ]
 }
 
 @description('Deploy network peering module') // works fine
@@ -83,19 +83,19 @@ module peering 'Modules/peering.bicep' = {
     }
   }
 
-// @description('Deploy keyvault and encryption module')   // work in progress
-// // Deploy Keyvault & encryption module
-// module keyvault 'Modules/keyvault.bicep' = {
-//   scope: rootgroup
-//   name: 'keyvault_deployment'
-//   params: {
-//     location: location
-//     // storageAccount: stg.outputs.stg_id
-//     // storageName: stg.outputs.stg_name
-//     environment: environment
-//     // vm_webserver_principal_id: webserver.outputs.vm_webserver_principal_id
-//   }
-// }
+@description('Deploy keyvault and encryption module')   // work in progress
+// Deploy Keyvault & encryption module
+module keyvault 'Modules/keyvault.bicep' = {
+  scope: rootgroup
+  name: 'keyvault_deployment'
+  params: {
+    location: location
+    // storageAccount: stg.outputs.stg_id
+    // storageName: stg.outputs.stg_name
+    environment: environment
+    // vm_webserver_principal_id: webserver.outputs.vm_webserver_principal_id
+  }
+}
 
 // @description('Deply database module')
 // // Deploy mySQL database attached to webserver as back-end db

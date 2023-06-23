@@ -13,8 +13,9 @@ param nicid string
 // param diskencryption string
 
 // adminserver specifics
-@description('The name of your Virtual Machine.')
-param vm_name_adminserver string = '${environment}winadminserver'
+@description('The name of your Virtual Machine. Windows computer name cannot be longer than 15 characters max. Trust me, I tried.')
+@maxLength(15) 
+param vm_name_adminserver string = 'winadminserver'
 param vm_size string = 'Standard_B1s'
 // param vm_size string = environment == 'dev' ? 'Standard_B1s' : 'Standard_D2ds_v4' // set b1s as dev and d2ds_V4 as prod standard || pos sizes test 'Standard_D2ps_v5' // 'Standard_B1s' // 'Standard_D2ds_v4'
 param vm_sku string = '2022-datacenter-azure-edition-core' // 2022-datacenter-core-smalldisk-g2 als alternative
@@ -34,6 +35,11 @@ param admin_password string = 'PasswordMustBeSafeOk!'       // later in keyvault
 resource vm_adminserver 'Microsoft.Compute/virtualMachines@2022-03-01' = {
   name: vm_name_adminserver
   location: location
+  tags: {
+    environment: environment
+    type: vm_name_adminserver
+    location: location
+  }
   properties: {
     hardwareProfile: {
       vmSize: vm_size

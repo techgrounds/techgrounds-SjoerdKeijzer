@@ -68,4 +68,9 @@ resource webvm 'Microsoft.Compute/virtualMachines@2022-03-01' = {
 
 
 
-output vm_webserver_principal_id string = webvm.identity.principalId
+// output vm_webserver_principal_id string = webvm.identity.principalId       // is apparantly invalid output according to Azure Bicep upon deployment
+
+// results in error: {
+// 'The template output \'vm_webserver_principal_id\' is not valid: The language expression property \'identity\' doesn\'t exist,
+//  available properties are \
+//  'apiVersion, location, properties, condition, isConditionTrue, subscriptionId, resourceGroupName, scope, resourceId, referenceApiVersion, existing, isTemplateResource, isAction, provisioningOperation\'..'

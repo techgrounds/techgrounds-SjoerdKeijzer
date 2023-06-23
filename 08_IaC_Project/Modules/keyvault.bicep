@@ -32,29 +32,17 @@ param tenantId string = subscription().tenantId
 
 @description('Specifies the permissions to keys in the vault. Valid values are: all, encrypt, decrypt, wrapKey, unwrapKey, sign, verify, get, list, create, update, import, delete, backup, restore, recover, and purge.')
 param keysPermissions array = [
-  'wrapKey'
-  'unwrapKey'
-  'get'
-  'encrypt'
-  'decrypt'
-  'sign'
-  'verify'
-  'list'
+  'all'
 ]
 
 @description('Specifies the permissions to secrets in the vault. Valid values are: all, get, list, set, delete, backup, restore, recover, and purge.')
 param secretsPermissions array = [
-  'list'
-  'get'
-  'recover'
-  'restore'
+'all'
 ]
 
 @description('Specifices the permissions to certificates in the vault.')
 param certificatesPermissions array = [
-  'list'
-  'get'
-  'set'
+  'all'
 ]
 
 @description('Specifies whether the key vault is a standard vault or a premium vault.')
@@ -76,10 +64,10 @@ resource keyvault_resource 'Microsoft.KeyVault/vaults@2021-11-01-preview' = {
     enabledForDeployment: true            // Specifies whether Azure Virtual Machines are permitted to retrieve certificates stored as secrets from the key vault
     enabledForDiskEncryption: true        // Specifies whether Azure Disk Encryption is permitted to retrieve secrets from the vault and unwrap keys
     enabledForTemplateDeployment: true    // Specifies whether Azure Resource Manager is permitted to retrieve secrets from the key vault. Must enable this for IaC projects upon deployment for keyvault to work. 
-    // enableRbacAuthorization: true
+    enableRbacAuthorization: false
     tenantId: tenantId
     enableSoftDelete: true
-    softDeleteRetentionInDays: 0          // set to 0 so redeployment for testing purposes is easier. 90 is standard
+    softDeleteRetentionInDays: 7          // min value 7 - 90 is standard
     publicNetworkAccess: 'Enabled'        // could be 'Disabled' but chances are for now I could lock myself out of my Keyvault
     accessPolicies: [
       {
@@ -132,7 +120,7 @@ resource disk_encryption 'Microsoft.Compute/diskEncryptionSets@2021-08-01' = {
   }
 }
 
-// // Key Vault Crypto Service Encryption User
+// // Key Vault RBAC Encryption User
 // resource roleAssignment 'Microsoft.Authorization/roleAssignments@2020-10-01-preview' = {
 //   name: guid(disk_encryption.id,keyvault_resource.id)
 //   scope: keyvault_resource
