@@ -60,7 +60,7 @@ resource pub_ip_webserver 'Microsoft.Network/publicIPAddresses@2021-02-01' = {
     location: location
   }
   properties: {
-    publicIPAllocationMethod: 'Dynamic'
+    publicIPAllocationMethod: 'Static'
   }
 }
 
@@ -72,6 +72,9 @@ resource nic_webserver 'Microsoft.Network/networkInterfaces@2022-11-01' = {
     location:location
   }
   properties: {
+    networkSecurityGroup: {
+      id: nsg_webserver.id
+    }
     ipConfigurations: [
       {
         name: 'ipconfig_webserver'
@@ -177,6 +180,9 @@ resource nic_adminserver 'Microsoft.Network/networkInterfaces@2022-11-01' = {
     location:location
   }
   properties: {
+    networkSecurityGroup: {
+      id: nsg_adminserver.id
+    }
     ipConfigurations: [
       {
         name: 'ipconfig_adminserver'
@@ -184,7 +190,7 @@ resource nic_adminserver 'Microsoft.Network/networkInterfaces@2022-11-01' = {
           subnet: {
             id: vnet_adminserver.properties.subnets[0].id
           }
-          privateIPAllocationMethod: 'Static'
+          privateIPAllocationMethod: 'Dynamic'
           publicIPAddress: {
             id: pub_ip_adminserver.id
           }

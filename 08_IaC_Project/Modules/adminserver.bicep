@@ -8,7 +8,7 @@ param environment string
 // input linked outputs from networking module. Outputs are defined in adminserver module in main.bicep
 param nicid string
 
-param diskencryption string
+// param diskencryption string
 
 // adminserver specifics
 @description('The name of your Virtual Machine. Windows computer name cannot be longer than 15 characters max. Trust me, I tried.')
@@ -56,9 +56,9 @@ resource vm_adminserver 'Microsoft.Compute/virtualMachines@2022-03-01' = {
       osDisk: {
         createOption: 'FromImage'
         managedDisk: {
-          diskEncryptionSet: {
-            id: diskencryption
-          }
+          // diskEncryptionSet: {                     enable when keyvault deploys proper
+          //   id: diskencryption
+          // }
           storageAccountType: 'StandardSSD_LRS'
         }
       }

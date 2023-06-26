@@ -26,6 +26,7 @@ param kv_key_name string = 'key${uniqueString(resourceGroup().name)}'
 @description('Specifies the name of the key vault.')
 param keyVaultName string = 'kv${environment}${uniqueString(resourceGroup().name)}'
 
+
 @description('Specifies the Azure Active Directory tenant ID that should be used for authenticating requests to the key vault. Get it by using Get-AzSubscription cmdlet.')
 param tenantId string = subscription().tenantId
 // param tenantId string = '7810209c-8fef-48a1-8881-d6946b6a7633'
@@ -66,6 +67,7 @@ resource keyvault_resource 'Microsoft.KeyVault/vaults@2021-11-01-preview' = {
     enabledForTemplateDeployment: true    // Specifies whether Azure Resource Manager is permitted to retrieve secrets from the key vault. Must enable this for IaC projects upon deployment for keyvault to work. 
     enableRbacAuthorization: false
     tenantId: tenantId
+    enablePurgeProtection: true           // once enable cannot be turned off. Learn this the hard way. When giving 'false' value it just now will get a deployment error
     enableSoftDelete: true
     softDeleteRetentionInDays: 7          // min value 7 - 90 is standard
     publicNetworkAccess: 'Enabled'        // could be 'Disabled' but chances are for now I could lock myself out of my Keyvault
