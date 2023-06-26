@@ -1,14 +1,12 @@
 
 @description('set resources in same region as the target resource group')
 param location string
-
 param environment string
 
-@description('Input linked outputs from networking module.')
-// input linked outputs from networking module. Outputs are defined in adminserver module in main.bicep
-param nicid string
-
-// param diskencryption string
+@description('Inputs for this module that are linked outputs from other modules.')
+// Outputs are defined in adminserver module in main.bicep
+param nicid string        // import nic_id from adminserver vnet from network module
+// param diskencryption string  // enable diskencryption from keyvault module
 
 // adminserver specifics
 @description('The name of your Virtual Machine. Windows computer name cannot be longer than 15 characters max. Trust me, I tried.')
