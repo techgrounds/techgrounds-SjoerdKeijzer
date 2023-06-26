@@ -8,9 +8,7 @@ param environment string
 // input linked outputs from networking module. Outputs are defined in adminserver module in main.bicep
 param nicid string
 
-// // disk encryption
-// @secure()
-// param diskencryption string
+param diskencryption string
 
 // adminserver specifics
 @description('The name of your Virtual Machine. Windows computer name cannot be longer than 15 characters max. Trust me, I tried.')
@@ -20,11 +18,6 @@ param vm_size string = 'Standard_B1s'
 // param vm_size string = environment == 'dev' ? 'Standard_B1s' : 'Standard_D2ds_v4' // set b1s as dev and d2ds_V4 as prod standard || pos sizes test 'Standard_D2ps_v5' // 'Standard_B1s' // 'Standard_D2ds_v4'
 param vm_sku string = '2022-datacenter-azure-edition-core' // 2022-datacenter-core-smalldisk-g2 als alternative
 
-// @allowed([
-//   'password'
-//   //'sshkey'          // need to read how to config ssh acces proper 
-// ])
-// //param authentication string = 'password'
 
 @description('Username and pw settings for the Virtual Machine.')
 param admin_username string = 'sjoerdvm'
@@ -63,6 +56,9 @@ resource vm_adminserver 'Microsoft.Compute/virtualMachines@2022-03-01' = {
       osDisk: {
         createOption: 'FromImage'
         managedDisk: {
+          diskEncryptionSet: {
+            id: diskencryption
+          }
           storageAccountType: 'StandardSSD_LRS'
         }
       }

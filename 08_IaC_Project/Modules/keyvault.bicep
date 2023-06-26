@@ -110,6 +110,7 @@ resource disk_encryption 'Microsoft.Compute/diskEncryptionSets@2021-08-01' = {
     type: 'SystemAssigned'
   }
   properties: {
+    rotationToLatestKeyVersionEnabled: true
     activeKey: {
       keyUrl: kv_key_resource.properties.keyUriWithVersion
       sourceVault: {

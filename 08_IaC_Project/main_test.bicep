@@ -40,7 +40,7 @@ module network 'Modules/network._test.bicep' = {
   }
 }
 
-@description('Deploys admin server module') // need to fix acces rules from nsg and login to vm
+@description('Deploys admin server module') // need to fix acces rules from nsg and login to vm via rdp
 // Deploy admin server module
 module adminserver 'Modules/adminserver.bicep' = {
   name: 'adminserver_deployment'
@@ -49,6 +49,7 @@ module adminserver 'Modules/adminserver.bicep' = {
     location: location
     environment: environment
     nicid: network.outputs.nic_id_adminserver
+    diskencryption: keyvault.outputs.diskencryptset_id
   }
   // dependsOn: [
   //   network
@@ -64,6 +65,8 @@ module webserver 'Modules/webserver.bicep' = {
     location: location
     environment: environment
     nicid: network.outputs.nic_id_webserver
+    diskencryption: keyvault.outputs.diskencryptset_id
+    kv_key_name: keyvault.outputs.kv_key_name
   }
   // dependsOn: [
   //   network

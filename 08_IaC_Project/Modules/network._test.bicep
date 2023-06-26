@@ -33,6 +33,7 @@ resource vnet_webserver 'Microsoft.Network/virtualNetworks@2022-11-01' = {
     location: location
   }
   properties: {
+    enableDdosProtection: false
     addressSpace: {
       addressPrefixes: [
         '10.10.10.0/24'
@@ -108,7 +109,20 @@ resource nsg_webserver 'Microsoft.Network/networkSecurityGroups@2022-11-01' = {
           destinationPortRange: '443'
           destinationAddressPrefix: '*'
         }
+      } 
+      { name: 'http'
+      properties: {
+        access: 'Allow'
+        direction: 'Inbound'
+        priority: 200
+        protocol: 'Tcp'
+        sourcePortRange: '*'
+        sourceAddressPrefix: '*'
+        destinationPortRange: '80'
+        destinationAddressPrefix: '*'
+        // destinationPortRanges: ['8080']          // 8080 port nodig ?
       }
+    }
     ]
   }
 }
@@ -124,6 +138,7 @@ resource vnet_adminserver 'Microsoft.Network/virtualNetworks@2022-11-01' = {
     location:location
   }
   properties: {
+  enableDdosProtection: false
     addressSpace: {
       addressPrefixes: [
         '10.20.20.0/24'
@@ -150,7 +165,7 @@ resource pub_ip_adminserver 'Microsoft.Network/publicIPAddresses@2021-02-01' = {
     location: location
   }
   properties: {
-    publicIPAllocationMethod: 'Dynamic'
+    publicIPAllocationMethod: 'Static'
   }
 }
 
@@ -169,7 +184,7 @@ resource nic_adminserver 'Microsoft.Network/networkInterfaces@2022-11-01' = {
           subnet: {
             id: vnet_adminserver.properties.subnets[0].id
           }
-          privateIPAllocationMethod: 'Dynamic'
+          privateIPAllocationMethod: 'Static'
           publicIPAddress: {
             id: pub_ip_adminserver.id
           }
@@ -185,15 +200,15 @@ resource nsg_adminserver 'Microsoft.Network/networkSecurityGroups@2022-11-01' = 
   properties: {
     securityRules: [
       {
-        name: 'ssh'
+        name: 'admin_rdp'
         properties: {
           access: 'Allow'
           direction: 'Inbound'
-          priority: 100
+          priority: 110
           protocol: 'Tcp'
           sourcePortRange: '*'
-          sourceAddressPrefix: '*'
-          destinationPortRange: '22'
+          sourceAddressPrefix: '77.175.148.54'            // allow admin IP('s) // test for now, will 
+          destinationPortRange: '3389'                    // allow RDP acces on the usual RDP port
           destinationAddressPrefix: '*'
         }
       }

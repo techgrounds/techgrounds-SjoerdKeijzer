@@ -8,10 +8,8 @@ param location string
 // input linked outputs from networking module. Outputs are defined in webserver module in main.bicep
 param nicid string
 
-
-// // diskencryption
-// @secure()
-// param diskencryption string
+param diskencryption string
+param kv_key_name string
 
 @description('Name and specs of webserver.')
 // Name and specs of webserver
@@ -25,8 +23,11 @@ param webadmin_username string = 'vmsjoerd'
 @minLength(6)
 param webadmin_password string = 'PasswordMustBeSafeOk!'                        // later in keyvault zetten
 
-// var apache_script = loadFileAsBase64('bashscript/web_installscript.sh')          // apache user data to get onto webserver
+var apache_script = loadFileAsBase64('bashscript/web_installscript.sh')          // apache user data to get onto webserver
 
+resource kv_key_resource 'Microsoft.KeyVault/vaults/keys@2023-02-01' existing = {
+  name: kv_key_name
+}                    // this is a try out
 
 resource webvm 'Microsoft.Compute/virtualMachines@2022-03-01' = {
   name: vm_name_webserver
@@ -38,7 +39,7 @@ resource webvm 'Microsoft.Compute/virtualMachines@2022-03-01' = {
 
   }
   properties: {
-    // userData: apache_script
+    userData: apache_script
     hardwareProfile: {
       vmSize: vm_size
     }
@@ -51,6 +52,9 @@ resource webvm 'Microsoft.Compute/virtualMachines@2022-03-01' = {
       }
       osDisk: {
         createOption: 'FromImage'
+        encryptionSettings: {
+          diskEncryptionKey: kv_key_resource          // check if this works
+        }
       }
     }
     osProfile: {
