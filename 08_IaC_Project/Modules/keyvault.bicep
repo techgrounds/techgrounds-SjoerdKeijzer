@@ -24,6 +24,16 @@ param user_assigned_identity_name string= 'userid${uniqueString(resourceGroup().
 param kv_key_name string = 'key${uniqueString(resourceGroup().name)}' 
 
 @description('Specifies the name of the key vault.')
+
+// var timestamp = format(dateTimeAdd()).
+// var uniqueSuffix = utcNow().toIsoString('yyyyMMddHHmmss')
+
+
+// resource keyVault 'Microsoft.KeyVault/vaults@2021-04-01-preview' = {
+//   name: '${keyVaultName}${uniqueSuffix}'
+//   // other properties for Key Vault
+// }
+
 param keyVaultName string = 'kv${environment}${uniqueString(resourceGroup().name)}'
 
 
