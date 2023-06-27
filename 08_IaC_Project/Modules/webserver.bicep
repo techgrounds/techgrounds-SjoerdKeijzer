@@ -59,6 +59,7 @@ resource webvm 'Microsoft.Compute/virtualMachines@2022-03-01' = {
       computerName: vm_name_webserver
       adminUsername: webadmin_username
       adminPassword: webadmin_password
+      // customData: apache_script
     }
     networkProfile:  {
       networkInterfaces: [

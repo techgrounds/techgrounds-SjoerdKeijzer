@@ -106,8 +106,10 @@ module keyvault 'Modules/keyvault.bicep' = {
 //   name: 'database_deployment'
 //   scope: rootgroup
 //   params: {
-//     db_admin_username: keyvault.getSecret(db_adminuser.name)    // wip
-//     mysqlPassword: keyvault.getSecret(secret.name)              // wip
+//     // db_admin_username: sqladmin // keyvault.getSecret(db_adminuser.name)    // wip
+//     // mysqlPassword: mysqlPassword // keyvault.getSecret(secret.name)              // wip
+//     environment: environment
+//     location: location
 //   }
 // }
 

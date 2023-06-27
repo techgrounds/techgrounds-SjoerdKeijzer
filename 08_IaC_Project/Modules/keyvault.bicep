@@ -14,7 +14,6 @@ param environment string
 // Moet harde keuze maken tussen assigned identity of RBAC
 // az policy add voor toevoegen van secrets oid
 // admin pw moet gestored kunnen worden (via az policy add?)
-// back-up encryptie / secret? 
 
 
 @description('The name of the User Assigned Identity.')
@@ -23,16 +22,12 @@ param user_assigned_identity_name string= 'userid${uniqueString(resourceGroup().
 @description('Name of the key in the Key Vault')
 param kv_key_name string = 'key${uniqueString(resourceGroup().name)}' 
 
-@description('Specifies the name of the key vault.')
+@description('Specifies the name of the key vault. To make the name unique for redeployment purposes, a timestamp has been added in the name')
+var keyVaultName = 'kv${environment}-${timestamp}'
+param timestamp string = utcNow()
+// param keyVaultName string = 'kv${environment}${uniqueString(resourceGroup().name)}'      // works for one time fresh deployment with no prior keyvault
 
-// param utcShort string = utcNow('d')
-// var timestamp = dateTimeAdd{utcShort}
-// var unique_kv_name = 'kv${timestamp}'
-
-param keyVaultName string = 'kv${environment}${uniqueString(resourceGroup().name)}'
-
-
-@description('Specifies the Azure Active Directory tenant ID that should be used for authenticating requests to the key vault. Get it by using Get-AzSubscription cmdlet.')
+@description('Specifies the Azure Active Directory tenant ID that should be used for authenticating requests to the key vault.')
 param tenantId string = subscription().tenantId
 // param tenantId string = '7810209c-8fef-48a1-8881-d6946b6a7633'
 
@@ -72,7 +67,8 @@ resource keyvault_resource 'Microsoft.KeyVault/vaults@2021-11-01-preview' = {
     enabledForTemplateDeployment: true    // Specifies whether Azure Resource Manager is permitted to retrieve secrets from the key vault. Must enable this for IaC projects upon deployment for keyvault to work. 
     enableRbacAuthorization: false
     tenantId: tenantId
-    enablePurgeProtection: true           // once enable cannot be turned off. Learn this the hard way. When giving 'false' value it just now will get a deployment error
+    createMode: 'default'
+    enablePurgeProtection: true           // once enabled cannot be turned off. Learn this the hard way. When giving 'false' value it just now will get a deployment error
     enableSoftDelete: true
     softDeleteRetentionInDays: 7          // min value 7 - 90 is standard
     publicNetworkAccess: 'Enabled'        // could be 'Disabled' but chances are for now I could lock myself out of my Keyvault
