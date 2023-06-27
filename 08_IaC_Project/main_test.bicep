@@ -49,7 +49,7 @@ module adminserver 'Modules/adminserver.bicep' = {
     location: location
     environment: environment
     nicid: network.outputs.nic_id_adminserver
-    // diskencryption: keyvault.outputs.diskencryptset_id
+    diskencryption: keyvault.outputs.diskencryptset_id
   }
   // dependsOn: [
   //   network
@@ -65,8 +65,8 @@ module webserver 'Modules/webserver.bicep' = {
     location: location
     environment: environment
     nicid: network.outputs.nic_id_webserver
-    // diskencryption: keyvault.outputs.diskencryptset_id
-    // kv_key_name: keyvault.outputs.kv_key_name
+    diskencryption: keyvault.outputs.diskencryptset_id
+    kv_key_name: keyvault.outputs.kv_key_name
   }
   // dependsOn: [
   //   network
