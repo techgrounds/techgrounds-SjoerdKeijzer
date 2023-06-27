@@ -1,14 +1,16 @@
 targetScope = 'resourceGroup'
 
+param environment string
+
 @description('Place all resources in the same region of target resourcegroup, declared in main.bicep')
 param location string
 
 @description('Naming of vnets, subnets and nsg')
 // Naming of the vnets, subnets and nsg's
-param name_vnet_webserver string = 'vnet_webserver'
+param name_vnet_webserver string = '${environment}_vnet_webserver'
 param name_subnet_webserver string = 'subnet_webserver'
 param name_nsg_webserver string = 'nsg_webserver'
-param name_vnet_adminserver string = 'vnet_adminserver'
+param name_vnet_adminserver string = '${environment}_vnet_adminserver'
 param name_subnet_adminserver string= 'subnet_adminserver'
 param name_nsg_adminserver string = 'nsg_adminserver'
 
@@ -31,6 +33,7 @@ resource vnet_webserver 'Microsoft.Network/virtualNetworks@2022-11-01' = {
     location: location
   }
   properties: {
+    enableDdosProtection: false
     addressSpace: {
       addressPrefixes: [
         '10.10.10.0/24'
@@ -69,6 +72,9 @@ resource nic_webserver 'Microsoft.Network/networkInterfaces@2022-11-01' = {
     location:location
   }
   properties: {
+    networkSecurityGroup: {
+      id: nsg_webserver.id
+    }
     ipConfigurations: [
       {
         name: 'ipconfig_webserver'
@@ -76,7 +82,7 @@ resource nic_webserver 'Microsoft.Network/networkInterfaces@2022-11-01' = {
           subnet: {
             id: vnet_webserver.properties.subnets[0].id
           }
-          privateIPAllocationMethod: 'Static'
+          privateIPAllocationMethod: 'Dynamic'
           publicIPAddress: {
             id: pub_ip_webserver.id
           }
@@ -105,7 +111,21 @@ resource nsg_webserver 'Microsoft.Network/networkSecurityGroups@2022-11-01' = {
           sourceAddressPrefix: '*'
           destinationPortRange: '443'
           destinationAddressPrefix: '*'
-        }}
+        }
+      } 
+      { name: 'http'
+      properties: {
+        access: 'Allow'
+        direction: 'Inbound'
+        priority: 200
+        protocol: 'Tcp'
+        sourcePortRange: '*'
+        sourceAddressPrefix: '*'
+        destinationPortRange: '80'
+        destinationAddressPrefix: '*'
+        // destinationPortRanges: ['8080']          // 8080 port nodig ?
+      }
+    }
     ]
   }
 }
@@ -121,6 +141,7 @@ resource vnet_adminserver 'Microsoft.Network/virtualNetworks@2022-11-01' = {
     location:location
   }
   properties: {
+  enableDdosProtection: false
     addressSpace: {
       addressPrefixes: [
         '10.20.20.0/24'
@@ -159,6 +180,9 @@ resource nic_adminserver 'Microsoft.Network/networkInterfaces@2022-11-01' = {
     location:location
   }
   properties: {
+    networkSecurityGroup: {
+      id: nsg_adminserver.id
+    }
     ipConfigurations: [
       {
         name: 'ipconfig_adminserver'
@@ -166,7 +190,7 @@ resource nic_adminserver 'Microsoft.Network/networkInterfaces@2022-11-01' = {
           subnet: {
             id: vnet_adminserver.properties.subnets[0].id
           }
-          privateIPAllocationMethod: 'Static'
+          privateIPAllocationMethod: 'Dynamic'
           publicIPAddress: {
             id: pub_ip_adminserver.id
           }
@@ -182,15 +206,15 @@ resource nsg_adminserver 'Microsoft.Network/networkSecurityGroups@2022-11-01' = 
   properties: {
     securityRules: [
       {
-        name: 'ssh'
+        name: 'admin_rdp'
         properties: {
           access: 'Allow'
           direction: 'Inbound'
-          priority: 100
+          priority: 110
           protocol: 'Tcp'
           sourcePortRange: '*'
-          sourceAddressPrefix: '*'
-          destinationPortRange: '22'
+          sourceAddressPrefix: '77.175.148.54'            // allow admin IP('s) // test for now, will 
+          destinationPortRange: '3389'                    // allow RDP acces on the usual RDP port
           destinationAddressPrefix: '*'
         }
       }
@@ -202,6 +226,8 @@ resource nsg_adminserver 'Microsoft.Network/networkSecurityGroups@2022-11-01' = 
 // Outputs
 output vnet_id_webserver string = vnet_webserver.id
 output vnet_id_adminserver string = vnet_adminserver.id
+output vnet_name_webserver string = name_vnet_webserver
+output vnet_name_adminserver string = name_vnet_adminserver
 output subnet_id_webserver string = vnet_webserver.properties.subnets[0].id
 output subnet_id_adminserver string = vnet_adminserver.properties.subnets[0].id
 output nsg_id_webserver string = nsg_webserver.id
@@ -210,3 +236,5 @@ output nic_id_webserver string = nic_webserver.id
 output nic_id_adminserver string = nic_adminserver.id
 output pub_ip_id_webserver string = pub_ip_webserver.id
 output pub_ip_id_adminserver string = pub_ip_adminserver.id
+
+

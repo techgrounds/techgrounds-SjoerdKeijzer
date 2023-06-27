@@ -1,10 +1,18 @@
 targetScope = 'subscription'
 
+@description('Param for different environments. Dev(elopment) and prod(uction) are allowed')
+@allowed([
+  'dev'
+  'prod'
+])
+param environment string = 'dev'
+
+
 @description('Make general resource group for deployment in certain region')
 // Make a general resource group for deployment in a region
 param resourceGroupName string = 'rootrg'
 param location string = deployment().location // locate resources at location declared with the deployment command
-resource rootgroup 'Microsoft.Resources/resourceGroups@2021-04-01' = {
+resource rootgroup 'Microsoft.Resources/resourceGroups@2022-09-01' = {
   name: resourceGroupName
   location: location
 }
@@ -16,6 +24,7 @@ name: 'storagedeployment'
 scope: rootgroup
 params: {
   location: location
+  environment: environment
   }
 }
 
@@ -27,32 +36,44 @@ module network 'Modules/network._test.bicep' = {
   scope: rootgroup
   params: {
     location: location
+    environment: environment
   }
 }
 
-@description('Deploys admin server module')
+@description('Deploys admin server module') // need to fix acces rules from nsg and login to vm via rdp
 // Deploy admin server module
 module adminserver 'Modules/adminserver.bicep' = {
-  scope: rootgroup
   name: 'adminserver_deployment'
+  scope: rootgroup
   params: {
     location: location
+    environment: environment
     nicid: network.outputs.nic_id_adminserver
+    // diskencryption: keyvault.outputs.diskencryptset_id
   }
+  // dependsOn: [
+  //   network
+  // ]
 }
 
-@description('Deploy webserver module')
+@description('Deploy webserver module') // need to fix acces/routing from internet via nsg / and login to vm + apache bootstrap
 // Deploy webserver module
 module webserver 'Modules/webserver.bicep' = {
-  scope: rootgroup
   name: 'webserver_deployment'
+  scope: rootgroup
   params: {
     location: location
+    environment: environment
     nicid: network.outputs.nic_id_webserver
+    // diskencryption: keyvault.outputs.diskencryptset_id
+    // kv_key_name: keyvault.outputs.kv_key_name
   }
+  // dependsOn: [
+  //   network
+  // ]
 }
 
-@description('Deploy network peering module')
+@description('Deploy network peering module') // works fine
 // Deploy network peering module
 module peering 'Modules/peering.bicep' = {
   name: 'peering_deployment'
@@ -64,3 +85,44 @@ module peering 'Modules/peering.bicep' = {
     peer_admin_vnet: network.outputs.vnet_id_adminserver
     }
   }
+
+@description('Deploy keyvault and encryption module')   // work in progress
+// Deploy Keyvault & encryption module
+module keyvault 'Modules/keyvault.bicep' = {
+  scope: rootgroup
+  name: 'keyvault_deployment'
+  params: {
+    location: location
+    // // storageAccount: stg.outputs.stg_id
+    // // storageName: stg.outputs.stg_name
+    environment: environment
+    // // vm_webserver_principal_id: webserver.outputs.vm_webserver_principal_id
+  }
+}
+
+// @description('Deply database module')
+// // Deploy mySQL database attached to webserver as back-end db
+// module database 'Modules/database.bicep' = {
+//   name: 'database_deployment'
+//   scope: rootgroup
+//   params: {
+//     // db_admin_username: sqladmin // keyvault.getSecret(db_adminuser.name)    // wip
+//     // mysqlPassword: mysqlPassword // keyvault.getSecret(secret.name)              // wip
+//     environment: environment
+//     location: location
+//   }
+// }
+
+
+
+//  @description('Deploy vmss module')
+//  // Deply vmss module
+//  module vmss 'Modules/vmss.bicep' = {
+//   scope: rootgroup
+//   name: 'vmss_deployment'
+//   params: {
+//     location: location
+//     name_vnet_webserver: network.outputs.vnet_name_webserver
+//     id_vnet_webserver: network.outputs.vnet_id_webserver
+//   }
+//  }
