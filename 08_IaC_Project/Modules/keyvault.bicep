@@ -20,7 +20,7 @@ param managed_identity_name string= 'userid${uniqueString(resourceGroup().name)}
 @description('Name of the key in the Key Vault')
 param kv_key_name string = 'key${uniqueString(resourceGroup().name)}' 
 
-@description('Specifies the name of the key vault. To make the name unique for redeployment purposes, a timestamp has been added in the name')
+@description('Specifies the name of the key vault. To make the name unique for redeployment testing purposes, a timestamp has been added in the name')
 var keyVaultName = 'kv${environment}-${timestamp}'
 param timestamp string = utcNow()
 // param keyVaultName string = 'kv${environment}${uniqueString(resourceGroup().name)}'      // works for one time fresh deployment with no prior keyvault
@@ -82,6 +82,8 @@ resource keyvault_resource 'Microsoft.KeyVault/vaults@2021-11-01-preview' = {
     networkAcls: {
       defaultAction: 'Allow'          
       bypass: 'AzureServices'
+      // virtualNetworkRules: []
+      // ipRules: []
     }
   }
 }
@@ -149,7 +151,6 @@ resource key_vault_access_policy 'Microsoft.KeyVault/vaults/accessPolicies@2021-
           secrets: []
           certificates: []
         }
-        
       }
       {
         tenantId: tenantId

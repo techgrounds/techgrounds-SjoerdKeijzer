@@ -52,13 +52,23 @@ resource webvm 'Microsoft.Compute/virtualMachines@2022-03-01' = {
       }
       osDisk: {
         createOption: 'FromImage'
-        encryptionSettings: kv_key_resource          // // try existing enable when keyvault works
+        encryptionSettings: kv_key_resource          // // try existing enable when keyvault works // if not try managedDisk option
+        managedDisk: {
+          diskEncryptionSet: diskencryption
+        }
       }
     }
     osProfile: {
       computerName: vm_name_webserver
       adminUsername: webadmin_username
       adminPassword: webadmin_password
+      linuxConfiguration: {
+        // disablePasswordAuthentication: true
+        // ssh: {                                       // insert ssh key here but need to config it proper
+        //   publicKeys:
+        // }
+        provisionVMAgent: true
+      }
     }
     networkProfile:  {
       networkInterfaces: [
