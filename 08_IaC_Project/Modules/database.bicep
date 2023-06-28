@@ -18,13 +18,22 @@ resource sqlserver 'Microsoft.Sql/servers@2021-02-01-preview' = {
     administratorLoginPassword: mysqlPassword
     publicNetworkAccess: 'Disabled'
     version: 'mysqlversion'
-  }
+    restrictOutboundNetworkAccess: 'Enabled'
+    minimalTlsVersion: '1.2'
+    // keyId:
+    // federatedClientId:
+    // administrators:
 
-  resource sqldb 'databases' = {
-    name: sqldb_name
-    location: location
-    properties: {
-      // longTermRetentionBackupResourceId: ''
-    }
   }
 }
+
+  resource sqldb 'Microsoft.DBforMySQL/servers/databases@2017-12-01' = {
+    name: sqldb_name
+    parent: sqlserver               // need to fix this / get right resource
+    properties: {
+      // charset: 
+      // collation: 
+    }
+  }
+
+

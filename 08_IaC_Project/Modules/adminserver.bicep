@@ -54,18 +54,13 @@ resource vm_adminserver 'Microsoft.Compute/virtualMachines@2022-03-01' = {
       osDisk: {
         createOption: 'FromImage'
         managedDisk: {
-          diskEncryptionSet: {                     // enable when keyvault deploys proper
+          diskEncryptionSet: {                     
             id: diskencryption
           }
           storageAccountType: 'StandardSSD_LRS'
         }
       }
       dataDisks: [
-        // {
-        //   diskSizeGB: 512
-        //   lun: 0
-        //   createOption: 'Empty'
-        // }
       ]
     }
     networkProfile: {
