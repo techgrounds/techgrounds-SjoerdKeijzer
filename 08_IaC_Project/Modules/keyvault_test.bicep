@@ -118,7 +118,7 @@ resource disk_encryption 'Microsoft.Compute/diskEncryptionSets@2021-08-01' = {
     type: 'SystemAssigned'
   }
   properties: {
-    // encryptionType: 'EncryptionAtRestWithCustomerKey'
+    encryptionType: 'EncryptionAtRestWithCustomerKey'
     rotationToLatestKeyVersionEnabled: true
     activeKey: {
       keyUrl: kv_key_resource.properties.keyUriWithVersion
