@@ -82,8 +82,9 @@ resource keyvault_resource 'Microsoft.KeyVault/vaults@2021-11-01-preview' = {
     networkAcls: {
       defaultAction: 'Allow'          
       bypass: 'AzureServices'
-      // virtualNetworkRules: []
-      // ipRules: []
+      ipRules: [{
+        value: '77.175.148.54'                        // my own public IP
+      }]
     }
   }
 }
@@ -131,7 +132,7 @@ resource disk_encryption 'Microsoft.Compute/diskEncryptionSets@2021-08-01' = {
   }
 }
 
-
+// gives disk encryption set access to Keyvault
 resource key_vault_access_policy 'Microsoft.KeyVault/vaults/accessPolicies@2021-10-01' = {
   name: 'add'
   parent: keyvault_resource

@@ -66,7 +66,6 @@ module webserver 'Modules/webserver.bicep' = {
     environment: environment
     nicid: network.outputs.nic_id_webserver
     diskencryption: keyvault.outputs.diskencryptset_id
-    kv_key_name: keyvault.outputs.kv_key_name
   }
   // dependsOn: [
   //   network
@@ -86,7 +85,7 @@ module peering 'Modules/peering.bicep' = {
     }
   }
 
-@description('Deploy keyvault and encryption module')   // work in progress
+@description('Deploy keyvault and encryption module')   // deploys with encrypted diskset - need to fix passwords at other time
 // Deploy Keyvault & encryption module
 module keyvault 'Modules/keyvault.bicep' = {
   scope: rootgroup
@@ -96,7 +95,6 @@ module keyvault 'Modules/keyvault.bicep' = {
     // // storageAccount: stg.outputs.stg_id
     // // storageName: stg.outputs.stg_name
     environment: environment
-    // // vm_webserver_principal_id: webserver.outputs.vm_webserver_principal_id
   }
 }
 
@@ -126,3 +124,10 @@ module keyvault 'Modules/keyvault.bicep' = {
 //     id_vnet_webserver: network.outputs.vnet_id_webserver
 //   }
 //  }
+
+@description('Deploy Back-up and recovery module')
+// Deploy AZ back-up and recovery vault
+module backup_recovery 'Modules/backup_recovery.bicep' = {
+  name: 'backup_recovery_deployment'
+  scope: rootgroup
+}
