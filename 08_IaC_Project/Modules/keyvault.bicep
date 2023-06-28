@@ -65,7 +65,6 @@ resource keyvault_resource 'Microsoft.KeyVault/vaults@2021-11-01-preview' = {
     enableSoftDelete: true
     softDeleteRetentionInDays: 7          // min value 7 - 90 is standard
     publicNetworkAccess: 'Enabled'        // could be 'Disabled' but chances are for now I could lock myself out of my Keyvault
-    
     accessPolicies: [
       {
         objectId: managed_identity.properties.principalId     //  when working with user assigned identity (legacy)
@@ -75,19 +74,7 @@ resource keyvault_resource 'Microsoft.KeyVault/vaults@2021-11-01-preview' = {
           secrets: secretsPermissions
           certificates: certificatesPermissions
         }
-      }
-      // {
-      //   objectId: disk_encryption.properties.principalId
-      //   tenantId: tenantId
-      //   permissions: {
-      //     keys: [
-      //     'get'
-      //     'wrap'
-      //     'unwrap'
-      //   ]
-      //   }
-      // }
-    ]
+      }]
     sku: {
       name: skuName
       family: 'A'
@@ -131,6 +118,7 @@ resource disk_encryption 'Microsoft.Compute/diskEncryptionSets@2021-08-01' = {
     type: 'SystemAssigned'
   }
   properties: {
+    // encryptionType: 'EncryptionAtRestWithCustomerKey'
     rotationToLatestKeyVersionEnabled: true
     activeKey: {
       keyUrl: kv_key_resource.properties.keyUriWithVersion
@@ -138,7 +126,6 @@ resource disk_encryption 'Microsoft.Compute/diskEncryptionSets@2021-08-01' = {
         id: keyvault_resource.id
       }
     }
-    // encryptionType: 'EncryptionAtRestWithCustomerKey'
   }
 }
 
@@ -204,8 +191,6 @@ resource key_vault_access_policy 'Microsoft.KeyVault/vaults/accessPolicies@2021-
     ]
   }
 }
-
-
 
 
 @description('Outputs to other modules that need reference to Keyvault or encryption')

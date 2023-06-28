@@ -25,9 +25,9 @@ param webadmin_password string = 'PasswordMustBeSafeOk!'                        
 
 var apache_script = loadFileAsBase64('bashscript/web_installscript.sh')          // apache user data to get onto webserver
 
-resource kv_key_resource 'Microsoft.KeyVault/vaults/keys@2023-02-01' existing = {
-  name: kv_key_name
-}                    // this is a try out
+// resource kv_key_resource 'Microsoft.KeyVault/vaults/keys@2023-02-01' existing = {
+//   name: kv_key_name
+// }                    // this is a try out
 
 resource webvm 'Microsoft.Compute/virtualMachines@2022-03-01' = {
   name: vm_name_webserver
@@ -52,7 +52,7 @@ resource webvm 'Microsoft.Compute/virtualMachines@2022-03-01' = {
       }
       osDisk: {
         createOption: 'FromImage'
-        encryptionSettings: kv_key_resource          // // try existing enable when keyvault works
+        // encryptionSettings: kv_key_resource          // // try existing enable when keyvault works
       }
     }
     osProfile: {
