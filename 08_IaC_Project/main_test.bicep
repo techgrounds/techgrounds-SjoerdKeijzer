@@ -40,7 +40,7 @@ module network 'Modules/network._test.bicep' = {
   }
 }
 
-@description('Deploys admin server module') // need to fix acces rules from nsg and login to vm via rdp
+@description('Deploys admin server module') // succesfull rdp login
 // Deploy admin server module
 module adminserver 'Modules/adminserver.bicep' = {
   name: 'adminserver_deployment'
@@ -56,7 +56,7 @@ module adminserver 'Modules/adminserver.bicep' = {
   // ]
 }
 
-@description('Deploy webserver module') // need to fix acces/routing from internet via nsg / and login to vm + apache bootstrap
+@description('Deploy webserver module') // need to fix acces/routing from internet via nsg / and login to vm via ssh on adminserver
 // Deploy webserver module
 module webserver 'Modules/webserver.bicep' = {
   name: 'webserver_deployment'
