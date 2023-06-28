@@ -118,6 +118,8 @@ resource kv_key_resource 'Microsoft.KeyVault/vaults/keys@2023-02-01' = {
       'decrypt'
       'sign'
       'verify'
+      'wrap'
+      'unwrap'
     ]
   }
 }
@@ -147,24 +149,36 @@ resource keyVaultAccessPolicy 'Microsoft.KeyVault/vaults/accessPolicies@2021-11-
     accessPolicies: [
       {
         objectId: disk_encryption.identity.principalId
-        tenantId: tenant().tenantId
+        tenantId: tenantId
         permissions: {
           keys: [
             'get'
             'wrapKey'
             'unwrapKey'
+            'encrypt'
+            'decrypt'
           ]
           certificates: []
           secrets: []
         }
       }
+      {
+        tenantId: tenantId
+        objectId: managed_identity.properties.principalId
+        permissions: {
+          keys: [
+            'get'
+            'list'
+            'unwrapKey'
+            'wrapKey'
+          ]
+          secrets: []
+          certificates: []
+        }
+      }
     ]
   }
 }
-
-
-
-
 
 
 @description('Outputs to other modules that need reference to Keyvault or encryption')
