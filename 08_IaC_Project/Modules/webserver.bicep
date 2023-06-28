@@ -52,9 +52,11 @@ resource webvm 'Microsoft.Compute/virtualMachines@2022-03-01' = {
       }
       osDisk: {
         createOption: 'FromImage'
-        encryptionSettings: kv_key_resource          // // try existing enable when keyvault works // if not try managedDisk option
+        // encryptionSettings: kv_key_resource          // // try existing enable when keyvault works // if not try managedDisk option
         managedDisk: {
-          diskEncryptionSet: diskencryption
+          diskEncryptionSet: {
+            id: diskencryption
+          }
         }
       }
     }
