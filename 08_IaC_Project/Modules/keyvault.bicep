@@ -138,18 +138,42 @@ resource disk_encryption 'Microsoft.Compute/diskEncryptionSets@2021-08-01' = {
         id: keyvault_resource.id
       }
     }
-    encryptionType: 'EncryptionAtRestWithCustomerKey'
+    // encryptionType: 'EncryptionAtRestWithCustomerKey'
   }
 }
 
-resource keyVaultAccessPolicy 'Microsoft.KeyVault/vaults/accessPolicies@2021-11-01-preview' = {
+// resource keyVaultAccessPolicy 'Microsoft.KeyVault/vaults/accessPolicies@2021-11-01-preview' = {
+//   name: 'add'
+//   parent: keyvault_resource
+//   properties: {
+//     accessPolicies: [
+//       {
+//         objectId: disk_encryption.identity.principalId
+//         tenantId: tenantId
+//         permissions: {
+//           keys: [
+//             'get'
+//             'wrapKey'
+//             'unwrapKey'
+//             'encrypt'
+//             'decrypt'
+//           ]
+//           certificates: []
+//           secrets: []
+//         }
+//       }
+//     ]
+//   }
+// }
+
+resource key_vault_access_policy 'Microsoft.KeyVault/vaults/accessPolicies@2021-10-01' = {
   name: 'add'
   parent: keyvault_resource
   properties: {
-    accessPolicies: [
+    accessPolicies:[
       {
-        objectId: disk_encryption.identity.principalId
         tenantId: tenantId
+        objectId: disk_encryption.identity.principalId
         permissions: {
           keys: [
             'get'
@@ -158,9 +182,10 @@ resource keyVaultAccessPolicy 'Microsoft.KeyVault/vaults/accessPolicies@2021-11-
             'encrypt'
             'decrypt'
           ]
-          certificates: []
           secrets: []
+          certificates: []
         }
+        
       }
       {
         tenantId: tenantId
@@ -179,6 +204,8 @@ resource keyVaultAccessPolicy 'Microsoft.KeyVault/vaults/accessPolicies@2021-11-
     ]
   }
 }
+
+
 
 
 @description('Outputs to other modules that need reference to Keyvault or encryption')
