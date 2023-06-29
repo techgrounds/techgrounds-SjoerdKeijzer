@@ -176,6 +176,8 @@ resource key_vault_access_policy 'Microsoft.KeyVault/vaults/accessPolicies@2021-
 // Outputs to other modules that need reference to Keyvault or encryption
 output key_vault_resource_id string = keyvault_resource.id
 output key_vault_url string = keyvault_resource.properties.vaultUri
+output key_vault_name string = keyvault_resource.name
 output managed_id_out string = managed_identity.id
+output managed_id_name string = managed_identity_name
 output diskencryptset_id string = disk_encryption.id
 output kv_key_name string = kv_key_resource.name

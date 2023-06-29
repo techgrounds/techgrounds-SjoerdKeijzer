@@ -17,23 +17,23 @@ resource rootgroup 'Microsoft.Resources/resourceGroups@2022-09-01' = {
   location: location
 }
 
-@description('Deploy storage account module') // works just fine
-// Deploy storage account module
-module stg 'Modules/storage.bicep' = {
-name: 'storagedeployment'
-scope: rootgroup
-params: {
-  location: location
-  environment: environment
-  }
-}
-
  @description('Deploy network module') // works fine
 // Deploy network module
 // Ideally I want different resource groups for each vnet, but for easy testing purposes let's deploy everything in the main root resource group
 module network 'Modules/network._test.bicep' = {
   name: 'networkdeployment'
   scope: rootgroup
+  params: {
+    location: location
+    environment: environment
+  }
+}
+
+@description('Deploy keyvault and encryption module')   // deploys with encrypted diskset - need to fix passwords at other time
+// Deploy Keyvault & encryption module
+module keyvault 'Modules/keyvault.bicep' = {
+  scope: rootgroup
+  name: 'keyvault_deployment'
   params: {
     location: location
     environment: environment
@@ -85,17 +85,20 @@ module peering 'Modules/peering.bicep' = {
     }
   }
 
-@description('Deploy keyvault and encryption module')   // deploys with encrypted diskset - need to fix passwords at other time
-// Deploy Keyvault & encryption module
-module keyvault 'Modules/keyvault.bicep' = {
-  scope: rootgroup
-  name: 'keyvault_deployment'
-  params: {
-    location: location
-    // // storageAccount: stg.outputs.stg_id
-    // // storageName: stg.outputs.stg_name
-    environment: environment
+
+@description('Deploy storage account module') // works just fine
+// Deploy storage account module
+module stg 'Modules/storage.bicep' = {
+name: 'storagedeployment'
+scope: rootgroup
+params: {
+  location: location
+  environment: environment
+  managed_identity_name: keyvault.outputs.managed_id_name
+  keyVaultName: keyvault.outputs.key_vault_name
+  key_name: keyvault.outputs.kv_key_name
   }
+  dependsOn: [keyvault]
 }
 
 // @description('Deply database module')

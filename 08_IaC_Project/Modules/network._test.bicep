@@ -126,6 +126,18 @@ resource nsg_webserver 'Microsoft.Network/networkSecurityGroups@2022-11-01' = {
         // destinationPortRanges: ['8080']          // 8080 port nodig ?
       }
     }
+    { name: 'ssh'
+    properties: {
+      access: 'Allow'
+      direction: 'Inbound'
+      priority: 400
+      protocol: 'Tcp'
+      sourcePortRange: '*'                        
+      sourceAddressPrefix: '*'                    // admin server of ip als je ssh forwarding doet
+      destinationPortRange: '22'
+      destinationAddressPrefix: '*'               // waarschijnlijk nog specifieker maken
+    }
+    }
     ]
   }
 }
