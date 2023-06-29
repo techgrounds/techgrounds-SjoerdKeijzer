@@ -146,20 +146,20 @@ resource key_vault_access_policy 'Microsoft.KeyVault/vaults/accessPolicies@2021-
           certificates: []
         }
       }
-      {
-        tenantId: tenantId
-        objectId: managed_identity.properties.principalId
-        permissions: {
-          keys: [
-            'get'
-            'list'
-            'unwrapKey'
-            'wrapKey'
-          ]
-          secrets: []
-          certificates: []
-        }
-      }
+      // {
+      //   tenantId: tenantId
+      //   objectId: managed_identity.properties.principalId
+      //   permissions: {
+      //     keys: [
+      //       'get'
+      //       'list'
+      //       'unwrapKey'
+      //       'wrapKey'
+      //     ]
+      //     secrets: []
+      //     certificates: []
+      //   }
+      // }
     ]
   }
 }
