@@ -27,13 +27,13 @@ resource sqlserver 'Microsoft.Sql/servers@2021-02-01-preview' = {
   }
 }
 
-  resource sqldb 'Microsoft.DBforMySQL/servers/databases@2017-12-01' = {
-    name: sqldb_name
-    parent: sqlserver               // need to fix this / get right resource
-    properties: {
-      // charset: 
-      // collation: 
-    }
-  }
+  // resource sqldb 'Microsoft.DBforMySQL/servers/databases@2017-12-01' = {
+  //   name: sqldb_name
+  //   parent: sqlserver               // need to fix this / get right resource
+  //   properties: {
+  //     // charset: 
+  //     // collation: 
+  //   }
+  // }
 
 

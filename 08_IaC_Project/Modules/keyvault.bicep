@@ -1,18 +1,11 @@
 @description('Place keyvault in default region of target resourcegroup declared in main.bicep')
 param location string
-
 param environment string
-
-// @description('Outputs from stg module')
-// // import storage module outputs that might be required for disk encryption sets
-// param storageAccount string
-// param storageName string
 
 // N2K: Azure Key Vault enforces Transport Layer Security (TLS) protocol to protect data when it’s traveling between Azure Key vault and clients
 
 // az policy add voor toevoegen van secrets oid // alleen van toepassing op assigned id 
 // admin pw moet gestored kunnen worden
-
 
 @description('The name of the User Assigned Identity.')
 param managed_identity_name string= 'userid${uniqueString(resourceGroup().name)}' 
