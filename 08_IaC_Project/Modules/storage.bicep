@@ -37,6 +37,10 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2022-09-01' = {
     name: 'Standard_LRS'
   }
   kind: 'StorageV2'
+  identity: {
+    type: 'UserAssigned'
+    userAssignedIdentities: managed_identity
+  }
   properties: {
     accessTier: 'Hot'
     allowBlobPublicAccess: false
@@ -57,9 +61,9 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2022-09-01' = {
         keyvaulturi: keyvault_resource.properties.vaultUri
         keyname: key_name
       }
-      identity: {
-        userAssignedIdentity: managed_identity.id 
-      }
+      // identity: {
+      //   userAssignedIdentity: managed_identity.properties.principalId    // had eerst managed_identity.id
+      // }
     }
     networkAcls: {
       defaultAction: 'Deny'

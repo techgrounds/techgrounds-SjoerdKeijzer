@@ -126,6 +126,9 @@ params: {
 //     name_vnet_webserver: network.outputs.vnet_name_webserver
 //     id_vnet_webserver: network.outputs.vnet_id_webserver
 //   }
+//   dependsOn: [
+//     network
+//   ]
 //  }
 
 @description('Deploy Back-up and recovery module')
