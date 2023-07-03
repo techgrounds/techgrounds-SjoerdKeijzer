@@ -2,8 +2,6 @@
 param location string
 param environment string
 
-// N2K: Azure Key Vault enforces Transport Layer Security (TLS) protocol to protect data when it’s traveling between Azure Key vault and clients
-
 // az policy add voor toevoegen van secrets oid // alleen van toepassing op assigned id 
 // admin pw moet gestored kunnen worden
 

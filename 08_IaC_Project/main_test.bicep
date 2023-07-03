@@ -51,9 +51,6 @@ module adminserver 'Modules/adminserver.bicep' = {
     nicid: network.outputs.nic_id_adminserver
     diskencryption: keyvault.outputs.diskencryptset_id
   }
-  // dependsOn: [
-  //   network
-  // ]
 }
 
 @description('Deploy webserver module') // need to fix acces/routing from internet via nsg / and login to vm via ssh on adminserver
@@ -67,9 +64,6 @@ module webserver 'Modules/webserver.bicep' = {
     nicid: network.outputs.nic_id_webserver
     diskencryption: keyvault.outputs.diskencryptset_id
   }
-  // dependsOn: [
-  //   network
-  // ]
 }
 
 @description('Deploy network peering module') // works fine

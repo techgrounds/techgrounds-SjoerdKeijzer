@@ -222,7 +222,7 @@ resource nsg_adminserver 'Microsoft.Network/networkSecurityGroups@2022-11-01' = 
         properties: {
           access: 'Allow'
           direction: 'Inbound'
-          priority: 110
+          priority: 300
           protocol: 'Tcp'
           sourcePortRange: '*'
           sourceAddressPrefix: '77.175.148.54'            // allow admin IP('s) // test for now, will 

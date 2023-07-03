@@ -38,7 +38,7 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2022-09-01' = {
   }
   kind: 'StorageV2'
   identity: {
-    type: 'UserAssigned'
+    type: 'SystemAssigned'        // UserAssigned
     userAssignedIdentities: managed_identity
   }
   properties: {
