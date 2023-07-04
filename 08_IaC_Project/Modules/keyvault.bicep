@@ -56,16 +56,16 @@ resource keyvault_resource 'Microsoft.KeyVault/vaults@2021-11-01-preview' = {
     enableSoftDelete: true
     softDeleteRetentionInDays: 7          // min value 7 - 90 is standard
     publicNetworkAccess: 'Enabled'        // could be 'Disabled' but chances are for now I could lock myself out of my Keyvault
-    accessPolicies: [
-      {
-        objectId: managed_identity.properties.principalId     //  when working with user assigned identity (legacy)
-        tenantId: tenantId
-        permissions: {
-          keys: keysPermissions
-          secrets: secretsPermissions
-          certificates: certificatesPermissions
-        }
-      }]
+    // accessPolicies: [
+    //   {
+    //     objectId: managed_identity.properties.principalId     //  when working with user assigned identity (legacy)
+    //     tenantId: tenantId
+    //     permissions: {
+    //       keys: keysPermissions
+    //       secrets: secretsPermissions
+    //       certificates: certificatesPermissions
+    //     }
+    //   }]
     sku: {
       name: skuName
       family: 'A'
@@ -124,7 +124,7 @@ resource disk_encryption 'Microsoft.Compute/diskEncryptionSets@2021-08-01' = {
 }
 
 // gives disk encryption set access to Keyvault
-resource key_vault_access_policy 'Microsoft.KeyVault/vaults/accessPolicies@2021-10-01' = {
+resource vault_access_policy 'Microsoft.KeyVault/vaults/accessPolicies@2021-10-01' = {
   name: 'add'
   parent: keyvault_resource
   properties: {
@@ -144,18 +144,14 @@ resource key_vault_access_policy 'Microsoft.KeyVault/vaults/accessPolicies@2021-
           certificates: []
         }
       }
+    // gives managed ID acces to the vault
       {
         tenantId: tenantId
         objectId: managed_identity.properties.principalId
         permissions: {
-          keys: [
-            'get'
-            'list'
-            'unwrapKey'
-            'wrapKey'
-          ]
-          secrets: []
-          certificates: []
+          keys: keysPermissions
+          secrets: secretsPermissions
+          certificates: certificatesPermissions
         }
       }
     ]
