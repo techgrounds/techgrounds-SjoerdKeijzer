@@ -7,12 +7,14 @@ param diskencryption string
 // import needed outputs from other modules
 param name_vnet_webserver string
 param name_vmss string
+param agw_subnet string
+param agw_subnet_prefix string
 
 
 // public ip voor gateway
 // gateway in webserver vnet
-// gateway eigen subnet
-// gateway eigen NSG ?
+// gateway eigen subnet + subnet prefix
+// gateway eigen nsg? Nee, vmss eigen nsg
 // scale set aan gateway koppelen
 // listeners / rules instellen
 
@@ -32,14 +34,47 @@ resource app_gateway 'Microsoft.Network/applicationGateways@2022-11-01' = {
     // forceFirewallPolicyAssociation:
     enableHttp2: false
     // customErrorConfigurations: 
-    // gatewayIPConfigurations:
-    // frontendIPConfigurations:
-    // frontendPorts:
-    sku: gateway_sku
+    gatewayIPConfigurations: [
+      {
+        name: 'AGW_ipconfig'
+        properties: {
+          subnet: {
+            // id: agw_subnet.id                  // get subnet id from networking module
+          }
+        }
+      }
+    ]
+    frontendIPConfigurations: [
+      {
+        properties: {
+          publicIPAddress: {
+            // id: pub_ip_gateway                    // public IP for gateway here
+          }
+        }
+      }
+    ]
+    frontendPorts: [
+      {
+        name: 'https'
+        properties: {
+          port: 443
+        }
+      }
+      { name: 'http'
+      properties: {
+        port: 80
+      }
+      }
+    ]
+    sku: {
+      name: 'Standard_v2'
+      tier: 'Standard'          // standard v2
+    }
     // sslCertificates:
     // probes:
     // sslPolicy:
     // sslProfiles:
     // webApplicationFirewallConfiguration:
+    // redirectConfigurations:                              // need to write rule here for http > https
   }
 }

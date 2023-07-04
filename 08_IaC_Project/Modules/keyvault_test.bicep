@@ -2,6 +2,7 @@
 param location string
 
 param environment string
+param objectID string
 
 // @description('Outputs from stg module')
 // // import storage module outputs that might be required for disk encryption sets
@@ -67,7 +68,7 @@ resource keyvault_resource 'Microsoft.KeyVault/vaults@2021-11-01-preview' = {
     publicNetworkAccess: 'Enabled'        // could be 'Disabled' but chances are for now I could lock myself out of my Keyvault
     accessPolicies: [
       {
-        objectId: managed_identity.properties.principalId     //  when working with user assigned identity (legacy)
+        objectId: objectID // managed_identity.properties.principalId     //  when working with user assigned identity (legacy)
         tenantId: tenantId
         permissions: {
           keys: keysPermissions

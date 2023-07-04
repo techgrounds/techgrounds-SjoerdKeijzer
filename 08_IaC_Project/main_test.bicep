@@ -80,7 +80,7 @@ module peering 'Modules/peering.bicep' = {
   }
 
 
-@description('Deploy storage account module') // works just fine
+@description('Deploy storage account module')
 // Deploy storage account module
 module stg 'Modules/storage.bicep' = {
 name: 'storagedeployment'

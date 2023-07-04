@@ -15,14 +15,14 @@ param container_name string = 'container-${environment}'
 
 @description('Place storage account in same region as resource group')
 // place storage account in same region as resource group
-param location string = resourceGroup().location
+param location string
 
 resource keyvault_resource 'Microsoft.KeyVault/vaults@2021-11-01-preview' existing = {
   name: keyVaultName
 }
 
 resource managed_identity 'Microsoft.ManagedIdentity/userAssignedIdentities@2018-11-30' existing = {
-  name:  managed_identity_name
+  name: managed_identity_name
 }
 
 @description('storage account properties')
