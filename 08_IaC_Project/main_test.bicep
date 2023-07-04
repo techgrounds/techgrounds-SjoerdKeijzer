@@ -77,6 +77,7 @@ module peering 'Modules/peering.bicep' = {
     peer_web_vnet: network.outputs.vnet_id_webserver
     peer_admin_vnet: network.outputs.vnet_id_adminserver
     }
+    dependsOn: [network]
   }
 
 
