@@ -82,7 +82,7 @@ module peering 'Modules/peering.bicep' = {
 
 @description('Deploy storage account module')
 // Deploy storage account module
-module stg 'Modules/storage.bicep' = {
+module stg 'Modules/storage_test.bicep' = {
 name: 'storagedeployment'
 scope: rootgroup
 params: {

@@ -17,13 +17,13 @@ param container_name string = 'container-${environment}'
 // place storage account in same region as resource group
 param location string
 
-resource keyvault_resource 'Microsoft.KeyVault/vaults@2021-11-01-preview' existing = {
-  name: keyVaultName
-}
+// resource keyvault_resource 'Microsoft.KeyVault/vaults@2021-11-01-preview' existing = {
+//   name: keyVaultName
+// }
 
-resource managed_identity 'Microsoft.ManagedIdentity/userAssignedIdentities@2018-11-30' existing = {
-  name: managed_identity_name
-}
+// resource managed_identity 'Microsoft.ManagedIdentity/userAssignedIdentities@2018-11-30' existing = {
+//   name: managed_identity_name
+// }
 
 @description('storage account properties')
 // storage account properties
@@ -37,38 +37,31 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2022-09-01' = {
     name: 'Standard_LRS'
   }
   kind: 'StorageV2'
-  identity: {
-    type: 'SystemAssigned'        // UserAssigned
-    userAssignedIdentities: managed_identity
-  }
+  // identity: {
+  //   type: 'SystemAssigned'        // UserAssigned
+  //   userAssignedIdentities: managed_identity
+  // }
   properties: {
     accessTier: 'Hot'
     allowBlobPublicAccess: false
     publicNetworkAccess: 'Disabled'
     minimumTlsVersion: 'TLS1_2'
-    // keyPolicy:
-    // immutableStorageWithVersioning: 
     supportsHttpsTrafficOnly: true              // maybe switch back to false if I can't set the right permissions in 1.0
-    encryption: {
-      // services: {
-      //   blob: {
-      //     enabled: true
-      //   }
-      // }
-      keySource: 'Microsoft.Keyvault'
-      keyvaultproperties: {
-        keyvaulturi: keyvault_resource.properties.vaultUri
-        keyname: key_name
-      }
-      // identity: {
-      //   userAssignedIdentity: managed_identity.properties.principalId    // had eerst managed_identity.id
-      // }
-    }
+    // encryption: {
+    //   keySource: 'Microsoft.Keyvault'
+    //   keyvaultproperties: {
+    //     keyvaulturi: keyvault_resource.properties.vaultUri
+    //     keyname: key_name
+    //   }
+    //   identity: {
+    //     userAssignedIdentity: managed_identity.properties.principalId    // had eerst managed_identity.id
+    //   }
+    // }
     networkAcls: {
       defaultAction: 'Deny'
       bypass: 'AzureServices'
     }
-    }
+  }
   }
 
 resource blob 'Microsoft.Storage/storageAccounts/blobServices@2022-09-01' = {
@@ -91,14 +84,7 @@ resource blob 'Microsoft.Storage/storageAccounts/blobServices@2022-09-01' = {
     parent: blob
     properties: {
       publicAccess: 'None'
-      // defaultEncryptionScope: 
-      // enableNfsV3AllSquash:
-      // enableNfsV3RootSquash:
-      // denyEncryptionScopeOverride:
-      // immutableStorageWithVersioning:
-      // metadata:
     }
-
   }
 
   output stg_id string = storageAccount.id
