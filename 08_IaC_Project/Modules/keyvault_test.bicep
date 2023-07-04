@@ -42,7 +42,7 @@ param secretsPermissions array = [
 
 @description('Specifices the permissions to certificates in the vault.')
 param certificatesPermissions array = [
-  'all'
+'all'
 ]
 
 @description('Specifies whether the key vault is a standard vault or a premium vault.')

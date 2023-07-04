@@ -7,6 +7,7 @@ targetScope = 'subscription'
 ])
 param environment string = 'dev'
 
+param objectID string
 
 @description('Make general resource group for deployment in certain region')
 // Make a general resource group for deployment in a region
@@ -31,12 +32,13 @@ module network 'Modules/network._test.bicep' = {
 
 @description('Deploy keyvault and encryption module')   // deploys with encrypted diskset - need to fix passwords at other time
 // Deploy Keyvault & encryption module
-module keyvault 'Modules/keyvault.bicep' = {
+module keyvault 'Modules/keyvault_test.bicep' = {
   scope: rootgroup
   name: 'keyvault_deployment'
   params: {
     location: location
     environment: environment
+    objectID: objectID
   }
 }
 
@@ -80,20 +82,20 @@ module peering 'Modules/peering.bicep' = {
   }
 
 
-@description('Deploy storage account module')
-// Deploy storage account module
-module stg 'Modules/storage.bicep' = {
-name: 'storagedeployment'
-scope: rootgroup
-params: {
-  location: location
-  environment: environment
-  managed_identity_name: keyvault.outputs.managed_id_name
-  keyVaultName: keyvault.outputs.key_vault_name
-  key_name: keyvault.outputs.kv_key_name
-  }
-  dependsOn: [keyvault]
-}
+// @description('Deploy storage account module')
+// // Deploy storage account module
+// module stg 'Modules/storage.bicep' = {
+// name: 'storagedeployment'
+// scope: rootgroup
+// params: {
+//   location: location
+//   environment: environment
+//   managed_identity_name: keyvault.outputs.managed_id_name
+//   keyVaultName: keyvault.outputs.key_vault_name
+//   key_name: keyvault.outputs.kv_key_name
+//   }
+//   dependsOn: [keyvault]
+// }
 
 // @description('Deply database module')
 // // Deploy mySQL database attached to webserver as back-end db
