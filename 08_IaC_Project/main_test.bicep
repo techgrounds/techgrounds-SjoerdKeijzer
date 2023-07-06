@@ -19,7 +19,6 @@ resource rootgroup 'Microsoft.Resources/resourceGroups@2022-09-01' = {
 
  @description('Deploy network module') // works fine
 // Deploy network module
-// Ideally I want different resource groups for each vnet, but for easy testing purposes let's deploy everything in the main root resource group
 module network 'Modules/network._test.bicep' = {
   name: 'networkdeployment'
   scope: rootgroup
@@ -96,6 +95,47 @@ params: {
   dependsOn: [keyvault]
 }
 
+ @description('Deploy vmss module')
+ // Deply vmss module
+ module vmss 'Modules/vmss.bicep' = {
+  scope: rootgroup
+  name: 'vmss_deployment'
+  params: {
+    location: location
+    name_vnet_webserver: network.outputs.vnet_name_webserver
+    id_vnet_webserver: network.outputs.vnet_id_webserver
+  }
+  dependsOn: [
+    network
+  ]
+ }
+
+
+@description('Deploys application gateway')
+module gateway 'Modules/gateway.bicep' = {
+  name: 'AGW_deployment'
+  scope: rootgroup
+  params: {
+    agw_subnet: network.outputs.subnet_id_frontend
+    diskencryption: keyvault.outputs.diskencryptset_id
+    environment: environment
+    location: location
+    agw_pub_ip: network.outputs.pub_ip_agw
+    name_vmss: vmss.outputs.name_vmss
+    name_vnet_webserver: network.outputs.vnet_name_webserver
+  }
+  dependsOn: [
+    network
+  ]
+}
+
+@description('Deploy Back-up and recovery module')
+// Deploy AZ back-up and recovery vault
+module backup_recovery 'Modules/backup_recovery.bicep' = {
+  name: 'backup_recovery_deployment'
+  scope: rootgroup
+}
+
 // @description('Deply database module')
 // // Deploy mySQL database attached to webserver as back-end db
 // module database 'Modules/database.bicep' = {
@@ -108,27 +148,3 @@ params: {
 //     location: location
 //   }
 // }
-
-
-
-//  @description('Deploy vmss module')
-//  // Deply vmss module
-//  module vmss 'Modules/vmss.bicep' = {
-//   scope: rootgroup
-//   name: 'vmss_deployment'
-//   params: {
-//     location: location
-//     name_vnet_webserver: network.outputs.vnet_name_webserver
-//     id_vnet_webserver: network.outputs.vnet_id_webserver
-//   }
-//   dependsOn: [
-//     network
-//   ]
-//  }
-
-@description('Deploy Back-up and recovery module')
-// Deploy AZ back-up and recovery vault
-module backup_recovery 'Modules/backup_recovery.bicep' = {
-  name: 'backup_recovery_deployment'
-  scope: rootgroup
-}

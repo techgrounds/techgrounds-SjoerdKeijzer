@@ -8,8 +8,10 @@ param location string
 @description('Naming of vnets, subnets and nsg')
 // Naming of the vnets, subnets and nsg's
 param name_vnet_webserver string = '${environment}_vnet_webserver'
-param name_subnet_webserver string = 'subnet_webserver'
-param name_nsg_webserver string = 'nsg_webserver'
+param name_subnet_backend string = 'subnet_backend'
+param name_subnet_front_agw string = 'subnet_frontend_agw'
+param name_nsg_frontend string = 'nsg_frontend'
+param name_nsg_backend string = 'nsg_backend'
 param name_vnet_adminserver string = '${environment}_vnet_adminserver'
 param name_subnet_adminserver string= 'subnet_adminserver'
 param name_nsg_adminserver string = 'nsg_adminserver'
@@ -20,6 +22,7 @@ param name_nic_vnet_webserver string = 'nic_${name_vnet_webserver}'
 param name_nic_vnet_adminserver string = 'nic_${name_vnet_adminserver}'
 param name_pubip_webserver string = '${name_vnet_webserver}-publicIP'
 param name_pubip_adminserver string = '${name_vnet_adminserver}-publicIP'
+// nic for gateway?
 
 
 @description('All webserver infra to follow below. Order is vnet with nested subnet -> public IP -> nics -> NSG')
@@ -36,21 +39,41 @@ resource vnet_webserver 'Microsoft.Network/virtualNetworks@2022-11-01' = {
     enableDdosProtection: false
     addressSpace: {
       addressPrefixes: [
-        '10.10.10.0/24'
+        '10.10.10.0/25'
       ]}
       subnets: [
         { 
-          name: name_subnet_webserver
+          name: name_subnet_backend
         properties: {
-          addressPrefix: '10.10.10.0/24' // subnet(s) address here
+          addressPrefix: '10.10.10.128/25'                  // back-end subnet
           networkSecurityGroup: {
-            id: nsg_webserver.id}
+            id: nsg_backend.id}
+          }
+        }
+        {
+          name: name_subnet_front_agw
+          properties: {
+            addressPrefix: '10.10.10.0/25'                  // front end subnet
+            networkSecurityGroup: {
+              id: nsg_frontend.id
+            }
           }
         }
       
       ]
   }
 }
+resource pub_ip_agw 'Microsoft.Network/publicIPAddresses@2022-11-01' = {
+  name: 'AGW-pub-ip-address'
+  location: location
+  tags: {
+    vnet: name_vnet_webserver
+    location: location
+  }
+  properties: {
+    publicIPAllocationMethod: 'Static'
+    }
+  }
 
 resource pub_ip_webserver 'Microsoft.Network/publicIPAddresses@2021-02-01' = {
   name: name_pubip_webserver
@@ -73,7 +96,7 @@ resource nic_webserver 'Microsoft.Network/networkInterfaces@2022-11-01' = {
   }
   properties: {
     networkSecurityGroup: {
-      id: nsg_webserver.id
+      id: nsg_backend.id
     }
     ipConfigurations: [
       {
@@ -92,8 +115,23 @@ resource nic_webserver 'Microsoft.Network/networkInterfaces@2022-11-01' = {
   }
 }
 
-resource nsg_webserver 'Microsoft.Network/networkSecurityGroups@2022-11-01' = {
-  name: name_nsg_webserver
+resource nsg_frontend 'Microsoft.Network/networkSecurityGroups@2022-11-01' = {
+  name: name_nsg_frontend
+  location: location
+  tags: {
+    vnet: name_vnet_webserver
+    location: location
+  }
+  properties: {
+    securityRules: [
+      
+    ]
+  }
+}
+
+
+resource nsg_backend 'Microsoft.Network/networkSecurityGroups@2022-11-01' = {
+  name: name_nsg_backend
   location: location
   tags: {
     vnet: name_vnet_webserver
@@ -240,13 +278,15 @@ output vnet_id_webserver string = vnet_webserver.id
 output vnet_id_adminserver string = vnet_adminserver.id
 output vnet_name_webserver string = name_vnet_webserver
 output vnet_name_adminserver string = name_vnet_adminserver
-output subnet_id_webserver string = vnet_webserver.properties.subnets[0].id
+output subnet_id_backend string = vnet_webserver.properties.subnets[1].id
+output subnet_id_frontend string = vnet_webserver.properties.subnets[0].id
 output subnet_id_adminserver string = vnet_adminserver.properties.subnets[0].id
-output nsg_id_webserver string = nsg_webserver.id
+output nsg_id_backend string = nsg_backend.id
+output nsg_id_frontend string = nsg_frontend.id
 output nsg_id_adminserver string = nsg_adminserver.id
 output nic_id_webserver string = nic_webserver.id
 output nic_id_adminserver string = nic_adminserver.id
-output pub_ip_id_webserver string = pub_ip_webserver.id
 output pub_ip_id_adminserver string = pub_ip_adminserver.id
+output pub_ip_agw string = pub_ip_agw.id
 
 

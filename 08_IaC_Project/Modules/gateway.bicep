@@ -8,8 +8,10 @@ param diskencryption string
 param name_vnet_webserver string
 param name_vmss string
 param agw_subnet string
-param agw_subnet_prefix string
+param agw_pub_ip string
+// param agw_subnet_prefix string
 
+param app_gateway_name string = '${environment}-agw'
 
 // public ip voor gateway
 // gateway in webserver vnet
@@ -22,6 +24,7 @@ resource vnet_webserver 'Microsoft.Network/virtualNetworks@2022-11-01' existing 
   name: name_vnet_webserver
 }
 
+
 resource app_gateway 'Microsoft.Network/applicationGateways@2022-11-01' = {
   name: app_gateway_name
   properties: {
@@ -30,7 +33,11 @@ resource app_gateway 'Microsoft.Network/applicationGateways@2022-11-01' = {
       maxCapacity: 3
     }
     // authenticationCertificates:
-    // backendAddressPools:
+    backendAddressPools: [
+      // {
+      //   id: resourceId()
+      // }
+    ]
     // forceFirewallPolicyAssociation:
     enableHttp2: false
     // customErrorConfigurations: 
@@ -39,7 +46,7 @@ resource app_gateway 'Microsoft.Network/applicationGateways@2022-11-01' = {
         name: 'AGW_ipconfig'
         properties: {
           subnet: {
-            // id: agw_subnet.id                  // get subnet id from networking module
+            id: agw_subnet                  // get subnet id from networking module
           }
         }
       }
@@ -48,7 +55,7 @@ resource app_gateway 'Microsoft.Network/applicationGateways@2022-11-01' = {
       {
         properties: {
           publicIPAddress: {
-            // id: pub_ip_gateway                    // public IP for gateway here
+            id: agw_pub_ip                  // public IP for gateway here
           }
         }
       }
