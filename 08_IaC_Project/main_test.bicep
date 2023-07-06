@@ -104,6 +104,9 @@ params: {
     location: location
     name_vnet_webserver: network.outputs.vnet_name_webserver
     id_vnet_webserver: network.outputs.vnet_id_webserver
+    diskencryption: keyvault.outputs.diskencryptset_id
+    subnet_id_backend: network.outputs.subnet_id_backend
+    environment: environment
   }
   dependsOn: [
     network
@@ -117,7 +120,6 @@ module gateway 'Modules/gateway.bicep' = {
   scope: rootgroup
   params: {
     agw_subnet: network.outputs.subnet_id_frontend
-    diskencryption: keyvault.outputs.diskencryptset_id
     environment: environment
     location: location
     agw_pub_ip: network.outputs.pub_ip_agw

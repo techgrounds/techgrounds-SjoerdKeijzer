@@ -2,7 +2,6 @@
 // import the regular params from main
 param location string
 param environment string
-param diskencryption string
 
 // import needed outputs from other modules
 param name_vnet_webserver string
@@ -85,3 +84,6 @@ resource app_gateway 'Microsoft.Network/applicationGateways@2022-11-01' = {
     // redirectConfigurations:                              // need to write rule here for http > https
   }
 }
+
+
+output name_agw string = app_gateway_name
