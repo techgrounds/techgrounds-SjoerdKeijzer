@@ -107,6 +107,7 @@ params: {
     diskencryption: keyvault.outputs.diskencryptset_id
     subnet_id_backend: network.outputs.subnet_id_backend
     environment: environment
+    name_vmss:gateway
   }
   dependsOn: [
     network
