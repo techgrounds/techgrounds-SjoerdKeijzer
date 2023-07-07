@@ -9,6 +9,7 @@ param subnet_id_backend string
 param name_vmss string = 'vmss_webserver'
 param vm_size string = 'Standard_B1s'
 param vm_sku string = '20_04-lts'
+param name_vm string = '${environment}-web-vm'
 
 // installs apache on each scaling instance
 var apache_script = loadFileAsBase64('bashscript/web_installscript.sh')
@@ -31,7 +32,7 @@ resource vmss 'Microsoft.Compute/virtualMachineScaleSets@2021-11-01' = {
   sku: {
     tier: 'Standard'
     name: vm_size
-    capacity: 3
+    capacity: 1
   }
   properties: {
     automaticRepairsPolicy: {
@@ -66,6 +67,7 @@ resource vmss 'Microsoft.Compute/virtualMachineScaleSets@2021-11-01' = {
         }
       }
       osProfile: {
+        computerNamePrefix: name_vm
         adminUsername: webadmin_username
         adminPassword: webadmin_password
         linuxConfiguration: {
@@ -77,8 +79,9 @@ resource vmss 'Microsoft.Compute/virtualMachineScaleSets@2021-11-01' = {
         networkInterfaceConfigurations: [
           {
             // id: vmss_interface_id
-            name: '${environment}-VMSS_interface' 
+            name: '${environment}-VMSS_interface'
             properties: {
+              enableAcceleratedNetworking: false
               ipConfigurations: [
                 {
                 name: '${environment}-VMSS-IPconfig'
