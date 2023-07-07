@@ -104,7 +104,7 @@ resource vmss 'Microsoft.Compute/virtualMachineScaleSets@2021-11-01' = {
     //   rules: [
     //   ]
     // }
-    overprovision: false                                    // when set to true I got deployment errors
+    // overprovision: false                                    // when set to true I got deployment errors
     singlePlacementGroup: true
     platformFaultDomainCount: 1
   }
