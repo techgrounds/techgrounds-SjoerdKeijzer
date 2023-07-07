@@ -62,7 +62,7 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2022-09-01' = {
       bypass: 'AzureServices'
     }
   }
-  }
+}
 
 resource blob 'Microsoft.Storage/storageAccounts/blobServices@2022-09-01' = {
   name: blob_name
@@ -76,7 +76,6 @@ resource blob 'Microsoft.Storage/storageAccounts/blobServices@2022-09-01' = {
     // containerDeleteRetentionPolicy: bool _ value (int)
     // defaultServiceVersion:
   }
-
 }
 
   resource container 'Microsoft.Storage/storageAccounts/blobServices/containers@2022-09-01' = {

@@ -39,18 +39,18 @@ module keyvault 'Modules/keyvault.bicep' = {
   }
 }
 
-@description('Deploys admin server module') // succesfull rdp login
-// Deploy admin server module
-module adminserver 'Modules/adminserver.bicep' = {
-  name: 'adminserver_deployment'
-  scope: rootgroup
-  params: {
-    location: location
-    environment: environment
-    nicid: network.outputs.nic_id_adminserver
-    diskencryption: keyvault.outputs.diskencryptset_id
-  }
-}
+// @description('Deploys admin server module') // succesfull rdp login
+// // Deploy admin server module
+// module adminserver 'Modules/adminserver.bicep' = {
+//   name: 'adminserver_deployment'
+//   scope: rootgroup
+//   params: {
+//     location: location
+//     environment: environment
+//     nicid: network.outputs.nic_id_adminserver
+//     diskencryption: keyvault.outputs.diskencryptset_id
+//   }
+// }
 
 // @description('Deploy webserver module') // need to fix acces/routing from internet via nsg / and login to vm via ssh on adminserver
 // // Deploy webserver module
