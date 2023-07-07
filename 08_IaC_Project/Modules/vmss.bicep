@@ -11,6 +11,9 @@ param vm_size string = 'Standard_B1s'
 param vm_sku string = '20_04-lts'
 param name_vm string = '${environment}-web-vm'
 
+//interface
+param name_ntw_interface string = 'network_interface'
+
 // installs apache on each scaling instance
 var apache_script = loadFileAsBase64('bashscript/web_installscript.sh')
 
@@ -19,6 +22,36 @@ param webadmin_username string = 'vmsjoerd'
 @secure()
 @minLength(6)
 param webadmin_password string = 'PasswordMustBeSafeOk!'                        // later in keyvault zetten
+
+resource network_interface 'Microsoft.Network/networkInterfaces@2022-11-01' = {
+  name: name_ntw_interface
+  tags: {
+    location: location
+    vnet: name_vnet_webserver
+    id: 'ntw_interface'
+  }
+  properties: {
+    enableAcceleratedNetworking: false
+    enableIPForwarding: false
+    nicType: 'Standard'
+    ipConfigurations: [
+      {
+        name: 'ntw_interface_config'
+        // id: 
+        // type:
+        properties: {
+          // applicationGatewayBackendAddressPools:
+          // applicationSecurityGroups: 
+          privateIPAllocationMethod: 'Dynamic'
+          // publicIPAddress:
+          // privateIPAddress:
+          primary: null
+        }
+      }
+    ]
+  }
+  location: location
+}
 
 resource vmss 'Microsoft.Compute/virtualMachineScaleSets@2021-11-01' = {
   name: name_vmss
@@ -58,8 +91,10 @@ resource vmss 'Microsoft.Compute/virtualMachineScaleSets@2021-11-01' = {
           sku: vm_sku
         }
         osDisk: {
+          caching: 'ReadWrite'
           createOption: 'FromImage'
           managedDisk: {
+            storageAccountType: 'StandardSSD_LRS'
             diskEncryptionSet: {
               id: diskencryption
             }
@@ -78,8 +113,8 @@ resource vmss 'Microsoft.Compute/virtualMachineScaleSets@2021-11-01' = {
       networkProfile: {
         networkInterfaceConfigurations: [
           {
-            // id: vmss_interface_id
-            name: '${environment}-VMSS_interface'
+            id: network_interface.id
+            name: '${environment}-VMSS-interface'
             properties: {
               enableAcceleratedNetworking: false
               ipConfigurations: [
