@@ -29,7 +29,7 @@ resource app_gateway 'Microsoft.Network/applicationGateways@2022-11-01' = {
   properties: {
     autoscaleConfiguration: {
       minCapacity: 1
-      maxCapacity: 3
+      maxCapacity: 2
     }
     // authenticationCertificates:
     backendAddressPools: [

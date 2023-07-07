@@ -1,7 +1,6 @@
 param location string
 param environment string
 param name_vnet_webserver string
-param id_vnet_webserver string
 param diskencryption string
 param subnet_id_backend string
 param nsg_backend string
@@ -24,6 +23,10 @@ param webadmin_username string = 'vmsjoerd'
 @minLength(6)
 param webadmin_password string = 'PasswordMustBeSafeOk!'                        // later in keyvault zetten
 
+resource vnet_webserver 'Microsoft.Network/virtualNetworks@2022-11-01' existing = {
+  name: name_vnet_webserver
+}
+
 resource network_interface 'Microsoft.Network/networkInterfaces@2022-11-01' = {
   name: name_ntw_interface
   location: location
@@ -42,8 +45,6 @@ resource network_interface 'Microsoft.Network/networkInterfaces@2022-11-01' = {
     ipConfigurations: [
       {
         name: 'ntw_interface_config'
-        // id: 
-        // type:
         properties: {
           subnet: {
             id: subnet_id_backend
@@ -100,6 +101,7 @@ resource vmss 'Microsoft.Compute/virtualMachineScaleSets@2021-11-01' = {
         osDisk: {
           caching: 'ReadWrite'
           createOption: 'FromImage'
+          osType: 'Linux'
           managedDisk: {
             storageAccountType: 'StandardSSD_LRS'
             diskEncryptionSet: {
@@ -114,10 +116,11 @@ resource vmss 'Microsoft.Compute/virtualMachineScaleSets@2021-11-01' = {
         adminPassword: webadmin_password
         linuxConfiguration: {
           disablePasswordAuthentication: false
-          provisionVMAgent: true
+          provisionVMAgent: false                               // or true
         }
       }
       networkProfile: {
+        networkApiVersion: '2020-11-01'
         networkInterfaceConfigurations: [
           {
             id: network_interface.id
@@ -153,7 +156,6 @@ resource vmss 'Microsoft.Compute/virtualMachineScaleSets@2021-11-01' = {
     singlePlacementGroup: true
     platformFaultDomainCount: 1
   }
-  
 }
 
 output name_vmss string = name_vmss

@@ -22,6 +22,7 @@ param name_nic_vnet_webserver string = 'nic_${name_vnet_webserver}'
 param name_nic_vnet_adminserver string = 'nic_${name_vnet_adminserver}'
 param name_pubip_webserver string = '${name_vnet_webserver}-publicIP'
 param name_pubip_adminserver string = '${name_vnet_adminserver}-publicIP'
+param name_pubip_AGW string = 'AGW-pub-ip-address'
 // nic for gateway?
 
 
@@ -64,7 +65,7 @@ resource vnet_webserver 'Microsoft.Network/virtualNetworks@2022-11-01' = {
   }
 }
 resource pub_ip_agw 'Microsoft.Network/publicIPAddresses@2022-11-01' = {
-  name: 'AGW-pub-ip-address'
+  name: name_pubip_AGW
   location: location
   tags: {
     vnet: name_vnet_webserver
@@ -72,6 +73,7 @@ resource pub_ip_agw 'Microsoft.Network/publicIPAddresses@2022-11-01' = {
   }
   properties: {
     publicIPAllocationMethod: 'Static'
+    publicIPAddressVersion: 'IPv4'
     }
   }
 
