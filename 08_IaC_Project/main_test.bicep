@@ -106,6 +106,7 @@ params: {
     id_vnet_webserver: network.outputs.vnet_id_webserver
     diskencryption: keyvault.outputs.diskencryptset_id
     subnet_id_backend: network.outputs.subnet_id_backend
+    nsg_backend: network.outputs.nsg_id_backend
     environment: environment
   }
   dependsOn: [

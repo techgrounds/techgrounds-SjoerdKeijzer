@@ -4,6 +4,7 @@ param name_vnet_webserver string
 param id_vnet_webserver string
 param diskencryption string
 param subnet_id_backend string
+param nsg_backend string
 
 // VMSS specifics
 param name_vmss string = 'vmss_webserver'
@@ -25,12 +26,16 @@ param webadmin_password string = 'PasswordMustBeSafeOk!'                        
 
 resource network_interface 'Microsoft.Network/networkInterfaces@2022-11-01' = {
   name: name_ntw_interface
+  location: location
   tags: {
     location: location
     vnet: name_vnet_webserver
     id: 'ntw_interface'
   }
   properties: {
+    networkSecurityGroup: {
+      id: nsg_backend
+    }
     enableAcceleratedNetworking: false
     enableIPForwarding: false
     nicType: 'Standard'
@@ -40,6 +45,9 @@ resource network_interface 'Microsoft.Network/networkInterfaces@2022-11-01' = {
         // id: 
         // type:
         properties: {
+          subnet: {
+            id: subnet_id_backend
+          }
           // applicationGatewayBackendAddressPools:
           // applicationSecurityGroups: 
           privateIPAllocationMethod: 'Dynamic'
@@ -50,7 +58,6 @@ resource network_interface 'Microsoft.Network/networkInterfaces@2022-11-01' = {
       }
     ]
   }
-  location: location
 }
 
 resource vmss 'Microsoft.Compute/virtualMachineScaleSets@2021-11-01' = {
