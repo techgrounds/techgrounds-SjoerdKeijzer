@@ -52,18 +52,18 @@ module adminserver 'Modules/adminserver.bicep' = {
   }
 }
 
-@description('Deploy webserver module') // need to fix acces/routing from internet via nsg / and login to vm via ssh on adminserver
-// Deploy webserver module
-module webserver 'Modules/webserver.bicep' = {
-  name: 'webserver_deployment'
-  scope: rootgroup
-  params: {
-    location: location
-    environment: environment
-    nicid: network.outputs.nic_id_webserver
-    diskencryption: keyvault.outputs.diskencryptset_id
-  }
-}
+// @description('Deploy webserver module') // need to fix acces/routing from internet via nsg / and login to vm via ssh on adminserver
+// // Deploy webserver module
+// module webserver 'Modules/webserver.bicep' = {
+//   name: 'webserver_deployment'
+//   scope: rootgroup
+//   params: {
+//     location: location
+//     environment: environment
+//     nicid: network.outputs.nic_id_webserver
+//     diskencryption: keyvault.outputs.diskencryptset_id
+//   }
+// }
 
 @description('Deploy network peering module') // works fine
 // Deploy network peering module
@@ -127,7 +127,7 @@ module gateway 'Modules/gateway.bicep' = {
     name_vnet_webserver: network.outputs.vnet_name_webserver
   }
   dependsOn: [
-    network
+    network, vmss
   ]
 }
 

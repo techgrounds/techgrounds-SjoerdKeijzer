@@ -31,6 +31,7 @@ resource vmss 'Microsoft.Compute/virtualMachineScaleSets@2021-11-01' = {
   sku: {
     tier: 'Standard'
     name: vm_size
+    capacity: 3
   }
   properties: {
     automaticRepairsPolicy: {
@@ -103,7 +104,7 @@ resource vmss 'Microsoft.Compute/virtualMachineScaleSets@2021-11-01' = {
     //   rules: [
     //   ]
     // }
-    overprovision: true
+    overprovision: false                                    // when set to true I got deployment errors
     singlePlacementGroup: true
     platformFaultDomainCount: 1
   }
