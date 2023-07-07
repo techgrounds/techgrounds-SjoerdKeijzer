@@ -39,7 +39,7 @@ resource vnet_webserver 'Microsoft.Network/virtualNetworks@2022-11-01' = {
     enableDdosProtection: false
     addressSpace: {
       addressPrefixes: [
-        '10.10.10.0/25'
+        '10.10.10.0/24'
       ]}
       subnets: [
         { 

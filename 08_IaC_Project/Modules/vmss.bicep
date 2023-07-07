@@ -75,7 +75,7 @@ resource vmss 'Microsoft.Compute/virtualMachineScaleSets@2021-11-01' = {
       networkProfile: {
         networkInterfaceConfigurations: [
           {
-            id: vmss_interface_id
+            // id: vmss_interface_id
             name: '${environment}-VMSS_interface' 
             properties: {
               ipConfigurations: [
@@ -85,11 +85,11 @@ resource vmss 'Microsoft.Compute/virtualMachineScaleSets@2021-11-01' = {
                   subnet: {
                     id: subnet_id_backend
                   }
-                  applicationGatewayBackendAddressPools: [
-                    {
-                      id: resourceId('Microsoft.Network/applicationGateways/backendAddressPools', applicationGateWayName, 'myBackendPool')
-                    }
-                  ]
+                  // applicationGatewayBackendAddressPools: [
+                  //   {
+                  //     id: resourceId('Microsoft.Network/applicationGateways/backendAddressPools', applicationGateWayName, 'myBackendPool')
+                  //   }
+                  // ]
                 }  
               }
               ] 
