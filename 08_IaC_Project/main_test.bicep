@@ -96,41 +96,26 @@ params: {
 }
 
  @description('Deploy vmss module')
- // Deply vmss module
- module vmss 'Modules/vmss.bicep' = {
+ // Deply vmss with application gateway module
+ module vmss 'Modules/vmss_gateway.bicep' = {
   scope: rootgroup
   name: 'vmss_deployment'
   params: {
     location: location
+    environment: environment
     name_vnet_webserver: network.outputs.vnet_name_webserver
-    // id_vnet_webserver: network.outputs.vnet_id_webserver
     diskencryption: keyvault.outputs.diskencryptset_id
     subnet_id_backend: network.outputs.subnet_id_backend
     nsg_backend: network.outputs.nsg_id_backend
-    environment: environment
+    name_ntw_interface: network.outputs.ntw_interface_web_name
+    agw_pub_ip: network.outputs.pub_ip_agw
+    agw_subnet: network.outputs.subnet_id_frontend
   }
   dependsOn: [
     network
   ]
  }
 
-
-@description('Deploys application gateway')
-module gateway 'Modules/gateway.bicep' = {
-  name: 'AGW_deployment'
-  scope: rootgroup
-  params: {
-    agw_subnet: network.outputs.subnet_id_frontend
-    environment: environment
-    location: location
-    agw_pub_ip: network.outputs.pub_ip_agw
-    name_vmss: vmss.outputs.name_vmss
-    name_vnet_webserver: network.outputs.vnet_name_webserver
-  }
-  dependsOn: [
-    network, vmss
-  ]
-}
 
 @description('Deploy Back-up and recovery module')
 // Deploy AZ back-up and recovery vault

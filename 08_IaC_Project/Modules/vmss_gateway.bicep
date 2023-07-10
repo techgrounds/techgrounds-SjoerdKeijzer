@@ -1,18 +1,24 @@
+// General imported params
 param location string
 param environment string
-param name_vnet_webserver string
-param diskencryption string
-param subnet_id_backend string
-param nsg_backend string
 
 // VMSS specifics
+param diskencryption string
 param name_vmss string = 'vmss_webserver'
 param vm_size string = 'Standard_B1s'
 param vm_sku string = '20_04-lts'
 param name_vm string = '${environment}-web-vm'
 
-//interface
+// import the outputs from network module
+param name_vnet_webserver string
+param subnet_id_backend string
+param nsg_backend string
 param name_ntw_interface string = 'network_interface'
+
+// Gateway specifics
+param app_gateway_name string = '${environment}-agw'
+param agw_subnet string
+param agw_pub_ip string
 
 // installs apache on each scaling instance
 var apache_script = loadFileAsBase64('bashscript/web_installscript.sh')
@@ -27,34 +33,8 @@ resource vnet_webserver 'Microsoft.Network/virtualNetworks@2022-11-01' existing 
   name: name_vnet_webserver
 }
 
-resource network_interface 'Microsoft.Network/networkInterfaces@2022-11-01' = {
+resource network_interface 'Microsoft.Network/networkInterfaces@2022-11-01' existing = {
   name: name_ntw_interface
-  location: location
-  tags: {
-    location: location
-    vnet: name_vnet_webserver
-    id: 'ntw_interface'
-  }
-  properties: {
-    networkSecurityGroup: {
-      id: nsg_backend
-    }
-    enableAcceleratedNetworking: false
-    enableIPForwarding: false
-    nicType: 'Standard'
-    ipConfigurations: [
-      {
-        name: 'ntw_interface_config'
-        properties: {
-          subnet: {
-            id: subnet_id_backend
-          }
-          privateIPAllocationMethod: 'Dynamic'
-          primary: null
-        }
-      }
-    ]
-  }
 }
 
 resource vmss 'Microsoft.Compute/virtualMachineScaleSets@2021-11-01' = {
@@ -119,7 +99,6 @@ resource vmss 'Microsoft.Compute/virtualMachineScaleSets@2021-11-01' = {
         networkApiVersion: '2020-11-01'
         networkInterfaceConfigurations: [
           {
-            // id: network_interface.id
             name: '${environment}-VMSS-interface'
             properties: {
               enableAcceleratedNetworking: false
@@ -144,7 +123,7 @@ resource vmss 'Microsoft.Compute/virtualMachineScaleSets@2021-11-01' = {
         ]
       } 
     }
-    orchestrationMode: 'Uniform'                          // 'Flexible'
+    orchestrationMode: 'Flexible'                         // 'Flexible' or 'Uniform'
     // scaleInPolicy: {
     //   rules: [
     //   ]
@@ -154,5 +133,86 @@ resource vmss 'Microsoft.Compute/virtualMachineScaleSets@2021-11-01' = {
     platformFaultDomainCount: 1
   }
 }
+
+
+////////////////////////////////////////////////////////////////////////////////////////
+// Gateway 
+//
+
+resource app_gateway 'Microsoft.Network/applicationGateways@2022-11-01' = {
+  name: app_gateway_name
+  location: location
+  properties: {
+    autoscaleConfiguration: {
+      minCapacity: 1
+      maxCapacity: 2
+    }
+    // authenticationCertificates:
+    backendAddressPools: [
+      // {
+      //   id: resourceId()
+      // }
+    ]
+    // forceFirewallPolicyAssociation:
+    enableHttp2: false
+    // customErrorConfigurations: 
+    gatewayIPConfigurations: [
+      {
+        name: 'AGW_ipconfig'
+        properties: {
+          subnet: {
+            id: agw_subnet                  // get subnet id from networking module
+          }
+        }
+      }
+    ]
+    frontendIPConfigurations: [
+      {
+        properties: {
+          publicIPAddress: {
+            id: agw_pub_ip                  // public IP for gateway here
+          }
+        }
+      }
+    ]
+    frontendPorts: [
+      {
+        name: 'https'
+        properties: {
+          port: 443
+        }
+      }
+      { name: 'http'
+      properties: {
+        port: 80
+      }
+      }
+    ]
+    sku: {
+      name: 'Standard_v2'
+      tier: 'Standard_v2'          // 'Standard_v2'
+    }
+    // sslCertificates:
+    probes: [
+      {
+        properties: {
+          timeout: 60
+          unhealthyThreshold: 60
+          interval: 55
+        }
+      }
+    ]
+    // sslPolicy:
+    // sslProfiles:
+    // webApplicationFirewallConfiguration:
+    // redirectConfigurations:                              // need to write rule here for http > https
+  }
+}
+
+
+output name_agw string = app_gateway_name
+
+
+
 
 output name_vmss string = name_vmss

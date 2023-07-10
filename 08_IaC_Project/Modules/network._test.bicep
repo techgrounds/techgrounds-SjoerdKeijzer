@@ -18,12 +18,10 @@ param name_nsg_adminserver string = 'nsg_adminserver'
 
 @description('Naming of network components; nics and public IP')
 // Naming of network components; nics and public IPs
-param name_nic_vnet_webserver string = 'nic_${name_vnet_webserver}'
 param name_nic_vnet_adminserver string = 'nic_${name_vnet_adminserver}'
-param name_pubip_webserver string = '${name_vnet_webserver}-publicIP'
 param name_pubip_adminserver string = '${name_vnet_adminserver}-publicIP'
 param name_pubip_AGW string = 'AGW-pub-ip-address'
-// nic for gateway?
+param name_ntw_interface string = 'network_interface'
 
 
 @description('All webserver infra to follow below. Order is vnet with nested subnet -> public IP -> nics -> NSG')
@@ -77,17 +75,48 @@ resource pub_ip_agw 'Microsoft.Network/publicIPAddresses@2022-11-01' = {
     }
   }
 
-resource pub_ip_webserver 'Microsoft.Network/publicIPAddresses@2021-02-01' = {
-  name: name_pubip_webserver
-  location: location
-  tags: {
-    vnet: name_vnet_webserver
+  resource network_interface 'Microsoft.Network/networkInterfaces@2022-11-01' = {
+    name: name_ntw_interface
     location: location
+    tags: {
+      location: location
+      vnet: name_vnet_webserver
+      id: 'ntw_interface'
+    }
+    properties: {
+      networkSecurityGroup: {
+        id: nsg_backend.id
+      }
+      enableAcceleratedNetworking: false
+      enableIPForwarding: false
+      nicType: 'Standard'
+      ipConfigurations: [
+        {
+          name: 'ntw_interface_config'
+          properties: {
+            subnet: {
+              id: vnet_webserver.properties.subnets[0].id
+            }
+            privateIPAllocationMethod: 'Dynamic'
+            primary: null
+          }
+        }
+      ]
+    }
   }
-  properties: {
-    publicIPAllocationMethod: 'Static'
-  }
-}
+
+
+// resource pub_ip_webserver 'Microsoft.Network/publicIPAddresses@2021-02-01' = {
+//   name: name_pubip_webserver
+//   location: location
+//   tags: {
+//     vnet: name_vnet_webserver
+//     location: location
+//   }
+//   properties: {
+//     publicIPAllocationMethod: 'Static'
+//   }
+// }
 
 // resource nic_webserver 'Microsoft.Network/networkInterfaces@2022-11-01' = {
 //   name: name_nic_vnet_webserver
@@ -287,7 +316,9 @@ output nsg_id_backend string = nsg_backend.id
 output nsg_id_frontend string = nsg_frontend.id
 output nsg_id_adminserver string = nsg_adminserver.id
 output nic_id_adminserver string = nic_adminserver.id
+output ntw_interface_web_name string = name_ntw_interface
 output pub_ip_id_adminserver string = pub_ip_adminserver.id
 output pub_ip_agw string = pub_ip_agw.id
+
 
 
