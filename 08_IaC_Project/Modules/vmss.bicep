@@ -49,11 +49,7 @@ resource network_interface 'Microsoft.Network/networkInterfaces@2022-11-01' = {
           subnet: {
             id: subnet_id_backend
           }
-          // applicationGatewayBackendAddressPools:
-          // applicationSecurityGroups: 
           privateIPAllocationMethod: 'Dynamic'
-          // publicIPAddress:
-          // privateIPAddress:
           primary: null
         }
       }

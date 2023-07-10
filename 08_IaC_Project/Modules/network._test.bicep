@@ -89,33 +89,33 @@ resource pub_ip_webserver 'Microsoft.Network/publicIPAddresses@2021-02-01' = {
   }
 }
 
-resource nic_webserver 'Microsoft.Network/networkInterfaces@2022-11-01' = {
-  name: name_nic_vnet_webserver
-  location: location
-  tags: {
-    vnet: name_vnet_webserver
-    location:location
-  }
-  properties: {
-    networkSecurityGroup: {
-      id: nsg_backend.id
-    }
-    ipConfigurations: [
-      {
-        name: 'ipconfig_webserver'
-        properties: {
-          subnet: {
-            id: vnet_webserver.properties.subnets[0].id
-          }
-          privateIPAllocationMethod: 'Dynamic'
-          publicIPAddress: {
-            id: pub_ip_webserver.id
-          }
-        }
-      }
-    ]
-  }
-}
+// resource nic_webserver 'Microsoft.Network/networkInterfaces@2022-11-01' = {
+//   name: name_nic_vnet_webserver
+//   location: location
+//   tags: {
+//     vnet: name_vnet_webserver
+//     location:location
+//   }
+//   properties: {
+//     networkSecurityGroup: {
+//       id: nsg_backend.id
+//     }
+//     ipConfigurations: [
+//       {
+//         name: 'ipconfig_webserver'
+//         properties: {
+//           subnet: {
+//             id: vnet_webserver.properties.subnets[0].id
+//           }
+//           privateIPAllocationMethod: 'Dynamic'
+//           publicIPAddress: {
+//             id: pub_ip_webserver.id
+//           }
+//         }
+//       }
+//     ]
+//   }
+// }
 
 resource nsg_frontend 'Microsoft.Network/networkSecurityGroups@2022-11-01' = {
   name: name_nsg_frontend
@@ -286,7 +286,6 @@ output subnet_id_adminserver string = vnet_adminserver.properties.subnets[0].id
 output nsg_id_backend string = nsg_backend.id
 output nsg_id_frontend string = nsg_frontend.id
 output nsg_id_adminserver string = nsg_adminserver.id
-output nic_id_webserver string = nic_webserver.id
 output nic_id_adminserver string = nic_adminserver.id
 output pub_ip_id_adminserver string = pub_ip_adminserver.id
 output pub_ip_agw string = pub_ip_agw.id
