@@ -110,11 +110,11 @@ resource vmss 'Microsoft.Compute/virtualMachineScaleSets@2021-11-01' = {
                   subnet: {
                     id: subnet_id_backend
                   }
-                  // applicationGatewayBackendAddressPools: [
-                  //   {
-                  //     id: resourceId('Microsoft.Network/applicationGateways/backendAddressPools', applicationGateWayName, 'myBackendPool')
-                  //   }
-                  // ]
+                  applicationGatewayBackendAddressPools: [
+                    {
+                      id: resourceId('Microsoft.Network/applicationGateways/backendAddressPools', app_gateway_name, 'backend_pool')
+                    }
+                  ]
                 }  
               }
               ] 
@@ -147,15 +147,13 @@ resource app_gateway 'Microsoft.Network/applicationGateways@2022-11-01' = {
       minCapacity: 1
       maxCapacity: 2
     }
-    // authenticationCertificates:
     backendAddressPools: [
-      // {
-      //   id: resourceId()
-      // }
+      {
+        name: 'backend_pool'
+        // properties: 
+      }
     ]
-    // forceFirewallPolicyAssociation:
     enableHttp2: false
-    // customErrorConfigurations: 
     gatewayIPConfigurations: [
       {
         name: 'AGW_ipconfig'
@@ -169,6 +167,7 @@ resource app_gateway 'Microsoft.Network/applicationGateways@2022-11-01' = {
     frontendIPConfigurations: [
       {
         properties: {
+          privateIPAllocationMethod: 'Dynamic'
           publicIPAddress: {
             id: agw_pub_ip                  // public IP for gateway here
           }
