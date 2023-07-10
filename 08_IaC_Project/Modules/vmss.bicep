@@ -123,7 +123,7 @@ resource vmss 'Microsoft.Compute/virtualMachineScaleSets@2021-11-01' = {
         networkApiVersion: '2020-11-01'
         networkInterfaceConfigurations: [
           {
-            id: network_interface.id
+            // id: network_interface.id
             name: '${environment}-VMSS-interface'
             properties: {
               enableAcceleratedNetworking: false
