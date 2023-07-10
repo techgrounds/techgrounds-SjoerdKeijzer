@@ -127,12 +127,13 @@ resource vmss 'Microsoft.Compute/virtualMachineScaleSets@2021-11-01' = {
             name: '${environment}-VMSS-interface'
             properties: {
               enableAcceleratedNetworking: false
+              primary: true
               ipConfigurations: [
                 {
                 name: '${environment}-VMSS-IPconfig'
                 properties: {
                   subnet: {
-                    id: subnet_id_backend
+                    id: resourceId('Microsoft.Network/virtualNetworks/subnets', vnet_webserver.id, subnet_id_backend)
                   }
                   // applicationGatewayBackendAddressPools: [
                   //   {
