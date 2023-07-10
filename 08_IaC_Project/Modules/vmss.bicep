@@ -144,7 +144,7 @@ resource vmss 'Microsoft.Compute/virtualMachineScaleSets@2021-11-01' = {
         ]
       } 
     }
-    orchestrationMode: 'Flexible'
+    orchestrationMode: 'Uniform'                          // 'Flexible'
     // scaleInPolicy: {
     //   rules: [
     //   ]
