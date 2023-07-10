@@ -37,6 +37,7 @@ resource network_interface 'Microsoft.Network/networkInterfaces@2022-11-01' exis
   name: name_ntw_interface
 }
 
+@description('VMSS settings to follow')
 resource vmss 'Microsoft.Compute/virtualMachineScaleSets@2021-11-01' = {
   name: name_vmss
   location: location
@@ -112,7 +113,7 @@ resource vmss 'Microsoft.Compute/virtualMachineScaleSets@2021-11-01' = {
                   }
                   applicationGatewayBackendAddressPools: [
                     {
-                      id: resourceId('Microsoft.Network/applicationGateways/backendAddressPools', app_gateway_name, 'backend_pool')
+                      id: app_gateway.properties.backendAddressPools[0].id // resourceId('Microsoft.Network/applicationGateways/backendAddressPools', app_gateway_name, 'backend_pool')
                     }
                   ]
                 }  
@@ -210,8 +211,4 @@ resource app_gateway 'Microsoft.Network/applicationGateways@2022-11-01' = {
 
 
 output name_agw string = app_gateway_name
-
-
-
-
 output name_vmss string = name_vmss

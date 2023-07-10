@@ -80,20 +80,20 @@ module peering 'Modules/peering.bicep' = {
   }
 
 
-@description('Deploy storage account module')
-// Deploy storage account module
-module stg 'Modules/storage_test.bicep' = {
-name: 'storagedeployment'
-scope: rootgroup
-params: {
-  location: location
-  environment: environment
-  managed_identity_name: keyvault.outputs.managed_id_name
-  keyVaultName: keyvault.outputs.key_vault_name
-  key_name: keyvault.outputs.kv_key_name
-  }
-  dependsOn: [keyvault]
-}
+// @description('Deploy storage account module')
+// // Deploy storage account module
+// module stg 'Modules/storage_test.bicep' = {
+// name: 'storagedeployment'
+// scope: rootgroup
+// params: {
+//   location: location
+//   environment: environment
+//   managed_identity_name: keyvault.outputs.managed_id_name
+//   keyVaultName: keyvault.outputs.key_vault_name
+//   key_name: keyvault.outputs.kv_key_name
+//   }
+//   dependsOn: [keyvault]
+// }
 
  @description('Deploy vmss module')
  // Deply vmss with application gateway module
