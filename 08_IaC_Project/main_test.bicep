@@ -91,7 +91,6 @@ module peering 'Modules/peering.bicep' = {
     location: location
     environment: environment
     name_vnet_webserver: network.outputs.vnet_name_webserver
-    name_ntw_interface: network.outputs.ntw_interface_web_name
     diskencryption: keyvault.outputs.diskencryptset_id
     subnet_id_backend: network.outputs.subnet_id_backend
     agw_subnet: network.outputs.subnet_id_frontend

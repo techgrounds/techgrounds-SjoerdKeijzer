@@ -13,7 +13,7 @@ param name_vm string = '${environment}-web-vm'
 param name_vnet_webserver string
 param subnet_id_backend string
 param nsg_backend string
-param name_ntw_interface string = 'network_interface'
+// param name_ntw_interface string = 'network_interface'
 
 // Gateway specifics
 param NameGateway string = '${environment}-agw'
@@ -76,7 +76,7 @@ resource ApplicationGateway 'Microsoft.Network/applicationGateways@2022-11-01' =
         name: 'AGW_ipconfig'
         properties: {
           subnet: {
-            id: vnet_webserver.properties.subnets[0].id                 // vnet_webserver.properties.subnets[0].id 
+            id: vnet_webserver.properties.subnets[1].id                 // vnet_webserver.properties.subnets[0].id 
           }
         }
       }
