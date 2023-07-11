@@ -82,22 +82,39 @@ module peering 'Modules/peering.bicep' = {
 //   dependsOn: [keyvault]
 // }
 
+//  @description('Deploy vmss module')
+//  // Deply vmss with application gateway module
+//  module vmss 'Modules/vmss_gateway.bicep' = {
+//   scope: rootgroup
+//   name: 'vmss_agw_deployment'
+//   params: {
+//     location: location
+//     environment: environment
+//     name_vnet_webserver: network.outputs.vnet_name_webserver
+//     name_ntw_interface: network.outputs.ntw_interface_web_name
+//     diskencryption: keyvault.outputs.diskencryptset_id
+//     subnet_id_backend: network.outputs.subnet_id_backend
+//     nsg_backend: network.outputs.nsg_id_backend
+//     nsg_frontend: network.outputs.nsg_id_frontend
+//     agw_pub_ip: network.outputs.pub_ip_agw
+//     agw_subnet: network.outputs.subnet_id_frontend
+//   }
+//   dependsOn: [
+//     network
+//   ]
+//  }
+
  @description('Deploy vmss module')
  // Deply vmss with application gateway module
- module vmss 'Modules/vmss_gateway.bicep' = {
+ module vmss 'Modules/z_vmss_gateway.bicep' = {
   scope: rootgroup
-  name: 'vmss_deployment'
+  name: 'z_vmss_agw_deployment'
   params: {
     location: location
-    environment: environment
-    name_vnet_webserver: network.outputs.vnet_name_webserver
-    diskencryption: keyvault.outputs.diskencryptset_id
-    subnet_id_backend: network.outputs.subnet_id_backend
-    nsg_backend: network.outputs.nsg_id_backend
-    nsg_frontend: network.outputs.nsg_id_frontend
-    name_ntw_interface: network.outputs.ntw_interface_web_name
-    agw_pub_ip: network.outputs.pub_ip_agw
-    agw_subnet: network.outputs.subnet_id_frontend
+    diskencryptionId: keyvault.outputs.diskencryptset_id
+    AGWPipId: network.outputs.pub_ip_agw
+    AGWSubnetId: network.outputs.subnet_id_frontend
+    vmssSubnetId: network.outputs.subnet_id_backend
   }
   dependsOn: [
     network

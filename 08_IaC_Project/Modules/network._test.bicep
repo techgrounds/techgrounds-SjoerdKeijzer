@@ -41,14 +41,6 @@ resource vnet_webserver 'Microsoft.Network/virtualNetworks@2022-11-01' = {
         '10.10.10.0/24'
       ]}
       subnets: [
-        { 
-          name: name_subnet_backend
-        properties: {
-          addressPrefix: '10.10.10.128/25'                  // back-end subnet
-          networkSecurityGroup: {
-            id: nsg_backend.id}
-          }
-        }
         {
           name: name_subnet_front_agw
           properties: {
@@ -58,7 +50,14 @@ resource vnet_webserver 'Microsoft.Network/virtualNetworks@2022-11-01' = {
             }
           }
         }
-      
+        { 
+          name: name_subnet_backend
+        properties: {
+          addressPrefix: '10.10.10.128/25'                  // back-end subnet
+          networkSecurityGroup: {
+            id: nsg_backend.id}
+          }
+        }
       ]
   }
 }
@@ -155,11 +154,9 @@ resource nsg_frontend 'Microsoft.Network/networkSecurityGroups@2022-11-01' = {
   }
   properties: {
     securityRules: [
-      
     ]
   }
 }
-
 
 resource nsg_backend 'Microsoft.Network/networkSecurityGroups@2022-11-01' = {
   name: name_nsg_backend
@@ -184,7 +181,7 @@ resource nsg_backend 'Microsoft.Network/networkSecurityGroups@2022-11-01' = {
       } 
       { name: 'http'
       properties: {
-        access: 'Allow'
+        access: 'Allow'                       // later op deny
         direction: 'Inbound'
         priority: 200
         protocol: 'Tcp'
@@ -309,8 +306,8 @@ output vnet_id_webserver string = vnet_webserver.id
 output vnet_id_adminserver string = vnet_adminserver.id
 output vnet_name_webserver string = name_vnet_webserver
 output vnet_name_adminserver string = name_vnet_adminserver
-output subnet_id_backend string = vnet_webserver.properties.subnets[0].id   
-output subnet_id_frontend string = vnet_webserver.properties.subnets[1].id                
+output subnet_id_backend string = vnet_webserver.properties.subnets[1].id   
+output subnet_id_frontend string = vnet_webserver.properties.subnets[0].id                
 output subnet_id_adminserver string = vnet_adminserver.properties.subnets[0].id
 output nsg_id_backend string = nsg_backend.id
 output nsg_id_frontend string = nsg_frontend.id
