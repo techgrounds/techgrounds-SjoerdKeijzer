@@ -13,6 +13,7 @@ param name_vm string = '${environment}-web-vm'
 param name_vnet_webserver string
 param subnet_id_backend string
 param nsg_backend string
+param nsg_frontend string
 param name_ntw_interface string = 'network_interface'
 
 // Gateway specifics
@@ -57,7 +58,7 @@ resource vmss 'Microsoft.Compute/virtualMachineScaleSets@2021-11-01' = {
       enabled: true
     }
     upgradePolicy: {
-      mode: 'Rolling'                                // can be set to 'Automatic', 'Rolling' and 'Manual'
+      mode: 'Rolling'
       rollingUpgradePolicy: {
         prioritizeUnhealthyInstances: true
       }
@@ -102,18 +103,23 @@ resource vmss 'Microsoft.Compute/virtualMachineScaleSets@2021-11-01' = {
           {
             name: '${environment}-VMSS-interface'
             properties: {
+              networkSecurityGroup: {
+                id: nsg_backend
+              }
               enableAcceleratedNetworking: false
+              enableIPForwarding: false
               primary: true
               ipConfigurations: [
                 {
                 name: '${environment}-VMSS-IPconfig'
                 properties: {
+                  privateIPAddressVersion: 'IPv4'
                   subnet: {
                     id: subnet_id_backend
                   }
                   applicationGatewayBackendAddressPools: [
                     {
-                      id: app_gateway.properties.backendAddressPools[0].id // resourceId('Microsoft.Network/applicationGateways/backendAddressPools', app_gateway_name, 'backend_pool')
+                      id: app_gateway.properties.backendAddressPools[0].id
                     }
                   ]
                 }  
@@ -122,14 +128,28 @@ resource vmss 'Microsoft.Compute/virtualMachineScaleSets@2021-11-01' = {
             }
           }
         ]
+      }
+      extensionProfile: {
+        extensions: [
+          {
+            name: '${environment}-healthname'
+            properties: {
+              enableAutomaticUpgrade: false
+              autoUpgradeMinorVersion: false
+              publisher: 'Microsoft.ManagedServices'
+              type: 'ApplicationHealthLinux'
+              typeHandlerVersion: '1.0'
+              settings: {
+                port: 80
+                protocol: 'http'
+                requestPath: ''
+              }
+            }
+          }
+        ]
       } 
     }
     orchestrationMode: 'Flexible'                         // 'Flexible' or 'Uniform'
-    // scaleInPolicy: {
-    //   rules: [
-    //   ]
-    // }
-    // overprovision: false                                    // when set to true I got deployment errors
     singlePlacementGroup: true
     platformFaultDomainCount: 1
   }
@@ -148,6 +168,22 @@ resource app_gateway 'Microsoft.Network/applicationGateways@2022-11-01' = {
       minCapacity: 1
       maxCapacity: 2
     }
+    backendHttpSettingsCollection: [
+      {
+        name: 'backend_http_settings'
+        properties: {
+          port: 80
+          protocol: 'Http'
+          cookieBasedAffinity: 'Disabled'
+          pickHostNameFromBackendAddress: false
+          requestTimeout: 30
+          connectionDraining: {
+            enabled: false
+            drainTimeoutInSec: 1
+          }
+        }
+      }
+    ]
     backendAddressPools: [
       {
         name: 'backend_pool'

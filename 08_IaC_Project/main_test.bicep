@@ -52,19 +52,6 @@ module keyvault 'Modules/keyvault.bicep' = {
 //   }
 // }
 
-// @description('Deploy webserver module') // need to fix acces/routing from internet via nsg / and login to vm via ssh on adminserver
-// // Deploy webserver module
-// module webserver 'Modules/webserver.bicep' = {
-//   name: 'webserver_deployment'
-//   scope: rootgroup
-//   params: {
-//     location: location
-//     environment: environment
-//     nicid: network.outputs.nic_id_webserver
-//     diskencryption: keyvault.outputs.diskencryptset_id
-//   }
-// }
-
 @description('Deploy network peering module') // works fine
 // Deploy network peering module
 module peering 'Modules/peering.bicep' = {
@@ -107,6 +94,7 @@ module peering 'Modules/peering.bicep' = {
     diskencryption: keyvault.outputs.diskencryptset_id
     subnet_id_backend: network.outputs.subnet_id_backend
     nsg_backend: network.outputs.nsg_id_backend
+    nsg_frontend: network.outputs.nsg_id_frontend
     name_ntw_interface: network.outputs.ntw_interface_web_name
     agw_pub_ip: network.outputs.pub_ip_agw
     agw_subnet: network.outputs.subnet_id_frontend
