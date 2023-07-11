@@ -10,7 +10,7 @@ param environment string = 'dev'
 
 @description('Make general resource group for deployment in certain region')
 // Make a general resource group for deployment in a region
-param resourceGroupName string = 'rootrg'
+param resourceGroupName string = 'rootrg255'
 param location string = deployment().location // locate resources at location declared with the deployment command
 resource rootgroup 'Microsoft.Resources/resourceGroups@2022-09-01' = {
   name: resourceGroupName
@@ -82,44 +82,28 @@ module peering 'Modules/peering.bicep' = {
 //   dependsOn: [keyvault]
 // }
 
-//  @description('Deploy vmss module')
-//  // Deply vmss with application gateway module
-//  module vmss 'Modules/vmss_gateway.bicep' = {
-//   scope: rootgroup
-//   name: 'vmss_agw_deployment'
-//   params: {
-//     location: location
-//     environment: environment
-//     name_vnet_webserver: network.outputs.vnet_name_webserver
-//     name_ntw_interface: network.outputs.ntw_interface_web_name
-//     diskencryption: keyvault.outputs.diskencryptset_id
-//     subnet_id_backend: network.outputs.subnet_id_backend
-//     nsg_backend: network.outputs.nsg_id_backend
-//     nsg_frontend: network.outputs.nsg_id_frontend
-//     agw_pub_ip: network.outputs.pub_ip_agw
-//     agw_subnet: network.outputs.subnet_id_frontend
-//   }
-//   dependsOn: [
-//     network
-//   ]
-//  }
-
  @description('Deploy vmss module')
  // Deply vmss with application gateway module
- module vmss 'Modules/z_vmss_gateway.bicep' = {
+ module vmss 'Modules/vmss_gateway.bicep' = {
   scope: rootgroup
-  name: 'z_vmss_agw_deployment'
+  name: 'vmss_agw_deployment'
   params: {
     location: location
-    diskencryptionId: keyvault.outputs.diskencryptset_id
-    AGWPipId: network.outputs.pub_ip_agw
-    AGWSubnetId: network.outputs.subnet_id_frontend
-    vmssSubnetId: network.outputs.subnet_id_backend
+    environment: environment
+    name_vnet_webserver: network.outputs.vnet_name_webserver
+    name_ntw_interface: network.outputs.ntw_interface_web_name
+    diskencryption: keyvault.outputs.diskencryptset_id
+    subnet_id_backend: network.outputs.subnet_id_backend
+    agw_subnet: network.outputs.subnet_id_frontend
+    nsg_backend: network.outputs.nsg_id_backend
+    nsg_frontend: network.outputs.nsg_id_frontend
+    agw_pub_ip: network.outputs.pub_ip_agw
   }
   dependsOn: [
     network
   ]
  }
+
 
 
 @description('Deploy Back-up and recovery module')

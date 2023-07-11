@@ -105,18 +105,6 @@ resource pub_ip_agw 'Microsoft.Network/publicIPAddresses@2022-11-01' = {
   }
 
 
-// resource pub_ip_webserver 'Microsoft.Network/publicIPAddresses@2021-02-01' = {
-//   name: name_pubip_webserver
-//   location: location
-//   tags: {
-//     vnet: name_vnet_webserver
-//     location: location
-//   }
-//   properties: {
-//     publicIPAllocationMethod: 'Static'
-//   }
-// }
-
 // resource nic_webserver 'Microsoft.Network/networkInterfaces@2022-11-01' = {
 //   name: name_nic_vnet_webserver
 //   location: location
