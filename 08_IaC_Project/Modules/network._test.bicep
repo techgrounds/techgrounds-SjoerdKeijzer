@@ -74,35 +74,35 @@ resource pub_ip_agw 'Microsoft.Network/publicIPAddresses@2022-11-01' = {
     }
   }
 
-  resource network_interface 'Microsoft.Network/networkInterfaces@2022-11-01' = {
-    name: name_ntw_interface
-    location: location
-    tags: {
-      location: location
-      vnet: name_vnet_webserver
-      id: 'ntw_interface'
-    }
-    properties: {
-      networkSecurityGroup: {
-        id: nsg_backend.id
-      }
-      enableAcceleratedNetworking: false
-      enableIPForwarding: false
-      nicType: 'Standard'
-      ipConfigurations: [
-        {
-          name: 'ntw_interface_config'
-          properties: {
-            subnet: {
-              id: vnet_webserver.properties.subnets[0].id
-            }
-            privateIPAllocationMethod: 'Dynamic'
-            primary: null
-          }
-        }
-      ]
-    }
-  }
+  // resource network_interface 'Microsoft.Network/networkInterfaces@2022-11-01' = {
+  //   name: name_ntw_interface
+  //   location: location
+  //   tags: {
+  //     location: location
+  //     vnet: name_vnet_webserver
+  //     id: 'ntw_interface'
+  //   }
+  //   properties: {
+  //     networkSecurityGroup: {
+  //       id: nsg_backend.id
+  //     }
+  //     enableAcceleratedNetworking: false
+  //     enableIPForwarding: false
+  //     nicType: 'Standard'
+  //     ipConfigurations: [
+  //       {
+  //         name: 'ntw_interface_config'
+  //         properties: {
+  //           subnet: {
+  //             id: vnet_webserver.properties.subnets[0].id
+  //           }
+  //           privateIPAllocationMethod: 'Dynamic'
+  //           primary: null
+  //         }
+  //       }
+  //     ]
+  //   }
+  // }
 
 
 // resource nic_webserver 'Microsoft.Network/networkInterfaces@2022-11-01' = {
@@ -142,6 +142,18 @@ resource nsg_frontend 'Microsoft.Network/networkSecurityGroups@2022-11-01' = {
   }
   properties: {
     securityRules: [
+      { name: 'http'
+      properties: {
+        access: 'Allow'                       
+        direction: 'Inbound'
+        priority: 200
+        protocol: 'Tcp'
+        sourcePortRange: '*'
+        sourceAddressPrefix: '*'
+        destinationPortRange: '80'
+        destinationAddressPrefix: '*'
+      }
+    }
     ]
   }
 }
@@ -224,7 +236,6 @@ resource vnet_adminserver 'Microsoft.Network/virtualNetworks@2022-11-01' = {
       ]
   }
 }
-
 
 resource pub_ip_adminserver 'Microsoft.Network/publicIPAddresses@2021-02-01' = {
   name: name_pubip_adminserver
