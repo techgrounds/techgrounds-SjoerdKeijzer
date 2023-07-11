@@ -10,7 +10,7 @@ param environment string = 'dev'
 
 @description('Make general resource group for deployment in certain region')
 // Make a general resource group for deployment in a region
-param resourceGroupName string = 'rootrg255'
+param resourceGroupName string = 'rootrg'
 param location string = deployment().location // locate resources at location declared with the deployment command
 resource rootgroup 'Microsoft.Resources/resourceGroups@2022-09-01' = {
   name: resourceGroupName
@@ -82,8 +82,8 @@ module peering 'Modules/peering.bicep' = {
 //   dependsOn: [keyvault]
 // }
 
- @description('Deploy vmss module')
- // Deply vmss with application gateway module
+ @description('Deploy vmss and gateway module')
+ // Deploy vmss with application gateway module
  module vmss 'Modules/vmss_gateway.bicep' = {
   scope: rootgroup
   name: 'vmss_agw_deployment'

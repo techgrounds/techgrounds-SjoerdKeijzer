@@ -26,6 +26,11 @@ resource appGate 'Microsoft.Network/applicationGateways@2022-11-01' = {
     Location: location
   }
   properties: {
+    enableHttp2: false
+    autoscaleConfiguration: {
+      minCapacity: 1
+      maxCapacity: 2
+    }
     sku: {
       name: 'Standard_v2'
       tier: 'Standard_v2'
