@@ -102,6 +102,24 @@ module peering 'Modules/peering.bicep' = {
   ]
  }
 
+ // let's see if this works
+ module gateway_test 'Modules/gateway.bicep' = {
+  scope: rootgroup
+  name: 'gateway_test1278'
+  params: {
+    location: location
+    environment: environment
+    name_vnet_webserver: network.outputs.vnet_name_webserver
+    diskencryption: keyvault.outputs.diskencryptset_id
+    subnet_id_backend: network.outputs.subnet_id_backend
+    agw_subnet: network.outputs.subnet_id_frontend
+    nsg_backend: network.outputs.nsg_id_backend
+    agw_pub_ip: network.outputs.pub_ip_agw
+  }
+  dependsOn: [
+    network
+  ]
+ }
 
 
 @description('Deploy Back-up and recovery module')

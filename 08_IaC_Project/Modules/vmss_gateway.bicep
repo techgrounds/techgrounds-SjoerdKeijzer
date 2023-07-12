@@ -44,6 +44,11 @@ resource ApplicationGateway 'Microsoft.Network/applicationGateways@2022-11-01' =
   name: NameGateway
   location: location
   properties: {
+    sku: {
+      name: 'Standard_v2'
+      tier: 'Standard_v2'
+      capacity: 1
+    }
     autoscaleConfiguration: {
       minCapacity: 1
       maxCapacity: 2
@@ -76,7 +81,7 @@ resource ApplicationGateway 'Microsoft.Network/applicationGateways@2022-11-01' =
         name: 'AGW_ipconfig'
         properties: {
           subnet: {
-            id: vnet_webserver.properties.subnets[1].id                 // vnet_webserver.properties.subnets[0].id 
+            id: vnet_webserver.properties.subnets[1].id                 // agw_subnet
           }
         }
       }
@@ -97,21 +102,18 @@ resource ApplicationGateway 'Microsoft.Network/applicationGateways@2022-11-01' =
     ]
     frontendPorts: [
       {
-        name: 'https'
+        name: 'port_https'
         properties: {
           port: 443
         }
       }
-      { name: 'http'
+      { name: 'port_http'
       properties: {
         port: 80
       }
       }
     ]
-    sku: {
-      name: 'Standard_v2'
-      tier: 'Standard_v2'          // 'Standard_v2'
-    }
+  
     // sslCertificates:
     probes: [
       {
@@ -127,10 +129,10 @@ resource ApplicationGateway 'Microsoft.Network/applicationGateways@2022-11-01' =
         name: 'HttpListener'
         properties: {
           frontendIPConfiguration: {
-            id: resourceId('Microsoft.Network/applicationGateways/frontendIPConfigurations', NameGateway, 'appGatewayFrontendIP')
+            id: resourceId('Microsoft.Network/applicationGateways/frontendIPConfigurations', NameGateway, 'FrontendIPconfig')
           }
           frontendPort: {
-            id: resourceId('Microsoft.Network/applicationGateways/frontendPorts', NameGateway, 'appGatewayFrontendPort')
+            id: resourceId('Microsoft.Network/applicationGateways/frontendPorts', NameGateway, 'port_http')
           }
           protocol: 'Http'
           requireServerNameIndication: false

@@ -21,7 +21,7 @@ param name_nsg_adminserver string = 'nsg_adminserver'
 param name_nic_vnet_adminserver string = 'nic_${name_vnet_adminserver}'
 param name_pubip_adminserver string = '${name_vnet_adminserver}-publicIP'
 param name_pubip_AGW string = 'AGW-pub-ip-address'
-param name_ntw_interface string = 'network_interface'
+// param name_ntw_interface string = 'network_interface'
 
 
 @description('All webserver infra to follow below. Order is vnet with nested subnet -> public IP -> nics -> NSG')
@@ -44,7 +44,7 @@ resource vnet_webserver 'Microsoft.Network/virtualNetworks@2022-11-01' = {
         {
           name: name_subnet_front_agw
           properties: {
-            addressPrefix: '10.10.10.0/25'                  // front end subnet
+            addressPrefix: '10.10.10.128/25'                  // front end subnet
             networkSecurityGroup: {
               id: nsg_frontend.id
             }
@@ -53,7 +53,7 @@ resource vnet_webserver 'Microsoft.Network/virtualNetworks@2022-11-01' = {
         { 
           name: name_subnet_backend
         properties: {
-          addressPrefix: '10.10.10.128/25'                  // back-end subnet
+          addressPrefix: '10.10.10.0/25'                  // back-end subnet
           networkSecurityGroup: {
             id: nsg_backend.id}
           }
@@ -61,6 +61,7 @@ resource vnet_webserver 'Microsoft.Network/virtualNetworks@2022-11-01' = {
       ]
   }
 }
+
 resource pub_ip_agw 'Microsoft.Network/publicIPAddresses@2022-11-01' = {
   name: name_pubip_AGW
   location: location
@@ -167,6 +168,18 @@ resource nsg_frontend 'Microsoft.Network/networkSecurityGroups@2022-11-01' = {
           direction: 'Inbound'
         }
       }
+      { name: 'https'
+        properties: {
+          access: 'Allow' 
+          direction: 'Inbound' 
+          priority: 100
+          protocol: 'Tcp'
+          sourcePortRange: '*'
+          sourceAddressPrefix: '*'
+          destinationPortRange: '443'
+          destinationAddressPrefix: '*'
+        }
+      } 
     ]
   }
 }
@@ -194,7 +207,7 @@ resource nsg_backend 'Microsoft.Network/networkSecurityGroups@2022-11-01' = {
       } 
       { name: 'http'
       properties: {
-        access: 'Allow'                       // later op deny
+        access: 'Allow'                       // later op deny na ssl termination
         direction: 'Inbound'
         priority: 200
         protocol: 'Tcp'
@@ -303,7 +316,7 @@ resource nsg_adminserver 'Microsoft.Network/networkSecurityGroups@2022-11-01' = 
           priority: 300
           protocol: 'Tcp'
           sourcePortRange: '*'
-          sourceAddressPrefix: '77.175.148.54'            // allow admin IP('s) // test for now, will 
+          sourceAddressPrefix: '77.175.148.54'            // allow admin IP('s)
           destinationPortRange: '3389'                    // allow RDP acces on the usual RDP port
           destinationAddressPrefix: '*'
         }
@@ -318,14 +331,14 @@ output vnet_id_webserver string = vnet_webserver.id
 output vnet_id_adminserver string = vnet_adminserver.id
 output vnet_name_webserver string = name_vnet_webserver
 output vnet_name_adminserver string = name_vnet_adminserver
-output subnet_id_backend string = vnet_webserver.properties.subnets[1].id   
-output subnet_id_frontend string = vnet_webserver.properties.subnets[0].id                
+output subnet_id_backend string = vnet_webserver.properties.subnets[0].id   
+output subnet_id_frontend string = vnet_webserver.properties.subnets[1].id                
 output subnet_id_adminserver string = vnet_adminserver.properties.subnets[0].id
 output nsg_id_backend string = nsg_backend.id
 output nsg_id_frontend string = nsg_frontend.id
 output nsg_id_adminserver string = nsg_adminserver.id
 output nic_id_adminserver string = nic_adminserver.id
-output ntw_interface_web_name string = name_ntw_interface
+// output ntw_interface_web_name string = name_ntw_interface
 output pub_ip_id_adminserver string = pub_ip_adminserver.id
 output pub_ip_agw string = pub_ip_agw.id
 
