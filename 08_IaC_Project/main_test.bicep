@@ -10,7 +10,7 @@ param environment string = 'dev'
 
 @description('Make general resource group for deployment in certain region')
 // Make a general resource group for deployment in a region
-param resourceGroupName string = 'rootrg5'
+param resourceGroupName string = 'rootrg25'
 param location string = deployment().location // locate resources at location declared with the deployment command
 resource rootgroup 'Microsoft.Resources/resourceGroups@2022-09-01' = {
   name: resourceGroupName

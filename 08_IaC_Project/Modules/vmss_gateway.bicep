@@ -49,10 +49,6 @@ resource ApplicationGateway 'Microsoft.Network/applicationGateways@2022-11-01' =
       tier: 'Standard_v2'
       capacity: 1
     }
-    autoscaleConfiguration: {
-      minCapacity: 1
-      maxCapacity: 2
-    }
     backendHttpSettingsCollection: [
       {
         name: 'backend_http_settings'

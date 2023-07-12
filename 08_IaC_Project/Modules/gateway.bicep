@@ -16,7 +16,6 @@ resource vnet_webserver 'Microsoft.Network/virtualNetworks@2022-11-01' existing 
   name: name_vnet_webserver
 }
 
-
 resource app_gateway 'Microsoft.Network/applicationGateways@2022-11-01' = {
   name: app_gateway_name
   location: location
@@ -26,10 +25,6 @@ resource app_gateway 'Microsoft.Network/applicationGateways@2022-11-01' = {
       tier: 'Standard_v2'          // standard v2
       capacity: 1
     }
-    // autoscaleConfiguration: {
-    //   minCapacity: 1
-    //   maxCapacity: 2
-    // }
     backendAddressPools: [
       {
       name: 'backend_pool'
@@ -43,7 +38,7 @@ resource app_gateway 'Microsoft.Network/applicationGateways@2022-11-01' = {
         name: 'AGW_ipconfig'
         properties: {
           subnet: {
-            id: agw_subnet                  // get subnet id from networking module
+            id: vnet_webserver.properties.subnets[1].id                 // agw_subnet  
           }
         }
       }
@@ -159,6 +154,9 @@ resource vmss 'Microsoft.Compute/virtualMachineScaleSets@2021-11-01' = {
     capacity: 1
   }
   properties: {
+    singlePlacementGroup: true
+    platformFaultDomainCount: 1
+    overprovision: true
     automaticRepairsPolicy: {
       enabled: true
     }
@@ -203,7 +201,7 @@ resource vmss 'Microsoft.Compute/virtualMachineScaleSets@2021-11-01' = {
         }
       }
       networkProfile: {
-        networkApiVersion: '2020-11-01'
+        // networkApiVersion: '2020-11-01'
         networkInterfaceConfigurations: [
           {
             name: '${environment}-VMSS-interface'
@@ -220,11 +218,11 @@ resource vmss 'Microsoft.Compute/virtualMachineScaleSets@2021-11-01' = {
                 properties: {
                   privateIPAddressVersion: 'IPv4'
                   subnet: {
-                    id: subnet_id_backend
+                    id: vnet_webserver.properties.subnets[0].id                                                       // backend subnet
                   }
                   applicationGatewayBackendAddressPools: [
                     {
-                      id: resourceId('Microsoft.Network/applicationGateways/backendAddressPools', app_gateway_name, 'backend_pool')
+                      id: app_gateway.properties.backendAddressPools[0].id                                             // resourceId('Microsoft.Network/applicationGateways/backendAddressPools', app_gateway_name, 'backend_pool')
                     }
                   ]
                 }  
@@ -254,13 +252,8 @@ resource vmss 'Microsoft.Compute/virtualMachineScaleSets@2021-11-01' = {
         ]
       } 
     }
-    orchestrationMode: 'Flexible'                         // 'Flexible' or 'Uniform'
-    singlePlacementGroup: true
-    platformFaultDomainCount: 1
+    // orchestrationMode: 'Flexible'                         // 'Flexible' or 'Uniform'
   }
-  dependsOn: [
-  app_gateway
-  ]
 }
 
 

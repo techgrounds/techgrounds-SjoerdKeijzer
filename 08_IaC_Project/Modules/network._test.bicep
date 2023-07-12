@@ -76,26 +76,9 @@ resource pub_ip_agw 'Microsoft.Network/publicIPAddresses@2022-11-01' = {
     publicIPAllocationMethod: 'Static'
     publicIPAddressVersion: 'IPv4'
     idleTimeoutInMinutes: 4                       // must be between 4 and 30
-    }
-  }
-
-
-  resource webServerPublicIP 'Microsoft.Network/publicIPAddresses@2022-11-01' = {
-    name: 'webServerpublicIP'
-    location: location
-    sku: {
-      name: 'Standard'
-    }
-    tags: {
-      Location: location
-    }
-    properties: {
-      publicIPAddressVersion: 'IPv4'
-      publicIPAllocationMethod: 'Static'
-      idleTimeoutInMinutes: 4
-      dnsSettings: {
-        domainNameLabel: 'webserverscaleset'
-      }
+    // dnsSettings: {
+    //   domainNameLabel: 'string'
+    // }
     }
   }
 
