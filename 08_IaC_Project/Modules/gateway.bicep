@@ -26,10 +26,10 @@ resource app_gateway 'Microsoft.Network/applicationGateways@2022-11-01' = {
       tier: 'Standard_v2'          // standard v2
       capacity: 1
     }
-    autoscaleConfiguration: {
-      minCapacity: 1
-      maxCapacity: 2
-    }
+    // autoscaleConfiguration: {
+    //   minCapacity: 1
+    //   maxCapacity: 2
+    // }
     backendAddressPools: [
       {
       name: 'backend_pool'
@@ -90,7 +90,7 @@ resource app_gateway 'Microsoft.Network/applicationGateways@2022-11-01' = {
               id: resourceId('Microsoft.Network/applicationGateways/frontendIPConfigurations', app_gateway_name, 'FrontendIPconfig')
             }
             frontendPort: {
-              id: resourceId('Microsoft.Network/applicationGateways/frontendPorts', app_gateway_name, 'port_80')
+              id: resourceId('Microsoft.Network/applicationGateways/frontendPorts', app_gateway_name, 'port_http')
             }
             protocol: 'Http'
             requireServerNameIndication: false

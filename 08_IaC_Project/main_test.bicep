@@ -10,7 +10,7 @@ param environment string = 'dev'
 
 @description('Make general resource group for deployment in certain region')
 // Make a general resource group for deployment in a region
-param resourceGroupName string = 'rootrg'
+param resourceGroupName string = 'rootrg5'
 param location string = deployment().location // locate resources at location declared with the deployment command
 resource rootgroup 'Microsoft.Resources/resourceGroups@2022-09-01' = {
   name: resourceGroupName
@@ -82,27 +82,27 @@ module peering 'Modules/peering.bicep' = {
 //   dependsOn: [keyvault]
 // }
 
- @description('Deploy vmss and gateway module')
- // Deploy vmss with application gateway module
- module vmss 'Modules/vmss_gateway.bicep' = {
-  scope: rootgroup
-  name: 'vmss_agw_deployment'
-  params: {
-    location: location
-    environment: environment
-    name_vnet_webserver: network.outputs.vnet_name_webserver
-    diskencryption: keyvault.outputs.diskencryptset_id
-    subnet_id_backend: network.outputs.subnet_id_backend
-    agw_subnet: network.outputs.subnet_id_frontend
-    nsg_backend: network.outputs.nsg_id_backend
-    agw_pub_ip: network.outputs.pub_ip_agw
-  }
-  dependsOn: [
-    network
-  ]
- }
+//  @description('Deploy vmss and gateway module')
+//  // Deploy vmss with application gateway module
+//  module vmss 'Modules/vmss_gateway.bicep' = {
+//   scope: rootgroup
+//   name: 'vmss_agw_deployment'
+//   params: {
+//     location: location
+//     environment: environment
+//     name_vnet_webserver: network.outputs.vnet_name_webserver
+//     diskencryption: keyvault.outputs.diskencryptset_id
+//     subnet_id_backend: network.outputs.subnet_id_backend
+//     agw_subnet: network.outputs.subnet_id_frontend
+//     nsg_backend: network.outputs.nsg_id_backend
+//     agw_pub_ip: network.outputs.pub_ip_agw
+//   }
+//   dependsOn: [
+//     network
+//   ]
+//  }
 
- // let's see if this works
+ // let's see if this works - new gateway + vmss module
  module gateway_test 'Modules/gateway.bicep' = {
   scope: rootgroup
   name: 'gateway_test1278'

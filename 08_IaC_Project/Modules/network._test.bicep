@@ -65,6 +65,9 @@ resource vnet_webserver 'Microsoft.Network/virtualNetworks@2022-11-01' = {
 resource pub_ip_agw 'Microsoft.Network/publicIPAddresses@2022-11-01' = {
   name: name_pubip_AGW
   location: location
+  sku: {
+    name: 'Standard'
+  }
   tags: {
     vnet: name_vnet_webserver
     location: location
@@ -72,6 +75,27 @@ resource pub_ip_agw 'Microsoft.Network/publicIPAddresses@2022-11-01' = {
   properties: {
     publicIPAllocationMethod: 'Static'
     publicIPAddressVersion: 'IPv4'
+    idleTimeoutInMinutes: 4                       // must be between 4 and 30
+    }
+  }
+
+
+  resource webServerPublicIP 'Microsoft.Network/publicIPAddresses@2022-11-01' = {
+    name: 'webServerpublicIP'
+    location: location
+    sku: {
+      name: 'Standard'
+    }
+    tags: {
+      Location: location
+    }
+    properties: {
+      publicIPAddressVersion: 'IPv4'
+      publicIPAllocationMethod: 'Static'
+      idleTimeoutInMinutes: 4
+      dnsSettings: {
+        domainNameLabel: 'webserverscaleset'
+      }
     }
   }
 
@@ -230,6 +254,19 @@ resource nsg_backend 'Microsoft.Network/networkSecurityGroups@2022-11-01' = {
       destinationAddressPrefix: '*'               // waarschijnlijk nog specifieker maken
     }
     }
+    {
+      name: 'GatewayManager'
+          properties: {
+            protocol: 'TCP'
+            sourceAddressPrefix: 'GatewayManager'
+            sourcePortRange: '*' 
+            destinationAddressPrefix: '*' 
+            destinationPortRange: '65200-65535'
+            access: 'Allow'
+            priority: 1100
+            direction: 'Inbound'
+          }
+        }
     ]
   }
 }
