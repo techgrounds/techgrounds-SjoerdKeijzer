@@ -3,7 +3,7 @@
 param location string
 param environment string
 
-// Outputs are defined in adminserver module in main.bicep
+// Imported params from other modules
 param nicid string 
 param diskencryption string
 
@@ -42,7 +42,7 @@ resource vm_adminserver 'Microsoft.Compute/virtualMachines@2022-03-01' = {
       adminUsername: admin_username
       adminPassword: admin_password
       windowsConfiguration: {
-        enableAutomaticUpdates: false          // admin will use scheduled maintance feature to apply (security) updates
+        enableAutomaticUpdates: false          // admin will use scheduled maintenance feature to apply (security) updates
         provisionVMAgent: true
       }
     }

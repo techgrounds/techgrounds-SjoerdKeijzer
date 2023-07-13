@@ -44,6 +44,8 @@ resource vnet_webserver 'Microsoft.Network/virtualNetworks@2022-11-01' = {
         {
           name: name_subnet_backend                                               
           properties: {
+            privateEndpointNetworkPolicies: 'Enabled'
+            privateLinkServiceNetworkPolicies: 'Enabled'
             addressPrefix: '10.10.10.128/25'                  
             networkSecurityGroup: {
               id: nsg_backend.id                                   
@@ -53,6 +55,8 @@ resource vnet_webserver 'Microsoft.Network/virtualNetworks@2022-11-01' = {
         { 
           name: name_subnet_front_agw                                
         properties: {
+          privateEndpointNetworkPolicies: 'Enabled'
+          privateLinkServiceNetworkPolicies: 'Enabled'
           addressPrefix: '10.10.10.0/25'                  
           networkSecurityGroup: {
             id: nsg_frontend.id                                      

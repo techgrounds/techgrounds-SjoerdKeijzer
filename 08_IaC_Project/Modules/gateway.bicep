@@ -26,7 +26,7 @@ resource app_gateway 'Microsoft.Network/applicationGateways@2022-11-01' = {
   properties: {
     sku: {
       name: 'Standard_v2'
-      tier: 'Standard_v2'          // standard v2
+      tier: 'Standard_v2'
       capacity: 1
     }
     backendAddressPools: [
@@ -42,7 +42,7 @@ resource app_gateway 'Microsoft.Network/applicationGateways@2022-11-01' = {
         name: 'AGW_ipconfig'
         properties: {
           subnet: {
-            id: vnet_webserver.properties.subnets[1].id                 // agw_subnet  
+            id: vnet_webserver.properties.subnets[1].id  
           }
         }
       }
@@ -115,7 +115,20 @@ resource app_gateway 'Microsoft.Network/applicationGateways@2022-11-01' = {
         }
       ]
     // sslCertificates:
-    // probes:
+    // probes: [
+    //   {
+    //     name: 'probe'
+    //     properties: {
+    //       unhealthyThreshold:
+    //       timeout:
+    //       minServers:
+    //       match:
+    //       interval:
+    //       port:
+    //       protocol:
+    //     }
+    //   }
+    // ]
     // sslPolicy:
     // sslProfiles:
     // webApplicationFirewallConfiguration:
@@ -205,7 +218,6 @@ resource vmss 'Microsoft.Compute/virtualMachineScaleSets@2021-11-01' = {
         }
       }
       networkProfile: {
-        // networkApiVersion: '2020-11-01'
         networkInterfaceConfigurations: [
           {
             name: '${environment}-VMSS-interface'
@@ -256,7 +268,6 @@ resource vmss 'Microsoft.Compute/virtualMachineScaleSets@2021-11-01' = {
         ]
       } 
     }
-    // orchestrationMode: 'Flexible'                         // 'Flexible' or 'Uniform'
   }
 }
 

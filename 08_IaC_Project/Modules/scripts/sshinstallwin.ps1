@@ -1,3 +1,4 @@
+# Check if OpenSSH Client and Server are installed
 Get-WindowsCapability -Online | Where-Object Name -like 'OpenSSH*'
 
 # Install the OpenSSH Client
