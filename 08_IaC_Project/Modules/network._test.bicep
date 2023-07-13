@@ -238,19 +238,19 @@ resource nsg_backend 'Microsoft.Network/networkSecurityGroups@2022-11-01' = {
       destinationAddressPrefix: '*'               // waarschijnlijk nog specifieker maken
     }
     }
-    {
-      name: 'GatewayManager'
-          properties: {
-            protocol: 'TCP'
-            sourceAddressPrefix: 'GatewayManager'
-            sourcePortRange: '*' 
-            destinationAddressPrefix: '*' 
-            destinationPortRange: '65200-65535'
-            access: 'Allow'
-            priority: 1100
-            direction: 'Inbound'
-          }
-        }
+    // {
+    //   name: 'GatewayManager'
+    //       properties: {
+    //         protocol: 'TCP'
+    //         sourceAddressPrefix: 'GatewayManager'
+    //         sourcePortRange: '*' 
+    //         destinationAddressPrefix: '*' 
+    //         destinationPortRange: '65200-65535'
+    //         access: 'Allow'
+    //         priority: 1100
+    //         direction: 'Inbound'
+    //       }
+    //     }
     ]
   }
 }

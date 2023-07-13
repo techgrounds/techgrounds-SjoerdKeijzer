@@ -5,11 +5,10 @@ param environment string
 
 // import needed outputs from other modules
 param name_vnet_webserver string
-param agw_subnet string
-param subnet_id_backend string
 param agw_pub_ip string
 param nsg_backend string
 
+@description('Application Gateway name')
 param app_gateway_name string = 'app_gateway'
 
 resource vnet_webserver 'Microsoft.Network/virtualNetworks@2022-11-01' existing = {
