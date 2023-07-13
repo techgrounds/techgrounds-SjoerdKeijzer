@@ -18,6 +18,11 @@ resource vnet_webserver 'Microsoft.Network/virtualNetworks@2022-11-01' existing 
 resource app_gateway 'Microsoft.Network/applicationGateways@2022-11-01' = {
   name: app_gateway_name
   location: location
+  tags: {
+    location: location
+    vnet: name_vnet_webserver
+    id: app_gateway_name
+  }
   properties: {
     sku: {
       name: 'Standard_v2'

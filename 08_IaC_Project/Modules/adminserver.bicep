@@ -3,18 +3,19 @@
 param location string
 param environment string
 
-@description('Inputs for this module that are linked outputs from other modules.')
 // Outputs are defined in adminserver module in main.bicep
-param nicid string        // import nic_id from adminserver vnet from network module
-param diskencryption string  // enable diskencryption from keyvault module
+param nicid string 
+param diskencryption string
 
 // adminserver specifics
 @description('The name of your Virtual Machine. Windows computer name cannot be longer than 15 characters max. Trust me, I tried.')
 @maxLength(15) 
 param vm_name_adminserver string = 'winadminserver'
 param vm_size string = 'Standard_B1s'
-// param vm_size string = environment == 'dev' ? 'Standard_B1s' : 'Standard_D2ds_v4' // set b1s as dev and d2ds_V4 as prod standard || pos sizes test 'Standard_D2ps_v5' // 'Standard_B1s' // 'Standard_D2ds_v4'
-param vm_sku string = '2022-datacenter-azure-edition-core' // 2022-datacenter-core-smalldisk-g2 als alternative
+param vm_sku string = '2022-datacenter-azure-edition-core'
+
+@description('Installs openSSH on adminserver, so you can connect via SSH protocol (key or password) with scale set instances')
+var ssh_script = loadFileAsBase64('scripts/sshinstallwin.ps1')        // installs openSSH on adminserver to connect with scale set instances
 
 
 @description('Username and pw settings for the Virtual Machine.')
@@ -32,6 +33,7 @@ resource vm_adminserver 'Microsoft.Compute/virtualMachines@2022-03-01' = {
     location: location
   }
   properties: {
+    userData: ssh_script
     hardwareProfile: {
       vmSize: vm_size
     }
