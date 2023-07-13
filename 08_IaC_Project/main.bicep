@@ -17,20 +17,8 @@ resource rootgroup 'Microsoft.Resources/resourceGroups@2022-09-01' = {
   location: location
 }
 
-@description('Deploy storage account module') // works just fine
-// Deploy storage account module
-module stg 'Modules/storage.bicep' = {
-name: 'storagedeployment'
-scope: rootgroup
-params: {
-  location: location
-  environment: environment
-  }
-}
-
  @description('Deploy network module') // works fine
 // Deploy network module
-// Ideally I want different resource groups for each vnet, but for easy testing purposes let's deploy everything in the main root resource group
 module network 'Modules/network._test.bicep' = {
   name: 'networkdeployment'
   scope: rootgroup
@@ -40,7 +28,18 @@ module network 'Modules/network._test.bicep' = {
   }
 }
 
-@description('Deploys admin server module') // need to fix acces rules from nsg and login to vm via rdp
+@description('Deploy keyvault and encryption module')   // deploys with encrypted diskset - need to fix passwords at other time
+// Deploy Keyvault & encryption module
+module keyvault 'Modules/keyvault.bicep' = {
+  scope: rootgroup
+  name: 'keyvault_deployment'
+  params: {
+    location: location
+    environment: environment
+  }
+}
+
+@description('Deploys admin server module') // succesfull rdp login
 // Deploy admin server module
 module adminserver 'Modules/adminserver.bicep' = {
   name: 'adminserver_deployment'
@@ -51,26 +50,6 @@ module adminserver 'Modules/adminserver.bicep' = {
     nicid: network.outputs.nic_id_adminserver
     diskencryption: keyvault.outputs.diskencryptset_id
   }
-  // dependsOn: [
-  //   network
-  // ]
-}
-
-@description('Deploy webserver module') // need to fix acces/routing from internet via nsg / and login to vm + apache bootstrap
-// Deploy webserver module
-module webserver 'Modules/webserver.bicep' = {
-  name: 'webserver_deployment'
-  scope: rootgroup
-  params: {
-    location: location
-    environment: environment
-    nicid: network.outputs.nic_id_webserver
-    diskencryption: keyvault.outputs.diskencryptset_id
-    kv_key_name: keyvault.outputs.kv_key_name
-  }
-  // dependsOn: [
-  //   network
-  // ]
 }
 
 @description('Deploy network peering module') // works fine
@@ -84,20 +63,51 @@ module peering 'Modules/peering.bicep' = {
     peer_web_vnet: network.outputs.vnet_id_webserver
     peer_admin_vnet: network.outputs.vnet_id_adminserver
     }
+    dependsOn: [network]
   }
 
-@description('Deploy keyvault and encryption module')   // work in progress
-// Deploy Keyvault & encryption module
-module keyvault 'Modules/keyvault.bicep' = {
+
+// @description('Deploy storage account module')
+// // Deploy storage account module
+// module stg 'Modules/storage_test.bicep' = {
+// name: 'storagedeployment'
+// scope: rootgroup
+// params: {
+//   location: location
+//   environment: environment
+//   managed_identity_name: keyvault.outputs.managed_id_name
+//   keyVaultName: keyvault.outputs.key_vault_name
+//   key_name: keyvault.outputs.kv_key_name
+//   }
+//   dependsOn: [keyvault]
+// }
+
+@description('Deploys application gateway and webserver with scale set')
+ // deploys application gateway and webserver with scale set
+ module gateway_vmss 'Modules/gateway.bicep' = {
   scope: rootgroup
-  name: 'keyvault_deployment'
+  name: 'gateway_vmss'
   params: {
     location: location
-    // // storageAccount: stg.outputs.stg_id
-    // // storageName: stg.outputs.stg_name
     environment: environment
-    // // vm_webserver_principal_id: webserver.outputs.vm_webserver_principal_id
+    name_vnet_webserver: network.outputs.vnet_name_webserver
+    diskencryption: keyvault.outputs.diskencryptset_id
+    subnet_id_backend: network.outputs.subnet_id_backend
+    agw_subnet: network.outputs.subnet_id_frontend
+    nsg_backend: network.outputs.nsg_id_backend
+    agw_pub_ip: network.outputs.pub_ip_agw
   }
+  dependsOn: [
+    network
+  ]
+ }
+
+
+@description('Deploy Back-up and recovery module')
+// Deploy AZ back-up and recovery vault
+module backup_recovery 'Modules/backup_recovery.bicep' = {
+  name: 'backup_recovery_deployment'
+  scope: rootgroup
 }
 
 // @description('Deply database module')
@@ -112,17 +122,3 @@ module keyvault 'Modules/keyvault.bicep' = {
 //     location: location
 //   }
 // }
-
-
-
-//  @description('Deploy vmss module')
-//  // Deply vmss module
-//  module vmss 'Modules/vmss.bicep' = {
-//   scope: rootgroup
-//   name: 'vmss_deployment'
-//   params: {
-//     location: location
-//     name_vnet_webserver: network.outputs.vnet_name_webserver
-//     id_vnet_webserver: network.outputs.vnet_id_webserver
-//   }
-//  }

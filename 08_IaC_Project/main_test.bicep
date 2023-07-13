@@ -10,7 +10,7 @@ param environment string = 'dev'
 
 @description('Make general resource group for deployment in certain region')
 // Make a general resource group for deployment in a region
-param resourceGroupName string = 'rootrg25'
+param resourceGroupName string = 'rootrg'
 param location string = deployment().location // locate resources at location declared with the deployment command
 resource rootgroup 'Microsoft.Resources/resourceGroups@2022-09-01' = {
   name: resourceGroupName
@@ -39,18 +39,18 @@ module keyvault 'Modules/keyvault.bicep' = {
   }
 }
 
-// @description('Deploys admin server module') // succesfull rdp login
-// // Deploy admin server module
-// module adminserver 'Modules/adminserver.bicep' = {
-//   name: 'adminserver_deployment'
-//   scope: rootgroup
-//   params: {
-//     location: location
-//     environment: environment
-//     nicid: network.outputs.nic_id_adminserver
-//     diskencryption: keyvault.outputs.diskencryptset_id
-//   }
-// }
+@description('Deploys admin server module') // succesfull rdp login
+// Deploy admin server module
+module adminserver 'Modules/adminserver.bicep' = {
+  name: 'adminserver_deployment'
+  scope: rootgroup
+  params: {
+    location: location
+    environment: environment
+    nicid: network.outputs.nic_id_adminserver
+    diskencryption: keyvault.outputs.diskencryptset_id
+  }
+}
 
 @description('Deploy network peering module') // works fine
 // Deploy network peering module
@@ -82,11 +82,11 @@ module peering 'Modules/peering.bicep' = {
 //   dependsOn: [keyvault]
 // }
 
-
- // let's see if this works - new gateway + vmss module
- module gateway_test 'Modules/gateway.bicep' = {
+@description('Deploys application gateway and webserver with scale set')
+ // deploys application gateway and webserver with scale set
+ module gateway_vmss 'Modules/gateway.bicep' = {
   scope: rootgroup
-  name: 'gateway_test1278'
+  name: 'gateway_vmss'
   params: {
     location: location
     environment: environment

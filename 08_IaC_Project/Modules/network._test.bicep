@@ -42,20 +42,21 @@ resource vnet_webserver 'Microsoft.Network/virtualNetworks@2022-11-01' = {
       ]}
       subnets: [
         {
-          name: name_subnet_front_agw
+          name: name_subnet_backend                                               
           properties: {
-            addressPrefix: '10.10.10.128/25'                  // front end subnet
+            addressPrefix: '10.10.10.128/25'                  
             networkSecurityGroup: {
-              id: nsg_frontend.id
+              id: nsg_backend.id                                   
             }
           }
         }
         { 
-          name: name_subnet_backend
+          name: name_subnet_front_agw                                
         properties: {
-          addressPrefix: '10.10.10.0/25'                  // back-end subnet
+          addressPrefix: '10.10.10.0/25'                  
           networkSecurityGroup: {
-            id: nsg_backend.id}
+            id: nsg_frontend.id                                      
+          }
           }
         }
       ]
@@ -358,7 +359,6 @@ output nsg_id_backend string = nsg_backend.id
 output nsg_id_frontend string = nsg_frontend.id
 output nsg_id_adminserver string = nsg_adminserver.id
 output nic_id_adminserver string = nic_adminserver.id
-// output ntw_interface_web_name string = name_ntw_interface
 output pub_ip_id_adminserver string = pub_ip_adminserver.id
 output pub_ip_agw string = pub_ip_agw.id
 
