@@ -145,6 +145,7 @@ param name_vmss string = 'vmss_webserver'
 param vm_size string = 'Standard_B1s'
 param vm_sku string = '20_04-lts'
 param name_vm string = '${environment}-web-vm'
+param name_autoscaling string = 'autoscale_resource'
 
 // installs apache on each scaling instance
 var apache_script = loadFileAsBase64('bashscript/web_installscript.sh')
@@ -272,4 +273,42 @@ resource vmss 'Microsoft.Compute/virtualMachineScaleSets@2021-11-01' = {
 }
 
 
-
+resource autoscaling 'Microsoft.Insights/autoscalesettings@2022-10-01' = {
+  name: name_autoscaling
+  location: location
+  properties: {
+    enabled: true
+    targetResourceUri: vmss.id
+    profiles: [
+      {
+        name: 'autoscale_config'
+        capacity: {
+          default: '1'
+          maximum: '3'
+          minimum: '1'
+        }
+        rules: [
+          {
+            metricTrigger: {
+              metricName: 'percentage_cpu_increase' 
+              metricResourceUri: vmss.id 
+              operator: 'GreaterThan'
+              statistic: 'Average' 
+              threshold: 75 
+              timeAggregation: 'Average' 
+              timeGrain: 'PT1M'
+              timeWindow: 'PT10M' 
+              dividePerInstance: false
+            }
+          scaleAction: {
+            cooldown: 'PT1M'
+            direction: 'Increase'
+            type: 'ChangeCount'
+            value: '1'
+          }
+          }
+        ]
+      }
+    ]
+  }
+}
