@@ -38,16 +38,16 @@ resource app_gateway 'Microsoft.Network/applicationGateways@2022-11-01' = {
       tier: 'Standard_v2'
       capacity: 1
     }
-    sslCertificates: [
-      {
-        name: name_ssl_cert
-        properties: {
-          // keyVaultSecretId:
-          // data: ssl_cert
-          password: ssl_cert_password
-        }
-      }
-    ]
+    // sslCertificates: [
+    //   {
+    //     name: name_ssl_cert
+    //     properties: {
+    //       keyVaultSecretId:
+    //       data: ssl_cert
+    //       password: ssl_cert_password
+    //     }
+    //   }
+    // ]
     backendAddressPools: [
       {
       name: 'backend_pool'
@@ -114,22 +114,22 @@ resource app_gateway 'Microsoft.Network/applicationGateways@2022-11-01' = {
             requireServerNameIndication: false
           }
         }
-        {
-          name: 'HttpsListener'
-          properties: {
-            frontendIPConfiguration: { 
-              id: resourceId('Microsoft.Network/applicationGateways/frontendIPConfigurations', app_gateway_name, 'FrontendIPconfig')
-            }
-            frontendPort: {
-              id: resourceId('Microsoft.Network/applicationGateways/frontendPorts', app_gateway_name, 'port_https')
-            }
-            protocol: 'Https'
-            requireServerNameIndication: false
-            sslCertificate: {
-              id: resourceId('Microsoft.Network/applicationGateways/sslCertificates', app_gateway_name, name_ssl_cert) 
-            }
-          }
-        }
+        // {
+        //   name: 'HttpsListener'
+        //   properties: {
+        //     frontendIPConfiguration: { 
+        //       id: resourceId('Microsoft.Network/applicationGateways/frontendIPConfigurations', app_gateway_name, 'FrontendIPconfig')
+        //     }
+        //     frontendPort: {
+        //       id: resourceId('Microsoft.Network/applicationGateways/frontendPorts', app_gateway_name, 'port_https')
+        //     }
+        //     protocol: 'Https'
+        //     requireServerNameIndication: false
+        //     sslCertificate: {
+        //       id: resourceId('Microsoft.Network/applicationGateways/sslCertificates', app_gateway_name, name_ssl_cert) 
+        //     }
+        //   }
+        // }
       ]
       requestRoutingRules: [
         {
