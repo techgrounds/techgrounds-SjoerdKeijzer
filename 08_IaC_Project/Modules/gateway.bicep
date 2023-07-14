@@ -8,6 +8,15 @@ param name_vnet_webserver string
 param agw_pub_ip string
 param nsg_backend string
 
+// Certificate vars
+param name_ssl_cert string = 'ssl_cert_gateway'
+// var ssl_cert = {path to script} of loadasbasefile64
+@secure()
+param ssl_cert_password string = 'Yousslnotpass'
+
+/////////////////////////////////////////
+// Application Gateway 
+
 @description('Application Gateway name')
 param app_gateway_name string = 'app_gateway'
 
@@ -29,6 +38,16 @@ resource app_gateway 'Microsoft.Network/applicationGateways@2022-11-01' = {
       tier: 'Standard_v2'
       capacity: 1
     }
+    sslCertificates: [
+      {
+        name: name_ssl_cert
+        properties: {
+          // keyVaultSecretId:
+          // data: ssl_cert
+          password: ssl_cert_password
+        }
+      }
+    ]
     backendAddressPools: [
       {
       name: 'backend_pool'
@@ -42,7 +61,7 @@ resource app_gateway 'Microsoft.Network/applicationGateways@2022-11-01' = {
         name: 'AGW_ipconfig'
         properties: {
           subnet: {
-            id: vnet_webserver.properties.subnets[1].id  
+            id: vnet_webserver.properties.subnets[1].id         // frontend subnet
           }
         }
       }
@@ -95,6 +114,22 @@ resource app_gateway 'Microsoft.Network/applicationGateways@2022-11-01' = {
             requireServerNameIndication: false
           }
         }
+        {
+          name: 'HttpsListener'
+          properties: {
+            frontendIPConfiguration: { 
+              id: resourceId('Microsoft.Network/applicationGateways/frontendIPConfigurations', app_gateway_name, 'FrontendIPconfig')
+            }
+            frontendPort: {
+              id: resourceId('Microsoft.Network/applicationGateways/frontendPorts', app_gateway_name, 'port_https')
+            }
+            protocol: 'Https'
+            requireServerNameIndication: false
+            sslCertificate: {
+              id: resourceId('Microsoft.Network/applicationGateways/sslCertificates', app_gateway_name, name_ssl_cert) 
+            }
+          }
+        }
       ]
       requestRoutingRules: [
         {
@@ -114,7 +149,6 @@ resource app_gateway 'Microsoft.Network/applicationGateways@2022-11-01' = {
           }
         }
       ]
-    // sslCertificates:
     // probes: [
     //   {
     //     name: 'probe'
@@ -235,11 +269,11 @@ resource vmss 'Microsoft.Compute/virtualMachineScaleSets@2021-11-01' = {
                 properties: {
                   privateIPAddressVersion: 'IPv4'
                   subnet: {
-                    id: vnet_webserver.properties.subnets[0].id                                                       // backend subnet
+                    id: vnet_webserver.properties.subnets[0].id                                 // backend subnet
                   }
                   applicationGatewayBackendAddressPools: [
                     {
-                      id: app_gateway.properties.backendAddressPools[0].id                                             // resourceId('Microsoft.Network/applicationGateways/backendAddressPools', app_gateway_name, 'backend_pool')
+                      id: app_gateway.properties.backendAddressPools[0].id                      // resourceId('Microsoft.Network/applicationGateways/backendAddressPools', app_gateway_name, 'backend_pool')
                     }
                   ]
                 }  
@@ -272,7 +306,6 @@ resource vmss 'Microsoft.Compute/virtualMachineScaleSets@2021-11-01' = {
   }
 }
 
-
 resource autoscaling 'Microsoft.Insights/autoscalesettings@2022-10-01' = {
   name: name_autoscaling
   location: location
@@ -289,7 +322,7 @@ resource autoscaling 'Microsoft.Insights/autoscalesettings@2022-10-01' = {
         }
         rules: [
           {
-            metricTrigger: {
+            metricTrigger: {                                  // scale out rules
               metricName: 'percentage_cpu_increase' 
               metricResourceUri: vmss.id 
               operator: 'GreaterThan'
@@ -303,6 +336,25 @@ resource autoscaling 'Microsoft.Insights/autoscalesettings@2022-10-01' = {
           scaleAction: {
             cooldown: 'PT1M'
             direction: 'Increase'
+            type: 'ChangeCount'
+            value: '1'
+          }
+          }
+          {
+            metricTrigger: {                                // scale in rules
+              metricName: 'percentage_cpu_decrease' 
+              metricResourceUri: vmss.id 
+              operator: 'LessThan'
+              statistic: 'Average' 
+              threshold: 25 
+              timeAggregation: 'Average' 
+              timeGrain: 'PT1M'
+              timeWindow: 'PT10M' 
+              dividePerInstance: false
+            }
+          scaleAction: {
+            cooldown: 'PT1M'
+            direction: 'Decrease'
             type: 'ChangeCount'
             value: '1'
           }
