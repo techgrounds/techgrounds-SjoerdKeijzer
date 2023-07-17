@@ -48,6 +48,10 @@ resource app_gateway 'Microsoft.Network/applicationGateways@2022-11-01' = {
     //     }
     //   }
     // ]
+    sslPolicy: {
+      policyName: ''
+      minProtocolVersion: 'TLSv1_2'
+    }
     backendAddressPools: [
       {
       name: 'backend_pool'
@@ -249,7 +253,7 @@ resource vmss 'Microsoft.Compute/virtualMachineScaleSets@2021-11-01' = {
         adminPassword: webadmin_password
         linuxConfiguration: {
           disablePasswordAuthentication: false
-          provisionVMAgent: false                               // or true
+          provisionVMAgent: false                               
         }
       }
       networkProfile: {
@@ -273,7 +277,7 @@ resource vmss 'Microsoft.Compute/virtualMachineScaleSets@2021-11-01' = {
                   }
                   applicationGatewayBackendAddressPools: [
                     {
-                      id: app_gateway.properties.backendAddressPools[0].id                      // resourceId('Microsoft.Network/applicationGateways/backendAddressPools', app_gateway_name, 'backend_pool')
+                      id: app_gateway.properties.backendAddressPools[0].id                    
                     }
                   ]
                 }  
@@ -288,14 +292,14 @@ resource vmss 'Microsoft.Compute/virtualMachineScaleSets@2021-11-01' = {
           {
             name: '${environment}-healthname'
             properties: {
-              enableAutomaticUpgrade: false
+              enableAutomaticUpgrade: true
               autoUpgradeMinorVersion: false
               publisher: 'Microsoft.ManagedServices'
               type: 'ApplicationHealthLinux'
               typeHandlerVersion: '1.0'
               settings: {
                 port: 80
-                protocol: 'http'
+                protocol: 'Http'
                 requestPath: ''
               }
             }
@@ -323,7 +327,7 @@ resource autoscaling 'Microsoft.Insights/autoscalesettings@2022-10-01' = {
         rules: [
           {
             metricTrigger: {                                  // scale out rules
-              metricName: 'percentage-cpu-increase' 
+              metricName: 'Percentage CPU' 
               metricNamespace: ''
               metricResourceUri: vmss.id 
               operator: 'GreaterThan'
@@ -343,7 +347,7 @@ resource autoscaling 'Microsoft.Insights/autoscalesettings@2022-10-01' = {
           }
           {
             metricTrigger: {                                // scale in rules
-              metricName: 'percentage-cpu-decrease'
+              metricName: 'Percentage CPU'
               metricNamespace: ''
               metricResourceUri: vmss.id 
               operator: 'LessThan'

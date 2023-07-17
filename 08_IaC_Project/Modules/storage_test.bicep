@@ -38,12 +38,13 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2022-09-01' = {
     name: 'Standard_LRS'
   }
   kind: 'StorageV2'
-  identity: {
-    type:  'UserAssigned'               // system assigned        
-    userAssignedIdentities: {
-      '${managed_identity}': {}
-    }
-  }
+  // identity: {
+  //   type:  'UserAssigned'               // system assigned
+  //   userAssignedIdentities: managed_identity.id // grrr        
+    // userAssignedIdentities: {
+    //   '${managed_identity.i}': {}
+    // }
+  // }
   properties: {
     accessTier: 'Hot'
     allowBlobPublicAccess: false
