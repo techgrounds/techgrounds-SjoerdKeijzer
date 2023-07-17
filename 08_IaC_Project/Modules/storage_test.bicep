@@ -56,28 +56,28 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2022-09-01' = {
     defaultToOAuthAuthentication: false
     encryption: {
       requireInfrastructureEncryption: false
-      keySource: 'Microsoft.Keyvault'
-      keyvaultproperties: {
-        keyvaulturi: keyvault_resource.properties.vaultUri
-        keyname: key_name
-      }
-      identity: {
-        userAssignedIdentity: managed_identity.properties.principalId    // had eerst managed_identity.id
-      }
-      services: {
-        blob: {
-          enabled: true
-        }
-        table: {
-          enabled: true
-        }
-        file: {
-          enabled: true
-        }
-        queue: {
-          enabled: true
-        }
-      }
+      // keySource: 'Microsoft.Keyvault'
+      // keyvaultproperties: {
+      //   keyvaulturi: keyvault_resource.properties.vaultUri
+      //   keyname: key_name
+      // }
+      // identity: {
+      //   userAssignedIdentity: managed_identity.properties.principalId    // had eerst managed_identity.id
+      // }
+      // services: {
+      //   blob: {
+      //     enabled: true
+      //   }
+      //   table: {
+      //     enabled: true
+      //   }
+      //   file: {
+      //     enabled: true
+      //   }
+      //   queue: {
+      //     enabled: true
+      //   }
+      // }
     }
     networkAcls: {
       defaultAction: 'Allow'

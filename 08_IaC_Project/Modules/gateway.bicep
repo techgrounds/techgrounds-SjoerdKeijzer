@@ -13,6 +13,12 @@ param name_ssl_cert string = 'ssl_cert_gateway'
 // var ssl_cert = {path to script} of loadasbasefile64
 @secure()
 param ssl_cert_password string = 'Yousslnotpass'
+param ciphers array = [
+  'TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384'
+  'TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256'
+  'TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384'
+  'TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256'
+]
 
 /////////////////////////////////////////
 // Application Gateway 
@@ -49,8 +55,10 @@ resource app_gateway 'Microsoft.Network/applicationGateways@2022-11-01' = {
     //   }
     // ]
     sslPolicy: {
-      policyName: ''
+      policyName: 'ssl_policy'
       minProtocolVersion: 'TLSv1_2'
+      policyType: 'Custom'
+      cipherSuites: ciphers                                                  
     }
     backendAddressPools: [
       {
@@ -153,22 +161,6 @@ resource app_gateway 'Microsoft.Network/applicationGateways@2022-11-01' = {
           }
         }
       ]
-    // probes: [
-    //   {
-    //     name: 'probe'
-    //     properties: {
-    //       unhealthyThreshold:
-    //       timeout:
-    //       minServers:
-    //       match:
-    //       interval:
-    //       port:
-    //       protocol:
-    //     }
-    //   }
-    // ]
-    // sslPolicy:
-    // sslProfiles:
     // webApplicationFirewallConfiguration:
     // redirectConfigurations:                              // need to write rule here for http > https
   }
