@@ -323,7 +323,8 @@ resource autoscaling 'Microsoft.Insights/autoscalesettings@2022-10-01' = {
         rules: [
           {
             metricTrigger: {                                  // scale out rules
-              metricName: 'percentage_cpu_increase' 
+              metricName: 'percentage-cpu-increase' 
+              metricNamespace: ''
               metricResourceUri: vmss.id 
               operator: 'GreaterThan'
               statistic: 'Average' 
@@ -342,7 +343,8 @@ resource autoscaling 'Microsoft.Insights/autoscalesettings@2022-10-01' = {
           }
           {
             metricTrigger: {                                // scale in rules
-              metricName: 'percentage_cpu_decrease' 
+              metricName: 'percentage-cpu-decrease'
+              metricNamespace: ''
               metricResourceUri: vmss.id 
               operator: 'LessThan'
               statistic: 'Average' 

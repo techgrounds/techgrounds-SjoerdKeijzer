@@ -168,7 +168,6 @@ resource nsg_backend 'Microsoft.Network/networkSecurityGroups@2022-11-01' = {
         sourceAddressPrefix: '*'
         destinationPortRange: '80'
         destinationAddressPrefix: '*'
-        // destinationPortRanges: ['8080']          // 8080 port nodig ?
       }
     }
     { name: 'ssh'
@@ -178,24 +177,11 @@ resource nsg_backend 'Microsoft.Network/networkSecurityGroups@2022-11-01' = {
       priority: 400
       protocol: 'Tcp'
       sourcePortRange: '*'                        
-      sourceAddressPrefix: '*'                    // admin server of ip als je ssh forwarding doet
+      sourceAddressPrefix: '*'                    
       destinationPortRange: '22'
-      destinationAddressPrefix: '*'               // waarschijnlijk nog specifieker maken
+      destinationAddressPrefix: '*' 
     }
     }
-    // {
-    //   name: 'GatewayManager'
-    //       properties: {
-    //         protocol: 'TCP'
-    //         sourceAddressPrefix: 'GatewayManager'
-    //         sourcePortRange: '*' 
-    //         destinationAddressPrefix: '*' 
-    //         destinationPortRange: '65200-65535'
-    //         access: 'Allow'
-    //         priority: 1100
-    //         direction: 'Inbound'
-    //       }
-    //     }
     ]
   }
 }

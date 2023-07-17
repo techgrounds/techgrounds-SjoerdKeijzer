@@ -52,7 +52,7 @@ resource keyvault_resource 'Microsoft.KeyVault/vaults@2021-11-01-preview' = {
     enableRbacAuthorization: false        // we dont have write permissions to make role assignments with our Techgrounds AD role 'Contributor'. We must make use of access policies.
     tenantId: tenantId
     createMode: 'default'
-    enablePurgeProtection: true           // once enabled cannot be turned off. Learn this the hard way. When giving 'false' value it just now will get a deployment error
+    enablePurgeProtection: true           // Once enabled cannot be turned off. Learn this the hard way. When giving 'false' value it just now will get a deployment error
     enableSoftDelete: true
     softDeleteRetentionInDays: 7          // min value 7 - 90 is standard
     publicNetworkAccess: 'Enabled'        // could be 'Disabled' but chances are for now I could lock myself out of my Keyvault
