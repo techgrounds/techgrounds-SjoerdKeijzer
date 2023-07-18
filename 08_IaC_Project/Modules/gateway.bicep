@@ -10,7 +10,7 @@ param nsg_backend string
 
 // Certificate vars
 param name_ssl_cert string = 'ssl_cert_gateway'
-// var ssl_cert = {path to script} of loadasbasefile64
+var ssl_cert = loadFileAsBase64('cert/Sjoerdoscert.pfx')
 @secure()
 param ssl_cert_password string = 'Yousslnotpass'
 param ciphers array = [
@@ -44,15 +44,15 @@ resource app_gateway 'Microsoft.Network/applicationGateways@2022-11-01' = {
       tier: 'Standard_v2'
       capacity: 1
     }
-    // sslCertificates: [
-    //   {
-    //     name: name_ssl_cert
-    //     properties: {
-    //       data: ssl_cert
-    //       password: ssl_cert_password
-    //     }
-    //   }
-    // ]
+    sslCertificates: [
+      {
+        name: name_ssl_cert
+        properties: {
+          data: ssl_cert
+          password: ssl_cert_password
+        }
+      }
+    ]
     sslPolicy: {
       policyName: 'ssl_policy'
       minProtocolVersion: 'TLSv1_2'
@@ -111,6 +111,17 @@ resource app_gateway 'Microsoft.Network/applicationGateways@2022-11-01' = {
           }
         }
     ]
+    redirectConfigurations: [
+      {
+        name: 'redirect_config'
+        properties: {
+          redirectType: 'Permanent'
+          targetListener: {
+            id: resourceId('Microsoft.Network/applicationGateways/httpListeners', app_gateway_name, 'HttpsListener')
+          }
+        }
+      }
+    ]
       httpListeners: [
         {
           name: 'HttpListener'
@@ -125,31 +136,50 @@ resource app_gateway 'Microsoft.Network/applicationGateways@2022-11-01' = {
             requireServerNameIndication: false
           }
         }
-        // {
-        //   name: 'HttpsListener'
-        //   properties: {
-        //     frontendIPConfiguration: { 
-        //       id: resourceId('Microsoft.Network/applicationGateways/frontendIPConfigurations', app_gateway_name, 'FrontendIPconfig')
-        //     }
-        //     frontendPort: {
-        //       id: resourceId('Microsoft.Network/applicationGateways/frontendPorts', app_gateway_name, 'port_https')
-        //     }
-        //     protocol: 'Https'
-        //     requireServerNameIndication: false
-        //     sslCertificate: {
-        //       id: resourceId('Microsoft.Network/applicationGateways/sslCertificates', app_gateway_name, name_ssl_cert) 
-        //     }
-        //   }
-        // }
+        {
+          name: 'HttpsListener'
+          properties: {
+            frontendIPConfiguration: { 
+              id: resourceId('Microsoft.Network/applicationGateways/frontendIPConfigurations', app_gateway_name, 'FrontendIPconfig')
+            }
+            frontendPort: {
+              id: resourceId('Microsoft.Network/applicationGateways/frontendPorts', app_gateway_name, 'port_https')
+            }
+            protocol: 'Https'
+            requireServerNameIndication: false
+            sslCertificate: {
+              id: resourceId('Microsoft.Network/applicationGateways/sslCertificates', app_gateway_name, name_ssl_cert) 
+            }
+          }
+        }
       ]
       requestRoutingRules: [
         {
-          name: 'GatewayReqRule'
+          name: 'route_rule_http'
           properties: {
             priority: 1
             ruleType: 'Basic'
             httpListener: {
               id: resourceId('Microsoft.Network/applicationGateways/httpListeners', app_gateway_name, 'HttpListener')
+            }
+            redirectConfiguration: {
+              id: resourceId('Microsoft.Network/applicationGateways/redirectConfigurations', app_gateway_name, 'redirect_config')
+            }
+            // backendAddressPool: {
+            //   id: resourceId('Microsoft.Network/applicationGateways/backendAddressPools', app_gateway_name, 'backend_pool')
+            // }
+            // backendHttpSettings: {
+            //   id: resourceId('Microsoft.Network/applicationGateways/backendHttpSettingsCollection', app_gateway_name, 'BackendHttpSettings')
+            // }
+          }
+        }
+        {
+          name: 'route_rule_https'
+          properties: {
+            priority: 100
+            ruleType: 'Basic'
+            httpListener: {
+              id: resourceId('Microsoft.Network/applicationGateways/httpListeners', app_gateway_name, 'HttpsListener')
             }
             backendAddressPool: {
               id: resourceId('Microsoft.Network/applicationGateways/backendAddressPools', app_gateway_name, 'backend_pool')
@@ -161,7 +191,6 @@ resource app_gateway 'Microsoft.Network/applicationGateways@2022-11-01' = {
         }
       ]
     // webApplicationFirewallConfiguration:
-    // redirectConfigurations:                              // need to write rule here for http > https
   }
 }
 
