@@ -14,7 +14,7 @@ param key_name string
 @minLength(3)
 @maxLength(26)
 param storage_name string = 'stg${uniqueString(resourceGroup().id)}'
-param blob_name string = 'blob-${environment}${storage_name}'
+param blob_name string = 'blob-${storage_name}'
 param container_name string = 'container-${environment}'
 
 
@@ -96,22 +96,22 @@ resource blob 'Microsoft.Storage/storageAccounts/blobServices@2022-09-01' = {
   name: blob_name
   parent: storage_account
   properties: {
-    isVersioningEnabled: false
-    automaticSnapshotPolicyEnabled: false
-    lastAccessTimeTrackingPolicy: {
-      enable: true
-    }
-    restorePolicy: {
-      enabled: false
-    }
-    deleteRetentionPolicy: {
-      enabled: true
-      days: 7
-    }
-    containerDeleteRetentionPolicy: {
-      enabled: true
-      days: 7
-    }
+    // isVersioningEnabled: false
+    // automaticSnapshotPolicyEnabled: false
+    // lastAccessTimeTrackingPolicy: {
+    //   enable: true
+    // }
+    // restorePolicy: {
+    //   enabled: false
+    // }
+    // deleteRetentionPolicy: {
+    //   enabled: true
+    //   days: 7
+    // }
+    // containerDeleteRetentionPolicy: {
+    //   enabled: true
+    //   days: 7
+    // }
   }
 }
 

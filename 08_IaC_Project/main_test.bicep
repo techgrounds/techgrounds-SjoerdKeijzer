@@ -116,14 +116,14 @@ params: {
 //   }
 // }
 
-@description('Deply database module')
-// Deploy mySQL database attached to webserver as back-end db
-module database 'Modules/database.bicep' = {
-  name: 'database_deployment'
-  scope: rootgroup
-  params: { 
-    environment: environment
-    location: location
-    name_vnet_webserver: network.outputs.vnet_name_webserver
-  }
-}
+// @description('Deply database module')
+// // Deploy mySQL database attached to webserver as back-end db
+// module database 'Modules/database.bicep' = {
+//   name: 'database_deployment'
+//   scope: rootgroup
+//   params: { 
+//     environment: environment
+//     location: location
+//     name_vnet_webserver: network.outputs.vnet_name_webserver
+//   }
+// }

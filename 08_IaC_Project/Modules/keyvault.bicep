@@ -2,19 +2,15 @@
 param location string
 param environment string
 
-// az policy add voor toevoegen van secrets oid // alleen van toepassing op assigned id 
-// admin pw moet gestored kunnen worden
-
 @description('The name of the User Assigned Identity.')
 param managed_identity_name string= 'userid${uniqueString(resourceGroup().name)}' 
 
-@description('Name of the key in the Key Vault')
+@description('Name of the encryption key in the Key Vault')
 param kv_key_name string = 'key${uniqueString(resourceGroup().name)}' 
 
 @description('Specifies the name of the key vault. To make the name unique for redeployment testing purposes, a timestamp has been added in the name')
 var keyVaultName = 'kv${environment}-${timestamp}'
 param timestamp string = utcNow()
-// param keyVaultName string = 'kv${environment}${uniqueString(resourceGroup().name)}'      // works for one time fresh deployment with no prior keyvault
 
 @description('Specifies the Azure Active Directory tenant ID that should be used for authenticating requests to the key vault.')
 param tenantId string = subscription().tenantId

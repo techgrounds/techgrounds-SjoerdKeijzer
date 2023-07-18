@@ -1,4 +1,3 @@
-
 // import the regular params from main
 param location string
 param environment string
@@ -215,7 +214,6 @@ resource vmss 'Microsoft.Compute/virtualMachineScaleSets@2021-11-01' = {
     vnet: name_vnet_webserver
     location: location
     id: 'vm scale set'
-    project: 'IaC'
   }
   sku: {
     tier: 'Standard'
@@ -326,6 +324,10 @@ resource vmss 'Microsoft.Compute/virtualMachineScaleSets@2021-11-01' = {
 resource autoscaling 'Microsoft.Insights/autoscalesettings@2022-10-01' = {
   name: name_autoscaling
   location: location
+  tags: {
+    id: 'autoscaling'
+    vnet: name_vnet_webserver
+  }
   properties: {
     enabled: true
     predictiveAutoscalePolicy: {

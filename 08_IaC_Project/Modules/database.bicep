@@ -37,6 +37,7 @@ resource sqlserver 'Microsoft.DBforMySQL/servers@2017-12-01' = {
     }
   }
 }
+
 /////////////////////////////////////////////////////
 
 @description('Virtual Network RuleName')
