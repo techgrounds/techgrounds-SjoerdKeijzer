@@ -7,17 +7,20 @@ targetScope = 'subscription'
 ])
 param environment string = 'dev'
 
+@secure()
+param ssl_cert_password string
+
 
 @description('Make general resource group for deployment in certain region')
 // Make a general resource group for deployment in a region
-param resourceGroupName string = 'rootrg25'
-param location string = deployment().location // locate resources at location declared with the deployment command
+param resourceGroupName string = 'rootrg6'
+param location string = deployment().location                 // locate resources at location declared with the deployment command
 resource rootgroup 'Microsoft.Resources/resourceGroups@2022-09-01' = {
   name: resourceGroupName
   location: location
 }
 
- @description('Deploy network module') // works fine
+ @description('Deploy network module')
 // Deploy network module
 module network 'Modules/network._test.bicep' = {
   name: 'networkdeployment'
@@ -28,7 +31,7 @@ module network 'Modules/network._test.bicep' = {
   }
 }
 
-@description('Deploy keyvault and encryption module')   // deploys with encrypted diskset - need to fix passwords at other time
+@description('Deploy keyvault and encryption module')
 // Deploy Keyvault & encryption module
 module keyvault 'Modules/keyvault.bicep' = {
   scope: rootgroup
@@ -39,7 +42,7 @@ module keyvault 'Modules/keyvault.bicep' = {
   }
 }
 
-@description('Deploys admin server module') // succesfull rdp login
+@description('Deploys admin server module')
 // Deploy admin server module
 module adminserver 'Modules/adminserver.bicep' = {
   name: 'adminserver_deployment'
@@ -52,7 +55,7 @@ module adminserver 'Modules/adminserver.bicep' = {
   }
 }
 
-@description('Deploy network peering module') // works fine
+@description('Deploy network peering module')
 // Deploy network peering module
 module peering 'Modules/peering.bicep' = {
   name: 'peering_deployment'
@@ -94,6 +97,7 @@ params: {
     diskencryption: keyvault.outputs.diskencryptset_id
     nsg_backend: network.outputs.nsg_id_backend
     agw_pub_ip: network.outputs.pub_ip_agw
+    ssl_cert_password: ssl_cert_password
   }
   dependsOn: [
     network

@@ -90,6 +90,7 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2022-09-01' = {
   }
 }
 
+
 resource blob 'Microsoft.Storage/storageAccounts/blobServices@2022-09-01' = {
   name: blob_name
   parent: storageAccount
@@ -113,14 +114,14 @@ resource blob 'Microsoft.Storage/storageAccounts/blobServices@2022-09-01' = {
   }
 }
 
-  resource container 'Microsoft.Storage/storageAccounts/blobServices/containers@2022-09-01' = {
-    name: container_name
-    parent: blob
-    properties: {
-      publicAccess: 'None'
-      immutableStorageWithVersioning: {
-        enabled: false
-      }
-      denyEncryptionScopeOverride: false
+resource container 'Microsoft.Storage/storageAccounts/blobServices/containers@2022-09-01' = {
+  name: container_name
+  parent: blob
+  properties: {
+    publicAccess: 'None'
+    immutableStorageWithVersioning: {
+      enabled: false
     }
+    denyEncryptionScopeOverride: false
   }
+}

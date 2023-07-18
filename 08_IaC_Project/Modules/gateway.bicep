@@ -11,8 +11,11 @@ param nsg_backend string
 // Certificate vars
 param name_ssl_cert string = 'ssl_cert_gateway'
 var ssl_cert = loadFileAsBase64('cert/Sjoerdoscert.pfx')
+// @secure()
+// param ssl_cert_password string = 'Yousslnotpass'
 @secure()
-param ssl_cert_password string = 'Yousslnotpass'
+@description('The password for the SSL certificate.')
+param ssl_cert_password string
 param ciphers array = [
   'TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384'
   'TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256'
@@ -54,10 +57,9 @@ resource app_gateway 'Microsoft.Network/applicationGateways@2022-11-01' = {
       }
     ]
     sslPolicy: {
-      policyName: 'ssl_policy'
-      minProtocolVersion: 'TLSv1_2'
       policyType: 'Custom'
-      cipherSuites: ciphers                                                  
+      minProtocolVersion: 'TLSv1_2'
+      cipherSuites: ciphers
     }
     backendAddressPools: [
       {
