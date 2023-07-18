@@ -13,7 +13,7 @@ param ssl_cert_password string
 
 @description('Make general resource group for deployment in certain region')
 // Make a general resource group for deployment in a region
-param resourceGroupName string = 'rootrg'
+param resourceGroupName string = 'rootrg25'
 param location string = deployment().location                 // locate resources at location declared with the deployment command
 resource rootgroup 'Microsoft.Resources/resourceGroups@2022-09-01' = {
   name: resourceGroupName
@@ -104,28 +104,26 @@ params: {
   ]
  }
 
-
-@description('Deploy Back-up and recovery module')
-// Deploy AZ back-up and recovery vault
-module backup_recovery 'Modules/backup_recovery.bicep' = {
-  name: 'backup_recovery_deployment'
-  scope: rootgroup
-  params: {
-    location: location
-    environment: environment
-    vm_name_adminserver: adminserver.outputs.vm_name_adminserver
-  }
-}
-
-// @description('Deply database module')
-// // Deploy mySQL database attached to webserver as back-end db
-// module database 'Modules/database.bicep' = {
-//   name: 'database_deployment'
+// @description('Deploy Back-up and recovery module')
+// // Deploy AZ back-up and recovery vault
+// module backup_recovery 'Modules/backup_recovery.bicep' = {
+//   name: 'backup_recovery_deployment'
 //   scope: rootgroup
 //   params: {
-//     // db_admin_username: sqladmin // keyvault.getSecret(db_adminuser.name)    // wip
-//     // mysqlPassword: mysqlPassword // keyvault.getSecret(secret.name)              // wip
-//     environment: environment
 //     location: location
+//     environment: environment
+//     vm_name_adminserver: adminserver.outputs.vm_name_adminserver
 //   }
 // }
+
+@description('Deply database module')
+// Deploy mySQL database attached to webserver as back-end db
+module database 'Modules/database.bicep' = {
+  name: 'database_deployment'
+  scope: rootgroup
+  params: { 
+    environment: environment
+    location: location
+    name_vnet_webserver: network.outputs.vnet_name_webserver
+  }
+}

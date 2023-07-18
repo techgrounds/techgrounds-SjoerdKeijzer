@@ -82,7 +82,7 @@ resource app_gateway 'Microsoft.Network/applicationGateways@2022-11-01' = {
         name: 'FrontendIPconfig'
         properties: {
           publicIPAddress: {
-            id: agw_pub_ip                  // public IP for gateway here
+            id: agw_pub_ip                  // public IP for gateway
           }
         }
       }
@@ -165,12 +165,6 @@ resource app_gateway 'Microsoft.Network/applicationGateways@2022-11-01' = {
             redirectConfiguration: {
               id: resourceId('Microsoft.Network/applicationGateways/redirectConfigurations', app_gateway_name, 'redirect_config')
             }
-            // backendAddressPool: {
-            //   id: resourceId('Microsoft.Network/applicationGateways/backendAddressPools', app_gateway_name, 'backend_pool')
-            // }
-            // backendHttpSettings: {
-            //   id: resourceId('Microsoft.Network/applicationGateways/backendHttpSettingsCollection', app_gateway_name, 'BackendHttpSettings')
-            // }
           }
         }
         {
@@ -190,7 +184,6 @@ resource app_gateway 'Microsoft.Network/applicationGateways@2022-11-01' = {
           }
         }
       ]
-    // webApplicationFirewallConfiguration:
   }
 }
 
@@ -273,7 +266,7 @@ resource vmss 'Microsoft.Compute/virtualMachineScaleSets@2021-11-01' = {
         adminPassword: webadmin_password
         linuxConfiguration: {
           disablePasswordAuthentication: false
-          provisionVMAgent: true                  // false was default                               
+          provisionVMAgent: false                             
         }
       }
       networkProfile: {
@@ -319,7 +312,7 @@ resource vmss 'Microsoft.Compute/virtualMachineScaleSets@2021-11-01' = {
               typeHandlerVersion: '1.0'
               settings: {
                 port: 80
-                protocol: 'http'           // http of tcp
+                protocol: 'http'
                 requestPath: ''
               }
             }

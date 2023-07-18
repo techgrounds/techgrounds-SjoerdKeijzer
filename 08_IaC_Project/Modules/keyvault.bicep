@@ -74,7 +74,7 @@ resource keyvault_resource 'Microsoft.KeyVault/vaults@2021-11-01-preview' = {
       defaultAction: 'Allow'          
       bypass: 'AzureServices'
       ipRules: [{
-        value: '77.175.148.54'                        // my own public IP
+        value: '77.175.148.54'                        // admin or trusted source range here
       }]
     }
   }

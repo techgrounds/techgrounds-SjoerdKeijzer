@@ -13,8 +13,8 @@ param key_name string
 @description('Name the storage acount with a unique name. As f.e. storage123xyz')
 @minLength(3)
 @maxLength(26)
-param storageName string = 'stg${uniqueString(resourceGroup().id)}'
-param blob_name string = 'blob-${environment}${storageName}'
+param storage_name string = 'stg${uniqueString(resourceGroup().id)}'
+param blob_name string = 'blob-${environment}${storage_name}'
 param container_name string = 'container-${environment}'
 
 
@@ -28,11 +28,13 @@ resource managed_identity 'Microsoft.ManagedIdentity/userAssignedIdentities@2018
 
 @description('storage account properties')
 // storage account properties
-resource storageAccount 'Microsoft.Storage/storageAccounts@2022-09-01' = {
-  name: storageName
+resource storage_account 'Microsoft.Storage/storageAccounts@2022-09-01' = {
+  name: storage_name
   location: location
   tags: {
     environment: environment
+    location: location
+    id: 'storage account'
   }
   sku: {
     name: 'Standard_LRS'
@@ -90,10 +92,9 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2022-09-01' = {
   }
 }
 
-
 resource blob 'Microsoft.Storage/storageAccounts/blobServices@2022-09-01' = {
   name: blob_name
-  parent: storageAccount
+  parent: storage_account
   properties: {
     isVersioningEnabled: false
     automaticSnapshotPolicyEnabled: false
