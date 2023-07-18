@@ -83,4 +83,4 @@ resource vm_adminserver 'Microsoft.Compute/virtualMachines@2022-03-01' = {
   }
 }
 
-
+output vm_name_adminserver string = vm_name_adminserver

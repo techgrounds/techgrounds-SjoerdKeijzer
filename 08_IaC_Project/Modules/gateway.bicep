@@ -11,8 +11,6 @@ param nsg_backend string
 // Certificate vars
 param name_ssl_cert string = 'ssl_cert_gateway'
 var ssl_cert = loadFileAsBase64('cert/Sjoerdoscert.pfx')
-// @secure()
-// param ssl_cert_password string = 'Yousslnotpass'
 @secure()
 @description('The password for the SSL certificate.')
 param ssl_cert_password string
@@ -203,7 +201,7 @@ resource app_gateway 'Microsoft.Network/applicationGateways@2022-11-01' = {
 param diskencryption string
 param name_vmss string = 'vmss_webserver'
 param vm_size string = 'Standard_B1s'
-param vm_sku string = '20_04-lts'
+param vm_sku string = '22_04-lts-gen2'                           // '20_04-lts'
 param name_vm string = '${environment}-web-vm'
 param name_autoscaling string = 'autoscale_resource'
 
@@ -252,7 +250,7 @@ resource vmss 'Microsoft.Compute/virtualMachineScaleSets@2021-11-01' = {
       userData: apache_script
       storageProfile: {
         imageReference: {
-          offer: '0001-com-ubuntu-server-focal'
+          offer: '0001-com-ubuntu-server-jammy'               // '0001-com-ubuntu-server-focal'
           version: 'latest'
           publisher: 'canonical'
           sku: vm_sku
@@ -275,7 +273,7 @@ resource vmss 'Microsoft.Compute/virtualMachineScaleSets@2021-11-01' = {
         adminPassword: webadmin_password
         linuxConfiguration: {
           disablePasswordAuthentication: false
-          provisionVMAgent: false                               
+          provisionVMAgent: true                  // false was default                               
         }
       }
       networkProfile: {
@@ -321,7 +319,7 @@ resource vmss 'Microsoft.Compute/virtualMachineScaleSets@2021-11-01' = {
               typeHandlerVersion: '1.0'
               settings: {
                 port: 80
-                protocol: 'Http'
+                protocol: 'http'           // http of tcp
                 requestPath: ''
               }
             }
@@ -337,6 +335,10 @@ resource autoscaling 'Microsoft.Insights/autoscalesettings@2022-10-01' = {
   location: location
   properties: {
     enabled: true
+    predictiveAutoscalePolicy: {
+      scaleMode: 'ForecastOnly'
+      scaleLookAheadTime: 'PT14M'
+    }
     targetResourceUri: vmss.id
     profiles: [
       {
