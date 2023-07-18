@@ -48,7 +48,6 @@ resource app_gateway 'Microsoft.Network/applicationGateways@2022-11-01' = {
     //   {
     //     name: name_ssl_cert
     //     properties: {
-    //       keyVaultSecretId:
     //       data: ssl_cert
     //       password: ssl_cert_password
     //     }
