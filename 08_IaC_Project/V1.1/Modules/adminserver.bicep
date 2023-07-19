@@ -15,14 +15,14 @@ param vm_size string = 'Standard_B1s'
 param vm_sku string = '2022-datacenter-azure-edition-core'
 
 @description('Installs openSSH on adminserver, so you can connect via SSH protocol (key or password) with scale set instances')
-var ssh_script = loadFileAsBase64('scripts/sshinstallwin.ps1')        // installs openSSH on adminserver to connect with scale set instances
+var ssh_script = loadFileAsBase64('scripts/sshinstallwin.ps1')        // installs openSSH server on adminserver to connect with scale set instances
 
 
 @description('Username and pw settings for the Virtual Machine.')
 param admin_username string = 'sjoerdvm'
 @secure()
 @minLength(6)
-param admin_password string = 'PasswordMustBeSafeOk!'       // later in keyvault als secret zetten en reference maken
+param admin_password string       
 
 resource vm_adminserver 'Microsoft.Compute/virtualMachines@2022-03-01' = {
   name: vm_name_adminserver

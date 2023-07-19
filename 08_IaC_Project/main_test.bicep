@@ -5,16 +5,21 @@ targetScope = 'subscription'
   'dev'
   'prod'
 ])
-param environment string = 'dev'
+param environment string = 'prod'
 
+@description('Password set for ssl cert, please see documentation')
 @secure()
 param ssl_cert_password string
+
+@description('Password param for adminserver, this is set at deployment')
+@secure()
+param admin_password string
 
 
 @description('Make general resource group for deployment in certain region')
 // Make a general resource group for deployment in a region
 param resourceGroupName string = 'rootrg25'
-param location string = deployment().location                 // locate resources at location declared with the deployment command
+param location string = deployment().location                           // locate resources at location declared with the deployment command
 resource rootgroup 'Microsoft.Resources/resourceGroups@2022-09-01' = {
   name: resourceGroupName
   location: location
@@ -22,7 +27,7 @@ resource rootgroup 'Microsoft.Resources/resourceGroups@2022-09-01' = {
 
  @description('Deploy network module')
 // Deploy network module
-module network 'Modules/network._test.bicep' = {
+module network 'V1.1/Modules/network.bicep' = {
   name: 'networkdeployment'
   scope: rootgroup
   params: {
@@ -33,7 +38,7 @@ module network 'Modules/network._test.bicep' = {
 
 @description('Deploy keyvault and encryption module')
 // Deploy Keyvault & encryption module
-module keyvault 'Modules/keyvault.bicep' = {
+module keyvault 'V1.1/Modules/keyvault.bicep' = {
   scope: rootgroup
   name: 'keyvault_deployment'
   params: {
@@ -44,12 +49,13 @@ module keyvault 'Modules/keyvault.bicep' = {
 
 @description('Deploys admin server module')
 // Deploy admin server module
-module adminserver 'Modules/adminserver.bicep' = {
+module adminserver 'V1.1/Modules/adminserver.bicep'  = {
   name: 'adminserver_deployment'
   scope: rootgroup
   params: {
     location: location
     environment: environment
+    admin_password: admin_password
     nicid: network.outputs.nic_id_adminserver
     diskencryption: keyvault.outputs.diskencryptset_id
   }
@@ -57,7 +63,7 @@ module adminserver 'Modules/adminserver.bicep' = {
 
 @description('Deploy network peering module')
 // Deploy network peering module
-module peering 'Modules/peering.bicep' = {
+module peering 'V1.1/Modules/peering.bicep' = {
   name: 'peering_deployment'
   scope: rootgroup
   params: {
@@ -72,22 +78,18 @@ module peering 'Modules/peering.bicep' = {
 
 @description('Deploy storage account module')
 // Deploy storage account module
-module stg 'Modules/storage_test.bicep' = {
+module stg 'V1.1/Modules/storage_test.bicep' = {
 name: 'storagedeployment'
 scope: rootgroup
 params: {
   location: location
   environment: environment
-  managed_identity_name: keyvault.outputs.managed_id_name
-  keyVaultName: keyvault.outputs.key_vault_name
-  key_name: keyvault.outputs.kv_key_name
   }
-  dependsOn: [keyvault]
 }
 
 @description('Deploys application gateway and webserver with scale set')
  // deploys application gateway and webserver with scale set
- module gateway_vmss 'Modules/gateway.bicep' = {
+ module gateway_vmss 'V1.1/Modules/gateway.bicep' = {
   scope: rootgroup
   name: 'gateway_vmss'
   params: {
@@ -106,7 +108,7 @@ params: {
 
 // @description('Deploy Back-up and recovery module')
 // // Deploy AZ back-up and recovery vault
-// module backup_recovery 'Modules/backup_recovery.bicep' = {
+// module backup_recovery 'V1.1/Modules/backup_recovery.bicep' = {
 //   name: 'backup_recovery_deployment'
 //   scope: rootgroup
 //   params: {
@@ -116,14 +118,3 @@ params: {
 //   }
 // }
 
-// @description('Deply database module')
-// // Deploy mySQL database attached to webserver as back-end db
-// module database 'Modules/database.bicep' = {
-//   name: 'database_deployment'
-//   scope: rootgroup
-//   params: { 
-//     environment: environment
-//     location: location
-//     name_vnet_webserver: network.outputs.vnet_name_webserver
-//   }
-// }

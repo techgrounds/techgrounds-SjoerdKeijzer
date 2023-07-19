@@ -14,7 +14,7 @@ param timestamp string = utcNow()
 
 @description('Specifies the Azure Active Directory tenant ID that should be used for authenticating requests to the key vault.')
 param tenantId string = subscription().tenantId
-// param tenantId string = '7810209c-8fef-48a1-8881-d6946b6a7633'
+
 
 @description('Specifies the permissions to keys in the vault. Valid values are: all, encrypt, decrypt, wrapKey, unwrapKey, sign, verify, get, list, create, update, import, delete, backup, restore, recover, and purge.')
 param keysPermissions array = [
@@ -51,10 +51,10 @@ resource keyvault_resource 'Microsoft.KeyVault/vaults@2021-11-01-preview' = {
     enablePurgeProtection: true           // Once enabled cannot be turned off. Learn this the hard way. When giving 'false' value it just now will get a deployment error
     enableSoftDelete: true
     softDeleteRetentionInDays: 7          // min value 7 - 90 is standard
-    publicNetworkAccess: 'Enabled'        // could be 'Disabled' but chances are for now I could lock myself out of my Keyvault
+    publicNetworkAccess: 'Disabled'        
     accessPolicies: [
       {
-        objectId: managed_identity.properties.principalId     //  when working with user assigned identity (legacy)
+        objectId: managed_identity.properties.principalId
         tenantId: tenantId
         permissions: {
           keys: keysPermissions
@@ -108,7 +108,6 @@ resource disk_encryption 'Microsoft.Compute/diskEncryptionSets@2021-08-01' = {
     type: 'SystemAssigned'
   }
   properties: {
-    // encryptionType: 'EncryptionAtRestWithCustomerKey'
     rotationToLatestKeyVersionEnabled: true
     activeKey: {
       keyUrl: kv_key_resource.properties.keyUriWithVersion
@@ -140,16 +139,6 @@ resource vault_access_policy 'Microsoft.KeyVault/vaults/accessPolicies@2021-10-0
           certificates: []
         }
       }
-    // gives managed ID acces to the vault
-      // {
-      //   tenantId: tenantId
-      //   objectId: managed_identity.properties.principalId
-      //   permissions: {
-      //     keys: keysPermissions
-      //     secrets: secretsPermissions
-      //     certificates: certificatesPermissions
-      //   }
-      // }
     ]
   }
 }

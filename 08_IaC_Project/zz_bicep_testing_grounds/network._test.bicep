@@ -81,9 +81,6 @@ resource pub_ip_agw 'Microsoft.Network/publicIPAddresses@2022-11-01' = {
     publicIPAllocationMethod: 'Static'
     publicIPAddressVersion: 'IPv4'
     idleTimeoutInMinutes: 4                       // must be between 4 and 30
-    // dnsSettings: {
-    //   domainNameLabel: 'string'
-    // }
     }
   }
 
@@ -160,7 +157,7 @@ resource nsg_backend 'Microsoft.Network/networkSecurityGroups@2022-11-01' = {
       } 
       { name: 'http'
       properties: {
-        access: 'Allow'                       // later op deny na ssl termination
+        access: 'Allow'                       
         direction: 'Inbound'
         priority: 200
         protocol: 'Tcp'

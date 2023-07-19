@@ -66,12 +66,13 @@ ____
 ## 30/06 
 
 ### Dagverslag (1 zin)
- 
+Disk encryption werkt 
 
 ### Obstakels
-
+Param probleem gefixed van gisteren
 
 ### Oplossingen
-
+Het goed instellen ':D'
 
 ### Learnings
+Goed blijven lezen, hoe wel het soms makkelijk over settings heen lezen is, zeker bij grotere lappen code. 
