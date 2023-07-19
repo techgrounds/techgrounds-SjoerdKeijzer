@@ -9,7 +9,7 @@ param nsg_backend string
 
 // Certificate vars
 param name_ssl_cert string = 'ssl_cert_gateway'
-var ssl_cert = loadFileAsBase64('cert/Sjoerdoscert.pfx')
+var ssl_cert = loadFileAsBase64('../cert/Sjoerdoscert.pfx')
 @secure()
 @description('The password for the SSL certificate.')
 param ssl_cert_password string
@@ -198,7 +198,7 @@ param name_vm string = '${environment}-web-vm'
 param name_autoscaling string = 'autoscale_resource'
 
 // installs apache on each scaling instance
-var apache_script = loadFileAsBase64('bashscript/web_installscript.sh')
+var apache_script = loadFileAsBase64('../bashscript/web_installscript.sh')
 
 //login webserver
 param webadmin_username string = 'vmsjoerd'

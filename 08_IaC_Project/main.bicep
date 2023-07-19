@@ -31,7 +31,7 @@ resource rootgroup 'Microsoft.Resources/resourceGroups@2022-09-01' = {
 
  @description('Deploy network module')
 // Deploy network module
-module network 'Modules/network.bicep' = {
+module network 'V1.1/Modules/network.bicep' = {
   name: 'networkdeployment'
   scope: rootgroup
   params: {
@@ -42,7 +42,7 @@ module network 'Modules/network.bicep' = {
 
 @description('Deploy keyvault and encryption module')
 // Deploy Keyvault & encryption module
-module keyvault 'Modules/keyvault.bicep' = {
+module keyvault 'V1.1/Modules/keyvault.bicep' = {
   scope: rootgroup
   name: 'keyvault_deployment'
   params: {
@@ -53,7 +53,7 @@ module keyvault 'Modules/keyvault.bicep' = {
 
 @description('Deploys admin server module')
 // Deploy admin server module
-module adminserver 'Modules/adminserver.bicep' = {
+module adminserver 'V1.1/Modules/adminserver.bicep'  = {
   name: 'adminserver_deployment'
   scope: rootgroup
   params: {
@@ -67,7 +67,7 @@ module adminserver 'Modules/adminserver.bicep' = {
 
 @description('Deploy network peering module')
 // Deploy network peering module
-module peering 'Modules/peering.bicep' = {
+module peering 'V1.1/Modules/peering.bicep' = {
   name: 'peering_deployment'
   scope: rootgroup
   params: {
@@ -82,7 +82,7 @@ module peering 'Modules/peering.bicep' = {
 
 @description('Deploy storage account module')
 // Deploy storage account module
-module stg 'Modules/storage_test.bicep' = {
+module stg 'V1.1/Modules/storage_test.bicep' = {
 name: 'storagedeployment'
 scope: rootgroup
 params: {
@@ -93,7 +93,7 @@ params: {
 
 @description('Deploys application gateway and webserver with scale set')
  // deploys application gateway and webserver with scale set
- module gateway_vmss 'Modules/gateway.bicep' = {
+ module gateway_vmss 'V1.1/Modules/gateway.bicep' = {
   scope: rootgroup
   name: 'gateway_vmss'
   params: {
@@ -113,7 +113,7 @@ params: {
 
 // @description('Deploy Back-up and recovery module')
 // // Deploy AZ back-up and recovery vault
-// module backup_recovery 'Modules/backup_recovery.bicep' = {
+// module backup_recovery 'V1.1/Modules/backup_recovery.bicep' = {
 //   name: 'backup_recovery_deployment'
 //   scope: rootgroup
 //   params: {
