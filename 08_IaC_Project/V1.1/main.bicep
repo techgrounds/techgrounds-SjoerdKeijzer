@@ -11,18 +11,9 @@ param environment string = 'prod'
 @secure()
 param ssl_cert_password string
 
-@description('Password param for adminserver, this is set at deployment.')
-@secure()
-param admin_password string
-
-@description('Set password for webserver to login on vmss instances. The password is set at deployment.')
-@secure()
-param webadmin_password string 
-
-
 @description('Make general resource group for deployment in certain region.')
 // Make a general resource group for deployment in a region
-param resourceGroupName string = 'rootrg25'
+param resourceGroupName string = 'rootrg'
 param location string = deployment().location                           // locate resources at location declared with the deployment command
 resource rootgroup 'Microsoft.Resources/resourceGroups@2022-09-01' = {
   name: resourceGroupName
@@ -59,7 +50,6 @@ module adminserver 'Modules/adminserver.bicep' = {
   params: {
     location: location
     environment: environment
-    admin_password: admin_password
     nicid: network.outputs.nic_id_adminserver
     diskencryption: keyvault.outputs.diskencryptset_id
   }
@@ -82,7 +72,7 @@ module peering 'Modules/peering.bicep' = {
 
 @description('Deploy storage account module')
 // Deploy storage account module
-module stg 'Modules/storage_test.bicep' = {
+module stg 'Modules/storage.bicep' = {
 name: 'storagedeployment'
 scope: rootgroup
 params: {
@@ -104,7 +94,6 @@ params: {
     nsg_backend: network.outputs.nsg_id_backend
     agw_pub_ip: network.outputs.pub_ip_agw
     ssl_cert_password: ssl_cert_password
-    webadmin_password: webadmin_password
   }
   dependsOn: [
     network
@@ -122,4 +111,3 @@ params: {
 //     vm_name_adminserver: adminserver.outputs.vm_name_adminserver
 //   }
 // }
-

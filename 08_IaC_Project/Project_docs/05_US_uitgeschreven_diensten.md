@@ -8,6 +8,6 @@
 - Azure Virtual Machines | VM voor de webserver en mgmt server 
 - Azure SQL database | als back-end DB voor de webserver
 - Azure disk encryption | voor .. het encrypten van disks
-- Azure Back-up | voor daily back-ups webserver
+- Azure Back-up  of Recovery vault | voor daily back-ups webserver
 
-- /!\ SSH connectie naar mgmt server? NSG alleen configuren of doen via Azure Bastion maybe? 
+- SSH connectie naar mgmt server? NSG alleen configuren of doen via Azure Bastion maybe? Uitkomst: RDP naar adminserver en met SSH naar scale set instances vanwege vereisten. 

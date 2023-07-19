@@ -204,7 +204,7 @@ var apache_script = loadFileAsBase64('../bashscript/web_installscript.sh')
 param webadmin_username string = 'vmsjoerd'
 @secure()
 @minLength(6)
-param webadmin_password string      
+param webadmin_password string = 'PasswordMustBeSafeOk!'    
 
 @description('VMSS settings to follow')
 resource vmss 'Microsoft.Compute/virtualMachineScaleSets@2021-11-01' = {
@@ -241,7 +241,7 @@ resource vmss 'Microsoft.Compute/virtualMachineScaleSets@2021-11-01' = {
       userData: apache_script
       storageProfile: {
         imageReference: {
-          offer: '0001-com-ubuntu-server-jammy'               // '0001-com-ubuntu-server-focal'
+          offer: '0001-com-ubuntu-server-jammy'
           version: 'latest'
           publisher: 'canonical'
           sku: vm_sku
@@ -264,7 +264,7 @@ resource vmss 'Microsoft.Compute/virtualMachineScaleSets@2021-11-01' = {
         adminPassword: webadmin_password
         linuxConfiguration: {
           disablePasswordAuthentication: false
-          provisionVMAgent: false                             
+          provisionVMAgent: true                             
         }
       }
       networkProfile: {
