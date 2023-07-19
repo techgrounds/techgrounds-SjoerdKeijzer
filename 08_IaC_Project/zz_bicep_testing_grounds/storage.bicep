@@ -14,7 +14,6 @@ param blob_name string = 'blob-${environment}${storageName}'
 param container_name string = 'container-${environment}'
 
 @description('Place storage account in same region as resource group')
-// place storage account in same region as resource group
 param location string
 
 resource keyvault_resource 'Microsoft.KeyVault/vaults@2021-11-01-preview' existing = {
@@ -38,7 +37,7 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2022-09-01' = {
   }
   kind: 'StorageV2'
   identity: {
-    type: 'SystemAssigned'        // UserAssigned
+    type: 'SystemAssigned'        
     userAssignedIdentities: managed_identity
   }
   properties: {
@@ -46,23 +45,13 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2022-09-01' = {
     allowBlobPublicAccess: false
     publicNetworkAccess: 'Disabled'
     minimumTlsVersion: 'TLS1_2'
-    // keyPolicy:
-    // immutableStorageWithVersioning: 
-    supportsHttpsTrafficOnly: true              // maybe switch back to false if I can't set the right permissions in 1.0
+    supportsHttpsTrafficOnly: true             
     encryption: {
-      // services: {
-      //   blob: {
-      //     enabled: true
-      //   }
-      // }
       keySource: 'Microsoft.Keyvault'
       keyvaultproperties: {
         keyvaulturi: keyvault_resource.properties.vaultUri
         keyname: key_name
       }
-      // identity: {
-      //   userAssignedIdentity: managed_identity.properties.principalId    // had eerst managed_identity.id
-      // }
     }
     networkAcls: {
       defaultAction: 'Deny'
@@ -76,12 +65,6 @@ resource blob 'Microsoft.Storage/storageAccounts/blobServices@2022-09-01' = {
   parent: storageAccount
   properties: {
     isVersioningEnabled: false
-    // automaticSnapshotPolicyEnabled: true + value  (int)
-    // lastAccessTimeTrackingPolicy: 
-    // restorePolicy: bool + value (int)
-    // deleteRetentionPolicy: bool + value (int)
-    // containerDeleteRetentionPolicy: bool _ value (int)
-    // defaultServiceVersion:
   }
 
 }
@@ -91,15 +74,5 @@ resource blob 'Microsoft.Storage/storageAccounts/blobServices@2022-09-01' = {
     parent: blob
     properties: {
       publicAccess: 'None'
-      // defaultEncryptionScope: 
-      // enableNfsV3AllSquash:
-      // enableNfsV3RootSquash:
-      // denyEncryptionScopeOverride:
-      // immutableStorageWithVersioning:
-      // metadata:
     }
-
   }
-
-  output stg_id string = storageAccount.id
-  output stg_name string = storageName

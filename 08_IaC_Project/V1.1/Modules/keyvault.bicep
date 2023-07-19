@@ -88,7 +88,7 @@ resource kv_key_resource 'Microsoft.KeyVault/vaults/keys@2023-02-01' = {
     attributes: {
       enabled: true
     }
-    keySize: 2048              // Other possible values are 3072 or 4096
+    keySize: 2048             
     kty: 'RSA'
     keyOps: [
       'encrypt'
