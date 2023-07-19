@@ -193,7 +193,7 @@ resource app_gateway 'Microsoft.Network/applicationGateways@2022-11-01' = {
 param diskencryption string
 param name_vmss string = 'vmss_webserver'
 param vm_size string = 'Standard_B1s'
-param vm_sku string = '22_04-lts-gen2'                           // '20_04-lts'
+param vm_sku string = '22_04-lts-gen2'                           
 param name_vm string = '${environment}-web-vm'
 param name_autoscaling string = 'autoscale_resource'
 
@@ -204,7 +204,7 @@ var apache_script = loadFileAsBase64('bashscript/web_installscript.sh')
 param webadmin_username string = 'vmsjoerd'
 @secure()
 @minLength(6)
-param webadmin_password string = 'PasswordMustBeSafeOk!'                        // later in keyvault zetten
+param webadmin_password string      
 
 @description('VMSS settings to follow')
 resource vmss 'Microsoft.Compute/virtualMachineScaleSets@2021-11-01' = {
